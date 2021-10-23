@@ -1,17 +1,17 @@
 # -*- coding:utf-8 -*-
-
 """
 主ui界面，使用pyside2实现
 """
 import os
 import uuid
-from os.path import isfile, exists, join
+from os.path import isfile, exists, join, abspath, relpath
 from PySide2 import QtCore
 from PySide2.QtGui import QDropEvent
-from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit
+from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QListWidgetItem
 from QBinder import QEventHook, Binder
 from core.package_config_states import PackageConfigStates
 from core.package_configs import PackageConfigs
+from ui.add_extras_ui import AddExtrasUI
 from ui.design.ui_main import Ui_MainWindow
 from ui.start_pack_ui import StartPackUI
 # noinspection PyTypeChecker
@@ -38,9 +38,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._eventHook = QEventHook.instance()
 
         self._state = Binder()
-        self._state.currentWorkDir = os.getcwd()
+        self._state.currentWorkDir = abspath(os.getcwd())
 
         self._startPackUI = StartPackUI(self)
+        self._addExtrasUI = AddExtrasUI(self)
 
         self.setupUi(self)
         self.setupMenu()
@@ -63,6 +64,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.setupAppIconUI()
         self.setupSplashUI()
         self.setupEncryptionKeyUI()
+        self.setupWindowModeUI()
         self.setupProductModeUI()
         self.setupLogLevelUI()
         self.setupDebugOptionUI()
@@ -72,6 +74,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.setupASCIIOnlyUI()
         self.setupStartPackButton()
         self.setupSearchPathsUI()
+        self.setupAddExtraDataUI()
 
     def setupMenu(self):
         # 载入配置文件
@@ -92,9 +95,15 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 else:
                     pass
 
+        def onCreateNewConfigs():
+            if ask(self, self.tr("New Configs"), self.tr("Current configs will be lost. Sure to create a new config?")):
+                newConfigs = PackageConfigs()
+                self.changeCurrentConfigs(newConfigs)
+
         self.actionLoadConfigs.triggered.connect(onLoadPackageConfigs)
         self.actionSaveConfigs.triggered.connect(onSavePackageConfigs)
         self.actionStartPack.triggered.connect(self.openStartPackUI)
+        self.actionNewConfigs.triggered.connect(onCreateNewConfigs)
 
     def setupCurrentWorkDirUI(self):
         """
@@ -110,14 +119,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 self._state.currentWorkDir = path
 
         def onSelectCurrentDir():
-            path = openDirDialog(self, self.tr("Change Working Dir"))
+            path = openDirDialog(self, "Change Working Dir")
             if path is not None:
                 onPathChange(path)
 
         self.changeCurrentWorkDirButton.clicked.connect(onSelectCurrentDir)
         self.currentWorkDirEdit.setText(lambda: self._state.currentWorkDir * 1)
         self.currentWorkDirEdit.textChanged.connect(onPathChange)
-        self.updateToolTip(self.tr("Current working directory"), self.currentWorkDirEdit, self.currentWorkDirLabel)
+        self.updateToolTip("Current working directory", self.currentWorkDirEdit, self.currentWorkDirLabel)
 
     def setupPyInstallerUI(self):
         """
@@ -337,6 +346,18 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.updateToolTip(self._commonOptions.encryptionKey.description,
                            self.encryptionKeyEdit, self.encryptionKeyLabel)
 
+    def setupWindowModeUI(self):
+        self.updateToolTip(self._commonOptions.windowMode.description, self.windowModeCombo, self.windowModeLabel)
+        self.windowModeCombo.addItems(self._commonOptions.windowMode.argumentChoices)
+        # 双向绑定
+        self.windowModeCombo.setCurrentText(lambda: self._packageConfigStates.windowMode * 1)
+        self.windowModeCombo.currentTextChanged.connect(
+            lambda text: self._packageConfigStates.setWindowMode(text, updateConfigs=True)
+        )
+        self.defaultWindowModeButton.clicked.connect(
+            lambda: self._packageConfigStates.setWindowMode(None, updateConfigs=True)
+        )
+
     def setupProductModeUI(self):
         self.updateToolTip(self._commonOptions.productMode.description, self.productModeCombo, self.productModelLabel)
         self.productModeCombo.addItems(self._commonOptions.productMode.argumentChoices)
@@ -414,11 +435,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.updateToolTip(self._commonOptions.searchPaths.description,
                            self.searchPathsLabel, self.searchPathsListWidget)
 
-        # 双向绑定
+        # 绑定到QListWidget
         def onUpdateItems():
             self.searchPathsListWidget.clear()
             return self._packageConfigStates.searchPaths
 
+        self.searchPathsListWidget.addItems(onUpdateItems)
+
+        # 添加搜索路径
         def onAddSearchPath():
             searchPaths = openDirsDialog(self, self.tr("Add Search Path"))
             if searchPaths is not None:
@@ -427,25 +451,84 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 except Exception as e:
                     error(self, self.tr("Error"), self.tr("Failed to add search path") + f"(error：{e})")
 
-        self.searchPathsListWidget.addItems(onUpdateItems)
         self.addSearchPathButton.clicked.connect(onAddSearchPath)
 
-        # 实现移除路径功能
-        def onSelectionChange():
-            if len(self.searchPathsListWidget.selectedItems()) > 0:
-                self.removeSearchPathButton.setEnabled(True)
-            else:
-                self.removeSearchPathButton.setEnabled(False)
-
-        def onRemove():
+        # 移除搜索路径
+        def onRemoveSearchPath():
             selected = [w.text() for w in self.searchPathsListWidget.selectedItems()]
             if len(selected) > 0:
-                if ask(self, self.tr("Remove Search Paths"), self.tr("Sure to remove search paths")):
-                    self._packageConfigStates.removeSearchPaths(selected)
+                if ask(self, self.tr("Remove Search Paths"), self.tr("Sure to remove search paths?")):
+                    self._packageConfigStates.removeSearchPaths(selected, updateConfigs=True)
+
         self.removeSearchPathButton.setEnabled(False)
-        self.removeSearchPathButton.clicked.connect(onRemove)
-        self.searchPathsListWidget.itemSelectionChanged.connect(onSelectionChange)
+        self.removeSearchPathButton.clicked.connect(onRemoveSearchPath)
         self.searchPathsListWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.searchPathsListWidget.itemSelectionChanged.connect(
+            lambda: self.removeSearchPathButton.setEnabled(len(self.searchPathsListWidget.selectedItems()) > 0)
+        )
+
+        # 清除搜索路径
+        self.clearSearchPathButton.clicked.connect(
+            lambda: self._packageConfigStates.clearSearchPaths(updateConfigs=True)
+        )
+
+    def setupAddExtraDataUI(self):
+        self.updateToolTip(self._commonOptions.extraData.description,
+                           self.extraDataLabel,
+                           self.extraDataListWidget)
+
+        # 绑定数据到QListWidget
+        def onUpdateItems():
+            self.extraDataListWidget.clear()
+            return self._packageConfigStates.extraData
+
+        self.extraDataListWidget.addItems(onUpdateItems)
+
+        # 添加数据
+        self.addExtraDataButton.clicked.connect(self.openAddExtraDataUI)
+        self._addExtrasUI.extraDataAdded.connect(
+            lambda data: self._packageConfigStates.addExtraData([data], updateConfigs=True))
+
+        # 移除数据
+        def onRemoveExtraData():
+            selected = [w.text() for w in self.extraDataListWidget.selectedItems()]
+            if len(selected) > 0:
+                if ask(self, self.tr("Remove Extra Data"), self.tr("Sure to remove extra data?")):
+                    self._packageConfigStates.removeExtraData(selected, updateConfigs=True)
+
+        self.removeExtraDataButton.setEnabled(False)
+        self.extraDataListWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.extraDataListWidget.itemSelectionChanged.connect(
+            lambda: self.removeExtraDataButton.setEnabled(
+                len(self.extraDataListWidget.selectedItems()) > 0
+            )
+        )
+        self.removeExtraDataButton.clicked.connect(onRemoveExtraData)
+
+        # 文件拖放功能
+        def onDrop(event):
+            event: QDropEvent
+            urls = event.mimeData().urls()
+            sources = [url.toLocalFile() for url in urls]
+            data = [self._addExtrasUI.join(source, self._addExtrasUI.relativePath(source)) for source in sources]
+            self._packageConfigStates.addExtraData(data, updateConfigs=True)
+
+        self.addExtraDataButton.setAcceptDrops(True)
+        self._eventHook.add_hook(self.addExtraDataButton,
+                                 QtCore.QEvent.DragEnter,
+                                 lambda event: event.acceptProposedAction())
+        self._eventHook.add_hook(self.addExtraDataButton, QtCore.QEvent.Drop, onDrop)
+
+        # 双击修改数据
+        self.extraDataListWidget.itemDoubleClicked.connect(
+            lambda item: self._addExtrasUI.display(
+                AddExtrasUI.MODIFY_EXTRA_DATA, item.text(),
+                self._packageConfigStates.extraData.index(item.text())
+            )
+        )
+        self._addExtrasUI.extraDataChanged.connect(
+            lambda index, data: self._packageConfigStates.updateExtraData(index, data)
+        )
 
     def updateToolTip(self, tooltip, *widgets):
         if tooltip != "" and tooltip is not None:
@@ -459,14 +542,17 @@ class MainUI(QMainWindow, Ui_MainWindow):
         except Exception as e:
             warn(self, self.tr("Warning"), self.tr("Cannot read package config file") + f"(error: {e})")
         else:
-            self._packageConfigs = None
-            self._packageConfigs = newConfigs
-            self._commonOptions = self._packageConfigs.commonOptions
-            self._upxOptions = self._packageConfigs.upxOptions
-            self._hookOptions = self._packageConfigs.hookOptions
-            self._windowsOptions = self._packageConfigs.windowsOptions
-            self._macosOptions = self._packageConfigs.macosOptions
-            self._packageConfigStates.changeConfigs(self._packageConfigs)
+            self.changeCurrentConfigs(newConfigs)
+
+    def changeCurrentConfigs(self, newConfigs):
+        self._packageConfigs = None
+        self._packageConfigs = newConfigs
+        self._commonOptions = self._packageConfigs.commonOptions
+        self._upxOptions = self._packageConfigs.upxOptions
+        self._hookOptions = self._packageConfigs.hookOptions
+        self._windowsOptions = self._packageConfigs.windowsOptions
+        self._macosOptions = self._packageConfigs.macosOptions
+        self._packageConfigStates.changeConfigs(self._packageConfigs)
 
     def detectExistPackageConfigs(self):
         configPath = join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE)
@@ -476,6 +562,16 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 self.loadPackageConfigs(configPath)
 
     def openStartPackUI(self):
+        if self._packageConfigStates.pyinstaller is None or self._packageConfigStates.pyinstaller == "":
+            warn(self, self.tr("Warning"), self.tr("Path of pyinstaller is empty!"))
+            return
+        if len(self._packageConfigStates.scripts) == 0:
+            warn(self, self.tr("Warning"), self.tr("Need at least one script to pack!"))
+            return
         if self._startPackUI.isHidden():
             self._startPackUI.display(self._packageConfigs.toPakCommand(),
                                       self._state.currentWorkDir)
+
+    def openAddExtraDataUI(self):
+        if self._addExtrasUI.isHidden():
+            self._addExtrasUI.display(AddExtrasUI.ADD_EXTRA_DATA)

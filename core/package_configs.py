@@ -63,35 +63,35 @@ class PackageConfigs(object):
                 name="distpath",
                 hasArgument=True,
                 desc="--distpath DIR: "
-                     "Where to put the bundled app (default: ./dist)"
+                     "Where to put the bundled app (default: ./dist)."
             )
 
             self.workPath = Option(
                 name="workpath",
                 hasArgument=True,
                 desc="--workpath WORKPATH: "
-                     "Where to put all the temporary work files, .log, .pyz and etc. (default: ./build)"
+                     "Where to put all the temporary work files, .log, .pyz and etc. (default: ./build)."
             )
 
             self.specPath = Option(
                 name="specpath",
                 hasArgument=True,
                 desc="--specpath DIR: "
-                     "Folder to store the generated spec file (default: current directory)"
+                     "Folder to store the generated spec file (default: current directory)."
             )
 
             self.noConfirm = Option(
                 name="noconfirm",
                 hasArgument=False,
                 desc="-y, --noconfirm: "
-                     "Replace output directory (default: SPECPATH/dist/SPECNAME) without asking for confirmation"
+                     "Replace output directory (default: SPECPATH/dist/SPECNAME) without asking for confirmation."
             )
 
             self.asciiOnly = Option(
                 name="ascii",
                 hasArgument=False,
                 desc="-a, --ascii: "
-                     "Do not include unicode encoding support (default: included if available)"
+                     "Do not include unicode encoding support (default: included if available)."
             )
 
             self.cleanBeforePack = Option(
@@ -127,14 +127,36 @@ class PackageConfigs(object):
                      "Create a one-file bundled executable."
             )
 
+            self.windowMode = Option(
+                name="",
+                hasArgument=True,
+                argumentChoices=[OPTION_BY_DEFAULT, "windowed", "console"],
+                connector="",
+                desc="-w, --windowed, --noconsole or -c, --console, --nowindowed: "
+                     "(-w, --windowed, --noconsole)Windows and Mac OS X: do not provide a console window for standard "
+                     "i/o. On Mac OS X this also triggers building an OS X .app bundle. On Windows this option will "
+                     "be set if the first script is a ‘.pyw’ file. This option is ignored in *NIX systems. (-c, "
+                     "--console, --nowindowed) Open a console window for standard i/o (default). On Windows this "
+                     "option will have no effect if the first script is a ‘.pyw’ file. ",
+
+            )
+
+            self.consoleMode = Option(
+                name="console",
+                hasArgument=False,
+                desc="-c, --console, --nowindowed: "
+                     "Open a console window for standard i/o (default). On Windows this option will have no effect if "
+                     "the first script is a ‘.pyw’ file. "
+            )
+
             self.productName = Option(
                 name="name",
                 hasArgument=True,
                 desc="-n NAME, --name NAME: "
-                     "Name to assign to the bundled app and spec file (default: first script’s basename)"
+                     "Name to assign to the bundled app and spec file (default: first script’s basename)."
             )
 
-            self.extraDataPaths = MultipleOption(
+            self.extraData = MultipleOption(
                 name="add-data",
                 desc="--add-data <SRC;DEST or SRC:DEST>: "
                      "Additional non-binary files or folders to be added to the executable. "
@@ -142,7 +164,7 @@ class PackageConfigs(object):
                      "(which is ; on Windows and : on most unix systems) is used."
             )
 
-            self.extraBinaryPaths = MultipleOption(
+            self.extraBinaries = MultipleOption(
                 name="add-binary",
                 desc="--add-binary <SRC;DEST or SRC:DEST>: "
                      "Additional binary files to be added to the executable. "
@@ -201,7 +223,7 @@ class PackageConfigs(object):
                 name="exclude-module",
                 desc="--exclude-module EXCLUDES: "
                      "Optional module or package (the Python name, not the path name) that will be ignored "
-                     "(as though it was not found)"
+                     "(as though it was not found)."
             )
 
             self.encryptionKey = Option(
@@ -240,17 +262,7 @@ class PackageConfigs(object):
                 name="strip",
                 hasArgument=False,
                 desc="-s, --strip: "
-                     "Apply a symbol-table strip to the executable and shared libs (not recommended for Windows)"
-            )
-
-            self.noConsoleWindow = Option(
-                name="noconsole",
-                hasArgument=False,
-                desc="-w, --windowed, --noconsole: "
-                     "Windows and Mac OS X: do not provide a console window for standard i/o."
-                     " On Mac OS X this also triggers building an OS X .app bundle. "
-                     "On Windows this option will be set if the first script is a ‘.pyw’ file."
-                     " This option is ignored in *NIX systems."
+                     "Apply a symbol-table strip to the executable and shared libs (not recommended for Windows)."
             )
 
             self.icon = Option(

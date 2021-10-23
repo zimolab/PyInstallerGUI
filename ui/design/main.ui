@@ -36,50 +36,46 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="currentWorkDirLabel">
-          <property name="text">
-           <string>Working Dir    </string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="currentWorkDirLabel">
+            <property name="text">
+             <string>Working Dir    </string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
            <widget class="DirectoryEdit" name="currentWorkDirEdit">
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="2">
            <widget class="QPushButton" name="changeCurrentWorkDirButton">
             <property name="text">
              <string>Change</string>
             </property>
            </widget>
           </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QLabel" name="pyinstallerLabel">
-          <property name="text">
-           <string>Pynstaller Path</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="pyinstallerLabel">
+            <property name="text">
+             <string>Pynstaller Path</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
            <widget class="FileEdit" name="pyinstallerEdit">
             <property name="dragEnabled">
              <bool>true</bool>
             </property>
             <property name="placeholderText">
-             <string>set your pyinstaller here</string>
+             <string>Set path of pyinstaller here</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="1" column="2">
            <widget class="QPushButton" name="selectPyInstallerButton">
             <property name="text">
              <string>Select</string>
@@ -141,27 +137,17 @@
           <property name="topMargin">
            <number>5</number>
           </property>
-          <item row="11" column="1">
-           <widget class="QCheckBox" name="cleanBeforePackCheckBox">
+          <item row="6" column="3">
+           <widget class="QPushButton" name="generateEncryptionKeyButton">
             <property name="text">
-             <string>Clean before build</string>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
+             <string>Auto Gen</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="productModelLabel">
+          <item row="2" column="2">
+           <widget class="QPushButton" name="defaultWorkPathButton">
             <property name="text">
-             <string>Product Mode</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="productNameLabel">
-            <property name="text">
-             <string>Product Name</string>
+             <string>Default</string>
             </property>
            </widget>
           </item>
@@ -172,78 +158,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="productNameEdit"/>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="specPathLabel">
-            <property name="text">
-             <string>Spec Path</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="workPathLabel">
-            <property name="text">
-             <string>Work Path</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="DirectoryEdit" name="distPathEdit"/>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="debugOptionLabel">
-            <property name="text">
-             <string>Debug Option</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="appIconEdit"/>
-          </item>
-          <item row="6" column="1">
-           <widget class="QLineEdit" name="encryptionKeyEdit"/>
-          </item>
-          <item row="12" column="1">
-           <widget class="QCheckBox" name="noConfirmCheckBox">
-            <property name="text">
-             <string>Don't Confirm</string>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="splashEdit"/>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="workPathEdit"/>
-          </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="logLevelLabel">
-            <property name="text">
-             <string>Log Level</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="1">
-           <widget class="QComboBox" name="debugOptionCombo"/>
-          </item>
-          <item row="13" column="1">
-           <widget class="QCheckBox" name="stripSymbolsCheckBox">
-            <property name="text">
-             <string>Strip symbol-table</string>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="specPathEdit"/>
-          </item>
           <item row="6" column="0">
            <widget class="QLabel" name="encryptionKeyLabel">
             <property name="text">
@@ -251,20 +165,10 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="splashLabel">
+          <item row="0" column="0">
+           <widget class="QLabel" name="productNameLabel">
             <property name="text">
-             <string>Splash</string>
-            </property>
-           </widget>
-          </item>
-          <item row="14" column="1">
-           <widget class="QCheckBox" name="asciiOnlyCheckBox">
-            <property name="text">
-             <string>ASCII only（no unicode）</string>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
+             <string>Product Name</string>
             </property>
            </widget>
           </item>
@@ -276,17 +180,97 @@
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QComboBox" name="logLevelCombo"/>
+           <widget class="QComboBox" name="productModeCombo"/>
           </item>
-          <item row="15" column="0" colspan="4">
-           <widget class="QPushButton" name="startPackButton">
+          <item row="5" column="3">
+           <widget class="QPushButton" name="selectSplashButton">
             <property name="text">
-             <string>Pack</string>
+             <string>Select</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
-           <widget class="QComboBox" name="productModeCombo"/>
+          <item row="10" column="1">
+           <widget class="QComboBox" name="debugOptionCombo"/>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="defaultSpecPathButton">
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QPushButton" name="defaultSplashButton">
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="productModelLabel">
+            <property name="text">
+             <string>Product Mode</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="selectDistPathButton">
+            <property name="text">
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="encryptionKeyEdit"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="DirectoryEdit" name="distPathEdit"/>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="splashEdit"/>
+          </item>
+          <item row="9" column="1">
+           <widget class="QComboBox" name="logLevelCombo"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="specPathEdit"/>
+          </item>
+          <item row="14" column="1">
+           <widget class="QCheckBox" name="stripSymbolsCheckBox">
+            <property name="text">
+             <string>Strip symbol-table</string>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="workPathLabel">
+            <property name="text">
+             <string>Work Path</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="2">
+           <widget class="QPushButton" name="defaultProductModeButton">
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="productNameEdit"/>
+          </item>
+          <item row="13" column="1">
+           <widget class="QCheckBox" name="noConfirmCheckBox">
+            <property name="text">
+             <string>Don't Confirm</string>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="defaultDistPathButton">
@@ -295,15 +279,56 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="defaultWorkPathButton">
+          <item row="6" column="2">
+           <widget class="QPushButton" name="defaultEncryptionKeyButton">
             <property name="text">
              <string>Default</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QPushButton" name="selectDistPathButton">
+          <item row="16" column="0" colspan="4">
+           <widget class="QPushButton" name="startPackButton">
+            <property name="text">
+             <string>Pack</string>
+            </property>
+           </widget>
+          </item>
+          <item row="15" column="1">
+           <widget class="QCheckBox" name="asciiOnlyCheckBox">
+            <property name="text">
+             <string>ASCII only（no unicode）</string>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QPushButton" name="defaultAppIconButton">
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="windowModeLabel">
+            <property name="text">
+             <string>Window Mode</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="debugOptionLabel">
+            <property name="text">
+             <string>Debug Option</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="appIconEdit"/>
+          </item>
+          <item row="4" column="3">
+           <widget class="QPushButton" name="selectAppIconButton">
             <property name="text">
              <string>Select</string>
             </property>
@@ -316,15 +341,8 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="2">
-           <widget class="QPushButton" name="defaultSpecPathButton">
-            <property name="text">
-             <string>Default</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QPushButton" name="defaultAppIconButton">
+          <item row="9" column="2">
+           <widget class="QPushButton" name="defaultLogLevelButton">
             <property name="text">
              <string>Default</string>
             </property>
@@ -337,59 +355,54 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="3">
-           <widget class="QPushButton" name="selectAppIconButton">
+          <item row="5" column="0">
+           <widget class="QLabel" name="splashLabel">
             <property name="text">
-             <string>Select</string>
+             <string>Splash</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="2">
-           <widget class="QPushButton" name="defaultSplashButton">
+          <item row="9" column="0">
+           <widget class="QLabel" name="logLevelLabel">
             <property name="text">
-             <string>Default</string>
+             <string>Log Level</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="3">
-           <widget class="QPushButton" name="selectSplashButton">
+          <item row="12" column="1">
+           <widget class="QCheckBox" name="cleanBeforePackCheckBox">
             <property name="text">
-             <string>Select</string>
+             <string>Clean before build</string>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item row="6" column="2">
-           <widget class="QPushButton" name="defaultEncryptionKeyButton">
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="workPathEdit"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="specPathLabel">
             <property name="text">
-             <string>Default</string>
+             <string>Spec Path</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="2">
-           <widget class="QPushButton" name="defaultProductModeButton">
-            <property name="text">
-             <string>Default</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="2">
-           <widget class="QPushButton" name="defaultLogLevelButton">
-            <property name="text">
-             <string>Default</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="2">
+          <item row="10" column="2">
            <widget class="QPushButton" name="defaultDebugOptionButton">
             <property name="text">
              <string>Default</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="3">
-           <widget class="QPushButton" name="generateEncryptionKeyButton">
+          <item row="7" column="1">
+           <widget class="QComboBox" name="windowModeCombo"/>
+          </item>
+          <item row="7" column="2">
+           <widget class="QPushButton" name="defaultWindowModeButton">
             <property name="text">
-             <string>Auto Gen</string>
+             <string>Default</string>
             </property>
            </widget>
           </item>
@@ -449,7 +462,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QLabel" name="extraDataPathsLabel">
+         <widget class="QLabel" name="extraDataLabel">
           <property name="text">
            <string>Extra Data Paths</string>
           </property>
@@ -458,7 +471,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QListWidget" name="listWidget"/>
+           <widget class="QListWidget" name="extraDataListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -488,7 +501,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="extraBinariesPathsLabel">
+         <widget class="QLabel" name="extraBinariesLabel">
           <property name="text">
            <string>Extra Binaries Paths</string>
           </property>
@@ -497,19 +510,19 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QListWidget" name="listWidget_2"/>
+           <widget class="QListWidget" name="extraBinariesListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QPushButton" name="addExtraDataButton_2">
+             <widget class="QPushButton" name="addExtraBinariesButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="removeExtraDataButton_2">
+             <widget class="QPushButton" name="removeExtraBinariesButton">
               <property name="text">
                <string>Remove</string>
               </property>
@@ -1110,6 +1123,7 @@
      <string>File</string>
     </property>
     <addaction name="separator"/>
+    <addaction name="actionNewConfigs"/>
     <addaction name="actionSaveConfigs"/>
     <addaction name="actionLoadConfigs"/>
     <addaction name="separator"/>
@@ -1185,6 +1199,11 @@
   <action name="actionSettings">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionNewConfigs">
+   <property name="text">
+    <string>New</string>
    </property>
   </action>
  </widget>

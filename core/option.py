@@ -194,7 +194,7 @@ class MultipleOption(Option):
         # 忽略特殊值
         if arg is None or arg == "" or arg == OPTION_BY_DEFAULT:
             return
-            # 验证
+        # 验证
         if self._argumentChoices is not None:
             if arg not in self._argumentChoices:
                 raise ValueError("argument is not allowed")
@@ -217,6 +217,27 @@ class MultipleOption(Option):
     def addAll(self, *args):
         for arg in args:
             self.add(arg)
+
+    def update(self, index, arg):
+        # 忽略特殊值
+        if arg is None or arg == "" or arg == OPTION_BY_DEFAULT:
+            return
+        # 校验index
+        if (not self.isSet) or index < 0 or index >= len(self.argument):
+            raise RuntimeError("index out of bound")
+        # 验证
+        if self._argumentChoices is not None:
+            if arg not in self._argumentChoices:
+                raise ValueError("argument is not allowed")
+            else:
+                self._argument[index] = arg
+                self._optionStatus = OptionStatus.SET
+        else:
+            if ArgumentValidators.getValidator(self._argumentType)(arg):
+                self._argument[index] = arg
+                self._optionStatus = OptionStatus.SET
+            else:
+                raise ValueError("argument is not valid")
 
     def stringify(self):
         if not self.isOptionSet():

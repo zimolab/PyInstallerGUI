@@ -40,6 +40,7 @@ class PackageConfigStates(BinderTemplate):
     appIcon = ""
     splash = ""
     encryptionKey = ""
+    windowMode = OPTION_BY_DEFAULT
     productMode = OPTION_BY_DEFAULT
     logLevel = OPTION_BY_DEFAULT
     debugOption = OPTION_BY_DEFAULT
@@ -48,6 +49,7 @@ class PackageConfigStates(BinderTemplate):
     stripSymbolTable = False
     asciiOnly = False
     searchPaths = []
+    extraData = []
 
     def __init__(self, configs):
         self._configs = None
@@ -75,6 +77,7 @@ class PackageConfigStates(BinderTemplate):
         self.setAppIcon(self._configs.commonOptions.icon.argument, updateConfigs=False)
         self.setSplash(self._configs.commonOptions.splash.argument, updateConfigs=False)
         self.setEncryptionKey(self._configs.commonOptions.encryptionKey.argument, updateConfigs=False)
+        self.setWindowMode(self._configs.commonOptions.windowMode.argument, updateConfigs=False)
         self.setProductMode(self._configs.commonOptions.productMode.argument, updateConfigs=False)
         self.setLogLevel(self._configs.commonOptions.logLevel.argument, updateConfigs=False)
         self.setDebugOption(self._configs.commonOptions.debugOption.argument, updateConfigs=False)
@@ -83,6 +86,7 @@ class PackageConfigStates(BinderTemplate):
         self.setStripSymbolTable(self._configs.commonOptions.stripSymbolTable.isSet, updateConfigs=False)
         self.setASCIIOnly(self._configs.commonOptions.asciiOnly.isSet, updateConfigs=False)
         self.addSearchPaths(self._configs.commonOptions.searchPaths.argument, clearBeforeAdd=False, updateConfigs=False)
+        self.addExtraData(self._configs.commonOptions.extraData.argument, clearBeforeAdd=False, updateConfigs=False)
 
     def setPyInstallerPath(self, path, updateConfigs=True):
         self.pyinstaller = path
@@ -181,6 +185,13 @@ class PackageConfigStates(BinderTemplate):
         if updateConfigs:
             self._configs.commonOptions.encryptionKey.argument = self.encryptionKey
 
+    def setWindowMode(self, mode, updateConfigs=True):
+        if mode is None or mode == "":
+            mode = OPTION_BY_DEFAULT
+        self.windowMode = mode
+        if updateConfigs:
+            self._configs.commonOptions.windowMode.argument = self.windowMode
+
     def setProductMode(self, mode, updateConfigs=True):
         if mode is None or mode == "":
             mode = OPTION_BY_DEFAULT
@@ -261,3 +272,44 @@ class PackageConfigStates(BinderTemplate):
         if updateConfigs:
             self._configs.commonOptions.searchPaths.unset()
             self._configs.commonOptions.searchPaths.addAll(*self.searchPaths)
+
+    def clearSearchPaths(self, updateConfigs=True):
+        self.searchPaths = []
+        if updateConfigs:
+            self._configs.commonOptions.searchPaths.unset()
+
+    def addExtraData(self, dataPaths, clearBeforeAdd=False, updateConfigs=True):
+        if clearBeforeAdd:
+            self.extraData.clear()
+            self.extraData.extend(dataPaths)
+            if updateConfigs:
+                self._configs.commonOptions.extraData.unset()
+                self._configs.commonOptions.extraData.addAll(*self.extraData)
+            return
+
+        for path in dataPaths:
+            if path in self.extraData:
+                continue
+            self.extraData.append(path)
+
+        if updateConfigs:
+            self._configs.commonOptions.extraData.unset()
+            self._configs.commonOptions.extraData.addAll(*self.extraData)
+
+    def removeExtraData(self, data, updateConfigs=True):
+        for path in data:
+            idx = self.extraData.index(path)
+            if idx >= 0:
+                del self.extraData[idx]
+
+        if updateConfigs:
+            self._configs.commonOptions.extraData.unset()
+            self._configs.commonOptions.extraData.addAll(*self.extraData)
+
+    def updateExtraData(self, index, data, updateConfigs=True):
+        if index < 0 or index >= len(self.extraData):
+            return
+        self.extraData[index] = data
+        if updateConfigs:
+            self._configs.commonOptions.extraData.unset()
+            self._configs.commonOptions.extraData.addAll(*self.extraData)
