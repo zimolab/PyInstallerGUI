@@ -13,7 +13,7 @@ from ui.utils import warn, info
 
 
 # noinspection PyTypeChecker
-class StartPackUI(QDialog, Ui_StartPackDialog):
+class StartPackDialog(QDialog, Ui_StartPackDialog):
     def __init__(self, parent):
         super().__init__(parent)
         self.cwd = ""

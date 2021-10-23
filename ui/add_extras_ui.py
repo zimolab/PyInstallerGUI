@@ -13,7 +13,7 @@ from ui.utils import openDirDialog, openFileDialog, warn
 
 
 # noinspection PyTypeChecker
-class AddExtrasUI(QDialog, Ui_AddExtrasDialog):
+class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
     ADD_EXTRA_DATA = 0
     ADD_EXTRA_BIN = 1
     MODIFY_EXTRA_DATA = 2
@@ -34,7 +34,7 @@ class AddExtrasUI(QDialog, Ui_AddExtrasDialog):
         self.setupUi()
 
     def setupUi(self, _=None):
-        super(AddExtrasUI, self).setupUi(self)
+        super(AddExtrasDialog, self).setupUi(self)
         self.soureEdit.setText(lambda: self._state.sourcePath)
         self.destinationEdit.setText(lambda: self._state.destinationPath)
         self.selectDirButton.clicked.connect(self.onSelectDir)

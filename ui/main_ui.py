@@ -11,11 +11,10 @@ from PySide2.QtGui import QDropEvent
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit
 from QBinder import QEventHook, Binder
 
-from core.package_config_states import PackageConfigStates
-from core.package_configs import PackageConfigs
-from ui.add_extras_ui import AddExtrasUI
+from core.package import Package
+from ui.add_extras_ui import AddExtrasDialog
 from ui.design.ui_main import Ui_MainWindow
-from ui.start_pack_ui import StartPackUI
+from ui.start_pack_ui import StartPackDialog
 # noinspection PyTypeChecker
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog
@@ -28,34 +27,55 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__(None)
 
-        self._packageConfigs = PackageConfigs()
-        self._commonOptions = self._packageConfigs.commonOptions
-        self._upxOptions = self._packageConfigs.upxOptions
-        self._hookOptions = self._packageConfigs.hookOptions
-        self._windowsOptions = self._packageConfigs.windowsOptions
-        self._macosOptions = self._packageConfigs.macosOptions
-
-        self._packageConfigStates = PackageConfigStates(self._packageConfigs)
+        self._configs = Package()
+        self._commonOptions = self._configs.commonOptions
+        self._upxOptions = self._configs.upxOptions
+        self._hookOptions = self._configs.hookOptions
+        self._windowsOptions = self._configs.windowsOptions
+        self._macOSXOptions = self._configs.macOSXOptions
 
         self._eventHook = QEventHook.instance()
 
         self._state = Binder()
-        self._state.currentWorkDir = abspath(os.getcwd())
+        self._state.cwd = abspath(os.getcwd())
 
-        self._startPackUI = StartPackUI(self)
-        self._addExtrasUI = AddExtrasUI(self)
+        self._startPackDialog = StartPackDialog(self)
+        self._addExtrasDialog = AddExtrasDialog(self)
 
-        self.setupUi(self)
+        self.setupUi()
         self.setupMenu()
 
         localCentralize(self)
 
         self.detectExistPackageConfigs()
 
-    def setupUi(self, _):
-        super().setupUi(_)
+    def bindConfigs(self):
+        self._configs.bind("pyinstaller", self.pyinstallerEdit)
+        self._configs.bind("scripts", self.scriptsListWidget)
+        self._configs.commonOptions.productName.bind(self.productNameEdit)
+        self._configs.commonOptions.distPath.bind(self.distPathEdit)
+        self._configs.commonOptions.workPath.bind(self.workPathEdit)
+        self._configs.commonOptions.specPath.bind(self.specPathEdit)
+        self._configs.commonOptions.icon.bind(self.appIconEdit)
+        self._configs.commonOptions.splash.bind(self.splashEdit)
+        self._configs.commonOptions.encryptionKey.bind(self.encryptionKeyEdit)
+        self._configs.commonOptions.windowMode.bind(self.windowModeCombo)
+        self._configs.commonOptions.productMode.bind(self.productModeCombo)
+        self._configs.commonOptions.logLevel.bind(self.logLevelCombo)
+        self._configs.commonOptions.debugOption.bind(self.debugOptionCombo)
+        self._configs.commonOptions.cleanBeforePack.bind(self.cleanBeforePackCheckBox)
+        self._configs.commonOptions.noConfirm.bind(self.noConfirmCheckBox)
+        self._configs.commonOptions.stripSymbolTable.bind(self.stripSymbolsCheckBox)
+        self._configs.commonOptions.asciiOnly.bind(self.asciiOnlyCheckBox)
+        self._configs.commonOptions.searchPaths.bind(self.searchPathsListWidget)
+        self._configs.commonOptions.extraData.bind(self.extraDataListWidget)
 
-        self.setupCurrentWorkDirUI()
+    def setupUi(self, _=None):
+        super().setupUi(self)
+
+        self.bindConfigs()
+
+        self.setupCWDUI()
         self.setupPyInstallerUI()
         self.setupScriptsUI()
         # commonOptions
@@ -81,40 +101,37 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def setupMenu(self):
         # 载入配置文件
         def onLoadPackageConfigs():
-            configFile = openFileDialog(self, self.tr("Select Configs"), None, "Config File(*.json;*.*)")
-            if configFile is not None:
-                self.loadPackageConfigs(configFile)
+            path = openFileDialog(self, self.tr("Select Configs"), None, "Config File(*.json;*.*)")
+            if path is not None:
+                self.loadPackageConfigs(path)
 
         # 保存配置文件
         def onSavePackageConfigs():
-            packageConfigsPath = saveFileDialog(self, self.tr("Save Package Configs"),
-                                                join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE))
-            if packageConfigsPath is not None:
+            path = saveFileDialog(self, self.tr("Save Package Configs"),
+                                  join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE))
+            if path is not None:
                 try:
-                    self._packageConfigs.save(packageConfigsPath)
+                    self._configs.saveToFile(path)
                 except Exception as e:
-                    error(self, self.tr("Warning"), self.tr("Cannot save package config file") + f"({e})")
-                else:
-                    pass
+                    error(self, self.tr("Warning"), self.tr("Cannot save package config file!") + f"({e})")
 
         def onCreateNewConfigs():
             if ask(self, self.tr("New Configs"), self.tr("Current configs will be lost. Sure to create a new config?")):
-                newConfigs = PackageConfigs()
-                self.changeCurrentConfigs(newConfigs)
+                self._configs.reset()
 
         self.actionLoadConfigs.triggered.connect(onLoadPackageConfigs)
         self.actionSaveConfigs.triggered.connect(onSavePackageConfigs)
-        self.actionStartPack.triggered.connect(self.openStartPackUI)
+        self.actionStartPack.triggered.connect(self.openStartPackDialog)
         self.actionNewConfigs.triggered.connect(onCreateNewConfigs)
 
-    def setupCurrentWorkDirUI(self):
+    def setupCWDUI(self):
         def onPathChange(path):
             try:
                 os.chdir(path)
             except Exception as e:
                 warn(self, self.tr("Warning"), self.tr("Cannot change current work dir to") + path + f"({e})")
             else:
-                self._state.currentWorkDir = path
+                self._state.cwd = path
 
         def onSelectCurrentDir():
             path = openDirDialog(self, "Change Working Dir")
@@ -122,7 +139,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 onPathChange(path)
 
         self.changeCurrentWorkDirButton.clicked.connect(onSelectCurrentDir)
-        self.currentWorkDirEdit.setText(lambda: self._state.currentWorkDir * 1)
+        self.currentWorkDirEdit.setText(lambda: self._state.cwd * 1)
         self.currentWorkDirEdit.textChanged.connect(onPathChange)
         self.updateToolTip("Current working directory", self.currentWorkDirEdit, self.currentWorkDirLabel)
 
@@ -132,63 +149,31 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                              self.tr("pyinstaller executable(*.*)"))
             if pyinstallerPath is None:
                 return
-            self._packageConfigStates.setPyInstallerPath(pyinstallerPath, updateConfigs=True)
+            self._configs.pyinstaller = pyinstallerPath
 
         self.selectPyInstallerButton.clicked.connect(onSelectPyInstallerPath)
-        self.pyinstallerEdit.setText(lambda: self._packageConfigStates.pyinstaller * 1)
-        self.pyinstallerEdit.textChanged.connect(
-            lambda text: self._packageConfigStates.setPyInstallerPath(text, updateConfigs=True)
-        )
         self.updateToolTip(self.tr("Path to pyinstaller executable"), self.pyinstallerEdit, self.pyinstallerLabel)
 
     def setupScriptsUI(self):
-        """
-        设置待打包脚本列表UI
-        """
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 设置scriptsListWidget
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 设置项目选择模式：ExtendedSelection，用ctrl键选择多项
         self.scriptsListWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
-
-        # 处理选区变化事件
-        def onSelectionChanged():
-            if len(self.scriptsListWidget.selectedItems()) > 0:
-                self.removeScriptButton.setEnabled(True)
-            else:
-                self.removeScriptButton.setEnabled(False)
-
-        self.scriptsListWidget.itemSelectionChanged.connect(onSelectionChanged)
-
-        # 将scriptsListWidget显示的项目与self._packageConfigStates.scripts变量进行双向绑定
-        def updateItems():
-            self.scriptsListWidget.clear()
-            return self._packageConfigStates.scripts
-
-        self.scriptsListWidget.addItems(updateItems)
-
-        self.scriptsLabel.setToolTip(self.tr("scriptname: name of script files to be processed"))
+        self.scriptsListWidget.itemSelectionChanged.connect(
+            lambda: self.removeScriptButton.setEnabled(len(self.scriptsListWidget.selectedItems()) > 0))
+        self.updateToolTip("scriptname: name of script files to be processed", self.scriptsLabel,
+                           self.scriptsListWidget)
 
         # TODO: 为列表控件添加右键菜单，添加清空列表、打开选中文件功能等
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 设置addScriptButton
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 设置按钮单击事件
+        # 添加脚本按钮
         def onAddScript():
-            scriptFiles = openFilesDialog(self, self.tr(u"Add Script"), None,
-                                          self.tr("Python Scripts(*.py *.pyw)"))
-            if scriptFiles is not None:
-                self._packageConfigStates.addScripts(scriptFiles)
+            scripts = openFilesDialog(self, self.tr(u"Add Script"), None,
+                                      self.tr("Python Scripts(*.py *.pyw)"))
+            if scripts is not None:
+                self._configs.addScripts(*scripts)
 
         self.addScriptButton.clicked.connect(onAddScript)
-
         # 实现文件拖放功能
-        # FIXME： 经实验，发现在QListWidget上只能触发DragEnter事件，无法触发Drop事件，这很可能是一个Bug。
-        #  退而求其次，只能在addScriptButton实现文件的拖放功能了。
+        # FIXME： 经实验，发现在QListWidget上只能触发DragEnter事件，无法触发Drop事件，这很可能是一个Bug。退而求其次，只能在addScriptButton实现文件的拖放功能了。
         def onDrop(event):
-            event: QDropEvent
             urls = event.mimeData().urls()
             if len(urls) == 0:
                 return
@@ -197,235 +182,133 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 for url in urls if
                 isfile(url.toLocalFile()) and (url.toLocalFile().endswith(".py") or url.toLocalFile().endswith(".pyw"))
             ]
-            self._packageConfigStates.addScripts(scripts)
+            self._configs.addScripts(*scripts)
 
         self.addScriptButton.setAcceptDrops(True)
         self._eventHook.add_hook(self.addScriptButton, QtCore.QEvent.DragEnter,
                                  lambda event: event.acceptProposedAction())
         self._eventHook.add_hook(self.addScriptButton, QtCore.QEvent.Drop, onDrop)
 
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 设置removeScriptButton
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 设置按钮单击事件
+        # 移除脚本按钮
         def onRemoveScript():
-            selectedScripts = [w.text() for w in self.scriptsListWidget.selectedItems()]
-            if len(selectedScripts) > 0:
+            selected = [w.text() for w in self.scriptsListWidget.selectedItems()]
+            if len(selected) > 0:
                 if ask(self, self.tr("Remove Scripts"), self.tr("Sure to remove scripts")):
-                    self._packageConfigStates.removeScripts(selectedScripts)
+                    self._configs.removeScripts(*selected)
 
         self.removeScriptButton.setEnabled(False)
         self.removeScriptButton.clicked.connect(onRemoveScript)
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     def setupProductNameUI(self):
         self.updateToolTip(self._commonOptions.productName.description,
                            self.productNameEdit, self.productNameLabel)
-        self.productNameEdit.setText(lambda: self._packageConfigStates.productName * 1)
-        self.productNameEdit.textChanged.connect(lambda text:
-                                                 self._packageConfigStates.setProductName(text, updateConfigs=True))
 
     def setupDistPathUI(self):
-        # 设置distPathEdit
-        self.distPathEdit.setText(lambda: self._packageConfigStates.distPath * 1)
-        self.distPathEdit.textChanged.connect(
-            lambda text: self._packageConfigStates.setDistPath(text, updateConfigs=True)
-        )
         # 设置defaultDistPathButton
-        self.defaultDistPathButton.clicked.connect(
-            lambda: self._packageConfigStates.setDistPath(None, updateConfigs=True)
-        )
+        self.defaultDistPathButton.clicked.connect(self._commonOptions.distPath.unset)
 
         # 设置selectDistPathButton
         def onSelectDistPath():
-            distPath = openDirDialog(self, self.tr("Select Dist Path"))
-            if distPath != "" and distPath is not None:
-                self._packageConfigStates.setDistPath(distPath, updateConfigs=True)
+            path = openDirDialog(self, self.tr("Select Dist Path"))
+            if path != "" and path is not None:
+                self._commonOptions.distPath.argument = path
 
         self.selectDistPathButton.clicked.connect(onSelectDistPath)
         self.updateToolTip(self._commonOptions.distPath.description, self.distPathLabel, self.distPathEdit)
 
     def setupWorkPathUI(self):
-        # 设置workPathEdit
-        self.workPathEdit.setText(lambda: self._packageConfigStates.workPath * 1)
-        self.workPathEdit.textChanged.connect(
-            lambda text: self._packageConfigStates.setWorkPath(text, updateConfigs=True)
-        )
         # 设置defaultWorkPathButton
-        self.defaultWorkPathButton.clicked.connect(
-            lambda: self._packageConfigStates.setWorkPath(None, updateConfigs=True)
-        )
+        self.defaultWorkPathButton.clicked.connect(self._commonOptions.workPath.unset)
 
         # 设置selectWorkPathButton
         def onSelectWorkPath():
-            workPath = openDirDialog(self, self.tr("Select Work Path"))
-            if workPath != "" and workPath is not None:
-                self._packageConfigStates.setWorkPath(workPath, updateConfigs=True)
+            path = openDirDialog(self, self.tr("Select Work Path"))
+            if path != "" and path is not None:
+                self._commonOptions.workPath.argument = path
 
         self.selectWorkPathButton.clicked.connect(onSelectWorkPath)
         self.updateToolTip(self._commonOptions.workPath.description, self.workPathLabel, self.workPathEdit)
 
     def setupSpecPathUI(self):
         def onSelectSpecPath():
-            specPath = openDirDialog(self, self.tr("Select Spec File Path"))
-            if specPath is not None:
-                self._packageConfigStates.setSpecPath(specPath, updateConfigs=True)
+            path = openDirDialog(self, self.tr("Select Spec File Path"))
+            if path is not None:
+                self._commonOptions.specPath.argument = path
 
         self.selectSpecPathButton.clicked.connect(onSelectSpecPath)
-        self.specPathEdit.setText(lambda: self._packageConfigStates.specPath * 1)
-        self.specPathEdit.textChanged.connect(
-            lambda text: self._packageConfigStates.setSpecPath(text, updateConfigs=True)
-        )
-        self.defaultSpecPathButton.clicked.connect(
-            lambda: self._packageConfigStates.setSpecPath(None, updateConfigs=True)
-        )
+        self.defaultSpecPathButton.clicked.connect(self._commonOptions.specPath.unset)
         self.updateToolTip(self._commonOptions.specPath.description, self.specPathEdit, self.specPathLabel)
 
     def setupAppIconUI(self):
+        self.defaultAppIconButton.clicked.connect(self._commonOptions.icon.unset)
+
         def onSelectIcon():
-            iconPath = openFileDialog(self, self.tr("Select App Icon"), None, self.tr("Icon Files(*.ico;*.icns)"))
-            if iconPath is not None:
-                self._packageConfigStates.setAppIcon(iconPath, updateConfigs=True)
+            path = openFileDialog(self, self.tr("Select App Icon"), None, self.tr("Icon Files(*.ico;*.icns)"))
+            if path is not None:
+                self._commonOptions.icon.argument = path
 
         self.selectAppIconButton.clicked.connect(onSelectIcon)
-        self.defaultAppIconButton.clicked.connect(
-            lambda: self._packageConfigStates.setAppIcon(None, updateConfigs=True)
-        )
-        # 双向绑定
-        self.appIconEdit.setText(lambda: self._packageConfigStates.appIcon * 1)
-        self.appIconEdit.textChanged.connect(
-            lambda text: self._packageConfigStates.setAppIcon(text, updateConfigs=True))
         self.updateToolTip(self._commonOptions.icon.description, self.appIconEdit, self.appIconLabel)
 
     def setupSplashUI(self):
+        self.defaultSplashButton.clicked.connect(self._commonOptions.splash.unset)
+
         def onSelectSplashPath():
-            splashPath = openFileDialog(
+            path = openFileDialog(
                 self, self.tr("Select Splash"), None, self.tr("Image File(*.jpg;*.jepg;*.png)"))
-            if splashPath is not None:
-                self._packageConfigStates.setSplash(splashPath, updateConfigs=True)
+            if path is not None:
+                self._commonOptions.splash.argument = path
 
         self.selectSplashButton.clicked.connect(onSelectSplashPath)
-        self.defaultSplashButton.clicked.connect(lambda: self._packageConfigStates.setSplash(None, updateConfigs=True))
-        # 双向绑定
-        self.splashEdit.setText(lambda: self._packageConfigStates.splash * 1)
-        self.splashEdit.textChanged.connect(lambda text: self._packageConfigStates.setSplash(text, updateConfigs=True))
         self.updateToolTip(self._commonOptions.splash.description, self.splashLabel, self.splashEdit)
 
     def setupEncryptionKeyUI(self):
-        # 双向绑定
-        self.encryptionKeyEdit.setEchoMode(QLineEdit.PasswordEchoOnEdit)
-        self.encryptionKeyEdit.setText(lambda: self._packageConfigStates.encryptionKey * 1)
-        self.encryptionKeyEdit.textChanged.connect(
-            lambda text: self._packageConfigStates.setEncryptionKey(text, updateConfigs=True))
-
-        self.defaultEncryptionKeyButton.clicked.connect(
-            lambda: self._packageConfigStates.setEncryptionKey(None, updateConfigs=True))
+        self.defaultEncryptionKeyButton.clicked.connect(self._commonOptions.encryptionKey.unset)
 
         self.generateEncryptionKeyButton.clicked.connect(
-            lambda: self._packageConfigStates.setEncryptionKey(uuid.uuid4().hex, updateConfigs=True)
-        )
+            lambda: self._commonOptions.encryptionKey.set(uuid.uuid4().hex))
 
         self.updateToolTip(self._commonOptions.encryptionKey.description,
                            self.encryptionKeyEdit, self.encryptionKeyLabel)
 
     def setupWindowModeUI(self):
         self.updateToolTip(self._commonOptions.windowMode.description, self.windowModeCombo, self.windowModeLabel)
-        self.windowModeCombo.addItems(self._commonOptions.windowMode.argumentChoices)
-        # 双向绑定
-        self.windowModeCombo.setCurrentText(lambda: self._packageConfigStates.windowMode * 1)
-        self.windowModeCombo.currentTextChanged.connect(
-            lambda text: self._packageConfigStates.setWindowMode(text, updateConfigs=True)
-        )
-        self.defaultWindowModeButton.clicked.connect(
-            lambda: self._packageConfigStates.setWindowMode(None, updateConfigs=True)
-        )
+        self.windowModeCombo.addItems(self._commonOptions.windowMode.choices)
+        self.defaultWindowModeButton.clicked.connect(self._commonOptions.windowMode.unset)
 
     def setupProductModeUI(self):
         self.updateToolTip(self._commonOptions.productMode.description, self.productModeCombo, self.productModelLabel)
-        self.productModeCombo.addItems(self._commonOptions.productMode.argumentChoices)
-        # 双向绑定
-        self.productModeCombo.setCurrentText(lambda: self._packageConfigStates.productMode * 1)
-        self.productModeCombo.currentTextChanged.connect(
-            lambda text: self._packageConfigStates.setProductMode(text, updateConfigs=True)
-        )
-        self.defaultProductModeButton.clicked.connect(
-            lambda: self._packageConfigStates.setProductMode(None, updateConfigs=True)
-        )
+        self.productModeCombo.addItems(self._commonOptions.productMode.choices)
+        self.defaultProductModeButton.clicked.connect(self._commonOptions.productMode.unset)
 
     def setupLogLevelUI(self):
         self.updateToolTip(self._commonOptions.logLevel.description, self.logLevelLabel, self.logLevelCombo)
-        self.logLevelCombo.addItems(self._commonOptions.logLevel.argumentChoices)
-        # 双向绑定
-        self.logLevelCombo.setCurrentText(lambda: self._packageConfigStates.logLevel * 1)
-        self.logLevelCombo.currentTextChanged.connect(
-            lambda text: self._packageConfigStates.setLogLevel(text, updateConfigs=True)
-        )
-        self.defaultLogLevelButton.clicked.connect(
-            lambda: self._packageConfigStates.setLogLevel(None, updateConfigs=True))
+        self.logLevelCombo.addItems(self._commonOptions.logLevel.choices)
+        self.defaultLogLevelButton.clicked.connect(self._commonOptions.logLevel.unset)
 
     def setupDebugOptionUI(self):
         self.updateToolTip(self._commonOptions.debugOption.description, self.debugOptionCombo, self.debugOptionLabel)
-        self.debugOptionCombo.addItems(self._commonOptions.debugOption.argumentChoices)
-        # 双向绑定
-        self.debugOptionCombo.setCurrentText(
-            lambda: self._packageConfigStates.debugOption * 1
-        )
-        self.debugOptionCombo.currentTextChanged.connect(
-            lambda text: self._packageConfigStates.setDebugOption(text, updateConfigs=True)
-        )
-        self.defaultDebugOptionButton.clicked.connect(
-            lambda: self._packageConfigStates.setDebugOption(None, updateConfigs=True))
+        self.debugOptionCombo.addItems(self._commonOptions.debugOption.choices)
+        self.defaultDebugOptionButton.clicked.connect(self._commonOptions.debugOption.unset)
 
     def setupCleanBeforePackUI(self):
         self.updateToolTip(self._commonOptions.cleanBeforePack.description, self.cleanBeforePackCheckBox)
-        # 双向绑定
-        self.cleanBeforePackCheckBox.setChecked(lambda: self._packageConfigStates.cleanBeforePack * 1)
-        self.cleanBeforePackCheckBox.clicked.connect(
-            lambda: self._packageConfigStates.setCleanBeforePack(self.cleanBeforePackCheckBox.isChecked(),
-                                                                 updateConfigs=True)
-        )
 
     def setupNoConfirmUI(self):
         self.updateToolTip(self._commonOptions.noConfirm.description, self.noConfirmCheckBox)
-        # 双向绑定
-        self.noConfirmCheckBox.setChecked(lambda: self._packageConfigStates.onConfirm * 1)
-        self.noConfirmCheckBox.clicked.connect(
-            lambda: self._packageConfigStates.setNoConfirm(self.noConfirmCheckBox.isChecked(), updateConfigs=True)
-        )
 
     def setupStripSymbolTableUI(self):
         self.updateToolTip(self._commonOptions.stripSymbolTable.description, self.stripSymbolsCheckBox)
-        # 双向绑定
-        self.stripSymbolsCheckBox.setChecked(lambda: self._packageConfigStates.stripSymbolTable * 1)
-        self.stripSymbolsCheckBox.clicked.connect(
-            lambda: self._packageConfigStates.setStripSymbolTable(self.stripSymbolsCheckBox.isChecked(),
-                                                                  updateConfigs=True)
-        )
 
     def setupASCIIOnlyUI(self):
         self.updateToolTip(self._commonOptions.asciiOnly.description, self.asciiOnlyCheckBox)
-        # 双向绑定
-        self.asciiOnlyCheckBox.setChecked(lambda: self._packageConfigStates.asciiOnly * 1)
-        self.asciiOnlyCheckBox.clicked.connect(
-            lambda: self._packageConfigStates.setASCIIOnly(self.asciiOnlyCheckBox.isChecked(), updateConfigs=True)
-        )
 
     def setupStartPackButton(self):
-        self.startPackButton.clicked.connect(self.openStartPackUI)
+        self.startPackButton.clicked.connect(self.openStartPackDialog)
 
     def setupSearchPathsUI(self):
         self.updateToolTip(self._commonOptions.searchPaths.description,
                            self.searchPathsLabel, self.searchPathsListWidget)
-
-        # 绑定到QListWidget
-        def onUpdateItems():
-            self.searchPathsListWidget.clear()
-            return self._packageConfigStates.searchPaths
-
-        self.searchPathsListWidget.addItems(onUpdateItems)
-
         # 添加搜索路径
         def onAddSearchPath():
             searchPaths = openDirsDialog(self, self.tr("Add Search Path"))
@@ -461,24 +344,17 @@ class MainUI(QMainWindow, Ui_MainWindow):
                            self.extraDataLabel,
                            self.extraDataListWidget)
 
-        # 绑定数据到QListWidget
-        def onUpdateItems():
-            self.extraDataListWidget.clear()
-            return self._packageConfigStates.extraData
-
-        self.extraDataListWidget.addItems(onUpdateItems)
-
         # 添加数据
-        self.addExtraDataButton.clicked.connect(self.openAddExtraDataUI)
-        self._addExtrasUI.extraDataAdded.connect(
-            lambda data: self._packageConfigStates.addExtraData([data], updateConfigs=True))
+        self.addExtraDataButton.clicked.connect(self.openAddExtraDataDialog)
+        self._addExtrasDialog.extraDataAdded.connect(
+            lambda data: self._commonOptions.extraData.add(data))
 
         # 移除数据
         def onRemoveExtraData():
             selected = [w.text() for w in self.extraDataListWidget.selectedItems()]
             if len(selected) > 0:
                 if ask(self, self.tr("Remove Extra Data"), self.tr("Sure to remove extra data?")):
-                    self._packageConfigStates.removeExtraData(selected, updateConfigs=True)
+                    self._commonOptions.extraData.remove(*selected)
 
         self.removeExtraDataButton.setEnabled(False)
         self.extraDataListWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -494,8 +370,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
             event: QDropEvent
             urls = event.mimeData().urls()
             sources = [url.toLocalFile() for url in urls]
-            data = [self._addExtrasUI.join(source, self._addExtrasUI.relativePath(source)) for source in sources]
-            self._packageConfigStates.addExtraData(data, updateConfigs=True)
+            data = [self._addExtrasDialog.join(source, self._addExtrasDialog.relativePath(source)) for source in
+                    sources]
+            self._commonOptions.extraData.remove(*data)
 
         self.addExtraDataButton.setAcceptDrops(True)
         self._eventHook.add_hook(self.addExtraDataButton,
@@ -505,13 +382,13 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         # 双击修改数据
         self.extraDataListWidget.itemDoubleClicked.connect(
-            lambda item: self._addExtrasUI.display(
-                AddExtrasUI.MODIFY_EXTRA_DATA, item.text(),
-                self._packageConfigStates.extraData.index(item.text())
+            lambda item: self._addExtrasDialog.display(
+                AddExtrasDialog.MODIFY_EXTRA_DATA, item.text(),
+                self._commonOptions.extraData.indexOf(item.text())
             )
         )
-        self._addExtrasUI.extraDataChanged.connect(
-            lambda index, data: self._packageConfigStates.updateExtraData(index, data)
+        self._addExtrasDialog.extraDataChanged.connect(
+            lambda index, data: self._commonOptions.extraData.set(index, data)
         )
 
     def updateToolTip(self, tooltip, *widgets):
@@ -520,42 +397,31 @@ class MainUI(QMainWindow, Ui_MainWindow):
             for widget in widgets:
                 widget.setToolTip(tooltip)
 
-    def loadPackageConfigs(self, configFile):
+    def loadPackageConfigs(self, path):
         try:
-            newConfigs = PackageConfigs.load(configFile, ignoreErrors=False)
+            self._configs.load(path, reset=True, ignoreErrors=False)
         except Exception as e:
-            warn(self, self.tr("Warning"), self.tr("Cannot read package config file") + f"(error: {e})")
-        else:
-            self.changeCurrentConfigs(newConfigs)
-
-    def changeCurrentConfigs(self, newConfigs):
-        self._packageConfigs = None
-        self._packageConfigs = newConfigs
-        self._commonOptions = self._packageConfigs.commonOptions
-        self._upxOptions = self._packageConfigs.upxOptions
-        self._hookOptions = self._packageConfigs.hookOptions
-        self._windowsOptions = self._packageConfigs.windowsOptions
-        self._macosOptions = self._packageConfigs.macosOptions
-        self._packageConfigStates.changeConfigs(self._packageConfigs)
+            warn(self, self.tr("Warning"),
+                 self.tr("Some errors occurred when loading configs from file!") + f"(error: {e})")
 
     def detectExistPackageConfigs(self):
-        configPath = join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE)
-        if exists(configPath):
+        path = join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE)
+        if exists(path):
             if ask(self, self.tr("Load Package Config"),
                    self.tr("package.json found in current path, load it?")):
-                self.loadPackageConfigs(configPath)
+                self.loadPackageConfigs(path)
 
-    def openStartPackUI(self):
-        if self._packageConfigStates.pyinstaller is None or self._packageConfigStates.pyinstaller == "":
+    def openStartPackDialog(self):
+        if self._configs.pyinstaller is None or self._configs.pyinstaller == "":
             warn(self, self.tr("Warning"), self.tr("Path of pyinstaller is empty!"))
             return
-        if len(self._packageConfigStates.scripts) == 0:
+        if len(self._configs.scripts) == 0:
             warn(self, self.tr("Warning"), self.tr("Need at least one script to pack!"))
             return
-        if self._startPackUI.isHidden():
-            self._startPackUI.display(self._packageConfigs.toPakCommand(),
-                                      self._state.currentWorkDir)
+        if self._startPackDialog.isHidden():
+            self._startPackDialog.display(self._configs.toCommandLine(),
+                                          self._state.cwd)
 
-    def openAddExtraDataUI(self):
-        if self._addExtrasUI.isHidden():
-            self._addExtrasUI.display(AddExtrasUI.ADD_EXTRA_DATA)
+    def openAddExtraDataDialog(self):
+        if self._addExtrasDialog.isHidden():
+            self._addExtrasDialog.display(AddExtrasDialog.ADD_EXTRA_DATA)
