@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_extrasnobaTV.ui'
+## Form generated from reading UI file 'add_extrasTRlkQk.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -54,15 +54,15 @@ class Ui_AddExtrasDialog(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.selectDirButton = QPushButton(AddExtrasDialog)
-        self.selectDirButton.setObjectName(u"selectDirButton")
-
-        self.horizontalLayout.addWidget(self.selectDirButton)
-
         self.selectFileButton = QPushButton(AddExtrasDialog)
         self.selectFileButton.setObjectName(u"selectFileButton")
 
         self.horizontalLayout.addWidget(self.selectFileButton)
+
+        self.selectDirButton = QPushButton(AddExtrasDialog)
+        self.selectDirButton.setObjectName(u"selectDirButton")
+
+        self.horizontalLayout.addWidget(self.selectDirButton)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -94,8 +94,8 @@ class Ui_AddExtrasDialog(object):
         self.sourceLabel.setText(QCoreApplication.translate("AddExtrasDialog", u"Source", None))
         self.destinationLabel.setText(QCoreApplication.translate("AddExtrasDialog", u"Destination", None))
         self.label.setText(QCoreApplication.translate("AddExtrasDialog", u"Note: glob format is supported!", None))
-        self.selectDirButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Select Dir", None))
         self.selectFileButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Select File", None))
+        self.selectDirButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Select Dir", None))
         self.actButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Add", None))
         self.exitButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Exit", None))
     # retranslateUi

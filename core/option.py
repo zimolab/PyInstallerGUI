@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
-
+"""
+Pyinstaller命令行选项的抽象
+"""
 OPTION_BY_DEFAULT = "BY-DEFAULT"
 
 
@@ -246,72 +248,3 @@ class MultipleOption(Option):
             return ""
         return " ".join(
             [self._makeOptionString(self._name, self._type, arg, self._connector) for arg in self._argument])
-
-
-def toMetadata(opt):
-    metadata = {
-        "name": opt.name,
-        "type": opt.optionType,
-        "description": opt.description,
-        "connector": opt.connector,
-    }
-    if opt.hasArgument:
-        if isinstance(opt.argument, list):
-            metadata["argument"] = []
-        else:
-            metadata["argument"] = None
-        metadata["argumentType"] = opt.argumentType
-        metadata["argumentChoices"] = opt.argumentChoices
-    return metadata
-
-
-def fromMetadata(metadata):
-    if "argument" not in metadata:
-        opt = Option(
-            name=metadata["name"],
-            optionType=metadata["type"],
-            hasArgument=False,
-        )
-    else:
-        argument = metadata["argument"]
-        if isinstance(argument, list):
-            opt = MultipleOption(
-                name=metadata["name"],
-                optionType=metadata["type"],
-                argumentType=metadata["argumentType"],
-            )
-        else:
-            opt = Option(
-                name=metadata["name"],
-                optionType=metadata["type"],
-                hasArgument=True,
-                argumentType=metadata["argumentType"]
-            )
-        if "argumentChoices" in metadata:
-            opt.argumentChoices = metadata["argumentChoices"]
-        else:
-            opt.argumentChoices = None
-    if "connector" in metadata:
-        opt.connector = metadata["connector"]
-    if "description" in metadata:
-        opt.description = metadata["description"]
-    return opt
-
-# o1 = Option("test1", hasArgument=True)
-# o1.set(1)
-# m1 = toMetadata(o1)
-# print(m1)
-#
-# o2 = MultipleOption("test2")
-# m2 = toMetadata(o2)
-# print(m2)
-# #
-# o3 = Option("test3")
-# m3 = toMetadata(o3)
-# print(m3)
-#
-# a1 = fromMetadata(m1)
-# a2 = fromMetadata(m2)
-# a3 = fromMetadata(m3)
-# print(a1, a1.argumentType, a1.hasArgument)
-# print(a3, a3.argumentType, a3.hasArgument)

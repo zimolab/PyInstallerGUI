@@ -50,6 +50,7 @@ class PackageConfigStates(BinderTemplate):
     asciiOnly = False
     searchPaths = []
     extraData = []
+    extraBinaries = []
 
     def __init__(self, configs):
         self._configs = None
@@ -87,6 +88,7 @@ class PackageConfigStates(BinderTemplate):
         self.setASCIIOnly(self._configs.commonOptions.asciiOnly.isSet, updateConfigs=False)
         self.addSearchPaths(self._configs.commonOptions.searchPaths.argument, clearBeforeAdd=False, updateConfigs=False)
         self.addExtraData(self._configs.commonOptions.extraData.argument, clearBeforeAdd=False, updateConfigs=False)
+        self.makeLink(self.extraBinaries, self._configs.commonOptions.extraBinaries)
 
     def setPyInstallerPath(self, path, updateConfigs=True):
         self.pyinstaller = path
@@ -313,3 +315,8 @@ class PackageConfigStates(BinderTemplate):
         if updateConfigs:
             self._configs.commonOptions.extraData.unset()
             self._configs.commonOptions.extraData.addAll(*self.extraData)
+
+    def makeLink(self, state, config):
+        self.extraBinaries = config.argument
+        config.argument = self.extraBinaries
+        print(self.extraBinaries, type(self.extraBinaries))

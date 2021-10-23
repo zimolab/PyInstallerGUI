@@ -4,11 +4,13 @@
 """
 import os
 import uuid
-from os.path import isfile, exists, join, abspath, relpath
+from os.path import isfile, exists, join, abspath
+
 from PySide2 import QtCore
 from PySide2.QtGui import QDropEvent
-from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QListWidgetItem
+from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit
 from QBinder import QEventHook, Binder
+
 from core.package_config_states import PackageConfigStates
 from core.package_configs import PackageConfigs
 from ui.add_extras_ui import AddExtrasUI
@@ -16,7 +18,7 @@ from ui.design.ui_main import Ui_MainWindow
 from ui.start_pack_ui import StartPackUI
 # noinspection PyTypeChecker
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
-    globalCentralize, localCentralize, openDirsDialog
+    localCentralize, openDirsDialog
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -106,10 +108,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.actionNewConfigs.triggered.connect(onCreateNewConfigs)
 
     def setupCurrentWorkDirUI(self):
-        """
-        设置当前工作目录UI
-        """
-
         def onPathChange(path):
             try:
                 os.chdir(path)
@@ -129,10 +127,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.updateToolTip("Current working directory", self.currentWorkDirEdit, self.currentWorkDirLabel)
 
     def setupPyInstallerUI(self):
-        """
-        设置PyInstaller UI
-        """
-
         def onSelectPyInstallerPath():
             pyinstallerPath = openFileDialog(self, self.tr("Select pyinstaller executable"), None,
                                              self.tr("pyinstaller executable(*.*)"))
@@ -234,9 +228,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                                  self._packageConfigStates.setProductName(text, updateConfigs=True))
 
     def setupDistPathUI(self):
-        """
-        设置目录路径选项UI
-        """
         # 设置distPathEdit
         self.distPathEdit.setText(lambda: self._packageConfigStates.distPath * 1)
         self.distPathEdit.textChanged.connect(
@@ -257,9 +248,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.updateToolTip(self._commonOptions.distPath.description, self.distPathLabel, self.distPathEdit)
 
     def setupWorkPathUI(self):
-        """
-        设置工作路径（构建路径）UI
-        """
         # 设置workPathEdit
         self.workPathEdit.setText(lambda: self._packageConfigStates.workPath * 1)
         self.workPathEdit.textChanged.connect(
@@ -280,10 +268,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.updateToolTip(self._commonOptions.workPath.description, self.workPathLabel, self.workPathEdit)
 
     def setupSpecPathUI(self):
-        """
-        设置Spec文件路径UI
-        """
-
         def onSelectSpecPath():
             specPath = openDirDialog(self, self.tr("Select Spec File Path"))
             if specPath is not None:
