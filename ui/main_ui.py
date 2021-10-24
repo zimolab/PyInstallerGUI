@@ -14,6 +14,7 @@ from QBinder import QEventHook, Binder
 from core.package import Package
 from ui.add_extras_ui import AddExtrasDialog
 from ui.design.ui_main import Ui_MainWindow
+from ui.modify_path_ui import ModifyPathDialog
 from ui.start_pack_ui import StartPackDialog
 # noinspection PyTypeChecker
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
@@ -41,6 +42,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         self._startPackDialog = StartPackDialog(self)
         self._addExtrasDialog = AddExtrasDialog(self)
+        self._modifyPathDialog = ModifyPathDialog(self)
 
         self.setupUi()
         self.setupMenu()
@@ -171,6 +173,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 self._configs.addScripts(*scripts)
 
         self.addScriptButton.clicked.connect(onAddScript)
+
         # 实现文件拖放功能
         # FIXME： 经实验，发现在QListWidget上只能触发DragEnter事件，无法触发Drop事件，这很可能是一个Bug。退而求其次，只能在addScriptButton实现文件的拖放功能了。
         def onDrop(event):
@@ -198,6 +201,17 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         self.removeScriptButton.setEnabled(False)
         self.removeScriptButton.clicked.connect(onRemoveScript)
+
+        # 双击列表项修改路径
+        self.scriptsListWidget.itemDoubleClicked.connect(
+            lambda item: self._modifyPathDialog.display(
+                ModifyPathDialog.MODIFY_SCRIPT_PATH,
+                item.text(),
+                self._configs.scripts.index(item.text()))
+        )
+        self._modifyPathDialog.scriptPathModified.connect(
+            lambda index, modified: self._configs.updateScriptAt(index, modified)
+        )
 
     def setupProductNameUI(self):
         self.updateToolTip(self._commonOptions.productName.description,
@@ -309,6 +323,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def setupSearchPathsUI(self):
         self.updateToolTip(self._commonOptions.searchPaths.description,
                            self.searchPathsLabel, self.searchPathsListWidget)
+
         # 添加搜索路径
         def onAddSearchPath():
             searchPaths = openDirsDialog(self, self.tr("Add Search Path"))
