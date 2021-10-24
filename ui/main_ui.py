@@ -413,9 +413,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 self._commonOptions.extraData.indexOf(item.text())
             )
         )
-        self._addExtrasDialog.extraDataChanged.connect(
-            lambda index, data: self._commonOptions.extraData.set(index, data)
-        )
+        self._addExtrasDialog.extraDataChanged.connect(self._commonOptions.extraData.set)
 
     def updateToolTip(self, tooltip, *widgets):
         if tooltip != "" and tooltip is not None:

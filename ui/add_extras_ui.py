@@ -39,7 +39,7 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
         self.destinationEdit.setText(lambda: self._state.destinationPath)
         self.selectDirButton.clicked.connect(self.onSelectDir)
         self.selectFileButton.clicked.connect(self.onSelectFile)
-        self.actButton.clicked.connect(self.onAct)
+        self.actButton.clicked.connect(self.onAction)
 
     def display(self, action, extra=None, index=None):
         self._action = action
@@ -82,7 +82,8 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
             self._state.sourcePath = selectedFile
             self._state.destinationPath = self.relativePath(selectedFile)
 
-    def onAct(self):
+    # noinspection PyUnresolvedReferences
+    def onAction(self):
         if self._state.sourcePath is None or self._state.sourcePath == "":
             warn(self, self.tr("Warning"), self.tr("Source path is empty!"))
             return
