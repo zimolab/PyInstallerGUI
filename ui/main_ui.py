@@ -12,7 +12,7 @@ from PySide2.QtGui import QDropEvent, Qt
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit
 from QBinder import QEventHook, Binder
 
-from core.package import Package
+from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
 from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL
@@ -31,7 +31,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__(None)
 
-        self._configs = Package()
+        self._configs = PackageConfig()
         self._commonOptions = self._configs.commonOptions
         self._upxOptions = self._configs.upxOptions
         self._hookOptions = self._configs.hookOptions

@@ -15,7 +15,7 @@ from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSE
     BaseOption
 
 
-class Package(object):
+class PackageConfig(object):
     def __init__(self):
         self._state = Binder()
         self._state.pyinstaller = "pyinstaller"
