@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
+    <width>709</width>
     <height>915</height>
    </rect>
   </property>
@@ -38,21 +38,21 @@
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
-           <widget class="QLabel" name="currentWorkDirLabel">
+           <widget class="QLabel" name="cwdLabel">
             <property name="text">
              <string>Working Dir    </string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="DirectoryEdit" name="currentWorkDirEdit">
+           <widget class="DirectoryEdit" name="cwdEdit">
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QPushButton" name="changeCurrentWorkDirButton">
+           <widget class="QPushButton" name="changeCWDButton">
             <property name="text">
              <string>Change</string>
             </property>
@@ -1105,6 +1105,66 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="metaTab">
+       <attribute name="title">
+        <string>Meta</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>7</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="nameLabel">
+            <property name="text">
+             <string>name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_2"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>author</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_4"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>description</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QTextEdit" name="textEdit"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1114,7 +1174,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>707</width>
+     <width>709</width>
      <height>23</height>
     </rect>
    </property>
@@ -1183,12 +1243,12 @@
   </action>
   <action name="actionSaveConfigs">
    <property name="text">
-    <string>Sava</string>
+    <string>Sava Configs</string>
    </property>
   </action>
   <action name="actionLoadConfigs">
    <property name="text">
-    <string>Load</string>
+    <string>Load Configs</string>
    </property>
   </action>
   <action name="actionHelp">
@@ -1203,7 +1263,7 @@
   </action>
   <action name="actionNewConfigs">
    <property name="text">
-    <string>New</string>
+    <string>New Configs</string>
    </property>
   </action>
  </widget>

@@ -292,6 +292,7 @@ class BindingMultipleOption(BaseOption):
 
     def clear(self):
         self._state.argument.clear()
+        self._state.argument = []
 
     def replaceWith(self, values, ignoreValidationError=True):
         self.clear()

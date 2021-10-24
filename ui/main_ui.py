@@ -138,10 +138,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
             if path is not None:
                 onPathChange(path)
 
-        self.changeCurrentWorkDirButton.clicked.connect(onSelectCurrentDir)
-        self.currentWorkDirEdit.setText(lambda: self._state.cwd * 1)
-        self.currentWorkDirEdit.textChanged.connect(onPathChange)
-        self.updateToolTip("Current working directory", self.currentWorkDirEdit, self.currentWorkDirLabel)
+        self.changeCWDButton.clicked.connect(onSelectCurrentDir)
+        self.cwdEdit.setText(lambda: self._state.cwd * 1)
+        self.cwdEdit.textChanged.connect(onPathChange)
+        self.updateToolTip("Current working directory", self.cwdEdit, self.cwdLabel)
 
     def setupPyInstallerUI(self):
         def onSelectPyInstallerPath():

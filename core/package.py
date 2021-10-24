@@ -148,6 +148,7 @@ class Package(object):
 
     def clearScripts(self):
         self._state.scripts.clear()
+        self._state.scripts = []
 
     def replaceScriptsWith(self, newScripts):
         self.clearScripts()
