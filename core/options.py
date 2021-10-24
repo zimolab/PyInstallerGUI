@@ -249,13 +249,13 @@ class BindingMultipleOption(BaseOption):
                 self._state.argument.remove(val)
 
     def removeAt(self, index):
-        if index < 0 or index >= self._state.argument:
+        if index < 0 or index >= len(self._state.argument):
             return False
         self._state.argument.pop(index)
         return True
 
     def set(self, index, val, ignoreValidationError=True):
-        if index < 0 or index >= self._state.argument:
+        if index < 0 or index >= len(self._state.argument):
             return False
         if val in self._valuesForUnset:
             return False

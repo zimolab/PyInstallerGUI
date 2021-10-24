@@ -326,10 +326,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         # 添加搜索路径
         def onAddSearchPath():
-            searchPaths = openDirsDialog(self, self.tr("Add Search Path"))
-            if searchPaths is not None:
+            paths = openDirsDialog(self, self.tr("Add Search Paths"))
+            if paths is not None:
                 try:
-                    self._packageConfigStates.addSearchPaths(searchPaths, updateConfigs=True)
+                    self._commonOptions.searchPaths.addAll(True, *paths)
                 except Exception as e:
                     error(self, self.tr("Error"), self.tr("Failed to add search path") + f"(error：{e})")
 
@@ -340,7 +340,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             selected = [w.text() for w in self.searchPathsListWidget.selectedItems()]
             if len(selected) > 0:
                 if ask(self, self.tr("Remove Search Paths"), self.tr("Sure to remove search paths?")):
-                    self._packageConfigStates.removeSearchPaths(selected, updateConfigs=True)
+                    self._commonOptions.searchPaths.remove(*selected)
 
         self.removeSearchPathButton.setEnabled(False)
         self.removeSearchPathButton.clicked.connect(onRemoveSearchPath)
@@ -351,7 +351,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         # 清除搜索路径
         self.clearSearchPathButton.clicked.connect(
-            lambda: self._packageConfigStates.clearSearchPaths(updateConfigs=True)
+            lambda: self._commonOptions.searchPaths.clear()
         )
 
     def setupAddExtraDataUI(self):
