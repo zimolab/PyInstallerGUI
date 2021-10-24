@@ -1203,6 +1203,9 @@
     </property>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
+    <addaction name="actionGotoPyinstallerWebsite"/>
+    <addaction name="actionGotoPyInstallerDoc"/>
+    <addaction name="separator"/>
     <addaction name="actionHelp"/>
    </widget>
    <widget class="QMenu" name="menuTools">
@@ -1264,6 +1267,16 @@
   <action name="actionNewConfigs">
    <property name="text">
     <string>New Configs</string>
+   </property>
+  </action>
+  <action name="actionGotoPyinstallerWebsite">
+   <property name="text">
+    <string>PyInstaller Website</string>
+   </property>
+  </action>
+  <action name="actionGotoPyInstallerDoc">
+   <property name="text">
+    <string>PyInstaller Documentation</string>
    </property>
   </action>
  </widget>

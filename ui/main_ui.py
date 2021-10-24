@@ -4,6 +4,7 @@
 """
 import os
 import uuid
+import webbrowser
 from os.path import isfile, exists, join, abspath
 
 from PySide2 import QtCore
@@ -13,7 +14,8 @@ from QBinder import QEventHook, Binder
 
 from core.package import Package
 from ui.add_extras_ui import AddExtrasDialog
-from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE
+from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
+    PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL
 from ui.design.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_pack_ui import StartPackDialog
@@ -126,6 +128,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.actionSaveConfigs.triggered.connect(onSavePackageConfigs)
         self.actionStartPack.triggered.connect(self.openStartPackDialog)
         self.actionNewConfigs.triggered.connect(onCreateNewConfigs)
+        self.actionGotoPyinstallerWebsite.triggered.connect(lambda: webbrowser.open(PYINSTALLER_WEBSITE_URL))
+        self.actionGotoPyInstallerDoc.triggered.connect(lambda: webbrowser.open(PYINSTALLER_DOC_STABLE_URL))
 
     def setupCWDUI(self):
         def onPathChange(path):

@@ -7,3 +7,8 @@ FILTER_PY_SOURCE_FILE = u"Python Scripts(*.py *.pyw)"
 FILTER_IMAGE_FILE = u"Image File(*.jpg;*.jepg;*.png)"
 FILTER_ICON_FILE = u"Icon File(*.ico;*.icns)"
 FILTER_CONFIG_FILE = u"Config File(*.json;*.*)"
+PYINSTALLER_WEBSITE_URL = "http://www.pyinstaller.org/"
+PYINSTALLER_DOC_URL = "http://www.pyinstaller.org/documentation.html"
+PYINSTALLER_DOC_STABLE_URL = "https://pyinstaller.readthedocs.io/en/stable/"
+HELP_URL = ""
+

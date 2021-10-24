@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainsApiCt.ui'
+## Form generated from reading UI file 'mainhkcwis.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -48,6 +48,10 @@ class Ui_MainWindow(object):
         self.actionSettings.setObjectName(u"actionSettings")
         self.actionNewConfigs = QAction(MainWindow)
         self.actionNewConfigs.setObjectName(u"actionNewConfigs")
+        self.actionGotoPyinstallerWebsite = QAction(MainWindow)
+        self.actionGotoPyinstallerWebsite.setObjectName(u"actionGotoPyinstallerWebsite")
+        self.actionGotoPyInstallerDoc = QAction(MainWindow)
+        self.actionGotoPyInstallerDoc.setObjectName(u"actionGotoPyInstallerDoc")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
@@ -1072,6 +1076,9 @@ class Ui_MainWindow(object):
         self.menu_2.addAction(self.actionSettings)
         self.menu_3.addAction(self.actionAbout)
         self.menu_3.addSeparator()
+        self.menu_3.addAction(self.actionGotoPyinstallerWebsite)
+        self.menu_3.addAction(self.actionGotoPyInstallerDoc)
+        self.menu_3.addSeparator()
         self.menu_3.addAction(self.actionHelp)
 
         self.retranslateUi(MainWindow)
@@ -1096,6 +1103,8 @@ class Ui_MainWindow(object):
         self.actionHelp.setText(QCoreApplication.translate("MainWindow", u"Help", None))
         self.actionSettings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.actionNewConfigs.setText(QCoreApplication.translate("MainWindow", u"New Configs", None))
+        self.actionGotoPyinstallerWebsite.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Website", None))
+        self.actionGotoPyInstallerDoc.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Documentation", None))
         self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"Working Dir    ", None))
         self.changeCWDButton.setText(QCoreApplication.translate("MainWindow", u"Change", None))
         self.pyinstallerLabel.setText(QCoreApplication.translate("MainWindow", u"Pynstaller Path", None))
