@@ -51,27 +51,18 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
             self.actButton.setText(self.tr("Add"))
         elif self._action == self.MODIFY_EXTRA_DATA:
             self.setWindowTitle(self.tr("Modify Extra Data"))
-            self.actButton.setText(self.tr("Modify"))
-            tmp = self.split(extra)
-            self._state.sourcePath = tmp[0]
-            self._state.destinationPath = tmp[1]
-            self._index = index
+            self.startModifyAction(extra, index)
         elif self._action == self.MODIFY_EXTRA_BIN:
             self.setWindowTitle(self.tr("Modify Extra Binary"))
             self.actButton.setText(self.tr("Modify"))
-            tmp = self.split(extra)
-            self._state.sourcePath = tmp[0]
-            self._state.destinationPath = tmp[1]
-            self._index = index
+            self.startModifyAction(extra, index)
         else:
             self.hide()
             return
         self.show()
 
     def hideEvent(self, event):
-        self._state.sourcePath = ""
-        self._state.destinationPath = ""
-        self._index = None
+        self.actionEnd()
 
     def onSelectDir(self):
         selectedDir = openDirDialog(
@@ -134,4 +125,23 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
             return relpath(path)
         except ValueError as e:
             return basename(path)
+
+    def startModifyAction(self, extra, index):
+        self.actButton.setText(self.tr("Modify"))
+        tmp = self.split(extra)
+        self._state.sourcePath = tmp[0]
+        self._state.destinationPath = tmp[1]
+        self._index = index
+        self.selectFileButton.setEnabled(False)
+        self.selectDirButton.setEnabled(False)
+        self.soureEdit.setEnabled(False)
+
+    def actionEnd(self):
+        self.actButton.setText("")
+        self._state.sourcePath = ""
+        self._state.destinationPath = ""
+        self._index = -1
+        self.selectFileButton.setEnabled(True)
+        self.selectDirButton.setEnabled(True)
+        self.soureEdit.setEnabled(True)
 

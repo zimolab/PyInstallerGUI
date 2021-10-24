@@ -255,7 +255,7 @@
           <item row="3" column="3">
            <widget class="QPushButton" name="selectSpecPathButton">
             <property name="text">
-             <string>select</string>
+             <string>Select</string>
             </property>
            </widget>
           </item>

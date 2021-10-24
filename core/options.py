@@ -212,6 +212,7 @@ class BindingMultipleOption(BaseOption):
         return True
 
     def add(self, val, ignoreValidationError=True):
+        # 防止元素重复
         if val in self._state.argument:
             return False
 
@@ -255,8 +256,13 @@ class BindingMultipleOption(BaseOption):
         return True
 
     def set(self, index, val, ignoreValidationError=True):
+        # 防止越界访问
         if index < 0 or index >= len(self._state.argument):
             return False
+        # 防止元素重复
+        if val in self._state.argument:
+            return False
+
         if val in self._valuesForUnset:
             return False
 

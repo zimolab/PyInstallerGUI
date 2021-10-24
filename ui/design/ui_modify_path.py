@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'modify_pathDpkVpd.ui'
+## Form generated from reading UI file 'modify_pathSoEbZr.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,21 +18,11 @@ class Ui_ModifyPathDialog(object):
         if not ModifyPathDialog.objectName():
             ModifyPathDialog.setObjectName(u"ModifyPathDialog")
         ModifyPathDialog.setWindowModality(Qt.WindowModal)
-        ModifyPathDialog.resize(418, 194)
+        ModifyPathDialog.resize(418, 240)
         self.verticalLayout = QVBoxLayout(ModifyPathDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.modifiedPathEdit = QLineEdit(ModifyPathDialog)
-        self.modifiedPathEdit.setObjectName(u"modifiedPathEdit")
-
-        self.gridLayout.addWidget(self.modifiedPathEdit, 1, 1, 1, 1)
-
-        self.modifiedPathLabel = QLabel(ModifyPathDialog)
-        self.modifiedPathLabel.setObjectName(u"modifiedPathLabel")
-
-        self.gridLayout.addWidget(self.modifiedPathLabel, 1, 0, 1, 1)
-
         self.originPathLabel = QLabel(ModifyPathDialog)
         self.originPathLabel.setObjectName(u"originPathLabel")
 
@@ -44,16 +34,31 @@ class Ui_ModifyPathDialog(object):
 
         self.gridLayout.addWidget(self.originPathEdit, 0, 1, 1, 1)
 
+        self.reselectButton = QPushButton(ModifyPathDialog)
+        self.reselectButton.setObjectName(u"reselectButton")
+
+        self.gridLayout.addWidget(self.reselectButton, 0, 2, 1, 1)
+
+        self.modifiedPathLabel = QLabel(ModifyPathDialog)
+        self.modifiedPathLabel.setObjectName(u"modifiedPathLabel")
+
+        self.gridLayout.addWidget(self.modifiedPathLabel, 1, 0, 1, 1)
+
+        self.modifiedPathEdit = QLineEdit(ModifyPathDialog)
+        self.modifiedPathEdit.setObjectName(u"modifiedPathEdit")
+
+        self.gridLayout.addWidget(self.modifiedPathEdit, 1, 1, 1, 1)
+
+        self.relpathButton = QPushButton(ModifyPathDialog)
+        self.relpathButton.setObjectName(u"relpathButton")
+
+        self.gridLayout.addWidget(self.relpathButton, 1, 2, 1, 1)
+
 
         self.verticalLayout.addLayout(self.gridLayout)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.relpathButton = QPushButton(ModifyPathDialog)
-        self.relpathButton.setObjectName(u"relpathButton")
-
-        self.horizontalLayout.addWidget(self.relpathButton)
-
         self.confirmButton = QPushButton(ModifyPathDialog)
         self.confirmButton.setObjectName(u"confirmButton")
 
@@ -76,9 +81,10 @@ class Ui_ModifyPathDialog(object):
 
     def retranslateUi(self, ModifyPathDialog):
         ModifyPathDialog.setWindowTitle(QCoreApplication.translate("ModifyPathDialog", u"Modify Path", None))
-        self.modifiedPathLabel.setText(QCoreApplication.translate("ModifyPathDialog", u"Modified", None))
         self.originPathLabel.setText(QCoreApplication.translate("ModifyPathDialog", u"Origin", None))
-        self.relpathButton.setText(QCoreApplication.translate("ModifyPathDialog", u"Relative Path", None))
+        self.reselectButton.setText(QCoreApplication.translate("ModifyPathDialog", u"Reselect", None))
+        self.modifiedPathLabel.setText(QCoreApplication.translate("ModifyPathDialog", u"Modified", None))
+        self.relpathButton.setText(QCoreApplication.translate("ModifyPathDialog", u"Relative", None))
         self.confirmButton.setText(QCoreApplication.translate("ModifyPathDialog", u"Confirm", None))
         self.cancelButton.setText(QCoreApplication.translate("ModifyPathDialog", u"Cancel", None))
     # retranslateUi

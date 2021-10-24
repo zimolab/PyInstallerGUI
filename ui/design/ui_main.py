@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwUZEyC.ui'
+## Form generated from reading UI file 'mainsApiCt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -1117,7 +1117,7 @@ class Ui_MainWindow(object):
         self.defaultWorkPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.asciiOnlyCheckBox.setText(QCoreApplication.translate("MainWindow", u"ASCII only\uff08no unicode\uff09", None))
         self.workPathLabel.setText(QCoreApplication.translate("MainWindow", u"Work Path", None))
-        self.selectSpecPathButton.setText(QCoreApplication.translate("MainWindow", u"select", None))
+        self.selectSpecPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.logLevelLabel.setText(QCoreApplication.translate("MainWindow", u"Log Level", None))
         self.productModelLabel.setText(QCoreApplication.translate("MainWindow", u"Product Mode", None))
         self.debugOptionLabel.setText(QCoreApplication.translate("MainWindow", u"Debug Option", None))

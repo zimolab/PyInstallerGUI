@@ -7,12 +7,13 @@ import uuid
 from os.path import isfile, exists, join, abspath
 
 from PySide2 import QtCore
-from PySide2.QtGui import QDropEvent
+from PySide2.QtGui import QDropEvent, Qt
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit
 from QBinder import QEventHook, Binder
 
 from core.package import Package
 from ui.add_extras_ui import AddExtrasDialog
+from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE
 from ui.design.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_pack_ui import StartPackDialog
@@ -103,7 +104,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def setupMenu(self):
         # 载入配置文件
         def onLoadPackageConfigs():
-            path = openFileDialog(self, self.tr("Select Configs"), None, "Config File(*.json;*.*)")
+            path = openFileDialog(self, self.tr("Select Configs"), None, FILTER_CONFIG_FILE)
             if path is not None:
                 self.loadPackageConfigs(path)
 
@@ -168,7 +169,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 添加脚本按钮
         def onAddScript():
             scripts = openFilesDialog(self, self.tr(u"Add Script"), None,
-                                      self.tr("Python Scripts(*.py *.pyw)"))
+                                      self.tr(FILTER_PY_SOURCE_FILE))
             if scripts is not None:
                 self._configs.addScripts(*scripts)
 
@@ -202,7 +203,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.removeScriptButton.setEnabled(False)
         self.removeScriptButton.clicked.connect(onRemoveScript)
 
-        # 双击列表项修改路径
+        # 双击修改列表项
         self.scriptsListWidget.itemDoubleClicked.connect(
             lambda item: self._modifyPathDialog.display(
                 ModifyPathDialog.MODIFY_SCRIPT_PATH,
@@ -257,7 +258,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.defaultAppIconButton.clicked.connect(self._commonOptions.icon.unset)
 
         def onSelectIcon():
-            path = openFileDialog(self, self.tr("Select App Icon"), None, self.tr("Icon Files(*.ico;*.icns)"))
+            path = openFileDialog(self, self.tr("Select App Icon"), None, self.tr(FILTER_ICON_FILE))
             if path is not None:
                 self._commonOptions.icon.argument = path
 
@@ -269,7 +270,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         def onSelectSplashPath():
             path = openFileDialog(
-                self, self.tr("Select Splash"), None, self.tr("Image File(*.jpg;*.jepg;*.png)"))
+                self, self.tr("Select Splash"), None, self.tr(FILTER_IMAGE_FILE))
             if path is not None:
                 self._commonOptions.splash.argument = path
 
@@ -354,6 +355,16 @@ class MainUI(QMainWindow, Ui_MainWindow):
             lambda: self._commonOptions.searchPaths.clear()
         )
 
+        # 双击修改列表项
+        self.searchPathsListWidget.itemDoubleClicked.connect(
+            lambda item: self._modifyPathDialog.display(
+                ModifyPathDialog.MODIFY_SEARCH_PATH,
+                item.text(),
+                self._commonOptions.searchPaths.indexOf(item.text())
+            )
+        )
+        self._modifyPathDialog.searchPathModified.connect(self._commonOptions.searchPaths.set)
+
     def setupAddExtraDataUI(self):
         self.updateToolTip(self._commonOptions.extraData.description,
                            self.extraDataLabel,
@@ -387,7 +398,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             sources = [url.toLocalFile() for url in urls]
             data = [self._addExtrasDialog.join(source, self._addExtrasDialog.relativePath(source)) for source in
                     sources]
-            self._commonOptions.extraData.remove(*data)
+            self._commonOptions.extraData.addAll(True, *data)
 
         self.addExtraDataButton.setAcceptDrops(True)
         self._eventHook.add_hook(self.addExtraDataButton,
@@ -395,7 +406,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  lambda event: event.acceptProposedAction())
         self._eventHook.add_hook(self.addExtraDataButton, QtCore.QEvent.Drop, onDrop)
 
-        # 双击修改数据
+        # 双击修改列表项
         self.extraDataListWidget.itemDoubleClicked.connect(
             lambda item: self._addExtrasDialog.display(
                 AddExtrasDialog.MODIFY_EXTRA_DATA, item.text(),
