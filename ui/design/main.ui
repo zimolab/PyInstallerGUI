@@ -951,20 +951,185 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="tab_7">
+          <widget class="QWidget" name="windowsOptionTab">
            <attribute name="title">
             <string>Windows</string>
            </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <item row="1" column="0">
+               <widget class="QLabel" name="versionFileLabel">
+                <property name="text">
+                 <string>Version File</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="resourceLabel">
+                <property name="text">
+                 <string>Resource</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="uacUIAccessCheckBox">
+                <property name="text">
+                 <string>uac-uiaccess</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="selectManifestFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="resolutionEdit"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="versionFileEdit"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="manifestFileLabel">
+                <property name="text">
+                 <string>Manifest File</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="selectVersionFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="uacAdminCheckBox">
+                <property name="text">
+                 <string>uac-admin</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QPushButton" name="selectResourceButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="manifestFileEdit"/>
+              </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="noPreferRedirectsCheckBox">
+                <property name="text">
+                 <string>win-no-prefer-redirects</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QCheckBox" name="privateAssembliesCheckBox">
+                <property name="text">
+                 <string>win-private-assemblies</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
-          <widget class="QWidget" name="tab_8">
+          <widget class="QWidget" name="macosxOptionTab">
            <attribute name="title">
             <string>Mac OS X</string>
            </attribute>
-          </widget>
-          <widget class="QWidget" name="tab_9">
-           <attribute name="title">
-            <string>Linux</string>
-           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_12">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QLabel" name="entitlementsFileLabel">
+                <property name="text">
+                 <string>Entitlements File</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="entitlementsFileEdit"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="targetArchitectureLabel">
+                <property name="text">
+                 <string>Target Architecture</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="targetArchitectureCombo"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="bundleIdentifierLabel">
+                <property name="text">
+                 <string>Bundle Identifier</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="bundleIdentifierEdit"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="codesignIdentityLabel">
+                <property name="text">
+                 <string>Codesign Identity</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="codesignIdentityEdit"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="selectEntitlementsFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -1105,9 +1270,9 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="metaTab">
+      <widget class="QWidget" name="metadataTab">
        <attribute name="title">
-        <string>Meta</string>
+        <string>Metadata</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
@@ -1124,42 +1289,55 @@
           <item row="0" column="0">
            <widget class="QLabel" name="nameLabel">
             <property name="text">
-             <string>name:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit_2"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>author</string>
+             <string>name</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_3"/>
+           <widget class="QLineEdit" name="authorEdit"/>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_2">
+          <item row="3" column="1">
+           <widget class="QTextEdit" name="descriptionEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="authorLabel">
             <property name="text">
-             <string>version</string>
+             <string>author</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QLineEdit" name="lineEdit_4"/>
           </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="nameEdit"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="versionLabel">
+            <property name="text">
+             <string>version</string>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="descriptionLabel">
             <property name="text">
              <string>description</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QTextEdit" name="textEdit"/>
+          <item row="4" column="1">
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
