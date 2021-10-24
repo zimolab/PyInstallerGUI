@@ -155,10 +155,10 @@ class Package(object):
         self.addScripts(*newScripts)
 
     def updateScriptAt(self, index, newScript):
-        # 数组越界
+        # 防止访问越界
         if index < 0 or index >= len(self._state.scripts):
             return
-        # 元素已经存在
+        # 防止元素重复
         if newScript in self._state.scripts:
             return
         self._state.scripts[index] = newScript

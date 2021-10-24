@@ -210,9 +210,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 item.text(),
                 self._configs.scripts.index(item.text()))
         )
-        self._modifyPathDialog.scriptPathModified.connect(
-            lambda index, modified: self._configs.updateScriptAt(index, modified)
-        )
+        self._modifyPathDialog.scriptPathModified.connect(self._configs.updateScriptAt)
 
     def setupProductNameUI(self):
         self.updateToolTip(self._commonOptions.productName.description,

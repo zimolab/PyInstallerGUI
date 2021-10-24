@@ -16,12 +16,5 @@ def startUI():
     sys.exit(app.exec_())
 
 
-def startConsole():
-    pass
-
-
 if __name__ == '__main__':
-    if len(sys.argv) >= 2:
-        startConsole()
-    else:
-        startUI()
+    startUI()
