@@ -1,5 +1,4 @@
 *.spec
 .venv
 dist
-package.json
 .idea
