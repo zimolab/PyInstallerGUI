@@ -5,7 +5,7 @@
 import os
 import uuid
 import webbrowser
-from os.path import isfile, exists, join, abspath, isdir
+from os.path import isfile, exists, join, abspath
 from typing import Union
 
 from PySide2 import QtCore
@@ -17,6 +17,7 @@ from QBinder import QEventHook, Binder
 from core.options import BindingOption, BindingFlag, BindingMultipleOption
 from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
+from ui.add_items_ui import AddItemsDialog
 from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE
 from ui.design.ui_main import Ui_MainWindow
@@ -24,7 +25,7 @@ from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
-    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath
+    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -55,6 +56,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._startCommandDialog = StartCommandDialog(self)
         self._addExtrasDialog = AddExtrasDialog(self)
         self._modifyPathDialog = ModifyPathDialog(self)
+        self._addItemsDialog = AddItemsDialog(self)
         # 设置UI
         self.setupUi()
         # 设置菜单
@@ -305,6 +307,27 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._addExtrasDialog.extraBinaryAdded.connect(
             lambda path: onAddExtras(path, self._commonOptions.extraBinaries))
         self._addExtrasDialog.extraBinaryChanged.connect(self._commonOptions.extraBinaries.set)
+
+        def onAddItem(_, option: BindingMultipleOption):
+            if option.name == self._commonOptions.excludeModules.name:
+                self._addItemsDialog.display(AddItemsDialog.ADD_EXCLUDE_MODULES, option.name)
+
+        def onModifyItem(item, index, option: BindingMultipleOption):
+            modified = getTextInput(self, self.tr("Modify Item"), self.tr("To be modified:"), item)
+            if modified is not None:
+                option.set(index, modified, True)
+
+        def onItemsAdded(optionName, items):
+            if optionName == self._commonOptions.excludeModules.name:
+                items = [item for item in items if item is not None and item != ""]
+                self._commonOptions.excludeModules.addAll(True, *items)
+
+        # excludeModules
+        self.autosetMultiItemsUI(option=self._commonOptions.excludeModules, label=self.excludeModulesLabel,
+                                 listWidget=self.excludeModulesListWidget, addButton=self.addExcludeModulesButton,
+                                 removeButton=self.removeExcludeModulesButton, onAdd=onAddItem, enableDrop=False,
+                                 onModify=onModifyItem)
+        self._addItemsDialog.itemsAdded.connect(onItemsAdded)
 
     def setupUPXOptionsUI(self):
         pass

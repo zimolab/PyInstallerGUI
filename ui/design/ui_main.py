@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainzaZvMm.ui'
+## Form generated from reading UI file 'mainCJkbCJ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(709, 915)
+        MainWindow.resize(709, 917)
         font = QFont()
         font.setFamily(u"Arial")
         font.setPointSize(9)
@@ -512,27 +512,27 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.verticalLayout_21 = QVBoxLayout()
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.excludeMoudluesLabel = QLabel(self.modulesTab)
-        self.excludeMoudluesLabel.setObjectName(u"excludeMoudluesLabel")
+        self.excludeModulesLabel = QLabel(self.modulesTab)
+        self.excludeModulesLabel.setObjectName(u"excludeModulesLabel")
 
-        self.verticalLayout_21.addWidget(self.excludeMoudluesLabel)
+        self.verticalLayout_21.addWidget(self.excludeModulesLabel)
 
-        self.excludeMoudluesListWidget = QListWidget(self.modulesTab)
-        self.excludeMoudluesListWidget.setObjectName(u"excludeMoudluesListWidget")
+        self.excludeModulesListWidget = QListWidget(self.modulesTab)
+        self.excludeModulesListWidget.setObjectName(u"excludeModulesListWidget")
 
-        self.verticalLayout_21.addWidget(self.excludeMoudluesListWidget)
+        self.verticalLayout_21.addWidget(self.excludeModulesListWidget)
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.removeExcludeMoudlueButton = QPushButton(self.modulesTab)
-        self.removeExcludeMoudlueButton.setObjectName(u"removeExcludeMoudlueButton")
+        self.addExcludeModulesButton = QPushButton(self.modulesTab)
+        self.addExcludeModulesButton.setObjectName(u"addExcludeModulesButton")
 
-        self.horizontalLayout_6.addWidget(self.removeExcludeMoudlueButton)
+        self.horizontalLayout_6.addWidget(self.addExcludeModulesButton)
 
-        self.addExcludeMoudlueButton = QPushButton(self.modulesTab)
-        self.addExcludeMoudlueButton.setObjectName(u"addExcludeMoudlueButton")
+        self.removeExcludeModulesButton = QPushButton(self.modulesTab)
+        self.removeExcludeModulesButton.setObjectName(u"removeExcludeModulesButton")
 
-        self.horizontalLayout_6.addWidget(self.addExcludeMoudlueButton)
+        self.horizontalLayout_6.addWidget(self.removeExcludeModulesButton)
 
 
         self.verticalLayout_21.addLayout(self.horizontalLayout_6)
@@ -554,10 +554,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.hiddenImportLabel)
 
-        self.hiddenImportslistWidget = QListWidget(self.modulesTab)
-        self.hiddenImportslistWidget.setObjectName(u"hiddenImportslistWidget")
+        self.hiddenImportsListWidget = QListWidget(self.modulesTab)
+        self.hiddenImportsListWidget.setObjectName(u"hiddenImportsListWidget")
 
-        self.verticalLayout_8.addWidget(self.hiddenImportslistWidget)
+        self.verticalLayout_8.addWidget(self.hiddenImportsListWidget)
 
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
@@ -1246,7 +1246,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(0)
+        self.mainTabWidget.setCurrentIndex(3)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -1325,9 +1325,9 @@ class Ui_MainWindow(object):
         self.removeExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.extraDataTab), QCoreApplication.translate("MainWindow", u"Extra Data", None))
-        self.excludeMoudluesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Moudlues", None))
-        self.removeExcludeMoudlueButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.addExcludeMoudlueButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.excludeModulesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Modules", None))
+        self.addExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.hiddenImportLabel.setText(QCoreApplication.translate("MainWindow", u"Hidden Imports", None))
         self.addHiddenImportButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeHiddenImportButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))

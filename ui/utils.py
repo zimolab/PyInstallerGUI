@@ -7,7 +7,8 @@ import os
 from os.path import isfile, isdir, relpath, basename
 
 from PySide2.QtCore import QDir
-from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView
+from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView, \
+    QInputDialog, QLineEdit
 
 
 def info(parent, title, content):
@@ -144,3 +145,13 @@ def relativePath(path, basenameIfFail=True):
             return path
     else:
         return p
+
+
+def getTextInput(parent, title, label, text=""):
+    inputText, ok = QInputDialog.getText(parent, title, label, QLineEdit.EchoMode.Normal, text=text)
+    if not ok:
+        return None
+    if inputText == "":
+        return None
+    else:
+        return inputText

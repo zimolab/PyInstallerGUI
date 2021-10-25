@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>709</width>
-    <height>915</height>
+    <height>917</height>
    </rect>
   </property>
   <property name="font">
@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -579,26 +579,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_21">
             <item>
-             <widget class="QLabel" name="excludeMoudluesLabel">
+             <widget class="QLabel" name="excludeModulesLabel">
               <property name="text">
-               <string>Exclude Moudlues</string>
+               <string>Exclude Modules</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="excludeMoudluesListWidget"/>
+             <widget class="QListWidget" name="excludeModulesListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
-               <widget class="QPushButton" name="removeExcludeMoudlueButton">
+               <widget class="QPushButton" name="addExcludeModulesButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="addExcludeMoudlueButton">
+               <widget class="QPushButton" name="removeExcludeModulesButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -625,7 +625,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="hiddenImportslistWidget"/>
+             <widget class="QListWidget" name="hiddenImportsListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
