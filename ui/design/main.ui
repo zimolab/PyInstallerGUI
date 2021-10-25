@@ -26,7 +26,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_9">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -544,14 +544,14 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_21">
             <item>
-             <widget class="QLabel" name="label_15">
+             <widget class="QLabel" name="excludeMoudluesLabel">
               <property name="text">
                <string>Exclude Moudlues</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView"/>
+             <widget class="QListWidget" name="excludeMoudluesListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -590,7 +590,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_2"/>
+             <widget class="QListWidget" name="hiddenImportslistWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -633,7 +633,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_10"/>
+             <widget class="QListWidget" name="listWidget_10"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_14">
@@ -672,7 +672,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_11"/>
+             <widget class="QListWidget" name="listWidget_11"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -708,7 +708,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_14"/>
+             <widget class="QListWidget" name="listWidget_14"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
@@ -747,7 +747,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_15"/>
+             <widget class="QListWidget" name="listWidget_15"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -790,7 +790,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_12"/>
+             <widget class="QListWidget" name="listWidget_12"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -829,7 +829,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="listView_13"/>
+             <widget class="QListWidget" name="listWidget_13"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_18">
@@ -861,7 +861,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_18">
         <item>
-         <widget class="QCheckBox" name="checkBox_2">
+         <widget class="QCheckBox" name="noUPXCheckBox">
           <property name="text">
            <string>Disable UPX</string>
           </property>
@@ -870,17 +870,17 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_22">
           <item>
-           <widget class="QLabel" name="label_24">
+           <widget class="QLabel" name="upxPathLabel">
             <property name="text">
              <string>UPX path</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="upxPathEdit"/>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_10">
+           <widget class="QPushButton" name="selectUPXPathButton">
             <property name="text">
              <string>Select</string>
             </property>
@@ -891,28 +891,31 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_17">
           <item>
-           <widget class="QLabel" name="label_25">
+           <widget class="QLabel" name="upxExcludesLabel">
             <property name="text">
              <string>Exludes</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listView_16"/>
+           <widget class="QListWidget" name="upxExcludesListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_23">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="addUPXExcludesButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_6">
+             <widget class="QPushButton" name="removeUPXExcludesButton">
               <property name="text">
                <string>Remove</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -949,7 +952,7 @@
            <enum>QTabWidget::South</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="windowsOptionTab">
            <attribute name="title">
@@ -987,7 +990,7 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLineEdit" name="resolutionEdit"/>
+               <widget class="QLineEdit" name="resourceEdit"/>
               </item>
               <item row="1" column="1">
                <widget class="QLineEdit" name="versionFileEdit"/>
@@ -1307,7 +1310,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_4"/>
+           <widget class="QLineEdit" name="versionEdit"/>
           </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="nameEdit"/>

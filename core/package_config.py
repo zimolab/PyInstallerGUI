@@ -8,7 +8,7 @@ import platform
 from os import makedirs
 from os.path import dirname
 
-from PySide2.QtWidgets import QLineEdit, QListWidget
+from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit
 from QBinder import Binder
 
 from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSET, BindingMultipleOption, \
@@ -205,10 +205,11 @@ class PackageConfig(object):
             self.version = self.version
 
         elif target == "description":
-            assert isinstance(widget, QLineEdit)
+            assert isinstance(widget, QTextEdit)
+            _w = widget
 
-            def onDescriptionChanged(description):
-                self.description = description
+            def onDescriptionChanged():
+                self.description = _w.toPlainText()
 
             widget.setText(lambda: self.description * 1)
             widget.textChanged.connect(onDescriptionChanged)
@@ -687,7 +688,7 @@ class PackageConfig(object):
 
             self.targetArchitecture = BindingOption(
                 name="target-arch",
-                choices=["x86_64", "arm64", "universal2"],
+                choices=[DEFAULT_VALUE_UNSET, "x86_64", "arm64", "universal2"],
                 description="--target-architecture ARCH, --target-arch ARCH: "
                             "Target architecture (macOS only; valid values: x86_64, arm64, universal2). Enables "
                             "switching between universal2 and single-arch version of frozen application (provided "

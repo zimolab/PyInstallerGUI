@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainLHilWb.ui'
+## Form generated from reading UI file 'mainEwRvEs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -56,8 +56,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.tabWidget = QTabWidget(self.centralwidget)
-        self.tabWidget.setObjectName(u"tabWidget")
+        self.mainTabWidget = QTabWidget(self.centralwidget)
+        self.mainTabWidget.setObjectName(u"mainTabWidget")
         self.commonTab = QWidget()
         self.commonTab.setObjectName(u"commonTab")
         self.verticalLayout_2 = QVBoxLayout(self.commonTab)
@@ -359,7 +359,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.gridLayout)
 
-        self.tabWidget.addTab(self.commonTab, "")
+        self.mainTabWidget.addTab(self.commonTab, "")
         self.pathsTab = QWidget()
         self.pathsTab.setObjectName(u"pathsTab")
         self.verticalLayout = QVBoxLayout(self.pathsTab)
@@ -399,7 +399,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.verticalLayout_3)
 
-        self.tabWidget.addTab(self.pathsTab, "")
+        self.mainTabWidget.addTab(self.pathsTab, "")
         self.extraDataTab = QWidget()
         self.extraDataTab.setObjectName(u"extraDataTab")
         self.verticalLayout_7 = QVBoxLayout(self.extraDataTab)
@@ -471,7 +471,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addLayout(self.verticalLayout_6)
 
-        self.tabWidget.addTab(self.extraDataTab, "")
+        self.mainTabWidget.addTab(self.extraDataTab, "")
         self.modulesTab = QWidget()
         self.modulesTab.setObjectName(u"modulesTab")
         self.verticalLayout_16 = QVBoxLayout(self.modulesTab)
@@ -480,15 +480,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.verticalLayout_21 = QVBoxLayout()
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.label_15 = QLabel(self.modulesTab)
-        self.label_15.setObjectName(u"label_15")
+        self.excludeMoudluesLabel = QLabel(self.modulesTab)
+        self.excludeMoudluesLabel.setObjectName(u"excludeMoudluesLabel")
 
-        self.verticalLayout_21.addWidget(self.label_15)
+        self.verticalLayout_21.addWidget(self.excludeMoudluesLabel)
 
-        self.listView = QListView(self.modulesTab)
-        self.listView.setObjectName(u"listView")
+        self.excludeMoudluesListWidget = QListWidget(self.modulesTab)
+        self.excludeMoudluesListWidget.setObjectName(u"excludeMoudluesListWidget")
 
-        self.verticalLayout_21.addWidget(self.listView)
+        self.verticalLayout_21.addWidget(self.excludeMoudluesListWidget)
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
@@ -522,10 +522,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.label_16)
 
-        self.listView_2 = QListView(self.modulesTab)
-        self.listView_2.setObjectName(u"listView_2")
+        self.hiddenImportslistWidget = QListWidget(self.modulesTab)
+        self.hiddenImportslistWidget.setObjectName(u"hiddenImportslistWidget")
 
-        self.verticalLayout_8.addWidget(self.listView_2)
+        self.verticalLayout_8.addWidget(self.hiddenImportslistWidget)
 
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
@@ -564,10 +564,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_22.addWidget(self.label_17)
 
-        self.listView_10 = QListView(self.modulesTab)
-        self.listView_10.setObjectName(u"listView_10")
+        self.listWidget_10 = QListWidget(self.modulesTab)
+        self.listWidget_10.setObjectName(u"listWidget_10")
 
-        self.verticalLayout_22.addWidget(self.listView_10)
+        self.verticalLayout_22.addWidget(self.listWidget_10)
 
         self.horizontalLayout_14 = QHBoxLayout()
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
@@ -601,10 +601,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.label_18)
 
-        self.listView_11 = QListView(self.modulesTab)
-        self.listView_11.setObjectName(u"listView_11")
+        self.listWidget_11 = QListWidget(self.modulesTab)
+        self.listWidget_11.setObjectName(u"listWidget_11")
 
-        self.verticalLayout_9.addWidget(self.listView_11)
+        self.verticalLayout_9.addWidget(self.listWidget_11)
 
         self.horizontalLayout_15 = QHBoxLayout()
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
@@ -636,10 +636,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_24.addWidget(self.label_19)
 
-        self.listView_14 = QListView(self.modulesTab)
-        self.listView_14.setObjectName(u"listView_14")
+        self.listWidget_14 = QListWidget(self.modulesTab)
+        self.listWidget_14.setObjectName(u"listWidget_14")
 
-        self.verticalLayout_24.addWidget(self.listView_14)
+        self.verticalLayout_24.addWidget(self.listWidget_14)
 
         self.horizontalLayout_20 = QHBoxLayout()
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -673,10 +673,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_15.addWidget(self.label_20)
 
-        self.listView_15 = QListView(self.modulesTab)
-        self.listView_15.setObjectName(u"listView_15")
+        self.listWidget_15 = QListWidget(self.modulesTab)
+        self.listWidget_15.setObjectName(u"listWidget_15")
 
-        self.verticalLayout_15.addWidget(self.listView_15)
+        self.verticalLayout_15.addWidget(self.listWidget_15)
 
         self.horizontalLayout_21 = QHBoxLayout()
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
@@ -715,10 +715,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_23.addWidget(self.label_21)
 
-        self.listView_12 = QListView(self.modulesTab)
-        self.listView_12.setObjectName(u"listView_12")
+        self.listWidget_12 = QListWidget(self.modulesTab)
+        self.listWidget_12.setObjectName(u"listWidget_12")
 
-        self.verticalLayout_23.addWidget(self.listView_12)
+        self.verticalLayout_23.addWidget(self.listWidget_12)
 
         self.horizontalLayout_17 = QHBoxLayout()
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
@@ -752,10 +752,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_14.addWidget(self.label_22)
 
-        self.listView_13 = QListView(self.modulesTab)
-        self.listView_13.setObjectName(u"listView_13")
+        self.listWidget_13 = QListWidget(self.modulesTab)
+        self.listWidget_13.setObjectName(u"listWidget_13")
 
-        self.verticalLayout_14.addWidget(self.listView_13)
+        self.verticalLayout_14.addWidget(self.listWidget_13)
 
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
@@ -778,59 +778,60 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_16.addLayout(self.horizontalLayout_16)
 
-        self.tabWidget.addTab(self.modulesTab, "")
+        self.mainTabWidget.addTab(self.modulesTab, "")
         self.upxTab = QWidget()
         self.upxTab.setObjectName(u"upxTab")
         self.verticalLayout_18 = QVBoxLayout(self.upxTab)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
-        self.checkBox_2 = QCheckBox(self.upxTab)
-        self.checkBox_2.setObjectName(u"checkBox_2")
+        self.noUPXCheckBox = QCheckBox(self.upxTab)
+        self.noUPXCheckBox.setObjectName(u"noUPXCheckBox")
 
-        self.verticalLayout_18.addWidget(self.checkBox_2)
+        self.verticalLayout_18.addWidget(self.noUPXCheckBox)
 
         self.horizontalLayout_22 = QHBoxLayout()
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
-        self.label_24 = QLabel(self.upxTab)
-        self.label_24.setObjectName(u"label_24")
+        self.upxPathLabel = QLabel(self.upxTab)
+        self.upxPathLabel.setObjectName(u"upxPathLabel")
 
-        self.horizontalLayout_22.addWidget(self.label_24)
+        self.horizontalLayout_22.addWidget(self.upxPathLabel)
 
-        self.lineEdit = QLineEdit(self.upxTab)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.upxPathEdit = QLineEdit(self.upxTab)
+        self.upxPathEdit.setObjectName(u"upxPathEdit")
 
-        self.horizontalLayout_22.addWidget(self.lineEdit)
+        self.horizontalLayout_22.addWidget(self.upxPathEdit)
 
-        self.pushButton_10 = QPushButton(self.upxTab)
-        self.pushButton_10.setObjectName(u"pushButton_10")
+        self.selectUPXPathButton = QPushButton(self.upxTab)
+        self.selectUPXPathButton.setObjectName(u"selectUPXPathButton")
 
-        self.horizontalLayout_22.addWidget(self.pushButton_10)
+        self.horizontalLayout_22.addWidget(self.selectUPXPathButton)
 
 
         self.verticalLayout_18.addLayout(self.horizontalLayout_22)
 
         self.verticalLayout_17 = QVBoxLayout()
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
-        self.label_25 = QLabel(self.upxTab)
-        self.label_25.setObjectName(u"label_25")
+        self.upxExcludesLabel = QLabel(self.upxTab)
+        self.upxExcludesLabel.setObjectName(u"upxExcludesLabel")
 
-        self.verticalLayout_17.addWidget(self.label_25)
+        self.verticalLayout_17.addWidget(self.upxExcludesLabel)
 
-        self.listView_16 = QListView(self.upxTab)
-        self.listView_16.setObjectName(u"listView_16")
+        self.upxExcludesListWidget = QListWidget(self.upxTab)
+        self.upxExcludesListWidget.setObjectName(u"upxExcludesListWidget")
 
-        self.verticalLayout_17.addWidget(self.listView_16)
+        self.verticalLayout_17.addWidget(self.upxExcludesListWidget)
 
         self.horizontalLayout_23 = QHBoxLayout()
         self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
-        self.pushButton = QPushButton(self.upxTab)
-        self.pushButton.setObjectName(u"pushButton")
+        self.addUPXExcludesButton = QPushButton(self.upxTab)
+        self.addUPXExcludesButton.setObjectName(u"addUPXExcludesButton")
 
-        self.horizontalLayout_23.addWidget(self.pushButton)
+        self.horizontalLayout_23.addWidget(self.addUPXExcludesButton)
 
-        self.pushButton_6 = QPushButton(self.upxTab)
-        self.pushButton_6.setObjectName(u"pushButton_6")
+        self.removeUPXExcludesButton = QPushButton(self.upxTab)
+        self.removeUPXExcludesButton.setObjectName(u"removeUPXExcludesButton")
+        self.removeUPXExcludesButton.setFlat(False)
 
-        self.horizontalLayout_23.addWidget(self.pushButton_6)
+        self.horizontalLayout_23.addWidget(self.removeUPXExcludesButton)
 
 
         self.verticalLayout_17.addLayout(self.horizontalLayout_23)
@@ -842,7 +843,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_18.addItem(self.verticalSpacer)
 
-        self.tabWidget.addTab(self.upxTab, "")
+        self.mainTabWidget.addTab(self.upxTab, "")
         self.platformTab = QWidget()
         self.platformTab.setObjectName(u"platformTab")
         self.horizontalLayout_24 = QHBoxLayout(self.platformTab)
@@ -876,10 +877,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.selectManifestFileButton, 2, 2, 1, 1)
 
-        self.resolutionEdit = QLineEdit(self.windowsOptionTab)
-        self.resolutionEdit.setObjectName(u"resolutionEdit")
+        self.resourceEdit = QLineEdit(self.windowsOptionTab)
+        self.resourceEdit.setObjectName(u"resourceEdit")
 
-        self.gridLayout_4.addWidget(self.resolutionEdit, 3, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.resourceEdit, 3, 1, 1, 1)
 
         self.versionFileEdit = QLineEdit(self.windowsOptionTab)
         self.versionFileEdit.setObjectName(u"versionFileEdit")
@@ -991,7 +992,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_24.addWidget(self.tabWidget_2)
 
-        self.tabWidget.addTab(self.platformTab, "")
+        self.mainTabWidget.addTab(self.platformTab, "")
         self.miscTab = QWidget()
         self.miscTab.setObjectName(u"miscTab")
         self.verticalLayout_27 = QVBoxLayout(self.miscTab)
@@ -1116,7 +1117,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_27.addLayout(self.verticalLayout_26)
 
-        self.tabWidget.addTab(self.miscTab, "")
+        self.mainTabWidget.addTab(self.miscTab, "")
         self.metadataTab = QWidget()
         self.metadataTab.setObjectName(u"metadataTab")
         self.verticalLayout_4 = QVBoxLayout(self.metadataTab)
@@ -1146,10 +1147,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.authorLabel, 1, 0, 1, 1)
 
-        self.lineEdit_4 = QLineEdit(self.metadataTab)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.versionEdit = QLineEdit(self.metadataTab)
+        self.versionEdit.setObjectName(u"versionEdit")
 
-        self.gridLayout_3.addWidget(self.lineEdit_4, 2, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.versionEdit, 2, 1, 1, 1)
 
         self.nameEdit = QLineEdit(self.metadataTab)
         self.nameEdit.setObjectName(u"nameEdit")
@@ -1173,9 +1174,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.gridLayout_3)
 
-        self.tabWidget.addTab(self.metadataTab, "")
+        self.mainTabWidget.addTab(self.metadataTab, "")
 
-        self.horizontalLayout_9.addWidget(self.tabWidget)
+        self.horizontalLayout_9.addWidget(self.mainTabWidget)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -1217,8 +1218,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.mainTabWidget.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1278,20 +1279,20 @@ class Ui_MainWindow(object):
         self.startPackButton.setText(QCoreApplication.translate("MainWindow", u"Pack", None))
         self.defaultDistPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.windowModeLabel.setText(QCoreApplication.translate("MainWindow", u"Window Mode", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.commonTab), QCoreApplication.translate("MainWindow", u"Common", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.commonTab), QCoreApplication.translate("MainWindow", u"Common", None))
         self.searchPathsLabel.setText(QCoreApplication.translate("MainWindow", u"Search Paths", None))
         self.addSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.pathsTab), QCoreApplication.translate("MainWindow", u"Paths", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.pathsTab), QCoreApplication.translate("MainWindow", u"Paths", None))
         self.extraDataLabel.setText(QCoreApplication.translate("MainWindow", u"Extra Data Paths", None))
         self.addExtraDataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeExtraDataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.extraBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Extra Binaries Paths", None))
         self.addExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.extraDataTab), QCoreApplication.translate("MainWindow", u"Extra Data", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Exclude Moudlues", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.extraDataTab), QCoreApplication.translate("MainWindow", u"Extra Data", None))
+        self.excludeMoudluesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Moudlues", None))
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"Hidden Imports", None))
@@ -1315,14 +1316,14 @@ class Ui_MainWindow(object):
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for(recursively):", None))
         self.pushButton_28.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_29.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.modulesTab), QCoreApplication.translate("MainWindow", u"Modules/Packages", None))
-        self.checkBox_2.setText(QCoreApplication.translate("MainWindow", u"Disable UPX", None))
-        self.label_24.setText(QCoreApplication.translate("MainWindow", u"UPX path", None))
-        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Exludes", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.upxTab), QCoreApplication.translate("MainWindow", u"UPX", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.modulesTab), QCoreApplication.translate("MainWindow", u"Modules/Packages", None))
+        self.noUPXCheckBox.setText(QCoreApplication.translate("MainWindow", u"Disable UPX", None))
+        self.upxPathLabel.setText(QCoreApplication.translate("MainWindow", u"UPX path", None))
+        self.selectUPXPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.upxExcludesLabel.setText(QCoreApplication.translate("MainWindow", u"Exludes", None))
+        self.addUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.upxTab), QCoreApplication.translate("MainWindow", u"UPX", None))
         self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
         self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))
         self.uacUIAccessCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-uiaccess", None))
@@ -1340,7 +1341,7 @@ class Ui_MainWindow(object):
         self.codesignIdentityLabel.setText(QCoreApplication.translate("MainWindow", u"Codesign Identity", None))
         self.selectEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.macosxOptionTab), QCoreApplication.translate("MainWindow", u"Mac OS X", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.platformTab), QCoreApplication.translate("MainWindow", u"Platform Specific", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.platformTab), QCoreApplication.translate("MainWindow", u"Platform Specific", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
         self.pushButton_21.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_24.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
@@ -1353,12 +1354,12 @@ class Ui_MainWindow(object):
         self.label_29.setText(QCoreApplication.translate("MainWindow", u"Bootloader ignore signals", None))
         self.pushButton_37.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.pushButton_38.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.miscTab), QCoreApplication.translate("MainWindow", u"MISC", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.miscTab), QCoreApplication.translate("MainWindow", u"MISC", None))
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"name", None))
         self.authorLabel.setText(QCoreApplication.translate("MainWindow", u"author", None))
         self.versionLabel.setText(QCoreApplication.translate("MainWindow", u"version", None))
         self.descriptionLabel.setText(QCoreApplication.translate("MainWindow", u"description", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.metadataTab), QCoreApplication.translate("MainWindow", u"Metadata", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.metadataTab), QCoreApplication.translate("MainWindow", u"Metadata", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"Pack", None))
         self.menu_3.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))

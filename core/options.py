@@ -130,6 +130,8 @@ class BindingOption(BaseOption):
             widget.setText(lambda: self.argument * 1)
             widget.textChanged.connect(onTextChanged)
         elif isinstance(widget, QComboBox):
+            if isinstance(self.choices, list) and len(self.choices) > 0:
+                widget.addItems(self.choices)
             widget.setCurrentText(lambda: self.argument * 1)
             widget.currentTextChanged.connect(onTextChanged)
         else:

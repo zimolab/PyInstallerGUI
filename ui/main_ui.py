@@ -57,6 +57,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def bindConfigs(self):
         self._configs.bind("pyinstaller", self.pyinstallerEdit)
         self._configs.bind("scripts", self.scriptsListWidget)
+        self._configs.bind("name", self.nameEdit)
+        self._configs.bind("author", self.authorEdit)
+        self._configs.bind("version", self.versionEdit)
+        self._configs.bind("description", self.descriptionEdit)
         self._configs.commonOptions.productName.bind(self.productNameEdit)
         self._configs.commonOptions.distPath.bind(self.distPathEdit)
         self._configs.commonOptions.workPath.bind(self.workPathEdit)
@@ -74,6 +78,25 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._configs.commonOptions.asciiOnly.bind(self.asciiOnlyCheckBox)
         self._configs.commonOptions.searchPaths.bind(self.searchPathsListWidget)
         self._configs.commonOptions.extraData.bind(self.extraDataListWidget)
+        self._configs.commonOptions.extraBinaries.bind(self.extraBinariesListWidget)
+        self._configs.commonOptions.excludeModules.bind(self.ex)
+
+        self._configs.upxOptions.noUPX.bind(self.noUPXCheckBox)
+        self._configs.upxOptions.upxPath.bind(self.upxPathEdit)
+        self._configs.upxOptions.excludeFiles.bind(self.upxExcludesListWidget)
+
+        self._configs.windowsOptions.versionFile.bind(self.versionFileEdit)
+        self._configs.windowsOptions.manifestFile.bind(self.manifestFileEdit)
+        self._configs.windowsOptions.resource.bind(self.resourceEdit)
+        self._configs.windowsOptions.uacAdmin.bind(self.uacAdminCheckBox)
+        self._configs.windowsOptions.uacUIAccess.bind(self.uacUIAccessCheckBox)
+        self._configs.windowsOptions.privateAssemblies.bind(self.privateAssembliesCheckBox)
+        self._configs.windowsOptions.noPreferRedirects.bind(self.noPreferRedirectsCheckBox)
+
+        self._configs.macOSXOptions.targetArchitecture.bind(self.targetArchitectureCombo)
+        self._configs.macOSXOptions.codesignIdentity.bind(self.codesignIdentityEdit)
+        self._configs.macOSXOptions.bundleIdentifier.bind(self.bundleIdentifierEdit)
+        self._configs.macOSXOptions.entitlementsFile.bind(self.entitlementsFileEdit)
 
     def setupUi(self, _=None):
         super().setupUi(self)
@@ -102,6 +125,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.setupStartPackButton()
         self.setupSearchPathsUI()
         self.setupAddExtraDataUI()
+        self.setupAddExtraBinariesUI()
+
+        self.setupUPXUI()
+        self.setupWindowsOptionsUI()
 
     def setupMenu(self):
         # 载入配置文件
@@ -290,22 +317,18 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
     def setupWindowModeUI(self):
         self.updateToolTip(self._commonOptions.windowMode.description, self.windowModeCombo, self.windowModeLabel)
-        self.windowModeCombo.addItems(self._commonOptions.windowMode.choices)
         self.defaultWindowModeButton.clicked.connect(self._commonOptions.windowMode.unset)
 
     def setupProductModeUI(self):
         self.updateToolTip(self._commonOptions.productMode.description, self.productModeCombo, self.productModelLabel)
-        self.productModeCombo.addItems(self._commonOptions.productMode.choices)
         self.defaultProductModeButton.clicked.connect(self._commonOptions.productMode.unset)
 
     def setupLogLevelUI(self):
         self.updateToolTip(self._commonOptions.logLevel.description, self.logLevelLabel, self.logLevelCombo)
-        self.logLevelCombo.addItems(self._commonOptions.logLevel.choices)
         self.defaultLogLevelButton.clicked.connect(self._commonOptions.logLevel.unset)
 
     def setupDebugOptionUI(self):
         self.updateToolTip(self._commonOptions.debugOption.description, self.debugOptionCombo, self.debugOptionLabel)
-        self.debugOptionCombo.addItems(self._commonOptions.debugOption.choices)
         self.defaultDebugOptionButton.clicked.connect(self._commonOptions.debugOption.unset)
 
     def setupCleanBeforePackUI(self):
@@ -372,10 +395,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
                            self.extraDataLabel,
                            self.extraDataListWidget)
 
-        # 添加数据
-        self.addExtraDataButton.clicked.connect(self.openAddExtraDataDialog)
-        self._addExtrasDialog.extraDataAdded.connect(
-            lambda data: self._commonOptions.extraData.add(data))
+        self.addExtraDataButton.clicked.connect(
+            lambda: self._addExtrasDialog.isHidden() and self._addExtrasDialog.display(AddExtrasDialog.ADD_EXTRA_DATA))
+        self._addExtrasDialog.extraDataAdded.connect(self._commonOptions.extraData.add)
 
         # 移除数据
         def onRemoveExtraData():
@@ -417,6 +439,57 @@ class MainUI(QMainWindow, Ui_MainWindow):
         )
         self._addExtrasDialog.extraDataChanged.connect(self._commonOptions.extraData.set)
 
+    def setupAddExtraBinariesUI(self):
+        self.updateToolTip(self._commonOptions.extraBinaries.description,
+                           self.extraBinariesLabel, self.extraBinariesListWidget)
+        self.addExtraBinariesButton.clicked.connect(
+            lambda: self._addExtrasDialog.isHidden() and self._addExtrasDialog.display(AddExtrasDialog.ADD_EXTRA_BIN))
+        self._addExtrasDialog.extraBinaryAdded.connect(self._commonOptions.extraBinaries.add)
+
+        # 移除数据
+        def onRemoveExtraBinaries():
+            selected = [w.text() for w in self.extraBinariesListWidget.selectedItems()]
+            if len(selected) > 0:
+                if ask(self, self.tr("Remove Extra Data"), self.tr("Sure to remove extra data?")):
+                    self._commonOptions.extraBinaries.remove(*selected)
+
+        self.removeExtraBinariesButton.setEnabled(False)
+        self.extraBinariesListWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.extraBinariesListWidget.itemSelectionChanged.connect(
+            lambda: self.removeExtraBinariesButton.setEnabled(len(self.extraBinariesListWidget.selectedItems()) > 0))
+        self.removeExtraBinariesButton.clicked.connect(onRemoveExtraBinaries)
+
+        # 双击修改列表项
+        self.extraBinariesListWidget.itemDoubleClicked.connect(
+            lambda item: self._addExtrasDialog.display(
+                AddExtrasDialog.MODIFY_EXTRA_BIN, item.text(),
+                self._commonOptions.extraBinaries.indexOf(item.text())
+            )
+        )
+        self._addExtrasDialog.extraBinaryChanged.connect(self._commonOptions.extraBinaries.set)
+
+        # 文件拖放功能
+        def onDrop(event):
+            event: QDropEvent
+            urls = event.mimeData().urls()
+            sources = [url.toLocalFile() for url in urls]
+            data = [self._addExtrasDialog.join(source, self._addExtrasDialog.relativePath(source)) for source in
+                    sources if isfile(source)]
+            self._commonOptions.extraBinaries.addAll(True, *data)
+        self.addExtraBinariesButton.setAcceptDrops(True)
+        self._eventHook.add_hook(self.addExtraBinariesButton, QtCore.QEvent.DragEnter,
+                                 lambda event: event.acceptProposedAction())
+        self._eventHook.add_hook(self.addExtraBinariesButton, QtCore.QEvent.Drop, onDrop)
+
+    def setupUPXUI(self):
+        pass
+
+    def setupWindowsOptionsUI(self):
+        pass
+
+    def setupMacOSXOptionsUI(self):
+        pass
+
     def updateToolTip(self, tooltip, *widgets):
         if tooltip != "" and tooltip is not None:
             tooltip = self.tr(tooltip)
@@ -448,6 +521,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
             self._startPackDialog.display(self._configs.toCommandLine(),
                                           self._state.cwd)
 
-    def openAddExtraDataDialog(self):
+    def openAddExtraBinariesDialog(self):
         if self._addExtrasDialog.isHidden():
-            self._addExtrasDialog.display(AddExtrasDialog.ADD_EXTRA_DATA)
+            self._addExtrasDialog.display(AddExtrasDialog.ADD_EXTRA_BIN)

@@ -49,6 +49,7 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
         elif self._action == self.ADD_EXTRA_BIN:
             self.setWindowTitle(self.tr("Add Extra Binary"))
             self.actButton.setText(self.tr("Add"))
+            self.selectDirButton.setEnabled(False)
         elif self._action == self.MODIFY_EXTRA_DATA:
             self.setWindowTitle(self.tr("Modify Extra Data"))
             self.startModifyAction(extra, index)
