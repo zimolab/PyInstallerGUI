@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from os.path import isdir
 from PySide2.QtGui import QDragEnterEvent, QDropEvent
 from PySide2.QtWidgets import QLineEdit
@@ -9,6 +8,7 @@ class DirectoryEdit(QLineEdit):
     """
     实现单个目录拖放的LineEdit
     """
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setAcceptDrops(True)

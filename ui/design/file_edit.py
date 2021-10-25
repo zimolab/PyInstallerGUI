@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from os.path import isfile
 from PySide2.QtGui import QDragEnterEvent, QDropEvent
 from PySide2.QtWidgets import QLineEdit

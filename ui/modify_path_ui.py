@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from os.path import relpath
+from os.path import relpath, abspath
 
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
@@ -27,6 +27,7 @@ class ModifyPathDialog(QDialog, Ui_ModifyPathDialog):
         super(ModifyPathDialog, self).setupUi(self)
         self.confirmButton.clicked.connect(lambda: self.onPathModified() or self.accept())
         self.relpathButton.clicked.connect(self.onCalcRelPath)
+        self.abspathButton.clicked.connect(self.onCalcAbsPath)
         self.reselectButton.clicked.connect(self.onReselect)
 
     def display(self, action, originPath, index):
@@ -43,6 +44,15 @@ class ModifyPathDialog(QDialog, Ui_ModifyPathDialog):
                  self.tr("Cannot get relative path of") + f"'{self.originPathEdit.text()}'(error: {e})")
         else:
             self.modifiedPathEdit.setText(rel)
+
+    def onCalcAbsPath(self):
+        try:
+            _abspath = abspath(self.originPathEdit.text())
+        except Exception as e:
+            warn(self, self.tr("Warning"),
+                 self.tr("Cannot get absolute path of") + f"'{self.originPathEdit.text()}'(error: {e})")
+        else:
+            self.modifiedPathEdit.setText(_abspath)
 
     def onReselect(self):
         if self._action == self.MODIFY_SCRIPT_PATH:

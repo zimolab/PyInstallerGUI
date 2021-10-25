@@ -4,6 +4,7 @@
 封装与UI界面有关的一些实用工具，比如文件对话框等
 """
 import os
+from os.path import isfile, isdir, relpath, basename
 
 from PySide2.QtCore import QDir
 from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView
@@ -94,3 +95,52 @@ def localCentralize(w: QWidget):
     x = int((currentGeometry.width() - w.width()) / 2)
     y = int((currentGeometry.height() - w.height()) / 2)
     w.move(x, y)
+
+
+def joinSrcAndDest(src, dest, pathsep=None):
+    if pathsep is None:
+        pathsep = os.pathsep
+    return f"{src}{pathsep}{dest}"
+
+
+def splitSrcAndDest(joined: str, pathsep=None):
+    if pathsep is None:
+        result = joined.split(pathsep, maxsplit=1)
+        if len(result) <= 1:
+            return joined, ""
+        return result
+
+    pathsep = ";"
+    tmp = joined.split(pathsep)
+    if len(tmp) == 2:
+        return tmp
+
+    pathsep = ":"
+    tmp = joined.split(pathsep)
+    if len(tmp) == 2:
+        return tmp
+    return joined, ""
+
+
+def filterFiles(paths):
+    return [path for path in paths if isfile(path)]
+
+
+def filterDirs(paths):
+    return [path for path in paths if isdir(path)]
+
+
+# noinspection PyBroadException
+def relativePath(path, basenameIfFail=True):
+    try:
+        p = relpath(path)
+    except Exception:
+        if basenameIfFail:
+            try:
+                return basename(path)
+            except Exception:
+                return path
+        else:
+            return path
+    else:
+        return p

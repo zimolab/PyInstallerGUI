@@ -8,7 +8,7 @@ import platform
 from os import makedirs
 from os.path import dirname
 
-from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit
+from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit, QPlainTextEdit
 from QBinder import Binder
 
 from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSET, BindingMultipleOption, \
@@ -49,7 +49,7 @@ class PackageConfig(object):
     def load(self, path, reset=True, ignoreErrors=True):
         if reset:
             self.reset()
-        with open(path) as file:
+        with open(path, "r", encoding="utf-8") as file:
             jsonData = json.load(file)
             if not isinstance(jsonData, dict):
                 if ignoreErrors:
@@ -211,7 +211,7 @@ class PackageConfig(object):
             def onDescriptionChanged():
                 self.description = _w.toPlainText()
 
-            widget.setText(lambda: self.description * 1)
+            widget.setPlainText(lambda: self.description * 1)
             widget.textChanged.connect(onDescriptionChanged)
             self.description = self.description
 
@@ -261,7 +261,7 @@ class PackageConfig(object):
         self.serializeOptions(serialized["options"]["macOSX"], macosOptions, excludes)
         self.serializeOptions(serialized["options"]["macOSX"], macosOptions, excludes)
 
-        return json.dumps(serialized, indent=4)
+        return json.dumps(serialized, indent=4, ensure_ascii=False)
 
     @classmethod
     def serializeOptions(cls, serialized, options, excludes=None):
@@ -304,7 +304,7 @@ class PackageConfig(object):
     @classmethod
     def loadFromFile(cls, path, ignoreErrors=True):
         configs = cls()
-        with open(path) as file:
+        with open(path, "r", encoding="utf-8") as file:
             jsonData = json.load(file)
             if not isinstance(jsonData, dict):
                 if ignoreErrors:
@@ -566,7 +566,7 @@ class PackageConfig(object):
                             "(default: apply PyInstaller’s icon)"
             )
 
-            self.runtimeTmpPath = BindingOption(
+            self.runtimeTmpDir = BindingOption(
                 name="runtime-tmpdir",
                 description="--runtime-tmpdir PATH: "
                             "Where to extract libraries and support files in onefile-mode. If this option is given, "

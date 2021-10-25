@@ -123,17 +123,14 @@ class BindingOption(BaseOption):
         return ""
 
     def bind(self, widget):
-        def onTextChanged(text):
-            self.argument = text
-
         if isinstance(widget, QLineEdit):
             widget.setText(lambda: self.argument * 1)
-            widget.textChanged.connect(onTextChanged)
+            widget.textChanged.connect(self.set)
         elif isinstance(widget, QComboBox):
             if isinstance(self.choices, list) and len(self.choices) > 0:
                 widget.addItems(self.choices)
             widget.setCurrentText(lambda: self.argument * 1)
-            widget.currentTextChanged.connect(onTextChanged)
+            widget.currentTextChanged.connect(self.set)
         else:
             raise ValueError("unsupported widget type")
         self.argument = self.argument

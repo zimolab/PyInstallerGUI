@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainnsmBAU.ui'
+## Form generated from reading UI file 'mainGsilXp.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -356,6 +356,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.windowModeLabel, 7, 0, 1, 1)
 
+        self.defaultProductNameButton = QPushButton(self.commonTab)
+        self.defaultProductNameButton.setObjectName(u"defaultProductNameButton")
+
+        self.gridLayout.addWidget(self.defaultProductNameButton, 0, 2, 1, 1)
+
 
         self.verticalLayout_2.addLayout(self.gridLayout)
 
@@ -428,6 +433,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.removeExtraDataButton)
 
+        self.clearExtraData = QPushButton(self.extraDataTab)
+        self.clearExtraData.setObjectName(u"clearExtraData")
+
+        self.horizontalLayout_4.addWidget(self.clearExtraData)
+
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_4)
 
@@ -464,6 +474,11 @@ class Ui_MainWindow(object):
         self.removeExtraBinariesButton.setObjectName(u"removeExtraBinariesButton")
 
         self.horizontalLayout_5.addWidget(self.removeExtraBinariesButton)
+
+        self.clearExtraBinariesButton = QPushButton(self.extraDataTab)
+        self.clearExtraBinariesButton.setObjectName(u"clearExtraBinariesButton")
+
+        self.horizontalLayout_5.addWidget(self.clearExtraBinariesButton)
 
 
         self.verticalLayout_6.addLayout(self.horizontalLayout_5)
@@ -1137,11 +1152,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.authorEdit, 1, 1, 1, 1)
 
-        self.descriptionEdit = QTextEdit(self.metadataTab)
-        self.descriptionEdit.setObjectName(u"descriptionEdit")
-
-        self.gridLayout_3.addWidget(self.descriptionEdit, 3, 1, 1, 1)
-
         self.authorLabel = QLabel(self.metadataTab)
         self.authorLabel.setObjectName(u"authorLabel")
 
@@ -1170,6 +1180,11 @@ class Ui_MainWindow(object):
         self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.gridLayout_3.addItem(self.verticalSpacer_4, 4, 1, 1, 1)
+
+        self.descriptionEdit = QTextEdit(self.metadataTab)
+        self.descriptionEdit.setObjectName(u"descriptionEdit")
+
+        self.gridLayout_3.addWidget(self.descriptionEdit, 3, 1, 1, 1)
 
 
         self.verticalLayout_4.addLayout(self.gridLayout_3)
@@ -1239,7 +1254,7 @@ class Ui_MainWindow(object):
         self.actionNewConfigs.setText(QCoreApplication.translate("MainWindow", u"New Configs", None))
         self.actionGotoPyinstallerWebsite.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Website", None))
         self.actionGotoPyInstallerDoc.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Documentation", None))
-        self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"Working Dir    ", None))
+        self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"cwd", None))
         self.changeCWDButton.setText(QCoreApplication.translate("MainWindow", u"Change", None))
         self.pyinstallerLabel.setText(QCoreApplication.translate("MainWindow", u"Pynstaller Path", None))
         self.pyinstallerEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Set path of pyinstaller here", None))
@@ -1279,18 +1294,21 @@ class Ui_MainWindow(object):
         self.startPackButton.setText(QCoreApplication.translate("MainWindow", u"Pack", None))
         self.defaultDistPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.windowModeLabel.setText(QCoreApplication.translate("MainWindow", u"Window Mode", None))
+        self.defaultProductNameButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.commonTab), QCoreApplication.translate("MainWindow", u"Common", None))
         self.searchPathsLabel.setText(QCoreApplication.translate("MainWindow", u"Search Paths", None))
         self.addSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.pathsTab), QCoreApplication.translate("MainWindow", u"Paths", None))
-        self.extraDataLabel.setText(QCoreApplication.translate("MainWindow", u"Extra Data Paths", None))
+        self.extraDataLabel.setText(QCoreApplication.translate("MainWindow", u"Extra Data", None))
         self.addExtraDataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeExtraDataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.extraBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Extra Binaries Paths", None))
+        self.clearExtraData.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.extraBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Extra Binaries", None))
         self.addExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.extraDataTab), QCoreApplication.translate("MainWindow", u"Extra Data", None))
         self.excludeMoudluesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Moudlues", None))
         self.removeExcludeMoudlueButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
@@ -1307,7 +1325,7 @@ class Ui_MainWindow(object):
         self.collectBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all binaries from:", None))
         self.addCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.collectAllLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all(submodules,data, bin...)from:", None))
+        self.collectAllLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all(submodules,data, bin...) from:", None))
         self.addCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.copyMetadaLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for:", None))

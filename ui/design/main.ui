@@ -40,7 +40,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="cwdLabel">
             <property name="text">
-             <string>Working Dir    </string>
+             <string>cwd</string>
             </property>
            </widget>
           </item>
@@ -406,6 +406,13 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="defaultProductNameButton">
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -464,7 +471,7 @@
         <item>
          <widget class="QLabel" name="extraDataLabel">
           <property name="text">
-           <string>Extra Data Paths</string>
+           <string>Extra Data</string>
           </property>
          </widget>
         </item>
@@ -489,6 +496,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="clearExtraData">
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -503,7 +517,7 @@
         <item>
          <widget class="QLabel" name="extraBinariesLabel">
           <property name="text">
-           <string>Extra Binaries Paths</string>
+           <string>Extra Binaries</string>
           </property>
          </widget>
         </item>
@@ -525,6 +539,13 @@
              <widget class="QPushButton" name="removeExtraBinariesButton">
               <property name="text">
                <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="clearExtraBinariesButton">
+              <property name="text">
+               <string>clear</string>
               </property>
              </widget>
             </item>
@@ -742,7 +763,7 @@
             <item>
              <widget class="QLabel" name="collectAllLabel">
               <property name="text">
-               <string>Collect all(submodules,data, bin...)from:</string>
+               <string>Collect all(submodules,data, bin...) from:</string>
               </property>
              </widget>
             </item>
@@ -1299,9 +1320,6 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="authorEdit"/>
           </item>
-          <item row="3" column="1">
-           <widget class="QTextEdit" name="descriptionEdit"/>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="authorLabel">
             <property name="text">
@@ -1341,6 +1359,9 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="3" column="1">
+           <widget class="QTextEdit" name="descriptionEdit"/>
           </item>
          </layout>
         </item>

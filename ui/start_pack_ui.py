@@ -105,7 +105,6 @@ class StartPackDialog(QDialog, Ui_StartPackDialog):
         self.terminateButton.clicked.connect(onTerminatePack)
 
     def setupClearOutputButton(self):
-
         self.clearOutputButton.clicked.connect(lambda: self.outputTextBrowser.setText(""))
 
     def setupCopyCommandButton(self):
