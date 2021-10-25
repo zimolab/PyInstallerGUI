@@ -85,6 +85,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._configs.upxOptions.upxPath.bind(self.upxPathEdit)
         self._configs.upxOptions.excludeFiles.bind(self.upxExcludesListWidget)
 
+
         self._configs.windowsOptions.versionFile.bind(self.versionFileEdit)
         self._configs.windowsOptions.manifestFile.bind(self.manifestFileEdit)
         self._configs.windowsOptions.resource.bind(self.resourceEdit)
