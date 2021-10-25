@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainEwRvEs.ui'
+## Form generated from reading UI file 'mainnsmBAU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -492,15 +492,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.pushButton_3 = QPushButton(self.modulesTab)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.removeExcludeMoudlueButton = QPushButton(self.modulesTab)
+        self.removeExcludeMoudlueButton.setObjectName(u"removeExcludeMoudlueButton")
 
-        self.horizontalLayout_6.addWidget(self.pushButton_3)
+        self.horizontalLayout_6.addWidget(self.removeExcludeMoudlueButton)
 
-        self.pushButton_2 = QPushButton(self.modulesTab)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.addExcludeMoudlueButton = QPushButton(self.modulesTab)
+        self.addExcludeMoudlueButton.setObjectName(u"addExcludeMoudlueButton")
 
-        self.horizontalLayout_6.addWidget(self.pushButton_2)
+        self.horizontalLayout_6.addWidget(self.addExcludeMoudlueButton)
 
 
         self.verticalLayout_21.addLayout(self.horizontalLayout_6)
@@ -517,10 +517,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8 = QVBoxLayout()
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.label_16 = QLabel(self.modulesTab)
-        self.label_16.setObjectName(u"label_16")
+        self.hiddenImportLabel = QLabel(self.modulesTab)
+        self.hiddenImportLabel.setObjectName(u"hiddenImportLabel")
 
-        self.verticalLayout_8.addWidget(self.label_16)
+        self.verticalLayout_8.addWidget(self.hiddenImportLabel)
 
         self.hiddenImportslistWidget = QListWidget(self.modulesTab)
         self.hiddenImportslistWidget.setObjectName(u"hiddenImportslistWidget")
@@ -529,15 +529,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.pushButton_4 = QPushButton(self.modulesTab)
-        self.pushButton_4.setObjectName(u"pushButton_4")
+        self.addHiddenImportButton = QPushButton(self.modulesTab)
+        self.addHiddenImportButton.setObjectName(u"addHiddenImportButton")
 
-        self.horizontalLayout_7.addWidget(self.pushButton_4)
+        self.horizontalLayout_7.addWidget(self.addHiddenImportButton)
 
-        self.pushButton_5 = QPushButton(self.modulesTab)
-        self.pushButton_5.setObjectName(u"pushButton_5")
+        self.removeHiddenImportButton = QPushButton(self.modulesTab)
+        self.removeHiddenImportButton.setObjectName(u"removeHiddenImportButton")
 
-        self.horizontalLayout_7.addWidget(self.pushButton_5)
+        self.horizontalLayout_7.addWidget(self.removeHiddenImportButton)
 
 
         self.verticalLayout_8.addLayout(self.horizontalLayout_7)
@@ -559,27 +559,27 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.verticalLayout_22 = QVBoxLayout()
         self.verticalLayout_22.setObjectName(u"verticalLayout_22")
-        self.label_17 = QLabel(self.modulesTab)
-        self.label_17.setObjectName(u"label_17")
+        self.collectSubmodulesLabel = QLabel(self.modulesTab)
+        self.collectSubmodulesLabel.setObjectName(u"collectSubmodulesLabel")
 
-        self.verticalLayout_22.addWidget(self.label_17)
+        self.verticalLayout_22.addWidget(self.collectSubmodulesLabel)
 
-        self.listWidget_10 = QListWidget(self.modulesTab)
-        self.listWidget_10.setObjectName(u"listWidget_10")
+        self.collectSubmodulesListWidget = QListWidget(self.modulesTab)
+        self.collectSubmodulesListWidget.setObjectName(u"collectSubmodulesListWidget")
 
-        self.verticalLayout_22.addWidget(self.listWidget_10)
+        self.verticalLayout_22.addWidget(self.collectSubmodulesListWidget)
 
         self.horizontalLayout_14 = QHBoxLayout()
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.pushButton_20 = QPushButton(self.modulesTab)
-        self.pushButton_20.setObjectName(u"pushButton_20")
+        self.addCollectSubmoduleButton = QPushButton(self.modulesTab)
+        self.addCollectSubmoduleButton.setObjectName(u"addCollectSubmoduleButton")
 
-        self.horizontalLayout_14.addWidget(self.pushButton_20)
+        self.horizontalLayout_14.addWidget(self.addCollectSubmoduleButton)
 
-        self.pushButton_19 = QPushButton(self.modulesTab)
-        self.pushButton_19.setObjectName(u"pushButton_19")
+        self.removeCollectSubmoduleButton = QPushButton(self.modulesTab)
+        self.removeCollectSubmoduleButton.setObjectName(u"removeCollectSubmoduleButton")
 
-        self.horizontalLayout_14.addWidget(self.pushButton_19)
+        self.horizontalLayout_14.addWidget(self.removeCollectSubmoduleButton)
 
 
         self.verticalLayout_22.addLayout(self.horizontalLayout_14)
@@ -596,27 +596,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9 = QVBoxLayout()
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.label_18 = QLabel(self.modulesTab)
-        self.label_18.setObjectName(u"label_18")
+        self.collectDataLabel = QLabel(self.modulesTab)
+        self.collectDataLabel.setObjectName(u"collectDataLabel")
 
-        self.verticalLayout_9.addWidget(self.label_18)
+        self.verticalLayout_9.addWidget(self.collectDataLabel)
 
-        self.listWidget_11 = QListWidget(self.modulesTab)
-        self.listWidget_11.setObjectName(u"listWidget_11")
+        self.collectDataListWidget = QListWidget(self.modulesTab)
+        self.collectDataListWidget.setObjectName(u"collectDataListWidget")
 
-        self.verticalLayout_9.addWidget(self.listWidget_11)
+        self.verticalLayout_9.addWidget(self.collectDataListWidget)
 
         self.horizontalLayout_15 = QHBoxLayout()
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.pushButton_22 = QPushButton(self.modulesTab)
-        self.pushButton_22.setObjectName(u"pushButton_22")
+        self.addCollectDataButton = QPushButton(self.modulesTab)
+        self.addCollectDataButton.setObjectName(u"addCollectDataButton")
 
-        self.horizontalLayout_15.addWidget(self.pushButton_22)
+        self.horizontalLayout_15.addWidget(self.addCollectDataButton)
 
-        self.pushButton_23 = QPushButton(self.modulesTab)
-        self.pushButton_23.setObjectName(u"pushButton_23")
+        self.removeCollectDataButton = QPushButton(self.modulesTab)
+        self.removeCollectDataButton.setObjectName(u"removeCollectDataButton")
 
-        self.horizontalLayout_15.addWidget(self.pushButton_23)
+        self.horizontalLayout_15.addWidget(self.removeCollectDataButton)
 
 
         self.verticalLayout_9.addLayout(self.horizontalLayout_15)
@@ -631,27 +631,27 @@ class Ui_MainWindow(object):
         self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
         self.verticalLayout_24 = QVBoxLayout()
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.label_19 = QLabel(self.modulesTab)
-        self.label_19.setObjectName(u"label_19")
+        self.collectBinariesLabel = QLabel(self.modulesTab)
+        self.collectBinariesLabel.setObjectName(u"collectBinariesLabel")
 
-        self.verticalLayout_24.addWidget(self.label_19)
+        self.verticalLayout_24.addWidget(self.collectBinariesLabel)
 
-        self.listWidget_14 = QListWidget(self.modulesTab)
-        self.listWidget_14.setObjectName(u"listWidget_14")
+        self.collectBinariesListWidget = QListWidget(self.modulesTab)
+        self.collectBinariesListWidget.setObjectName(u"collectBinariesListWidget")
 
-        self.verticalLayout_24.addWidget(self.listWidget_14)
+        self.verticalLayout_24.addWidget(self.collectBinariesListWidget)
 
         self.horizontalLayout_20 = QHBoxLayout()
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
-        self.pushButton_31 = QPushButton(self.modulesTab)
-        self.pushButton_31.setObjectName(u"pushButton_31")
+        self.addCollectBinariesButton = QPushButton(self.modulesTab)
+        self.addCollectBinariesButton.setObjectName(u"addCollectBinariesButton")
 
-        self.horizontalLayout_20.addWidget(self.pushButton_31)
+        self.horizontalLayout_20.addWidget(self.addCollectBinariesButton)
 
-        self.pushButton_32 = QPushButton(self.modulesTab)
-        self.pushButton_32.setObjectName(u"pushButton_32")
+        self.removeCollectBinariesButton = QPushButton(self.modulesTab)
+        self.removeCollectBinariesButton.setObjectName(u"removeCollectBinariesButton")
 
-        self.horizontalLayout_20.addWidget(self.pushButton_32)
+        self.horizontalLayout_20.addWidget(self.removeCollectBinariesButton)
 
 
         self.verticalLayout_24.addLayout(self.horizontalLayout_20)
@@ -668,27 +668,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_15 = QVBoxLayout()
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.label_20 = QLabel(self.modulesTab)
-        self.label_20.setObjectName(u"label_20")
+        self.collectAllLabel = QLabel(self.modulesTab)
+        self.collectAllLabel.setObjectName(u"collectAllLabel")
 
-        self.verticalLayout_15.addWidget(self.label_20)
+        self.verticalLayout_15.addWidget(self.collectAllLabel)
 
-        self.listWidget_15 = QListWidget(self.modulesTab)
-        self.listWidget_15.setObjectName(u"listWidget_15")
+        self.collectAllListWidget = QListWidget(self.modulesTab)
+        self.collectAllListWidget.setObjectName(u"collectAllListWidget")
 
-        self.verticalLayout_15.addWidget(self.listWidget_15)
+        self.verticalLayout_15.addWidget(self.collectAllListWidget)
 
         self.horizontalLayout_21 = QHBoxLayout()
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.pushButton_34 = QPushButton(self.modulesTab)
-        self.pushButton_34.setObjectName(u"pushButton_34")
+        self.addCollectAllButton = QPushButton(self.modulesTab)
+        self.addCollectAllButton.setObjectName(u"addCollectAllButton")
 
-        self.horizontalLayout_21.addWidget(self.pushButton_34)
+        self.horizontalLayout_21.addWidget(self.addCollectAllButton)
 
-        self.pushButton_35 = QPushButton(self.modulesTab)
-        self.pushButton_35.setObjectName(u"pushButton_35")
+        self.removeCollectAllButton = QPushButton(self.modulesTab)
+        self.removeCollectAllButton.setObjectName(u"removeCollectAllButton")
 
-        self.horizontalLayout_21.addWidget(self.pushButton_35)
+        self.horizontalLayout_21.addWidget(self.removeCollectAllButton)
 
 
         self.verticalLayout_15.addLayout(self.horizontalLayout_21)
@@ -710,27 +710,27 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
         self.verticalLayout_23 = QVBoxLayout()
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.label_21 = QLabel(self.modulesTab)
-        self.label_21.setObjectName(u"label_21")
+        self.copyMetadaLabel = QLabel(self.modulesTab)
+        self.copyMetadaLabel.setObjectName(u"copyMetadaLabel")
 
-        self.verticalLayout_23.addWidget(self.label_21)
+        self.verticalLayout_23.addWidget(self.copyMetadaLabel)
 
-        self.listWidget_12 = QListWidget(self.modulesTab)
-        self.listWidget_12.setObjectName(u"listWidget_12")
+        self.copyMetadaListWidget = QListWidget(self.modulesTab)
+        self.copyMetadaListWidget.setObjectName(u"copyMetadaListWidget")
 
-        self.verticalLayout_23.addWidget(self.listWidget_12)
+        self.verticalLayout_23.addWidget(self.copyMetadaListWidget)
 
         self.horizontalLayout_17 = QHBoxLayout()
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
-        self.pushButton_25 = QPushButton(self.modulesTab)
-        self.pushButton_25.setObjectName(u"pushButton_25")
+        self.addCopyMetadaButton = QPushButton(self.modulesTab)
+        self.addCopyMetadaButton.setObjectName(u"addCopyMetadaButton")
 
-        self.horizontalLayout_17.addWidget(self.pushButton_25)
+        self.horizontalLayout_17.addWidget(self.addCopyMetadaButton)
 
-        self.pushButton_26 = QPushButton(self.modulesTab)
-        self.pushButton_26.setObjectName(u"pushButton_26")
+        self.removeCopyMetadaButton = QPushButton(self.modulesTab)
+        self.removeCopyMetadaButton.setObjectName(u"removeCopyMetadaButton")
 
-        self.horizontalLayout_17.addWidget(self.pushButton_26)
+        self.horizontalLayout_17.addWidget(self.removeCopyMetadaButton)
 
 
         self.verticalLayout_23.addLayout(self.horizontalLayout_17)
@@ -747,27 +747,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_14 = QVBoxLayout()
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.label_22 = QLabel(self.modulesTab)
-        self.label_22.setObjectName(u"label_22")
+        self.deepcopyMetadaLabel = QLabel(self.modulesTab)
+        self.deepcopyMetadaLabel.setObjectName(u"deepcopyMetadaLabel")
 
-        self.verticalLayout_14.addWidget(self.label_22)
+        self.verticalLayout_14.addWidget(self.deepcopyMetadaLabel)
 
-        self.listWidget_13 = QListWidget(self.modulesTab)
-        self.listWidget_13.setObjectName(u"listWidget_13")
+        self.deepcopyMetadaListWidget = QListWidget(self.modulesTab)
+        self.deepcopyMetadaListWidget.setObjectName(u"deepcopyMetadaListWidget")
 
-        self.verticalLayout_14.addWidget(self.listWidget_13)
+        self.verticalLayout_14.addWidget(self.deepcopyMetadaListWidget)
 
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
-        self.pushButton_28 = QPushButton(self.modulesTab)
-        self.pushButton_28.setObjectName(u"pushButton_28")
+        self.addDeepcopyMetadaButton = QPushButton(self.modulesTab)
+        self.addDeepcopyMetadaButton.setObjectName(u"addDeepcopyMetadaButton")
 
-        self.horizontalLayout_18.addWidget(self.pushButton_28)
+        self.horizontalLayout_18.addWidget(self.addDeepcopyMetadaButton)
 
-        self.pushButton_29 = QPushButton(self.modulesTab)
-        self.pushButton_29.setObjectName(u"pushButton_29")
+        self.removeDeepcopyMetadaButton = QPushButton(self.modulesTab)
+        self.removeDeepcopyMetadaButton.setObjectName(u"removeDeepcopyMetadaButton")
 
-        self.horizontalLayout_18.addWidget(self.pushButton_29)
+        self.horizontalLayout_18.addWidget(self.removeDeepcopyMetadaButton)
 
 
         self.verticalLayout_14.addLayout(self.horizontalLayout_18)
@@ -999,27 +999,27 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.verticalLayout_19 = QVBoxLayout()
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
-        self.label_26 = QLabel(self.miscTab)
-        self.label_26.setObjectName(u"label_26")
+        self.hooksLabel = QLabel(self.miscTab)
+        self.hooksLabel.setObjectName(u"hooksLabel")
 
-        self.verticalLayout_19.addWidget(self.label_26)
+        self.verticalLayout_19.addWidget(self.hooksLabel)
 
-        self.listView_17 = QListView(self.miscTab)
-        self.listView_17.setObjectName(u"listView_17")
+        self.hooksListWidget = QListWidget(self.miscTab)
+        self.hooksListWidget.setObjectName(u"hooksListWidget")
 
-        self.verticalLayout_19.addWidget(self.listView_17)
+        self.verticalLayout_19.addWidget(self.hooksListWidget)
 
         self.horizontalLayout_25 = QHBoxLayout()
         self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
-        self.pushButton_21 = QPushButton(self.miscTab)
-        self.pushButton_21.setObjectName(u"pushButton_21")
+        self.addHooksButton = QPushButton(self.miscTab)
+        self.addHooksButton.setObjectName(u"addHooksButton")
 
-        self.horizontalLayout_25.addWidget(self.pushButton_21)
+        self.horizontalLayout_25.addWidget(self.addHooksButton)
 
-        self.pushButton_24 = QPushButton(self.miscTab)
-        self.pushButton_24.setObjectName(u"pushButton_24")
+        self.removeHooksButton = QPushButton(self.miscTab)
+        self.removeHooksButton.setObjectName(u"removeHooksButton")
 
-        self.horizontalLayout_25.addWidget(self.pushButton_24)
+        self.horizontalLayout_25.addWidget(self.removeHooksButton)
 
 
         self.verticalLayout_19.addLayout(self.horizontalLayout_25)
@@ -1029,27 +1029,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_20 = QVBoxLayout()
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.label_27 = QLabel(self.miscTab)
-        self.label_27.setObjectName(u"label_27")
+        self.rtHooksLabel = QLabel(self.miscTab)
+        self.rtHooksLabel.setObjectName(u"rtHooksLabel")
 
-        self.verticalLayout_20.addWidget(self.label_27)
+        self.verticalLayout_20.addWidget(self.rtHooksLabel)
 
-        self.listView_18 = QListView(self.miscTab)
-        self.listView_18.setObjectName(u"listView_18")
+        self.rtHooksListWidget = QListWidget(self.miscTab)
+        self.rtHooksListWidget.setObjectName(u"rtHooksListWidget")
 
-        self.verticalLayout_20.addWidget(self.listView_18)
+        self.verticalLayout_20.addWidget(self.rtHooksListWidget)
 
         self.horizontalLayout_26 = QHBoxLayout()
         self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
-        self.pushButton_27 = QPushButton(self.miscTab)
-        self.pushButton_27.setObjectName(u"pushButton_27")
+        self.addRTHooksButton = QPushButton(self.miscTab)
+        self.addRTHooksButton.setObjectName(u"addRTHooksButton")
 
-        self.horizontalLayout_26.addWidget(self.pushButton_27)
+        self.horizontalLayout_26.addWidget(self.addRTHooksButton)
 
-        self.pushButton_30 = QPushButton(self.miscTab)
-        self.pushButton_30.setObjectName(u"pushButton_30")
+        self.removeRTHooksButton = QPushButton(self.miscTab)
+        self.removeRTHooksButton.setObjectName(u"removeRTHooksButton")
 
-        self.horizontalLayout_26.addWidget(self.pushButton_30)
+        self.horizontalLayout_26.addWidget(self.removeRTHooksButton)
 
 
         self.verticalLayout_20.addLayout(self.horizontalLayout_26)
@@ -1059,27 +1059,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_25 = QVBoxLayout()
         self.verticalLayout_25.setObjectName(u"verticalLayout_25")
-        self.label_28 = QLabel(self.miscTab)
-        self.label_28.setObjectName(u"label_28")
+        self.rtTmpDirLabel = QLabel(self.miscTab)
+        self.rtTmpDirLabel.setObjectName(u"rtTmpDirLabel")
 
-        self.verticalLayout_25.addWidget(self.label_28)
+        self.verticalLayout_25.addWidget(self.rtTmpDirLabel)
 
-        self.listView_19 = QListView(self.miscTab)
-        self.listView_19.setObjectName(u"listView_19")
+        self.rtTmpDirlistWidget = QListWidget(self.miscTab)
+        self.rtTmpDirlistWidget.setObjectName(u"rtTmpDirlistWidget")
 
-        self.verticalLayout_25.addWidget(self.listView_19)
+        self.verticalLayout_25.addWidget(self.rtTmpDirlistWidget)
 
         self.horizontalLayout_27 = QHBoxLayout()
         self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
-        self.pushButton_33 = QPushButton(self.miscTab)
-        self.pushButton_33.setObjectName(u"pushButton_33")
+        self.addRTTmpDirButton = QPushButton(self.miscTab)
+        self.addRTTmpDirButton.setObjectName(u"addRTTmpDirButton")
 
-        self.horizontalLayout_27.addWidget(self.pushButton_33)
+        self.horizontalLayout_27.addWidget(self.addRTTmpDirButton)
 
-        self.pushButton_36 = QPushButton(self.miscTab)
-        self.pushButton_36.setObjectName(u"pushButton_36")
+        self.removeRTTmpDirButton = QPushButton(self.miscTab)
+        self.removeRTTmpDirButton.setObjectName(u"removeRTTmpDirButton")
 
-        self.horizontalLayout_27.addWidget(self.pushButton_36)
+        self.horizontalLayout_27.addWidget(self.removeRTTmpDirButton)
 
 
         self.verticalLayout_25.addLayout(self.horizontalLayout_27)
@@ -1089,27 +1089,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_26 = QVBoxLayout()
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
-        self.label_29 = QLabel(self.miscTab)
-        self.label_29.setObjectName(u"label_29")
+        self.blIgnoreSignalsLabel = QLabel(self.miscTab)
+        self.blIgnoreSignalsLabel.setObjectName(u"blIgnoreSignalsLabel")
 
-        self.verticalLayout_26.addWidget(self.label_29)
+        self.verticalLayout_26.addWidget(self.blIgnoreSignalsLabel)
 
-        self.listView_20 = QListView(self.miscTab)
-        self.listView_20.setObjectName(u"listView_20")
+        self.blIgnoreSignalsListWidget = QListWidget(self.miscTab)
+        self.blIgnoreSignalsListWidget.setObjectName(u"blIgnoreSignalsListWidget")
 
-        self.verticalLayout_26.addWidget(self.listView_20)
+        self.verticalLayout_26.addWidget(self.blIgnoreSignalsListWidget)
 
         self.horizontalLayout_28 = QHBoxLayout()
         self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
-        self.pushButton_37 = QPushButton(self.miscTab)
-        self.pushButton_37.setObjectName(u"pushButton_37")
+        self.addBLIgnoreSignalsButton = QPushButton(self.miscTab)
+        self.addBLIgnoreSignalsButton.setObjectName(u"addBLIgnoreSignalsButton")
 
-        self.horizontalLayout_28.addWidget(self.pushButton_37)
+        self.horizontalLayout_28.addWidget(self.addBLIgnoreSignalsButton)
 
-        self.pushButton_38 = QPushButton(self.miscTab)
-        self.pushButton_38.setObjectName(u"pushButton_38")
+        self.removeBLIgnoreSignalsButton = QPushButton(self.miscTab)
+        self.removeBLIgnoreSignalsButton.setObjectName(u"removeBLIgnoreSignalsButton")
 
-        self.horizontalLayout_28.addWidget(self.pushButton_38)
+        self.horizontalLayout_28.addWidget(self.removeBLIgnoreSignalsButton)
 
 
         self.verticalLayout_26.addLayout(self.horizontalLayout_28)
@@ -1293,29 +1293,29 @@ class Ui_MainWindow(object):
         self.removeExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.extraDataTab), QCoreApplication.translate("MainWindow", u"Extra Data", None))
         self.excludeMoudluesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Moudlues", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Hidden Imports", None))
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Collect all submodules from:", None))
-        self.pushButton_20.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_19.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
-        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Collect all data from:", None))
-        self.pushButton_22.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_23.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Collect all binaries from:", None))
-        self.pushButton_31.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_32.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Collect all(submodules,data, bin...)from:", None))
-        self.pushButton_34.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_35.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for:", None))
-        self.pushButton_25.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_26.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for(recursively):", None))
-        self.pushButton_28.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_29.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.removeExcludeMoudlueButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.addExcludeMoudlueButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.hiddenImportLabel.setText(QCoreApplication.translate("MainWindow", u"Hidden Imports", None))
+        self.addHiddenImportButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeHiddenImportButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.collectSubmodulesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all submodules from:", None))
+        self.addCollectSubmoduleButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectSubmoduleButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.collectDataLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all data from:", None))
+        self.addCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.collectBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all binaries from:", None))
+        self.addCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.collectAllLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all(submodules,data, bin...)from:", None))
+        self.addCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.copyMetadaLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for:", None))
+        self.addCopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.deepcopyMetadaLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for(recursively):", None))
+        self.addDeepcopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeDeepcopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.modulesTab), QCoreApplication.translate("MainWindow", u"Modules/Packages", None))
         self.noUPXCheckBox.setText(QCoreApplication.translate("MainWindow", u"Disable UPX", None))
         self.upxPathLabel.setText(QCoreApplication.translate("MainWindow", u"UPX path", None))
@@ -1342,18 +1342,18 @@ class Ui_MainWindow(object):
         self.selectEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.macosxOptionTab), QCoreApplication.translate("MainWindow", u"Mac OS X", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.platformTab), QCoreApplication.translate("MainWindow", u"Platform Specific", None))
-        self.label_26.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
-        self.pushButton_21.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_24.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_27.setText(QCoreApplication.translate("MainWindow", u"Runtime hooks", None))
-        self.pushButton_27.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_30.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_28.setText(QCoreApplication.translate("MainWindow", u"Runtime tmp dir", None))
-        self.pushButton_33.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_36.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Bootloader ignore signals", None))
-        self.pushButton_37.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.pushButton_38.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.hooksLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
+        self.addHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.rtHooksLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime hooks", None))
+        self.addRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.rtTmpDirLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime tmp dir", None))
+        self.addRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.blIgnoreSignalsLabel.setText(QCoreApplication.translate("MainWindow", u"Bootloader ignore signals", None))
+        self.addBLIgnoreSignalsButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeBLIgnoreSignalsButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.miscTab), QCoreApplication.translate("MainWindow", u"MISC", None))
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"name", None))
         self.authorLabel.setText(QCoreApplication.translate("MainWindow", u"author", None))

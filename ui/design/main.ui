@@ -556,14 +556,14 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="removeExcludeMoudlueButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="addExcludeMoudlueButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -583,7 +583,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <widget class="QLabel" name="label_16">
+             <widget class="QLabel" name="hiddenImportLabel">
               <property name="text">
                <string>Hidden Imports</string>
               </property>
@@ -595,14 +595,14 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
               <item>
-               <widget class="QPushButton" name="pushButton_4">
+               <widget class="QPushButton" name="addHiddenImportButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_5">
+               <widget class="QPushButton" name="removeHiddenImportButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -626,28 +626,28 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_22">
             <item>
-             <widget class="QLabel" name="label_17">
+             <widget class="QLabel" name="collectSubmodulesLabel">
               <property name="text">
                <string>Collect all submodules from:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_10"/>
+             <widget class="QListWidget" name="collectSubmodulesListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_14">
               <item>
-               <widget class="QPushButton" name="pushButton_20">
+               <widget class="QPushButton" name="addCollectSubmoduleButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_19">
+               <widget class="QPushButton" name="removeCollectSubmoduleButton">
                 <property name="text">
-                 <string>Clear</string>
+                 <string>Remove</string>
                 </property>
                </widget>
               </item>
@@ -665,26 +665,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_9">
             <item>
-             <widget class="QLabel" name="label_18">
+             <widget class="QLabel" name="collectDataLabel">
               <property name="text">
                <string>Collect all data from:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_11"/>
+             <widget class="QListWidget" name="collectDataListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_15">
               <item>
-               <widget class="QPushButton" name="pushButton_22">
+               <widget class="QPushButton" name="addCollectDataButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_23">
+               <widget class="QPushButton" name="removeCollectDataButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -701,26 +701,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_24">
             <item>
-             <widget class="QLabel" name="label_19">
+             <widget class="QLabel" name="collectBinariesLabel">
               <property name="text">
                <string>Collect all binaries from:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_14"/>
+             <widget class="QListWidget" name="collectBinariesListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
               <item>
-               <widget class="QPushButton" name="pushButton_31">
+               <widget class="QPushButton" name="addCollectBinariesButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_32">
+               <widget class="QPushButton" name="removeCollectBinariesButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -740,26 +740,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_15">
             <item>
-             <widget class="QLabel" name="label_20">
+             <widget class="QLabel" name="collectAllLabel">
               <property name="text">
                <string>Collect all(submodules,data, bin...)from:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_15"/>
+             <widget class="QListWidget" name="collectAllListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_21">
               <item>
-               <widget class="QPushButton" name="pushButton_34">
+               <widget class="QPushButton" name="addCollectAllButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_35">
+               <widget class="QPushButton" name="removeCollectAllButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -783,26 +783,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_23">
             <item>
-             <widget class="QLabel" name="label_21">
+             <widget class="QLabel" name="copyMetadaLabel">
               <property name="text">
                <string>Copy metadata for:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_12"/>
+             <widget class="QListWidget" name="copyMetadaListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_17">
               <item>
-               <widget class="QPushButton" name="pushButton_25">
+               <widget class="QPushButton" name="addCopyMetadaButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_26">
+               <widget class="QPushButton" name="removeCopyMetadaButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -822,26 +822,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_14">
             <item>
-             <widget class="QLabel" name="label_22">
+             <widget class="QLabel" name="deepcopyMetadaLabel">
               <property name="text">
                <string>Copy metadata for(recursively):</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_13"/>
+             <widget class="QListWidget" name="deepcopyMetadaListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_18">
               <item>
-               <widget class="QPushButton" name="pushButton_28">
+               <widget class="QPushButton" name="addDeepcopyMetadaButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_29">
+               <widget class="QPushButton" name="removeDeepcopyMetadaButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -1146,26 +1146,26 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_19">
           <item>
-           <widget class="QLabel" name="label_26">
+           <widget class="QLabel" name="hooksLabel">
             <property name="text">
              <string>Additional hooks</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listView_17"/>
+           <widget class="QListWidget" name="hooksListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_25">
             <item>
-             <widget class="QPushButton" name="pushButton_21">
+             <widget class="QPushButton" name="addHooksButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_24">
+             <widget class="QPushButton" name="removeHooksButton">
               <property name="text">
                <string>Remove</string>
               </property>
@@ -1178,26 +1178,26 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_20">
           <item>
-           <widget class="QLabel" name="label_27">
+           <widget class="QLabel" name="rtHooksLabel">
             <property name="text">
              <string>Runtime hooks</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listView_18"/>
+           <widget class="QListWidget" name="rtHooksListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_26">
             <item>
-             <widget class="QPushButton" name="pushButton_27">
+             <widget class="QPushButton" name="addRTHooksButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_30">
+             <widget class="QPushButton" name="removeRTHooksButton">
               <property name="text">
                <string>Remove</string>
               </property>
@@ -1210,26 +1210,26 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_25">
           <item>
-           <widget class="QLabel" name="label_28">
+           <widget class="QLabel" name="rtTmpDirLabel">
             <property name="text">
              <string>Runtime tmp dir</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listView_19"/>
+           <widget class="QListWidget" name="rtTmpDirlistWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_27">
             <item>
-             <widget class="QPushButton" name="pushButton_33">
+             <widget class="QPushButton" name="addRTTmpDirButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_36">
+             <widget class="QPushButton" name="removeRTTmpDirButton">
               <property name="text">
                <string>Remove</string>
               </property>
@@ -1242,26 +1242,26 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_26">
           <item>
-           <widget class="QLabel" name="label_29">
+           <widget class="QLabel" name="blIgnoreSignalsLabel">
             <property name="text">
              <string>Bootloader ignore signals</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listView_20"/>
+           <widget class="QListWidget" name="blIgnoreSignalsListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_28">
             <item>
-             <widget class="QPushButton" name="pushButton_37">
+             <widget class="QPushButton" name="addBLIgnoreSignalsButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_38">
+             <widget class="QPushButton" name="removeBLIgnoreSignalsButton">
               <property name="text">
                <string>Remove</string>
               </property>

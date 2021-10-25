@@ -61,6 +61,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._configs.bind("author", self.authorEdit)
         self._configs.bind("version", self.versionEdit)
         self._configs.bind("description", self.descriptionEdit)
+
         self._configs.commonOptions.productName.bind(self.productNameEdit)
         self._configs.commonOptions.distPath.bind(self.distPathEdit)
         self._configs.commonOptions.workPath.bind(self.workPathEdit)
@@ -79,12 +80,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._configs.commonOptions.searchPaths.bind(self.searchPathsListWidget)
         self._configs.commonOptions.extraData.bind(self.extraDataListWidget)
         self._configs.commonOptions.extraBinaries.bind(self.extraBinariesListWidget)
-        self._configs.commonOptions.excludeModules.bind(self.ex)
 
         self._configs.upxOptions.noUPX.bind(self.noUPXCheckBox)
         self._configs.upxOptions.upxPath.bind(self.upxPathEdit)
         self._configs.upxOptions.excludeFiles.bind(self.upxExcludesListWidget)
-
 
         self._configs.windowsOptions.versionFile.bind(self.versionFileEdit)
         self._configs.windowsOptions.manifestFile.bind(self.manifestFileEdit)
