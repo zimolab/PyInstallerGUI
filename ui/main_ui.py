@@ -21,7 +21,7 @@ from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_F
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE
 from ui.design.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
-from ui.start_pack_ui import StartPackDialog
+from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath
@@ -52,7 +52,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._state = Binder()
         self._state.cwd = abspath(os.getcwd())
         # 创建对话框或其他窗口
-        self._startPackDialog = StartPackDialog(self)
+        self._startCommandDialog = StartCommandDialog(self)
         self._addExtrasDialog = AddExtrasDialog(self)
         self._modifyPathDialog = ModifyPathDialog(self)
         # 设置UI
@@ -78,10 +78,11 @@ class MainUI(QMainWindow, Ui_MainWindow):
         """设置菜单"""
         self.actionLoadConfigs.triggered.connect(self.onLoadPackageConfigs)
         self.actionSaveConfigs.triggered.connect(self.onSavePackageConfigs)
-        self.actionStartPack.triggered.connect(self.openStartPackDialog)
+        self.actionStartPack.triggered.connect(self.startPack)
         self.actionNewConfigs.triggered.connect(self.onCreateNewConfigs)
         self.actionGotoPyinstallerWebsite.triggered.connect(lambda: webbrowser.open(PYINSTALLER_WEBSITE_URL))
         self.actionGotoPyInstallerDoc.triggered.connect(lambda: webbrowser.open(PYINSTALLER_DOC_STABLE_URL))
+        self.actionStartGenSpceFile.triggered.connect(self.startGenerateSpecFile)
 
     def setupScriptsUI(self):
         self.setTooltip("scriptname: name of script files to be processed", self.scriptsLabel, self.scriptsListWidget)
@@ -155,15 +156,27 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         # pyinstaller
         def onChangePyInstallerPath():
-            pyinstallerPath = openFileDialog(self, self.tr("Select pyinstaller executable"), None,
-                                             self.tr("pyinstaller executable(*.*)"))
-            if pyinstallerPath is None:
+            path = openFileDialog(self, self.tr("Select pyinstaller executable"), None,
+                                  self.tr("pyinstaller executable(*.*)"))
+            if path is None:
                 return
-            self._configs.pyinstaller = pyinstallerPath
+            self._configs.pyinstaller = path
 
         self._configs.bind("pyinstaller", self.pyinstallerEdit)
         self.selectPyInstallerButton.clicked.connect(onChangePyInstallerPath)
         self.setTooltip(self.tr("Path to pyinstaller executable"), self.pyinstallerEdit, self.pyinstallerLabel)
+
+        # pyimakespec
+        def onChangePyimakespecPath():
+            path = openFileDialog(self, self.tr("Select pyi-makespec executable"), None,
+                                  self.tr("pyi-makespec executable(*.*)"))
+            if path is None:
+                return
+            self._configs.pyimakespec = path
+
+        self._configs.bind("pyimakespec", self.pyimakespecEdit)
+        self.selectPyimakespecButton.clicked.connect(onChangePyimakespecPath)
+        self.setTooltip(self.tr("Path to pyi-makespec executable"), self.pyimakespecEdit, self.pyimakespecLabel)
         # scripts
         self.setupScriptsUI()
         # name
@@ -175,7 +188,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # description
         self._configs.bind("description", self.descriptionEdit)
         # 开始打包按钮
-        self.startPackButton.clicked.connect(self.openStartPackDialog)
+        self.startPackButton.clicked.connect(self.startPack)
 
     def setupCommonOptionsUI(self):
         # productName
@@ -423,17 +436,21 @@ class MainUI(QMainWindow, Ui_MainWindow):
                    self.tr("package.json found in current path, load it?")):
                 self.loadPackageConfigs(path)
 
-    def openStartPackDialog(self):
-        """打开开始打包窗口"""
-        if self._configs.pyinstaller is None or self._configs.pyinstaller == "":
-            warn(self, self.tr("Warning"), self.tr("Path of pyinstaller is empty!"))
+    def startPack(self):
+        self.openStartCommandDialog(self._configs.pyinstaller, StartCommandDialog.START_PACK)
+
+    def startGenerateSpecFile(self):
+        self.openStartCommandDialog(self._configs.pyimakespec, StartCommandDialog.START_GEN_SPEC_FILE)
+
+    def openStartCommandDialog(self, cmd, action):
+        if cmd is None or cmd == "":
+            warn(self, self.tr("Warning"), self.tr("cmd executable is empty!"))
             return
         if len(self._configs.scripts) == 0:
-            warn(self, self.tr("Warning"), self.tr("Need at least one script to pack!"))
+            warn(self, self.tr("Warning"), self.tr("Need at least one script!"))
             return
-        if self._startPackDialog.isHidden():
-            self._startPackDialog.display(self._configs.toCommandLine(),
-                                          self._state.cwd)
+        self._startCommandDialog.display(action, self._configs.toCommandLine(cmd),
+                                         self._state.cwd)
 
     def onLoadPackageConfigs(self):
         """载入配置文件"""
@@ -455,4 +472,3 @@ class MainUI(QMainWindow, Ui_MainWindow):
         """创建新的配置对象"""
         if ask(self, self.tr("New Configs"), self.tr("Current configs will be lost. Sure to create a new config?")):
             self._configs.reset()
-

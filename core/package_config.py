@@ -16,9 +16,13 @@ from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSE
 
 
 class PackageConfig(object):
+    CMD_PYINSTALLER = 0
+    CMD_PYIMAKESPEC = 0
+
     def __init__(self):
         self._state = Binder()
         self._state.pyinstaller = "pyinstaller"
+        self._state.pyimakespec = "pyi-makespec"
         self._state.name = ""
         self._state.author = ""
         self._state.version = "0.0.1"
@@ -30,60 +34,6 @@ class PackageConfig(object):
         self.windowsOptions = self.WindowsOptions()
         self.macOSXOptions = self.MacOSXOptions()
 
-    def reset(self):
-        self.pyinstaller = "pyinstaller"
-        self.name = ""
-        self.author = ""
-        self.version = "0.0.1"
-        self.description = "pyinstaller gui config file"
-        self.clearScripts()
-        options = []
-        options.extend(self.commonOptions.getOptions(withNames=False))
-        options.extend(self.hookOptions.getOptions(withNames=False))
-        options.extend(self.upxOptions.getOptions(withNames=False))
-        options.extend(self.windowsOptions.getOptions(withNames=False))
-        options.extend(self.macOSXOptions.getOptions(withNames=False))
-        for opt in options:
-            opt.unset()
-
-    def load(self, path, reset=True, ignoreErrors=True):
-        if reset:
-            self.reset()
-        with open(path, "r", encoding="utf-8") as file:
-            jsonData = json.load(file)
-            if not isinstance(jsonData, dict):
-                if ignoreErrors:
-                    return
-                else:
-                    raise RuntimeError("bad file format")
-
-        self.pyinstaller = self._get(jsonData, "pyinstaller", self.pyinstaller)
-        self.name = self._get(jsonData, "name", self.name)
-        self.author = self._get(jsonData, "author", self.author)
-        self.version = self._get(jsonData, "version", self.version)
-        self.description = self._get(jsonData, "description", self.description)
-        scripts = self._get(jsonData, "scripts", [])
-        if isinstance(scripts, list):
-            self.addScripts(*scripts)
-
-        try:
-            if "options" in jsonData:
-                options = jsonData["options"]
-                self.deserializeOptions(options, self.commonOptions)
-                if "hooks" in options:
-                    self.deserializeOptions(options["hooks"], self.hookOptions)
-                if "upx" in options:
-                    self.deserializeOptions(options["upx"], self.upxOptions)
-                if "windows" in options:
-                    self.deserializeOptions(options["windows"], self.windowsOptions)
-                if "macOSX" in options:
-                    self.deserializeOptions(options["macOSX"], self.macOSXOptions)
-        except Exception as e:
-            if ignoreErrors:
-                return
-            else:
-                raise e
-
     @property
     def pyinstaller(self):
         return self._state.pyinstaller
@@ -91,6 +41,14 @@ class PackageConfig(object):
     @pyinstaller.setter
     def pyinstaller(self, val):
         self._state.pyinstaller = val
+
+    @property
+    def pyimakespec(self):
+        return self._state.pyimakespec
+
+    @pyimakespec.setter
+    def pyimakespec(self, val):
+        self._state.pyimakespec = val
 
     @property
     def name(self):
@@ -127,6 +85,62 @@ class PackageConfig(object):
     @property
     def scripts(self):
         return self._state.scripts
+
+    def reset(self):
+        self.pyinstaller = "pyinstaller"
+        self.pyimakespec = "pyi-makespec"
+        self.name = ""
+        self.author = ""
+        self.version = "0.0.1"
+        self.description = "pyinstaller gui config file"
+        self.clearScripts()
+        options = []
+        options.extend(self.commonOptions.getOptions(withNames=False))
+        options.extend(self.hookOptions.getOptions(withNames=False))
+        options.extend(self.upxOptions.getOptions(withNames=False))
+        options.extend(self.windowsOptions.getOptions(withNames=False))
+        options.extend(self.macOSXOptions.getOptions(withNames=False))
+        for opt in options:
+            opt.unset()
+
+    def load(self, path, reset=True, ignoreErrors=True):
+        if reset:
+            self.reset()
+        with open(path, "r", encoding="utf-8") as file:
+            jsonData = json.load(file)
+            if not isinstance(jsonData, dict):
+                if ignoreErrors:
+                    return
+                else:
+                    raise RuntimeError("bad file format")
+
+        self.pyinstaller = self._get(jsonData, "pyinstaller", self.pyinstaller)
+        self.pyimakespec = self._get(jsonData, "pyi-makespec", self.pyimakespec)
+        self.name = self._get(jsonData, "name", self.name)
+        self.author = self._get(jsonData, "author", self.author)
+        self.version = self._get(jsonData, "version", self.version)
+        self.description = self._get(jsonData, "description", self.description)
+        scripts = self._get(jsonData, "scripts", [])
+        if isinstance(scripts, list):
+            self.addScripts(*scripts)
+
+        try:
+            if "options" in jsonData:
+                options = jsonData["options"]
+                self.deserializeOptions(options, self.commonOptions)
+                if "hooks" in options:
+                    self.deserializeOptions(options["hooks"], self.hookOptions)
+                if "upx" in options:
+                    self.deserializeOptions(options["upx"], self.upxOptions)
+                if "windows" in options:
+                    self.deserializeOptions(options["windows"], self.windowsOptions)
+                if "macOSX" in options:
+                    self.deserializeOptions(options["macOSX"], self.macOSXOptions)
+        except Exception as e:
+            if ignoreErrors:
+                return
+            else:
+                raise e
 
     def addScripts(self, *scripts):
         for script in scripts:
@@ -173,6 +187,16 @@ class PackageConfig(object):
             widget.setText(lambda: self.pyinstaller * 1)
             widget.textChanged.connect(onPyinstallerChanged)
             self.pyinstaller = self.pyinstaller
+
+        elif target == "pyimakespec":
+            assert isinstance(widget, QLineEdit)
+
+            def onPyimakespecChanged(path):
+                self.pyimakespec = path
+
+            widget.setText(lambda: self.pyimakespec * 1)
+            widget.textChanged.connect(onPyimakespecChanged)
+            self.pyimakespec = self.pyimakespec
 
         elif target == "name":
             assert isinstance(widget, QLineEdit)
@@ -232,11 +256,12 @@ class PackageConfig(object):
     def toJSON(self):
         excludes = []
         serialized = {
-            "pyinstaller": self.pyinstaller,
             "name": self.name,
             "author": self.author,
             "version": self.version,
             "description": self.description,
+            "pyinstaller": self.pyinstaller,
+            "pyimakespec": self.pyimakespec,
             "scripts": self.scripts,
             "options": {
             }
@@ -313,6 +338,7 @@ class PackageConfig(object):
                     raise RuntimeError("bad file format")
 
         configs.pyinstaller = cls._get(jsonData, "pyinstaller", configs.pyinstaller)
+        configs.pyimakespec = cls._get(jsonData, "pyimakespec", configs.pyimakespec)
         configs.name = cls._get(jsonData, "name", configs.name)
         configs.author = cls._get(jsonData, "author", configs.author)
         configs.version = cls._get(jsonData, "version", configs.version)
@@ -347,7 +373,15 @@ class PackageConfig(object):
         with open(path, "wb") as file:
             file.write(self.toJSON().encode("utf-8"))
 
-    def toCommandLine(self, useCurrentPlatformConfigs=True):
+    def toCommandLine(self, cmd, useCurrentPlatformConfigs=True):
+        return f"{cmd} {self.toOptionsCommandLine(useCurrentPlatformConfigs)}"
+
+    def toOptionsCommandLine(self, useCurrentPlatformConfigs=True):
+        argList = self.toOptionsList(useCurrentPlatformConfigs)
+        cmd = f"{' '.join(argList)} {' '.join(self.scripts)}"
+        return cmd
+
+    def toOptionsList(self, useCurrentPlatformConfigs=True):
         argList = []
         argList.extend(self.commonOptions.toStringList())
         argList.extend(self.hookOptions.toStringList())
@@ -358,8 +392,11 @@ class PackageConfig(object):
                 argList.extend(self.windowsOptions.toStringList())
             if platform.system().lower() == "darwin":
                 argList.extend(self.macOSXOptions.toStringList())
-        cmd = f"{self.pyinstaller} {' '.join(argList)} {' '.join(self.scripts)}"
-        return cmd
+        else:
+            argList.extend(self.windowsOptions.toStringList())
+            argList.extend(self.macOSXOptions.toStringList())
+
+        return argList
 
     class CommonOptions(Options):
         def __init__(self):
@@ -456,13 +493,15 @@ class PackageConfig(object):
                 description="--add-data <SRC;DEST or SRC:DEST>: "
                             "Additional non-binary files or folders to be added to the executable. The path separator "
                             "is platform specific, os.pathsep (which is ; on Windows and : on most unix systems) is "
-                            "used. "
+                            "used. ",
+                wrapArgument=True
             )
 
             self.extraBinaries = BindingMultipleOption(
                 name="add-binary",
                 description="--add-binary <SRC;DEST or SRC:DEST>: "
-                            "Additional binary files to be added to the executable. "
+                            "Additional binary files to be added to the executable. ",
+                wrapArgument=True
             )
 
             self.searchPaths = BindingMultipleOption(

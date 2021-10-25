@@ -1,11 +1,16 @@
 {
-    "pyinstaller": "pyinstaller",
     "name": "PyInstaller",
     "author": "zimolab@aliyun.com",
     "version": "0.0.1",
     "description": "一个简化PyInstaller命令行使用的小工具。界面基于PySide2构建。\n\n源码：https://github.com/zimolab/PyInstallerGUI.git",
-    "scripts": [],
+    "pyinstaller": "pyinstaller",
+    "pyimakespec": "pyi-makespec",
+    "scripts": [
+        "main.py"
+    ],
     "options": {
+        "productMode": "onedir",
+        "windowMode": "windowed",
         "upx": {},
         "hooks": {},
         "windows": {},

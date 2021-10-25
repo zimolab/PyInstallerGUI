@@ -59,7 +59,7 @@ class BaseOption(object):
 
 class BindingOption(BaseOption):
     def __init__(self, name, default="", form=OptionForm.LONG_OPTION, choices=None, connector=OptionConnector.EQUAL,
-                 description="", validator=None, ignoreValidationError=True):
+                 description="", validator=None, ignoreValidationError=True, wrapArgument=False):
         super().__init__(name, form, description)
         self._state = Binder()
         self._state.argument = ""
@@ -68,6 +68,7 @@ class BindingOption(BaseOption):
         self.choices = choices
         self.connector = connector
         self.validator = validator
+        self.wrapArgument = wrapArgument
 
         self.argument = default
 
@@ -119,7 +120,10 @@ class BindingOption(BaseOption):
 
     def toString(self):
         if self.isSet:
-            return f"{self.form}{self.name}{self.connector}{self.argument}"
+            if not self.wrapArgument:
+                return f'{self.form}{self.name}{self.connector}{self.argument}'
+            else:
+                return f'{self.form}{self.name}{self.connector}"{self.argument}"'
         return ""
 
     def bind(self, widget):
@@ -180,7 +184,7 @@ class BindingFlag(BaseOption):
 
 class BindingMultipleOption(BaseOption):
     def __init__(self, name, default=None, form=OptionForm.LONG_OPTION, choices=None, connector=OptionConnector.EQUAL,
-                 description="", validator=None):
+                 description="", validator=None, wrapArgument=False):
         super().__init__(name, form, description)
 
         if isinstance(default, list) or isinstance(default, tuple):
@@ -194,6 +198,7 @@ class BindingMultipleOption(BaseOption):
         self.choices = choices
         self.connector = connector
         self.validator = validator
+        self.wrapArgument = wrapArgument
 
         self.addAll(True, *default)
 
@@ -309,7 +314,10 @@ class BindingMultipleOption(BaseOption):
             self.add(val, ignoreValidationError)
 
     def _makeArgumentString(self, arg):
-        return f"{self.form}{self.name}{self.connector}{arg}"
+        if not self.wrapArgument:
+            return f'{self.form}{self.name}{self.connector}{arg}'
+        else:
+            return f'{self.form}{self.name}{self.connector}"{arg}"'
 
     def toString(self):
         if self.isSet:

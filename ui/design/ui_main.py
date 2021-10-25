@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainGsilXp.ui'
+## Form generated from reading UI file 'mainzaZvMm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -52,6 +52,8 @@ class Ui_MainWindow(object):
         self.actionGotoPyinstallerWebsite.setObjectName(u"actionGotoPyinstallerWebsite")
         self.actionGotoPyInstallerDoc = QAction(MainWindow)
         self.actionGotoPyInstallerDoc.setObjectName(u"actionGotoPyInstallerDoc")
+        self.actionStartGenSpceFile = QAction(MainWindow)
+        self.actionStartGenSpceFile.setObjectName(u"actionStartGenSpceFile")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
@@ -69,12 +71,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.cwdLabel, 0, 0, 1, 1)
 
-        self.cwdEdit = DirectoryEdit(self.commonTab)
-        self.cwdEdit.setObjectName(u"cwdEdit")
-        self.cwdEdit.setFocusPolicy(Qt.NoFocus)
-
-        self.gridLayout_2.addWidget(self.cwdEdit, 0, 1, 1, 1)
-
         self.changeCWDButton = QPushButton(self.commonTab)
         self.changeCWDButton.setObjectName(u"changeCWDButton")
 
@@ -91,10 +87,31 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.pyinstallerEdit, 1, 1, 1, 1)
 
+        self.cwdEdit = DirectoryEdit(self.commonTab)
+        self.cwdEdit.setObjectName(u"cwdEdit")
+        self.cwdEdit.setFocusPolicy(Qt.NoFocus)
+
+        self.gridLayout_2.addWidget(self.cwdEdit, 0, 1, 1, 1)
+
         self.selectPyInstallerButton = QPushButton(self.commonTab)
         self.selectPyInstallerButton.setObjectName(u"selectPyInstallerButton")
 
         self.gridLayout_2.addWidget(self.selectPyInstallerButton, 1, 2, 1, 1)
+
+        self.pyimakespecLabel = QLabel(self.commonTab)
+        self.pyimakespecLabel.setObjectName(u"pyimakespecLabel")
+
+        self.gridLayout_2.addWidget(self.pyimakespecLabel, 2, 0, 1, 1)
+
+        self.pyimakespecEdit = QLineEdit(self.commonTab)
+        self.pyimakespecEdit.setObjectName(u"pyimakespecEdit")
+
+        self.gridLayout_2.addWidget(self.pyimakespecEdit, 2, 1, 1, 1)
+
+        self.selectPyimakespecButton = QPushButton(self.commonTab)
+        self.selectPyimakespecButton.setObjectName(u"selectPyimakespecButton")
+
+        self.gridLayout_2.addWidget(self.selectPyimakespecButton, 2, 2, 1, 1)
 
 
         self.verticalLayout_2.addLayout(self.gridLayout_2)
@@ -1197,38 +1214,34 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 709, 23))
-        self.menu = QMenu(self.menubar)
-        self.menu.setObjectName(u"menu")
-        self.menu_2 = QMenu(self.menubar)
-        self.menu_2.setObjectName(u"menu_2")
-        self.menu_3 = QMenu(self.menubar)
-        self.menu_3.setObjectName(u"menu_3")
-        self.menuTools = QMenu(self.menubar)
-        self.menuTools.setObjectName(u"menuTools")
+        self.fileMenu = QMenu(self.menubar)
+        self.fileMenu.setObjectName(u"fileMenu")
+        self.commandMenu = QMenu(self.menubar)
+        self.commandMenu.setObjectName(u"commandMenu")
+        self.helpMenu = QMenu(self.menubar)
+        self.helpMenu.setObjectName(u"helpMenu")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.menubar.addAction(self.menu.menuAction())
-        self.menubar.addAction(self.menu_2.menuAction())
-        self.menubar.addAction(self.menuTools.menuAction())
-        self.menubar.addAction(self.menu_3.menuAction())
-        self.menu.addSeparator()
-        self.menu.addAction(self.actionNewConfigs)
-        self.menu.addAction(self.actionSaveConfigs)
-        self.menu.addAction(self.actionLoadConfigs)
-        self.menu.addSeparator()
-        self.menu.addAction(self.actionExit)
-        self.menu_2.addAction(self.actionStartPack)
-        self.menu_2.addSeparator()
-        self.menu_2.addAction(self.actionSettings)
-        self.menu_3.addAction(self.actionAbout)
-        self.menu_3.addSeparator()
-        self.menu_3.addAction(self.actionGotoPyinstallerWebsite)
-        self.menu_3.addAction(self.actionGotoPyInstallerDoc)
-        self.menu_3.addSeparator()
-        self.menu_3.addAction(self.actionHelp)
+        self.menubar.addAction(self.fileMenu.menuAction())
+        self.menubar.addAction(self.commandMenu.menuAction())
+        self.menubar.addAction(self.helpMenu.menuAction())
+        self.fileMenu.addSeparator()
+        self.fileMenu.addAction(self.actionNewConfigs)
+        self.fileMenu.addAction(self.actionSaveConfigs)
+        self.fileMenu.addAction(self.actionLoadConfigs)
+        self.fileMenu.addSeparator()
+        self.fileMenu.addAction(self.actionExit)
+        self.commandMenu.addAction(self.actionStartPack)
+        self.commandMenu.addAction(self.actionStartGenSpceFile)
+        self.helpMenu.addAction(self.actionAbout)
+        self.helpMenu.addSeparator()
+        self.helpMenu.addAction(self.actionGotoPyinstallerWebsite)
+        self.helpMenu.addAction(self.actionGotoPyInstallerDoc)
+        self.helpMenu.addSeparator()
+        self.helpMenu.addAction(self.actionHelp)
 
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
@@ -1254,11 +1267,13 @@ class Ui_MainWindow(object):
         self.actionNewConfigs.setText(QCoreApplication.translate("MainWindow", u"New Configs", None))
         self.actionGotoPyinstallerWebsite.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Website", None))
         self.actionGotoPyInstallerDoc.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Documentation", None))
+        self.actionStartGenSpceFile.setText(QCoreApplication.translate("MainWindow", u"Generate Spce File", None))
         self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"cwd", None))
         self.changeCWDButton.setText(QCoreApplication.translate("MainWindow", u"Change", None))
         self.pyinstallerLabel.setText(QCoreApplication.translate("MainWindow", u"Pynstaller Path", None))
-        self.pyinstallerEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Set path of pyinstaller here", None))
         self.selectPyInstallerButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.pyimakespecLabel.setText(QCoreApplication.translate("MainWindow", u"pyi-makespec", None))
+        self.selectPyimakespecButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.scriptsLabel.setText(QCoreApplication.translate("MainWindow", u"Scripts", None))
         self.addScriptButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeScriptButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
@@ -1378,9 +1393,8 @@ class Ui_MainWindow(object):
         self.versionLabel.setText(QCoreApplication.translate("MainWindow", u"version", None))
         self.descriptionLabel.setText(QCoreApplication.translate("MainWindow", u"description", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.metadataTab), QCoreApplication.translate("MainWindow", u"Metadata", None))
-        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
-        self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"Pack", None))
-        self.menu_3.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
-        self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"Tools", None))
+        self.fileMenu.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
+        self.commandMenu.setTitle(QCoreApplication.translate("MainWindow", u"Command", None))
+        self.helpMenu.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
     # retranslateUi
 

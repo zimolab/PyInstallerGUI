@@ -44,13 +44,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="DirectoryEdit" name="cwdEdit">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="2">
            <widget class="QPushButton" name="changeCWDButton">
             <property name="text">
@@ -70,13 +63,34 @@
             <property name="dragEnabled">
              <bool>true</bool>
             </property>
-            <property name="placeholderText">
-             <string>Set path of pyinstaller here</string>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="DirectoryEdit" name="cwdEdit">
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
             </property>
            </widget>
           </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="selectPyInstallerButton">
+            <property name="text">
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="pyimakespecLabel">
+            <property name="text">
+             <string>pyi-makespec</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="pyimakespecEdit"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="selectPyimakespecButton">
             <property name="text">
              <string>Select</string>
             </property>
@@ -1380,7 +1394,7 @@
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="fileMenu">
     <property name="title">
      <string>File</string>
     </property>
@@ -1391,15 +1405,14 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="commandMenu">
     <property name="title">
-     <string>Pack</string>
+     <string>Command</string>
     </property>
     <addaction name="actionStartPack"/>
-    <addaction name="separator"/>
-    <addaction name="actionSettings"/>
+    <addaction name="actionStartGenSpceFile"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
+   <widget class="QMenu" name="helpMenu">
     <property name="title">
      <string>Help</string>
     </property>
@@ -1410,15 +1423,9 @@
     <addaction name="separator"/>
     <addaction name="actionHelp"/>
    </widget>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Tools</string>
-    </property>
-   </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
-   <addaction name="menuTools"/>
-   <addaction name="menu_3"/>
+   <addaction name="fileMenu"/>
+   <addaction name="commandMenu"/>
+   <addaction name="helpMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoadPreset">
@@ -1479,6 +1486,11 @@
   <action name="actionGotoPyInstallerDoc">
    <property name="text">
     <string>PyInstaller Documentation</string>
+   </property>
+  </action>
+  <action name="actionStartGenSpceFile">
+   <property name="text">
+    <string>Generate Spce File</string>
    </property>
   </action>
  </widget>
