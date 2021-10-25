@@ -6,7 +6,7 @@ import shlex
 from datetime import datetime
 
 from PySide2.QtCore import QProcess
-from PySide2.QtGui import QCloseEvent
+from PySide2.QtGui import QCloseEvent, QColor
 from PySide2.QtWidgets import QDialog, QApplication
 
 from ui.design.ui_start_cmd import Ui_StartCommandDialog
@@ -46,7 +46,6 @@ class StartCommandDialog(QDialog, Ui_StartCommandDialog):
 
     def display(self, action, cmd, cwd):
         self._action = action
-
         if self._action == self.START_PACK:
             self.setWindowTitle(self.tr("Pack"))
         elif self._action == self.START_GEN_SPEC_FILE:
@@ -56,7 +55,6 @@ class StartCommandDialog(QDialog, Ui_StartCommandDialog):
 
         self._cmd = cmd
         self._cwd = cwd
-        print(shlex.split(cmd))
         self._cmdProcess.setWorkingDirectory(self._cwd)
         self.commandEdit.setPlainText(self._cmd)
         self.show()
@@ -68,7 +66,7 @@ class StartCommandDialog(QDialog, Ui_StartCommandDialog):
     def onCommandFinished(self, exitCode, exitStatus):
         self.startButton.setEnabled(True)
         self.outputTextBrowser.append(
-            f"[{datetime.now()}]" + self.tr("Finished") + f"(exitCode={exitCode} exitStatus={exitStatus})"
+            f"[{datetime.now()}]" + self.tr("Finished") + f"(exitCode={exitCode})\n"
         )
 
     def onStdoutReadyRead(self):
@@ -77,7 +75,7 @@ class StartCommandDialog(QDialog, Ui_StartCommandDialog):
 
     def onStderrReadyRead(self):
         output = self._cmdProcess.readAllStandardError()
-        self.outputTextBrowser.append(bytes(output).decode())
+        self.outputTextBrowser.append(f"{bytes(output).decode()}")
 
     def onErrorOccurred(self, error):
         self.outputTextBrowser.append(f"[{datetime.now()}]" + self.tr("An error occurred:") + f"{error}")
@@ -109,7 +107,7 @@ class StartCommandDialog(QDialog, Ui_StartCommandDialog):
             tmp = shlex.split(self._cmd)
             cmd = tmp[0]
             args = tmp[1:]
-            self.outputTextBrowser.append(f"{cmd} {args}")
+            self.outputTextBrowser.append(f"{self._cmd}")
             self._cmdProcess.start(cmd, args)
 
         self.startButton.clicked.connect(onStartPack)
