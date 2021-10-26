@@ -642,7 +642,7 @@
              <x>0</x>
              <y>0</y>
              <width>672</width>
-             <height>1829</height>
+             <height>2469</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -660,7 +660,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -713,7 +713,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -766,7 +766,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -819,7 +819,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -872,7 +872,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -925,7 +925,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -978,7 +978,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>
@@ -1031,7 +1031,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>150</height>
+                  <height>230</height>
                  </size>
                 </property>
                </widget>

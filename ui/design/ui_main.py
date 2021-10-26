@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainmKyfJG.ui'
+## Form generated from reading UI file 'mainKBCLXx.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -543,7 +543,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 672, 1829))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 672, 2469))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.hiddenImportLayout = QVBoxLayout()
@@ -555,7 +555,7 @@ class Ui_MainWindow(object):
 
         self.hiddenImportsListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.hiddenImportsListWidget.setObjectName(u"hiddenImportsListWidget")
-        self.hiddenImportsListWidget.setMinimumSize(QSize(0, 150))
+        self.hiddenImportsListWidget.setMinimumSize(QSize(0, 230))
 
         self.hiddenImportLayout.addWidget(self.hiddenImportsListWidget)
 
@@ -598,7 +598,7 @@ class Ui_MainWindow(object):
 
         self.excludeModulesListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.excludeModulesListWidget.setObjectName(u"excludeModulesListWidget")
-        self.excludeModulesListWidget.setMinimumSize(QSize(0, 150))
+        self.excludeModulesListWidget.setMinimumSize(QSize(0, 230))
 
         self.excludesLayout.addWidget(self.excludeModulesListWidget)
 
@@ -641,7 +641,7 @@ class Ui_MainWindow(object):
 
         self.collectAllListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.collectAllListWidget.setObjectName(u"collectAllListWidget")
-        self.collectAllListWidget.setMinimumSize(QSize(0, 150))
+        self.collectAllListWidget.setMinimumSize(QSize(0, 230))
 
         self.collectAllLayout.addWidget(self.collectAllListWidget)
 
@@ -684,7 +684,7 @@ class Ui_MainWindow(object):
 
         self.collectSubmodulesListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.collectSubmodulesListWidget.setObjectName(u"collectSubmodulesListWidget")
-        self.collectSubmodulesListWidget.setMinimumSize(QSize(0, 150))
+        self.collectSubmodulesListWidget.setMinimumSize(QSize(0, 230))
 
         self.collectSubLayout.addWidget(self.collectSubmodulesListWidget)
 
@@ -727,7 +727,7 @@ class Ui_MainWindow(object):
 
         self.collectDataListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.collectDataListWidget.setObjectName(u"collectDataListWidget")
-        self.collectDataListWidget.setMinimumSize(QSize(0, 150))
+        self.collectDataListWidget.setMinimumSize(QSize(0, 230))
 
         self.collectDataLayout.addWidget(self.collectDataListWidget)
 
@@ -770,7 +770,7 @@ class Ui_MainWindow(object):
 
         self.collectBinariesListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.collectBinariesListWidget.setObjectName(u"collectBinariesListWidget")
-        self.collectBinariesListWidget.setMinimumSize(QSize(0, 150))
+        self.collectBinariesListWidget.setMinimumSize(QSize(0, 230))
 
         self.collectBinLayout.addWidget(self.collectBinariesListWidget)
 
@@ -813,7 +813,7 @@ class Ui_MainWindow(object):
 
         self.copyMetadataListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.copyMetadataListWidget.setObjectName(u"copyMetadataListWidget")
-        self.copyMetadataListWidget.setMinimumSize(QSize(0, 150))
+        self.copyMetadataListWidget.setMinimumSize(QSize(0, 230))
 
         self.copyMetadataLayout.addWidget(self.copyMetadataListWidget)
 
@@ -856,7 +856,7 @@ class Ui_MainWindow(object):
 
         self.deepcopyMetadataListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.deepcopyMetadataListWidget.setObjectName(u"deepcopyMetadataListWidget")
-        self.deepcopyMetadataListWidget.setMinimumSize(QSize(0, 150))
+        self.deepcopyMetadataListWidget.setMinimumSize(QSize(0, 230))
 
         self.deepcopyMetadataLayout.addWidget(self.deepcopyMetadataListWidget)
 

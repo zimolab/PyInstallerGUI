@@ -302,7 +302,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  onModify=onModifySearchPath)
         self._modifyPathDialog.searchPathModified.connect(self._commonOptions.searchPaths.set)
 
-        # extraData&extraBinaries
+        # extraData & extraBinaries
         def onAddExtras(paths, option: BindingMultipleOption):
             if paths is None:
                 if option.name == self._commonOptions.extraBinaries.name:
