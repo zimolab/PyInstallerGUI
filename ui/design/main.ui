@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>745</width>
+    <width>677</width>
     <height>808</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -641,7 +641,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>672</width>
+             <width>604</width>
              <height>2469</height>
             </rect>
            </property>
@@ -1428,8 +1428,22 @@
                 </property>
                </widget>
               </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="defaultBundleIdentifierButton">
+                <property name="text">
+                 <string>Default</string>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="1">
                <widget class="QComboBox" name="targetArchitectureCombo"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="defaultTargetArchitectureButton">
+                <property name="text">
+                 <string>Default</string>
+                </property>
+               </widget>
               </item>
               <item row="2" column="1">
                <widget class="QLineEdit" name="bundleIdentifierEdit"/>
@@ -1441,17 +1455,24 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="selectEntitlementsFileButton">
+              <item row="3" column="2">
+               <widget class="QPushButton" name="defaultCodesignIdentityButton">
                 <property name="text">
-                 <string>Select</string>
+                 <string>Default</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="defaultEntitlementsFileButton">
+                <property name="text">
+                 <string>Default</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="3">
-               <widget class="QPushButton" name="defaultEntitlementsFileButton">
+               <widget class="QPushButton" name="selectEntitlementsFileButton">
                 <property name="text">
-                 <string>Default</string>
+                 <string>Select</string>
                 </property>
                </widget>
               </item>
@@ -1561,7 +1582,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>745</width>
+     <width>677</width>
      <height>26</height>
     </rect>
    </property>

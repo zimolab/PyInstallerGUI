@@ -20,7 +20,8 @@ from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
 from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
-    PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE
+    PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
+    FILTER_ENTITLEMENTS_FILE
 from ui.design.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
@@ -493,7 +494,17 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.autosetFlagUI(flag=self._windowsOptions.noPreferRedirects, flagBox=self.noPreferRedirectsCheckBox)
 
     def setupMacOSXOptionsUI(self):
-        pass
+        self.autosetPathSelectionUI(option=self._macOSXOptions.entitlementsFile, label=self.entitlementsFileLabel,
+                                    edit=self.entitlementsFileEdit, selectButton=self.selectEntitlementsFileButton,
+                                    defaultButton=self.defaultEntitlementsFileButton, selectionMode=self.SELECT_FILE,
+                                    filters=FILTER_ENTITLEMENTS_FILE)
+        self.autosetChoiceUI(option=self._macOSXOptions.targetArchitecture, label=self.targetArchitectureLabel,
+                             choicesBox=self.targetArchitectureCombo,
+                             defaultButton=self.defaultTargetArchitectureButton)
+        self.autosetTextInputUI(option=self._macOSXOptions.bundleIdentifier, label=self.bundleIdentifierLabel,
+                                edit=self.bundleIdentifierEdit, defaultButton=self.defaultBundleIdentifierButton)
+        self.autosetTextInputUI(option=self._macOSXOptions.codesignIdentity, label=self.codesignIdentityLabel,
+                                edit=self.codesignIdentityEdit, defaultButton=self.defaultCodesignIdentityButton)
 
     def setupHookOptionsUI(self):
         def onAdd(paths, option: BindingMultipleOption):
