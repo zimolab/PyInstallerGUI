@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -1177,28 +1177,35 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_19">
           <item>
-           <widget class="QLabel" name="hooksLabel">
+           <widget class="QLabel" name="hookDirsLabel">
             <property name="text">
-             <string>Additional hooks</string>
+             <string>Additional hooks dirs</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="hooksListWidget"/>
+           <widget class="QListWidget" name="hookDirsListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_25">
             <item>
-             <widget class="QPushButton" name="addHooksButton">
+             <widget class="QPushButton" name="addHookDirsButton">
               <property name="text">
                <string>Add</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="removeHooksButton">
+             <widget class="QPushButton" name="removeHookDirsButton">
               <property name="text">
                <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="clearHookDirsButton">
+              <property name="text">
+               <string>Clear</string>
               </property>
              </widget>
             </item>
@@ -1231,6 +1238,13 @@
              <widget class="QPushButton" name="removeRTHooksButton">
               <property name="text">
                <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="clearRTHooksButton">
+              <property name="text">
+               <string>Clear</string>
               </property>
              </widget>
             </item>

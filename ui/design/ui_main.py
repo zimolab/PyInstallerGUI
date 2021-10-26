@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainKBCLXx.ui'
+## Form generated from reading UI file 'mainrBMCzm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -969,27 +969,32 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.verticalLayout_19 = QVBoxLayout()
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
-        self.hooksLabel = QLabel(self.hooksTab)
-        self.hooksLabel.setObjectName(u"hooksLabel")
+        self.hookDirsLabel = QLabel(self.hooksTab)
+        self.hookDirsLabel.setObjectName(u"hookDirsLabel")
 
-        self.verticalLayout_19.addWidget(self.hooksLabel)
+        self.verticalLayout_19.addWidget(self.hookDirsLabel)
 
-        self.hooksListWidget = QListWidget(self.hooksTab)
-        self.hooksListWidget.setObjectName(u"hooksListWidget")
+        self.hookDirsListWidget = QListWidget(self.hooksTab)
+        self.hookDirsListWidget.setObjectName(u"hookDirsListWidget")
 
-        self.verticalLayout_19.addWidget(self.hooksListWidget)
+        self.verticalLayout_19.addWidget(self.hookDirsListWidget)
 
         self.horizontalLayout_25 = QHBoxLayout()
         self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
-        self.addHooksButton = QPushButton(self.hooksTab)
-        self.addHooksButton.setObjectName(u"addHooksButton")
+        self.addHookDirsButton = QPushButton(self.hooksTab)
+        self.addHookDirsButton.setObjectName(u"addHookDirsButton")
 
-        self.horizontalLayout_25.addWidget(self.addHooksButton)
+        self.horizontalLayout_25.addWidget(self.addHookDirsButton)
 
-        self.removeHooksButton = QPushButton(self.hooksTab)
-        self.removeHooksButton.setObjectName(u"removeHooksButton")
+        self.removeHookDirsButton = QPushButton(self.hooksTab)
+        self.removeHookDirsButton.setObjectName(u"removeHookDirsButton")
 
-        self.horizontalLayout_25.addWidget(self.removeHooksButton)
+        self.horizontalLayout_25.addWidget(self.removeHookDirsButton)
+
+        self.clearHookDirsButton = QPushButton(self.hooksTab)
+        self.clearHookDirsButton.setObjectName(u"clearHookDirsButton")
+
+        self.horizontalLayout_25.addWidget(self.clearHookDirsButton)
 
 
         self.verticalLayout_19.addLayout(self.horizontalLayout_25)
@@ -1020,6 +1025,11 @@ class Ui_MainWindow(object):
         self.removeRTHooksButton.setObjectName(u"removeRTHooksButton")
 
         self.horizontalLayout_26.addWidget(self.removeRTHooksButton)
+
+        self.clearRTHooksButton = QPushButton(self.hooksTab)
+        self.clearRTHooksButton.setObjectName(u"clearRTHooksButton")
+
+        self.horizontalLayout_26.addWidget(self.clearRTHooksButton)
 
 
         self.verticalLayout_20.addLayout(self.horizontalLayout_26)
@@ -1280,7 +1290,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(0)
+        self.mainTabWidget.setCurrentIndex(6)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -1413,12 +1423,14 @@ class Ui_MainWindow(object):
         self.removeUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.upxTab), QCoreApplication.translate("MainWindow", u"UPX", None))
-        self.hooksLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
-        self.addHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.hookDirsLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
+        self.addHookDirsButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeHookDirsButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearHookDirsButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.rtHooksLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime hooks", None))
         self.addRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.hooksTab), QCoreApplication.translate("MainWindow", u"Hooks", None))
         self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
         self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))

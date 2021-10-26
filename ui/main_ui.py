@@ -27,7 +27,8 @@ from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.upx_excludes_ui import UPXExcludesDialog
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
-    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont, toBaseNames
+    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont, toBaseNames, \
+    filterFiles
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -281,7 +282,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # bootloaderIgnoreSignals
         self.autosetFlagUI(flag=self._commonOptions.bootloaderIgnoreSignals, flagBox=self.ignoreSignalsCheckBox)
 
-        # searchPaths&runtimeTmpDir
+        # searchPaths & runtimeTmpDir
         def onSearchPaths(paths, option: BindingMultipleOption):
             if paths is None:
                 paths = openDirsDialog(self, self.tr("Add Directory"))
@@ -456,22 +457,22 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                     selectionMode=self.SELECT_DIR)
 
         # excludeFiles
-        def onUPXExcludeAdded(paths, option: BindingMultipleOption):
+        def onAdd(paths, option: BindingMultipleOption):
             if paths is None:
                 self._upxExcludesDialog.display(option)
             else:
                 excludes = toBaseNames(paths, filters=isfile)
                 option.addAll(True, *excludes)
 
-        def onModifyUPXExclude(exclude, index, option: BindingMultipleOption):
-            modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), exclude)
+        def onModify(path, index, option: BindingMultipleOption):
+            modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), path)
             if modified is not None:
                 option.set(index, modified, True)
 
         self.autosetMultiItemsUI(option=self._upxOptions.excludeFiles, label=self.upxExcludesLabel,
                                  listWidget=self.upxExcludesListWidget, addButton=self.addUPXExcludesButton,
                                  removeButton=self.removeUPXExcludesButton, clearButton=self.clearUPXExcludesButton,
-                                 onAdd=onUPXExcludeAdded, onModify=onModifyUPXExclude)
+                                 onAdd=onAdd, onModify=onModify)
         self._upxExcludesDialog.upxExcludesAdded.connect(lambda excludes, option: option.addAll(True, *excludes))
 
     def setupWindowsOptionsUI(self):
@@ -481,7 +482,41 @@ class MainUI(QMainWindow, Ui_MainWindow):
         pass
 
     def setupHookOptionsUI(self):
-        pass
+        def onAdd(paths, option: BindingMultipleOption):
+            if paths is None:
+                if option.name == self._hookOptions.additionalHooksDir.name:
+                    paths = openDirsDialog(self, self.tr("Add Additional Hooks Directories"))
+                else:
+                    paths = openFilesDialog(self, self.tr("Add Runtime Hooks"), filters=FILTER_PY_SOURCE_FILE)
+                if paths is None:
+                    return
+            else:
+                if option.name == self._hookOptions.additionalHooksDir.name:
+                    paths = filterDirs(paths)
+                else:
+                    paths = filterFiles(paths, ".py", ".pyw")
+                if paths is None or len(paths) == 0:
+                    return
+            option.addAll(True, *paths)
+
+        def onModify(path, index, option: BindingMultipleOption):
+            if option.name == self._hookOptions.additionalHooksDir.name:
+                self._modifyPathDialog.display(ModifyPathDialog.MODIFY_ADDITIONAL_HOOKS_DIR, path, index)
+            else:
+                self._modifyPathDialog.display(ModifyPathDialog.MODIFY_RUNTIME_HOOKS, path, index)
+
+        self.autosetMultiItemsUI(option=self._hookOptions.additionalHooksDir, label=self.hookDirsLabel,
+                                 listWidget=self.hookDirsListWidget, addButton=self.addHookDirsButton,
+                                 removeButton=self.removeHookDirsButton, clearButton=self.clearHookDirsButton,
+                                 onAdd=onAdd, onModify=onModify)
+        self._modifyPathDialog.additionalHooksDirModified.connect(
+            lambda index, modified: self._hookOptions.additionalHooksDir.set(index, modified, True))
+        self.autosetMultiItemsUI(option=self._hookOptions.runtimeHooks, label=self.rtHooksLabel,
+                                 listWidget=self.rtHooksListWidget, addButton=self.addRTHooksButton,
+                                 removeButton=self.removeRTHooksButton, clearButton=self.clearRTHooksButton,
+                                 onAdd=onAdd, onModify=onModify)
+        self._modifyPathDialog.runtimeHooksModified.connect(
+            lambda index, modified: self._hookOptions.runtimeHooks.set(index, modified, True))
 
     def autosetPathSelectionUI(self, option: BindingOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,
                                defaultButton: QPushButton, selectionMode, filters=None, startPath=None):

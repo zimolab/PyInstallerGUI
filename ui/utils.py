@@ -124,8 +124,16 @@ def splitSrcAndDest(joined: str, pathsep=None):
     return joined, ""
 
 
-def filterFiles(paths):
-    return [path for path in paths if isfile(path)]
+def filterFiles(paths, *extensions):
+    if len(extensions) == 0:
+        return [path for path in paths if isfile(path)]
+    else:
+        return [path for path in paths if isfile(path) and hasExtension(path, *extensions)]
+
+
+def hasExtension(path, *extensions):
+    ext = os.path.splitext(path)[-1]
+    return ext in extensions
 
 
 def filterDirs(paths):
