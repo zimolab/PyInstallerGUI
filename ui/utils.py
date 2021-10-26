@@ -148,13 +148,15 @@ def relativePath(path, basenameIfFail=True):
 
 
 def getTextInput(parent, title, label, text=""):
-    inputText, ok = QInputDialog.getText(parent, title, label, QLineEdit.EchoMode.Normal, text=text)
-    if not ok:
-        return None
-    if inputText == "":
-        return None
-    else:
-        return inputText
+    dialog = QInputDialog(parent)
+    dialog.setWindowTitle(title)
+    dialog.setLabelText(label)
+    dialog.setTextValue(text)
+    dialog.setFixedSize(350, 200)
+    dialog.show()
+    if dialog.exec_() == QInputDialog.Accepted:
+        return dialog.textValue()
+    return None
 
 
 def getFont(parent, initial=None, title=None):

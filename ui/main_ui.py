@@ -314,7 +314,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 self._addItemsDialog.display(AddItemsDialog.ADD_EXCLUDE_MODULES, option.name)
 
         def onModifyItem(item, index, option: BindingMultipleOption):
-            modified = getTextInput(self, self.tr("Modify Item"), self.tr("To be modified:"), item)
+            modified = getTextInput(self, self.tr("Modify"), self.tr("To be modified:"), item)
             if modified is not None:
                 option.set(index, modified, True)
 
