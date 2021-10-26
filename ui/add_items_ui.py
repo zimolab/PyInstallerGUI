@@ -3,6 +3,7 @@ import PySide2
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
+from core.options import BindingMultipleOption
 from ui.design.ui_add_items import Ui_AddItemsDialog
 
 
@@ -23,12 +24,12 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
 
     ITEMS_SEP = ";"
 
-    itemsAdded = Signal(str, list)
+    itemsAdded = Signal(BindingMultipleOption, list)
 
     def __init__(self, parent):
         super().__init__(parent)
         self._action = -1
-        self._optionName = ""
+        self._option = None
         self.setupUi()
 
     def setupUi(self, _=None):
@@ -41,12 +42,12 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
             warn(self, self.tr(u"Warning"), self.tr("Items cannot be empty!"))
             return
         items = content.split(self.ITEMS_SEP)
-        self.itemsAdded.emit(self._optionName, items)
+        self.itemsAdded.emit(self._option, items)
         self.accept()
 
-    def display(self, action, optionName):
+    def display(self, action, option):
         self._action = action
-        self._optionName = optionName
+        self._option = option
         self.updateTitle()
         self.show()
 
@@ -74,6 +75,7 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
     def hideEvent(self, event):
         super().hideEvent(event)
         self._action = -1
-        self._optionName = ""
+        self._option = None
         self.setWindowTitle("")
+        self.itemsEdit.setText("")
 

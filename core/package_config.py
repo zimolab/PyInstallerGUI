@@ -541,13 +541,13 @@ class PackageConfig(object):
                             "Collect all submodules, data files, and binaries from the specified package or module."
             )
 
-            self.copyMeta = BindingMultipleOption(
+            self.copyMetadata = BindingMultipleOption(
                 name="copy-metadata",
                 description="--copy-metadata PACKAGENAME: "
                             "Copy metadata for the specified package. "
             )
 
-            self.recursiveCopyMetadata = BindingMultipleOption(
+            self.deepcopyMetadata = BindingMultipleOption(
                 name="recursive-copy-metadata",
                 description="--recursive-copy-metadata PACKAGENAME: "
                             "Copy metadata for the specified package and all its dependencies."

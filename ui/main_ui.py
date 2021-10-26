@@ -309,26 +309,49 @@ class MainUI(QMainWindow, Ui_MainWindow):
             lambda path: onAddExtras(path, self._commonOptions.extraBinaries))
         self._addExtrasDialog.extraBinaryChanged.connect(self._commonOptions.extraBinaries.set)
 
+        # excludeModules & hiddenImports & collectSubmodules & collectData & collectBinaries & collectAll &
+        # copyMetadata & deepcopyMetadata
         def onAddItem(_, option: BindingMultipleOption):
             if option.name == self._commonOptions.excludeModules.name:
-                self._addItemsDialog.display(AddItemsDialog.ADD_EXCLUDE_MODULES, option.name)
+                self._addItemsDialog.display(AddItemsDialog.ADD_EXCLUDE_MODULES, option)
+            elif option.name == self._commonOptions.hiddenImports.name:
+                self._addItemsDialog.display(AddItemsDialog.ADD_HIDDEN_IMPORTS, option)
+            elif option.name == self._commonOptions.collectSubmodules.name:
+                self._addItemsDialog.display(AddItemsDialog.COLLECT_ALL_SUBMODULES, option)
+            elif option.name == self._commonOptions.collectData.name:
+                self._addItemsDialog.display(AddItemsDialog.COLLECT_ALL_DATA, option)
+            elif option.name == self._commonOptions.collectBinaries.name:
+                self._addItemsDialog.display(AddItemsDialog.COLLECT_ALL_BINARIES, option)
+            elif option.name == self._commonOptions.collectAll.name:
+                self._addItemsDialog.display(AddItemsDialog.COLLECT_ALL, option)
+            elif option.name == self._commonOptions.copyMetadata.name:
+                self._addItemsDialog.display(AddItemsDialog.COPY_METADATA, option)
+            elif option.name == self._commonOptions.deepcopyMetadata.name:
+                self._addItemsDialog.display(AddItemsDialog.DEEP_COPY_METADATA, option)
+            else:
+                raise ValueError("unknown action")
 
         def onModifyItem(item, index, option: BindingMultipleOption):
             modified = getTextInput(self, self.tr("Modify"), self.tr("To be modified:"), item)
             if modified is not None:
                 option.set(index, modified, True)
 
-        def onItemsAdded(optionName, items):
-            if optionName == self._commonOptions.excludeModules.name:
-                items = [item for item in items if item is not None and item != ""]
-                self._commonOptions.excludeModules.addAll(True, *items)
+        def onItemsAdded(option, items):
+            items = [item for item in items if item is not None and item != ""]
+            option.addAll(True, *items)
+
+        self._addItemsDialog.itemsAdded.connect(onItemsAdded)
 
         # excludeModules
         self.autosetMultiItemsUI(option=self._commonOptions.excludeModules, label=self.excludeModulesLabel,
                                  listWidget=self.excludeModulesListWidget, addButton=self.addExcludeModulesButton,
                                  removeButton=self.removeExcludeModulesButton, onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
-        self._addItemsDialog.itemsAdded.connect(onItemsAdded)
+        # hiddenImports
+        self.autosetMultiItemsUI(option=self._commonOptions.hiddenImports, label=self.hiddenImportLabel,
+                                 listWidget=self.hiddenImportsListWidget, addButton=self.addHiddenImportButton,
+                                 removeButton=self.removeHiddenImportButton, onAdd=onAddItem, enableDrop=False,
+                                 onModify=onModifyItem)
 
     def setupUPXOptionsUI(self):
         pass

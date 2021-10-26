@@ -155,7 +155,8 @@ def getTextInput(parent, title, label, text=""):
     dialog.setFixedSize(350, 200)
     dialog.show()
     if dialog.exec_() == QInputDialog.Accepted:
-        return dialog.textValue()
+        inputText = dialog.textValue()
+        return inputText
     return None
 
 
