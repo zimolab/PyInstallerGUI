@@ -12,7 +12,7 @@ from typing import Union
 from PySide2 import QtCore
 from PySide2.QtGui import QDropEvent
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QPushButton, QLabel, QCheckBox, QRadioButton, \
-    QComboBox, QListWidget, QApplication
+    QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup
 from QBinder import QEventHook, Binder
 
 from core.options import BindingOption, BindingFlag, BindingMultipleOption
@@ -58,6 +58,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._addExtrasDialog = AddExtrasDialog(self)
         self._modifyPathDialog = ModifyPathDialog(self)
         self._addItemsDialog = AddItemsDialog(self)
+        # actions
+        self._styles = []
         # 设置UI
         self.setupUi()
         # 设置菜单
@@ -93,6 +95,32 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.actionGotoPyInstallerDoc.triggered.connect(lambda: webbrowser.open(PYINSTALLER_DOC_STABLE_URL))
         self.actionStartGenSpceFile.triggered.connect(self.startGenerateSpecFile)
         self.actionChangeFont.triggered.connect(self.onChangeFont)
+        self.setupStylesMenu()
+
+    def setupStylesMenu(self):
+        """添加界面风格菜单"""
+        def onActionTriggered(action: QAction):
+            key = action.data()
+            try:
+                style = QStyleFactory.create(key)
+            except:
+                warn(self, self.tr("Warning"), self.tr(f"Cannot set style of '{key}'"))
+                action.setChecked(False)
+            else:
+                QApplication.instance().setStyle(style)
+
+        styleNames = QStyleFactory.keys()
+        group = QActionGroup(self)
+        group.setExclusive(True)
+        group.triggered.connect(onActionTriggered)
+        for styleName in styleNames:
+            styleAction = QAction(self)
+            styleAction.setText(styleName)
+            styleAction.setCheckable(True)
+            group.addAction(styleAction)
+            styleAction.setData(styleName)
+
+        self.menuStyles.addActions(group.actions())
 
     def setupScriptsUI(self):
         self.setTooltip("scriptname: name of script files to be processed", self.scriptsLabel, self.scriptsListWidget)

@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>709</width>
-    <height>933</height>
+    <height>937</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -1402,7 +1402,13 @@
     <property name="title">
      <string>Setting</string>
     </property>
+    <widget class="QMenu" name="menuStyles">
+     <property name="title">
+      <string>Styles</string>
+     </property>
+    </widget>
     <addaction name="actionChangeFont"/>
+    <addaction name="menuStyles"/>
    </widget>
    <addaction name="fileMenu"/>
    <addaction name="commandMenu"/>

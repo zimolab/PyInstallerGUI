@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'maineIqXxh.ui'
+## Form generated from reading UI file 'mainpZltZT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(709, 933)
+        MainWindow.resize(709, 937)
         MainWindow.setAcceptDrops(True)
         self.actionStartPack = QAction(MainWindow)
         self.actionStartPack.setObjectName(u"actionStartPack")
@@ -1189,6 +1189,8 @@ class Ui_MainWindow(object):
         self.helpMenu.setObjectName(u"helpMenu")
         self.menuSetting = QMenu(self.menubar)
         self.menuSetting.setObjectName(u"menuSetting")
+        self.menuStyles = QMenu(self.menuSetting)
+        self.menuStyles.setObjectName(u"menuStyles")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -1213,6 +1215,7 @@ class Ui_MainWindow(object):
         self.helpMenu.addSeparator()
         self.helpMenu.addAction(self.actionHelp)
         self.menuSetting.addAction(self.actionChangeFont)
+        self.menuSetting.addAction(self.menuStyles.menuAction())
 
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
@@ -1375,5 +1378,6 @@ class Ui_MainWindow(object):
         self.commandMenu.setTitle(QCoreApplication.translate("MainWindow", u"Command", None))
         self.helpMenu.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
         self.menuSetting.setTitle(QCoreApplication.translate("MainWindow", u"Setting", None))
+        self.menuStyles.setTitle(QCoreApplication.translate("MainWindow", u"Styles", None))
     # retranslateUi
 
