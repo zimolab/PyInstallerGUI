@@ -13,3 +13,12 @@ PYINSTALLER_DOC_URL = "http://www.pyinstaller.org/documentation.html"
 PYINSTALLER_DOC_STABLE_URL = "https://pyinstaller.readthedocs.io/en/stable/"
 HELP_URL = ""
 
+ITEM_SEPARATORS = {
+    "semicolon(;)": ";",
+    "ampersand(&)": "&",
+    "comma(,)": ",",
+    "colon(:)": ":",
+    "slash(/)": "/",
+    "backslash(\\)": "\\",
+    "white space": " "
+}

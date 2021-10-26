@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
-
 """
-封装与UI界面有关的一些实用工具，比如文件对话框等
+封装一些实用工具
 """
 import os
 from os.path import isfile, isdir, relpath, basename
@@ -9,6 +8,8 @@ from os.path import isfile, isdir, relpath, basename
 from PySide2.QtCore import QDir
 from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView, \
     QInputDialog, QLineEdit, QFontDialog
+
+from ui.constants import ITEM_SEPARATORS
 
 
 def info(parent, title, content):
@@ -170,3 +171,27 @@ def getFont(parent, initial=None, title=None):
     if ok:
         return font
     return None
+
+
+def splitItems(content, sepKey, defaultSep=";"):
+    if sepKey in ITEM_SEPARATORS:
+        sep = ITEM_SEPARATORS[sepKey]
+    else:
+        sep = defaultSep
+    items = content.split(sep)
+    return [item for item in items if item is not None and item != ""]
+
+
+def toBaseNames(paths, filters=None):
+    results = []
+    for path in paths:
+        if filters is not None:
+            if not filters(path):
+                continue
+        try:
+            bn = basename(path)
+        except:
+            results.append(path)
+        else:
+            results.append(bn)
+    return results

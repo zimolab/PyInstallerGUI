@@ -4,11 +4,12 @@ from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
 from core.options import BindingMultipleOption
+from ui.constants import ITEM_SEPARATORS
 from ui.design.ui_add_items import Ui_AddItemsDialog
 
 
 # noinspection PyTypeChecker
-from ui.utils import warn
+from ui.utils import warn, splitItems
 
 
 # noinspection PyTypeChecker
@@ -23,15 +24,6 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
     DEEP_COPY_METADATA = 8
 
     DEFAULT_ITEMS_SEP = ";"
-    itemSeparators = {
-        "semicolon(;)": ";",
-        "ampersand(&)": "&",
-        "comma(,)": ",",
-        "colon(:)": ":",
-        "slash(/)": "/",
-        "backslash(\\)": "\\",
-        "white space": " "
-    }
 
     itemsAdded = Signal(BindingMultipleOption, list)
 
@@ -43,7 +35,7 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
 
     def setupUi(self, _=None):
         super(AddItemsDialog, self).setupUi(self)
-        self.multiItemSeparatorCombo.addItems(self.itemSeparators.keys())
+        self.multiItemSeparatorCombo.addItems(ITEM_SEPARATORS.keys())
         self.addButton.clicked.connect(self.onAddItem)
 
     def onAddItem(self):
@@ -53,12 +45,7 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
             return
         content = content.replace("；", ";").replace("，", ",")
         sepKey = self.multiItemSeparatorCombo.currentText()
-        if sepKey in self.itemSeparators:
-            sep = self.itemSeparators[sepKey]
-        else:
-            sep = self.DEFAULT_ITEMS_SEP
-        items = content.split(sep)
-        items = [item for item in items if item is not None and item != ""]
+        items = splitItems(content, sepKey, self.DEFAULT_ITEMS_SEP)
         self.itemsAdded.emit(self._option, items)
         self.accept()
 

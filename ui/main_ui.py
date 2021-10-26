@@ -25,8 +25,9 @@ from ui.design.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
+from ui.upx_excludes_ui import UPXExcludesDialog
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
-    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont
+    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont, toBaseNames
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -58,8 +59,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._addExtrasDialog = AddExtrasDialog(self)
         self._modifyPathDialog = ModifyPathDialog(self)
         self._addItemsDialog = AddItemsDialog(self)
-        # actions
-        self._styles = []
+        self._upxExcludesDialog = UPXExcludesDialog(self)
         # 设置UI
         self.setupUi()
         # 设置菜单
@@ -99,6 +99,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
     def setupStylesMenu(self):
         """添加界面风格菜单"""
+
         def onActionTriggered(action: QAction):
             key = action.data()
             try:
@@ -438,6 +439,25 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.autosetPathSelectionUI(option=self._upxOptions.upxPath, label=self.upxPathLabel, edit=self.upxPathEdit,
                                     selectButton=self.selectUPXPathButton, defaultButton=self.defaultUPXPathButton,
                                     selectionMode=self.SELECT_DIR)
+
+        # excludeFiles
+        def onUPXExcludeAdded(paths, option: BindingMultipleOption):
+            if paths is None:
+                self._upxExcludesDialog.display(option)
+            else:
+                excludes = toBaseNames(paths, filters=isfile)
+                option.addAll(True, *excludes)
+
+        def onModifyUPXExclude(exclude, index, option: BindingMultipleOption):
+            modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), exclude)
+            if modified is not None:
+                option.set(index, modified, True)
+
+        self.autosetMultiItemsUI(option=self._upxOptions.excludeFiles, label=self.upxExcludesLabel,
+                                 listWidget=self.upxExcludesListWidget, addButton=self.addUPXExcludesButton,
+                                 removeButton=self.removeUPXExcludesButton, clearButton=self.clearUPXExcludesButton,
+                                 onAdd=onUPXExcludeAdded, onModify=onModifyUPXExclude)
+        self._upxExcludesDialog.upxExcludesAdded.connect(lambda excludes, option: option.addAll(True, *excludes))
 
     def setupWindowsOptionsUI(self):
         pass
