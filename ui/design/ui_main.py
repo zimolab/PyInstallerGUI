@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainzVaCQL.ui'
+## Form generated from reading UI file 'mainmKyfJG.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(665, 808)
+        MainWindow.resize(745, 808)
         MainWindow.setAcceptDrops(True)
         self.actionStartPack = QAction(MainWindow)
         self.actionStartPack.setObjectName(u"actionStartPack")
@@ -48,8 +48,8 @@ class Ui_MainWindow(object):
         self.actionChangeFont.setObjectName(u"actionChangeFont")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.verticalLayout_11 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.mainTabWidget = QTabWidget(self.centralwidget)
         self.mainTabWidget.setObjectName(u"mainTabWidget")
         self.commonTab = QWidget()
@@ -532,309 +532,360 @@ class Ui_MainWindow(object):
         self.mainTabWidget.addTab(self.extraDataTab, "")
         self.modulesTab = QWidget()
         self.modulesTab.setObjectName(u"modulesTab")
-        self.verticalLayout_16 = QVBoxLayout(self.modulesTab)
-        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-        self.horizontalLayout_12 = QHBoxLayout()
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.verticalLayout_21 = QVBoxLayout()
-        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.excludeModulesLabel = QLabel(self.modulesTab)
-        self.excludeModulesLabel.setObjectName(u"excludeModulesLabel")
-
-        self.verticalLayout_21.addWidget(self.excludeModulesLabel)
-
-        self.excludeModulesListWidget = QListWidget(self.modulesTab)
-        self.excludeModulesListWidget.setObjectName(u"excludeModulesListWidget")
-
-        self.verticalLayout_21.addWidget(self.excludeModulesListWidget)
-
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.addExcludeModulesButton = QPushButton(self.modulesTab)
-        self.addExcludeModulesButton.setObjectName(u"addExcludeModulesButton")
-
-        self.horizontalLayout_6.addWidget(self.addExcludeModulesButton)
-
-        self.removeExcludeModulesButton = QPushButton(self.modulesTab)
-        self.removeExcludeModulesButton.setObjectName(u"removeExcludeModulesButton")
-
-        self.horizontalLayout_6.addWidget(self.removeExcludeModulesButton)
-
-
-        self.verticalLayout_21.addLayout(self.horizontalLayout_6)
-
-
-        self.horizontalLayout_12.addLayout(self.verticalLayout_21)
-
-        self.line_4 = QFrame(self.modulesTab)
-        self.line_4.setObjectName(u"line_4")
-        self.line_4.setFrameShape(QFrame.VLine)
-        self.line_4.setFrameShadow(QFrame.Sunken)
-
-        self.horizontalLayout_12.addWidget(self.line_4)
-
-        self.verticalLayout_8 = QVBoxLayout()
+        self.verticalLayout_8 = QVBoxLayout(self.modulesTab)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.hiddenImportLabel = QLabel(self.modulesTab)
+        self.scrollArea = QScrollArea(self.modulesTab)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setFrameShape(QFrame.StyledPanel)
+        self.scrollArea.setFrameShadow(QFrame.Plain)
+        self.scrollArea.setLineWidth(1)
+        self.scrollArea.setMidLineWidth(1)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 672, 1829))
+        self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.hiddenImportLayout = QVBoxLayout()
+        self.hiddenImportLayout.setObjectName(u"hiddenImportLayout")
+        self.hiddenImportLabel = QLabel(self.scrollAreaWidgetContents)
         self.hiddenImportLabel.setObjectName(u"hiddenImportLabel")
 
-        self.verticalLayout_8.addWidget(self.hiddenImportLabel)
+        self.hiddenImportLayout.addWidget(self.hiddenImportLabel)
 
-        self.hiddenImportsListWidget = QListWidget(self.modulesTab)
+        self.hiddenImportsListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.hiddenImportsListWidget.setObjectName(u"hiddenImportsListWidget")
+        self.hiddenImportsListWidget.setMinimumSize(QSize(0, 150))
 
-        self.verticalLayout_8.addWidget(self.hiddenImportsListWidget)
+        self.hiddenImportLayout.addWidget(self.hiddenImportsListWidget)
 
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.addHiddenImportButton = QPushButton(self.modulesTab)
+        self.addHiddenImportButton = QPushButton(self.scrollAreaWidgetContents)
         self.addHiddenImportButton.setObjectName(u"addHiddenImportButton")
 
         self.horizontalLayout_7.addWidget(self.addHiddenImportButton)
 
-        self.removeHiddenImportButton = QPushButton(self.modulesTab)
+        self.removeHiddenImportButton = QPushButton(self.scrollAreaWidgetContents)
         self.removeHiddenImportButton.setObjectName(u"removeHiddenImportButton")
 
         self.horizontalLayout_7.addWidget(self.removeHiddenImportButton)
 
+        self.clearHiddenImportsButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearHiddenImportsButton.setObjectName(u"clearHiddenImportsButton")
 
-        self.verticalLayout_8.addLayout(self.horizontalLayout_7)
+        self.horizontalLayout_7.addWidget(self.clearHiddenImportsButton)
 
 
-        self.horizontalLayout_12.addLayout(self.verticalLayout_8)
+        self.hiddenImportLayout.addLayout(self.horizontalLayout_7)
 
 
-        self.verticalLayout_16.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_16.addLayout(self.hiddenImportLayout)
 
-        self.line_2 = QFrame(self.modulesTab)
+        self.line_2 = QFrame(self.scrollAreaWidgetContents)
         self.line_2.setObjectName(u"line_2")
         self.line_2.setFrameShape(QFrame.HLine)
         self.line_2.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_16.addWidget(self.line_2)
 
-        self.horizontalLayout_13 = QHBoxLayout()
-        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.verticalLayout_22 = QVBoxLayout()
-        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
-        self.collectSubmodulesLabel = QLabel(self.modulesTab)
-        self.collectSubmodulesLabel.setObjectName(u"collectSubmodulesLabel")
+        self.excludesLayout = QVBoxLayout()
+        self.excludesLayout.setObjectName(u"excludesLayout")
+        self.excludeModulesLabel = QLabel(self.scrollAreaWidgetContents)
+        self.excludeModulesLabel.setObjectName(u"excludeModulesLabel")
 
-        self.verticalLayout_22.addWidget(self.collectSubmodulesLabel)
+        self.excludesLayout.addWidget(self.excludeModulesLabel)
 
-        self.collectSubmodulesListWidget = QListWidget(self.modulesTab)
-        self.collectSubmodulesListWidget.setObjectName(u"collectSubmodulesListWidget")
+        self.excludeModulesListWidget = QListWidget(self.scrollAreaWidgetContents)
+        self.excludeModulesListWidget.setObjectName(u"excludeModulesListWidget")
+        self.excludeModulesListWidget.setMinimumSize(QSize(0, 150))
 
-        self.verticalLayout_22.addWidget(self.collectSubmodulesListWidget)
+        self.excludesLayout.addWidget(self.excludeModulesListWidget)
 
-        self.horizontalLayout_14 = QHBoxLayout()
-        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.addCollectSubmoduleButton = QPushButton(self.modulesTab)
-        self.addCollectSubmoduleButton.setObjectName(u"addCollectSubmoduleButton")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.addExcludeModulesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.addExcludeModulesButton.setObjectName(u"addExcludeModulesButton")
 
-        self.horizontalLayout_14.addWidget(self.addCollectSubmoduleButton)
+        self.horizontalLayout_6.addWidget(self.addExcludeModulesButton)
 
-        self.removeCollectSubmoduleButton = QPushButton(self.modulesTab)
-        self.removeCollectSubmoduleButton.setObjectName(u"removeCollectSubmoduleButton")
+        self.removeExcludeModulesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.removeExcludeModulesButton.setObjectName(u"removeExcludeModulesButton")
 
-        self.horizontalLayout_14.addWidget(self.removeCollectSubmoduleButton)
+        self.horizontalLayout_6.addWidget(self.removeExcludeModulesButton)
 
+        self.clearExcludeModulesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearExcludeModulesButton.setObjectName(u"clearExcludeModulesButton")
 
-        self.verticalLayout_22.addLayout(self.horizontalLayout_14)
-
-
-        self.horizontalLayout_13.addLayout(self.verticalLayout_22)
-
-        self.line_5 = QFrame(self.modulesTab)
-        self.line_5.setObjectName(u"line_5")
-        self.line_5.setFrameShape(QFrame.VLine)
-        self.line_5.setFrameShadow(QFrame.Sunken)
-
-        self.horizontalLayout_13.addWidget(self.line_5)
-
-        self.verticalLayout_9 = QVBoxLayout()
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.collectDataLabel = QLabel(self.modulesTab)
-        self.collectDataLabel.setObjectName(u"collectDataLabel")
-
-        self.verticalLayout_9.addWidget(self.collectDataLabel)
-
-        self.collectDataListWidget = QListWidget(self.modulesTab)
-        self.collectDataListWidget.setObjectName(u"collectDataListWidget")
-
-        self.verticalLayout_9.addWidget(self.collectDataListWidget)
-
-        self.horizontalLayout_15 = QHBoxLayout()
-        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.addCollectDataButton = QPushButton(self.modulesTab)
-        self.addCollectDataButton.setObjectName(u"addCollectDataButton")
-
-        self.horizontalLayout_15.addWidget(self.addCollectDataButton)
-
-        self.removeCollectDataButton = QPushButton(self.modulesTab)
-        self.removeCollectDataButton.setObjectName(u"removeCollectDataButton")
-
-        self.horizontalLayout_15.addWidget(self.removeCollectDataButton)
+        self.horizontalLayout_6.addWidget(self.clearExcludeModulesButton)
 
 
-        self.verticalLayout_9.addLayout(self.horizontalLayout_15)
+        self.excludesLayout.addLayout(self.horizontalLayout_6)
 
 
-        self.horizontalLayout_13.addLayout(self.verticalLayout_9)
+        self.verticalLayout_16.addLayout(self.excludesLayout)
 
+        self.line_3 = QFrame(self.scrollAreaWidgetContents)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setFrameShape(QFrame.HLine)
+        self.line_3.setFrameShadow(QFrame.Sunken)
 
-        self.verticalLayout_16.addLayout(self.horizontalLayout_13)
+        self.verticalLayout_16.addWidget(self.line_3)
 
-        self.horizontalLayout_19 = QHBoxLayout()
-        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
-        self.verticalLayout_24 = QVBoxLayout()
-        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.collectBinariesLabel = QLabel(self.modulesTab)
-        self.collectBinariesLabel.setObjectName(u"collectBinariesLabel")
-
-        self.verticalLayout_24.addWidget(self.collectBinariesLabel)
-
-        self.collectBinariesListWidget = QListWidget(self.modulesTab)
-        self.collectBinariesListWidget.setObjectName(u"collectBinariesListWidget")
-
-        self.verticalLayout_24.addWidget(self.collectBinariesListWidget)
-
-        self.horizontalLayout_20 = QHBoxLayout()
-        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
-        self.addCollectBinariesButton = QPushButton(self.modulesTab)
-        self.addCollectBinariesButton.setObjectName(u"addCollectBinariesButton")
-
-        self.horizontalLayout_20.addWidget(self.addCollectBinariesButton)
-
-        self.removeCollectBinariesButton = QPushButton(self.modulesTab)
-        self.removeCollectBinariesButton.setObjectName(u"removeCollectBinariesButton")
-
-        self.horizontalLayout_20.addWidget(self.removeCollectBinariesButton)
-
-
-        self.verticalLayout_24.addLayout(self.horizontalLayout_20)
-
-
-        self.horizontalLayout_19.addLayout(self.verticalLayout_24)
-
-        self.line_7 = QFrame(self.modulesTab)
-        self.line_7.setObjectName(u"line_7")
-        self.line_7.setFrameShape(QFrame.VLine)
-        self.line_7.setFrameShadow(QFrame.Sunken)
-
-        self.horizontalLayout_19.addWidget(self.line_7)
-
-        self.verticalLayout_15 = QVBoxLayout()
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.collectAllLabel = QLabel(self.modulesTab)
+        self.collectAllLayout = QVBoxLayout()
+        self.collectAllLayout.setObjectName(u"collectAllLayout")
+        self.collectAllLabel = QLabel(self.scrollAreaWidgetContents)
         self.collectAllLabel.setObjectName(u"collectAllLabel")
 
-        self.verticalLayout_15.addWidget(self.collectAllLabel)
+        self.collectAllLayout.addWidget(self.collectAllLabel)
 
-        self.collectAllListWidget = QListWidget(self.modulesTab)
+        self.collectAllListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.collectAllListWidget.setObjectName(u"collectAllListWidget")
+        self.collectAllListWidget.setMinimumSize(QSize(0, 150))
 
-        self.verticalLayout_15.addWidget(self.collectAllListWidget)
+        self.collectAllLayout.addWidget(self.collectAllListWidget)
 
         self.horizontalLayout_21 = QHBoxLayout()
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.addCollectAllButton = QPushButton(self.modulesTab)
+        self.addCollectAllButton = QPushButton(self.scrollAreaWidgetContents)
         self.addCollectAllButton.setObjectName(u"addCollectAllButton")
 
         self.horizontalLayout_21.addWidget(self.addCollectAllButton)
 
-        self.removeCollectAllButton = QPushButton(self.modulesTab)
+        self.removeCollectAllButton = QPushButton(self.scrollAreaWidgetContents)
         self.removeCollectAllButton.setObjectName(u"removeCollectAllButton")
 
         self.horizontalLayout_21.addWidget(self.removeCollectAllButton)
 
+        self.clearCollectAllButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearCollectAllButton.setObjectName(u"clearCollectAllButton")
 
-        self.verticalLayout_15.addLayout(self.horizontalLayout_21)
+        self.horizontalLayout_21.addWidget(self.clearCollectAllButton)
 
 
-        self.horizontalLayout_19.addLayout(self.verticalLayout_15)
+        self.collectAllLayout.addLayout(self.horizontalLayout_21)
 
 
-        self.verticalLayout_16.addLayout(self.horizontalLayout_19)
+        self.verticalLayout_16.addLayout(self.collectAllLayout)
 
-        self.line_8 = QFrame(self.modulesTab)
+        self.line_5 = QFrame(self.scrollAreaWidgetContents)
+        self.line_5.setObjectName(u"line_5")
+        self.line_5.setFrameShape(QFrame.HLine)
+        self.line_5.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_16.addWidget(self.line_5)
+
+        self.collectSubLayout = QVBoxLayout()
+        self.collectSubLayout.setObjectName(u"collectSubLayout")
+        self.collectSubmodulesLabel = QLabel(self.scrollAreaWidgetContents)
+        self.collectSubmodulesLabel.setObjectName(u"collectSubmodulesLabel")
+
+        self.collectSubLayout.addWidget(self.collectSubmodulesLabel)
+
+        self.collectSubmodulesListWidget = QListWidget(self.scrollAreaWidgetContents)
+        self.collectSubmodulesListWidget.setObjectName(u"collectSubmodulesListWidget")
+        self.collectSubmodulesListWidget.setMinimumSize(QSize(0, 150))
+
+        self.collectSubLayout.addWidget(self.collectSubmodulesListWidget)
+
+        self.horizontalLayout_14 = QHBoxLayout()
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.addCollectSubmodulesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.addCollectSubmodulesButton.setObjectName(u"addCollectSubmodulesButton")
+
+        self.horizontalLayout_14.addWidget(self.addCollectSubmodulesButton)
+
+        self.removeCollectSubmodulesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.removeCollectSubmodulesButton.setObjectName(u"removeCollectSubmodulesButton")
+
+        self.horizontalLayout_14.addWidget(self.removeCollectSubmodulesButton)
+
+        self.clearCollectSubmodulesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearCollectSubmodulesButton.setObjectName(u"clearCollectSubmodulesButton")
+
+        self.horizontalLayout_14.addWidget(self.clearCollectSubmodulesButton)
+
+
+        self.collectSubLayout.addLayout(self.horizontalLayout_14)
+
+
+        self.verticalLayout_16.addLayout(self.collectSubLayout)
+
+        self.collectDataLayout = QVBoxLayout()
+        self.collectDataLayout.setObjectName(u"collectDataLayout")
+        self.line_6 = QFrame(self.scrollAreaWidgetContents)
+        self.line_6.setObjectName(u"line_6")
+        self.line_6.setFrameShape(QFrame.HLine)
+        self.line_6.setFrameShadow(QFrame.Sunken)
+
+        self.collectDataLayout.addWidget(self.line_6)
+
+        self.collectDataLabel = QLabel(self.scrollAreaWidgetContents)
+        self.collectDataLabel.setObjectName(u"collectDataLabel")
+
+        self.collectDataLayout.addWidget(self.collectDataLabel)
+
+        self.collectDataListWidget = QListWidget(self.scrollAreaWidgetContents)
+        self.collectDataListWidget.setObjectName(u"collectDataListWidget")
+        self.collectDataListWidget.setMinimumSize(QSize(0, 150))
+
+        self.collectDataLayout.addWidget(self.collectDataListWidget)
+
+        self.horizontalLayout_15 = QHBoxLayout()
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.addCollectDataButton = QPushButton(self.scrollAreaWidgetContents)
+        self.addCollectDataButton.setObjectName(u"addCollectDataButton")
+
+        self.horizontalLayout_15.addWidget(self.addCollectDataButton)
+
+        self.removeCollectDataButton = QPushButton(self.scrollAreaWidgetContents)
+        self.removeCollectDataButton.setObjectName(u"removeCollectDataButton")
+
+        self.horizontalLayout_15.addWidget(self.removeCollectDataButton)
+
+        self.clearCollectDataButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearCollectDataButton.setObjectName(u"clearCollectDataButton")
+
+        self.horizontalLayout_15.addWidget(self.clearCollectDataButton)
+
+
+        self.collectDataLayout.addLayout(self.horizontalLayout_15)
+
+
+        self.verticalLayout_16.addLayout(self.collectDataLayout)
+
+        self.line_8 = QFrame(self.scrollAreaWidgetContents)
         self.line_8.setObjectName(u"line_8")
         self.line_8.setFrameShape(QFrame.HLine)
         self.line_8.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_16.addWidget(self.line_8)
 
-        self.horizontalLayout_16 = QHBoxLayout()
-        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
-        self.verticalLayout_23 = QVBoxLayout()
-        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.copyMetadataLabel = QLabel(self.modulesTab)
+        self.collectBinLayout = QVBoxLayout()
+        self.collectBinLayout.setObjectName(u"collectBinLayout")
+        self.collectBinariesLabel = QLabel(self.scrollAreaWidgetContents)
+        self.collectBinariesLabel.setObjectName(u"collectBinariesLabel")
+
+        self.collectBinLayout.addWidget(self.collectBinariesLabel)
+
+        self.collectBinariesListWidget = QListWidget(self.scrollAreaWidgetContents)
+        self.collectBinariesListWidget.setObjectName(u"collectBinariesListWidget")
+        self.collectBinariesListWidget.setMinimumSize(QSize(0, 150))
+
+        self.collectBinLayout.addWidget(self.collectBinariesListWidget)
+
+        self.horizontalLayout_20 = QHBoxLayout()
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.addCollectBinariesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.addCollectBinariesButton.setObjectName(u"addCollectBinariesButton")
+
+        self.horizontalLayout_20.addWidget(self.addCollectBinariesButton)
+
+        self.removeCollectBinariesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.removeCollectBinariesButton.setObjectName(u"removeCollectBinariesButton")
+
+        self.horizontalLayout_20.addWidget(self.removeCollectBinariesButton)
+
+        self.clearCollectBinariesButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearCollectBinariesButton.setObjectName(u"clearCollectBinariesButton")
+
+        self.horizontalLayout_20.addWidget(self.clearCollectBinariesButton)
+
+
+        self.collectBinLayout.addLayout(self.horizontalLayout_20)
+
+
+        self.verticalLayout_16.addLayout(self.collectBinLayout)
+
+        self.line_4 = QFrame(self.scrollAreaWidgetContents)
+        self.line_4.setObjectName(u"line_4")
+        self.line_4.setFrameShape(QFrame.HLine)
+        self.line_4.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_16.addWidget(self.line_4)
+
+        self.copyMetadataLayout = QVBoxLayout()
+        self.copyMetadataLayout.setObjectName(u"copyMetadataLayout")
+        self.copyMetadataLabel = QLabel(self.scrollAreaWidgetContents)
         self.copyMetadataLabel.setObjectName(u"copyMetadataLabel")
 
-        self.verticalLayout_23.addWidget(self.copyMetadataLabel)
+        self.copyMetadataLayout.addWidget(self.copyMetadataLabel)
 
-        self.copyMetadataListWidget = QListWidget(self.modulesTab)
+        self.copyMetadataListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.copyMetadataListWidget.setObjectName(u"copyMetadataListWidget")
+        self.copyMetadataListWidget.setMinimumSize(QSize(0, 150))
 
-        self.verticalLayout_23.addWidget(self.copyMetadataListWidget)
+        self.copyMetadataLayout.addWidget(self.copyMetadataListWidget)
 
         self.horizontalLayout_17 = QHBoxLayout()
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
-        self.addCopyMetadataButton = QPushButton(self.modulesTab)
+        self.addCopyMetadataButton = QPushButton(self.scrollAreaWidgetContents)
         self.addCopyMetadataButton.setObjectName(u"addCopyMetadataButton")
 
         self.horizontalLayout_17.addWidget(self.addCopyMetadataButton)
 
-        self.removeCopyMetadataButton = QPushButton(self.modulesTab)
+        self.removeCopyMetadataButton = QPushButton(self.scrollAreaWidgetContents)
         self.removeCopyMetadataButton.setObjectName(u"removeCopyMetadataButton")
 
         self.horizontalLayout_17.addWidget(self.removeCopyMetadataButton)
 
+        self.clearCopyMetadataButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearCopyMetadataButton.setObjectName(u"clearCopyMetadataButton")
 
-        self.verticalLayout_23.addLayout(self.horizontalLayout_17)
+        self.horizontalLayout_17.addWidget(self.clearCopyMetadataButton)
 
 
-        self.horizontalLayout_16.addLayout(self.verticalLayout_23)
+        self.copyMetadataLayout.addLayout(self.horizontalLayout_17)
 
-        self.line_6 = QFrame(self.modulesTab)
-        self.line_6.setObjectName(u"line_6")
-        self.line_6.setFrameShape(QFrame.VLine)
-        self.line_6.setFrameShadow(QFrame.Sunken)
 
-        self.horizontalLayout_16.addWidget(self.line_6)
+        self.verticalLayout_16.addLayout(self.copyMetadataLayout)
 
-        self.verticalLayout_14 = QVBoxLayout()
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.deepcopyMetadataLabel = QLabel(self.modulesTab)
+        self.deepcopyMetadataLayout = QVBoxLayout()
+        self.deepcopyMetadataLayout.setObjectName(u"deepcopyMetadataLayout")
+        self.line_9 = QFrame(self.scrollAreaWidgetContents)
+        self.line_9.setObjectName(u"line_9")
+        self.line_9.setFrameShape(QFrame.HLine)
+        self.line_9.setFrameShadow(QFrame.Sunken)
+
+        self.deepcopyMetadataLayout.addWidget(self.line_9)
+
+        self.deepcopyMetadataLabel = QLabel(self.scrollAreaWidgetContents)
         self.deepcopyMetadataLabel.setObjectName(u"deepcopyMetadataLabel")
 
-        self.verticalLayout_14.addWidget(self.deepcopyMetadataLabel)
+        self.deepcopyMetadataLayout.addWidget(self.deepcopyMetadataLabel)
 
-        self.deepcopyMetadataListWidget = QListWidget(self.modulesTab)
+        self.deepcopyMetadataListWidget = QListWidget(self.scrollAreaWidgetContents)
         self.deepcopyMetadataListWidget.setObjectName(u"deepcopyMetadataListWidget")
+        self.deepcopyMetadataListWidget.setMinimumSize(QSize(0, 150))
 
-        self.verticalLayout_14.addWidget(self.deepcopyMetadataListWidget)
+        self.deepcopyMetadataLayout.addWidget(self.deepcopyMetadataListWidget)
 
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
-        self.addDeepcopyMetadataButton = QPushButton(self.modulesTab)
+        self.addDeepcopyMetadataButton = QPushButton(self.scrollAreaWidgetContents)
         self.addDeepcopyMetadataButton.setObjectName(u"addDeepcopyMetadataButton")
 
         self.horizontalLayout_18.addWidget(self.addDeepcopyMetadataButton)
 
-        self.removeDeepcopyMetadataButton = QPushButton(self.modulesTab)
+        self.removeDeepcopyMetadataButton = QPushButton(self.scrollAreaWidgetContents)
         self.removeDeepcopyMetadataButton.setObjectName(u"removeDeepcopyMetadataButton")
 
         self.horizontalLayout_18.addWidget(self.removeDeepcopyMetadataButton)
 
+        self.clearDeepcopyMetadataButton = QPushButton(self.scrollAreaWidgetContents)
+        self.clearDeepcopyMetadataButton.setObjectName(u"clearDeepcopyMetadataButton")
 
-        self.verticalLayout_14.addLayout(self.horizontalLayout_18)
+        self.horizontalLayout_18.addWidget(self.clearDeepcopyMetadataButton)
 
 
-        self.horizontalLayout_16.addLayout(self.verticalLayout_14)
+        self.deepcopyMetadataLayout.addLayout(self.horizontalLayout_18)
 
 
-        self.verticalLayout_16.addLayout(self.horizontalLayout_16)
+        self.verticalLayout_16.addLayout(self.deepcopyMetadataLayout)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_8.addWidget(self.scrollArea)
 
         self.mainTabWidget.addTab(self.modulesTab, "")
         self.upxTab = QWidget()
@@ -1184,12 +1235,12 @@ class Ui_MainWindow(object):
 
         self.mainTabWidget.addTab(self.metadataTab, "")
 
-        self.horizontalLayout_9.addWidget(self.mainTabWidget)
+        self.verticalLayout_11.addWidget(self.mainTabWidget)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 665, 26))
+        self.menubar.setGeometry(QRect(0, 0, 745, 26))
         self.fileMenu = QMenu(self.menubar)
         self.fileMenu.setObjectName(u"fileMenu")
         self.commandMenu = QMenu(self.menubar)
@@ -1320,30 +1371,38 @@ class Ui_MainWindow(object):
         self.removeExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearExtraBinariesButton.setText(QCoreApplication.translate("MainWindow", u"clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.extraDataTab), QCoreApplication.translate("MainWindow", u"Extra Data", None))
-        self.excludeModulesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Modules", None))
-        self.addExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.hiddenImportLabel.setText(QCoreApplication.translate("MainWindow", u"Hidden Imports", None))
         self.addHiddenImportButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeHiddenImportButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.collectSubmodulesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all submodules from:", None))
-        self.addCollectSubmoduleButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeCollectSubmoduleButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.collectDataLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all data from:", None))
-        self.addCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.collectBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all binaries from:", None))
-        self.addCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearHiddenImportsButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.excludeModulesLabel.setText(QCoreApplication.translate("MainWindow", u"Exclude Modules", None))
+        self.addExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearExcludeModulesButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.collectAllLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all(submodules,data, bin...) from:", None))
         self.addCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.collectSubmodulesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all submodules from:", None))
+        self.addCollectSubmodulesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectSubmodulesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearCollectSubmodulesButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.collectDataLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all data from:", None))
+        self.addCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearCollectDataButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.collectBinariesLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all binaries from:", None))
+        self.addCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearCollectBinariesButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.copyMetadataLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for:", None))
         self.addCopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeCopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearCopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.deepcopyMetadataLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for(recursively):", None))
         self.addDeepcopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeDeepcopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearDeepcopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.modulesTab), QCoreApplication.translate("MainWindow", u"Modules/Packages", None))
         self.noUPXCheckBox.setText(QCoreApplication.translate("MainWindow", u"Disable UPX", None))
         self.upxPathLabel.setText(QCoreApplication.translate("MainWindow", u"UPX path", None))

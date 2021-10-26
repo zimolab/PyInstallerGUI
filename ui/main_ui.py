@@ -382,47 +382,62 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # excludeModules
         self.autosetMultiItemsUI(option=self._commonOptions.excludeModules, label=self.excludeModulesLabel,
                                  listWidget=self.excludeModulesListWidget, addButton=self.addExcludeModulesButton,
-                                 removeButton=self.removeExcludeModulesButton, onAdd=onAddItem, enableDrop=False,
-                                 onModify=onModifyItem)
+                                 removeButton=self.removeExcludeModulesButton,
+                                 clearButton=self.clearExcludeModulesButton,
+                                 onAdd=onAddItem, enableDrop=False, onModify=onModifyItem)
         # hiddenImports
         self.autosetMultiItemsUI(option=self._commonOptions.hiddenImports, label=self.hiddenImportLabel,
                                  listWidget=self.hiddenImportsListWidget, addButton=self.addHiddenImportButton,
-                                 removeButton=self.removeHiddenImportButton, onAdd=onAddItem, enableDrop=False,
+                                 removeButton=self.removeHiddenImportButton,
+                                 clearButton=self.clearHiddenImportsButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
         # collectSubmodules
         self.autosetMultiItemsUI(option=self._commonOptions.collectSubmodules, label=self.collectSubmodulesLabel,
-                                 listWidget=self.collectSubmodulesListWidget, addButton=self.addCollectSubmoduleButton,
-                                 removeButton=self.removeCollectSubmoduleButton, onAdd=onAddItem, enableDrop=False,
+                                 listWidget=self.collectSubmodulesListWidget, addButton=self.addCollectSubmodulesButton,
+                                 removeButton=self.removeCollectSubmodulesButton,
+                                 clearButton=self.clearCollectSubmodulesButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
         # collectData
         self.autosetMultiItemsUI(option=self._commonOptions.collectData, label=self.collectDataLabel,
                                  listWidget=self.collectDataListWidget, addButton=self.addCollectDataButton,
-                                 removeButton=self.removeCollectDataButton, onAdd=onAddItem, enableDrop=False,
+                                 removeButton=self.removeCollectDataButton,
+                                 clearButton=self.clearCollectDataButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
         # collectBinaries
         self.autosetMultiItemsUI(option=self._commonOptions.collectBinaries, label=self.collectBinariesLabel,
                                  listWidget=self.collectBinariesListWidget, addButton=self.addCollectBinariesButton,
-                                 removeButton=self.removeCollectBinariesButton, onAdd=onAddItem, enableDrop=False,
+                                 removeButton=self.removeCollectBinariesButton,
+                                 clearButton=self.clearCollectBinariesButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
         # collectAll
         self.autosetMultiItemsUI(option=self._commonOptions.collectAll, label=self.collectAllLabel,
                                  listWidget=self.collectAllListWidget, addButton=self.addCollectAllButton,
-                                 removeButton=self.removeCollectAllButton, onAdd=onAddItem, enableDrop=False,
+                                 removeButton=self.removeCollectAllButton,
+                                 clearButton=self.clearCollectAllButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
         # copyMetadata
         self.autosetMultiItemsUI(option=self._commonOptions.copyMetadata, label=self.copyMetadataLabel,
                                  listWidget=self.copyMetadataListWidget, addButton=self.addCopyMetadataButton,
-                                 removeButton=self.removeCopyMetadataButton, onAdd=onAddItem, enableDrop=False,
+                                 removeButton=self.removeCopyMetadataButton,
+                                 clearButton=self.clearCopyMetadataButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
         # deepcopyMetadata
         self.autosetMultiItemsUI(option=self._commonOptions.deepcopyMetadata, label=self.deepcopyMetadataLabel,
                                  listWidget=self.deepcopyMetadataListWidget, addButton=self.addDeepcopyMetadataButton,
-                                 removeButton=self.removeDeepcopyMetadataButton, onAdd=onAddItem, enableDrop=False,
+                                 removeButton=self.removeDeepcopyMetadataButton,
+                                 clearButton=self.clearDeepcopyMetadataButton,
+                                 onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
         # runtimeTmpDir
