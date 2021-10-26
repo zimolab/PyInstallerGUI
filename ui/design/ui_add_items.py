@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_itemsHFJeFq.ui'
+## Form generated from reading UI file 'add_itemsobYWpH.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -29,7 +29,7 @@ class Ui_AddItemsDialog(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.multiItemSeparatorLabel = QLabel(AddItemsDialog)
         self.multiItemSeparatorLabel.setObjectName(u"multiItemSeparatorLabel")
-        self.multiItemSeparatorLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.multiItemSeparatorLabel.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_2.addWidget(self.multiItemSeparatorLabel)
 

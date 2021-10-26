@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -946,6 +946,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="defaultUPXPathButton">
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -976,6 +983,13 @@
               </property>
               <property name="flat">
                <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="clearUPXExcludesButton">
+              <property name="text">
+               <string>Clear</string>
               </property>
              </widget>
             </item>

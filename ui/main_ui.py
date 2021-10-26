@@ -72,9 +72,15 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 设置非Options部分的UI
         self.setupNonOptionsUI()
         # 设置Options部分的UI
+        # -常规选项部分的UI
         self.setupCommonOptionsUI()
+        # -UPX选项的UI
         self.setupUPXOptionsUI()
+        # -Hooks选项的UI
+        self.setupHookOptionsUI()
+        # -windows平台专属选项的UI
         self.setupWindowsOptionsUI()
+        # -macOSX平台专属选项的UI
         self.setupMacOSXOptionsUI()
 
     def setupMenu(self):
@@ -396,15 +402,22 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                     defaultButton=self.defaultRTTmpDirButton, selectionMode=self.SELECT_DIR,
                                     startPath=str(Path.home()))
 
-
-
     def setupUPXOptionsUI(self):
-        pass
+        """设置UPX选项界面"""
+        # noUPX
+        self.autosetFlagUI(flag=self._upxOptions.noUPX, flagBox=self.noUPXCheckBox)
+        # upxPath
+        self.autosetPathSelectionUI(option=self._upxOptions.upxPath, label=self.upxPathLabel, edit=self.upxPathEdit,
+                                    selectButton=self.selectUPXPathButton, defaultButton=self.defaultUPXPathButton,
+                                    selectionMode=self.SELECT_DIR)
 
     def setupWindowsOptionsUI(self):
         pass
 
     def setupMacOSXOptionsUI(self):
+        pass
+
+    def setupHookOptionsUI(self):
         pass
 
     def autosetPathSelectionUI(self, option: BindingOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,

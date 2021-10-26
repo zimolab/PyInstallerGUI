@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainLlMNzT.ui'
+## Form generated from reading UI file 'maineIqXxh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -854,6 +854,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_22.addWidget(self.selectUPXPathButton)
 
+        self.defaultUPXPathButton = QPushButton(self.upxTab)
+        self.defaultUPXPathButton.setObjectName(u"defaultUPXPathButton")
+
+        self.horizontalLayout_22.addWidget(self.defaultUPXPathButton)
+
 
         self.verticalLayout_18.addLayout(self.horizontalLayout_22)
 
@@ -881,6 +886,11 @@ class Ui_MainWindow(object):
         self.removeUPXExcludesButton.setFlat(False)
 
         self.horizontalLayout_23.addWidget(self.removeUPXExcludesButton)
+
+        self.clearUPXExcludesButton = QPushButton(self.upxTab)
+        self.clearUPXExcludesButton.setObjectName(u"clearUPXExcludesButton")
+
+        self.horizontalLayout_23.addWidget(self.clearUPXExcludesButton)
 
 
         self.verticalLayout_17.addLayout(self.horizontalLayout_23)
@@ -1207,7 +1217,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(0)
+        self.mainTabWidget.setCurrentIndex(4)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -1325,9 +1335,11 @@ class Ui_MainWindow(object):
         self.noUPXCheckBox.setText(QCoreApplication.translate("MainWindow", u"Disable UPX", None))
         self.upxPathLabel.setText(QCoreApplication.translate("MainWindow", u"UPX path", None))
         self.selectUPXPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.defaultUPXPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.upxExcludesLabel.setText(QCoreApplication.translate("MainWindow", u"Exludes", None))
         self.addUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.upxTab), QCoreApplication.translate("MainWindow", u"UPX", None))
         self.hooksLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
         self.addHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
