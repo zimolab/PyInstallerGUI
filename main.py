@@ -7,16 +7,9 @@ import sys
 from PySide2.QtWidgets import QApplication
 from ui.main_ui import MainUI
 
-configs = {
-    "fontSize": 12
-}
-
 
 def startUI():
     app = QApplication(sys.argv)
-    font = app.font()
-    font.setPointSize(configs["fontSize"])
-    app.setFont(font)
     mainUI = MainUI()
     mainUI.show()
     sys.exit(app.exec_())

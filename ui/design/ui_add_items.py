@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_itemsqyVPHt.ui'
+## Form generated from reading UI file 'add_itemsQIeszr.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,10 +18,6 @@ class Ui_AddItemsDialog(object):
         if not AddItemsDialog.objectName():
             AddItemsDialog.setObjectName(u"AddItemsDialog")
         AddItemsDialog.resize(507, 209)
-        font = QFont()
-        font.setFamily(u"Arial")
-        font.setPointSize(9)
-        AddItemsDialog.setFont(font)
         self.verticalLayout = QVBoxLayout(AddItemsDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.itemsLabel = QLabel(AddItemsDialog)
@@ -58,7 +54,7 @@ class Ui_AddItemsDialog(object):
 
     def retranslateUi(self, AddItemsDialog):
         AddItemsDialog.setWindowTitle(QCoreApplication.translate("AddItemsDialog", u"Add Items", None))
-        self.itemsLabel.setText(QCoreApplication.translate("AddItemsDialog", u"Items(use semicolon to splite multiple items)", None))
+        self.itemsLabel.setText(QCoreApplication.translate("AddItemsDialog", u"use semicolon(;) to split multiple items", None))
         self.addButton.setText(QCoreApplication.translate("AddItemsDialog", u"Add", None))
         self.cancelButton.setText(QCoreApplication.translate("AddItemsDialog", u"Cancel", None))
     # retranslateUi

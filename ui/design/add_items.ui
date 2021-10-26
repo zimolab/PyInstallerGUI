@@ -10,12 +10,6 @@
     <height>209</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>Arial</family>
-    <pointsize>9</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Add Items</string>
   </property>
@@ -23,7 +17,7 @@
    <item>
     <widget class="QLabel" name="itemsLabel">
      <property name="text">
-      <string>Items(use semicolon to splite multiple items)</string>
+      <string>use semicolon(;) to split multiple items</string>
      </property>
     </widget>
    </item>

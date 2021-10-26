@@ -8,14 +8,8 @@
     <x>0</x>
     <y>0</y>
     <width>709</width>
-    <height>917</height>
+    <height>933</height>
    </rect>
-  </property>
-  <property name="font">
-   <font>
-    <family>Arial</family>
-    <pointsize>10</pointsize>
-   </font>
   </property>
   <property name="acceptDrops">
    <bool>true</bool>
@@ -1391,7 +1385,7 @@
      <x>0</x>
      <y>0</y>
      <width>709</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="fileMenu">
@@ -1423,8 +1417,15 @@
     <addaction name="separator"/>
     <addaction name="actionHelp"/>
    </widget>
+   <widget class="QMenu" name="menuSetting">
+    <property name="title">
+     <string>Setting</string>
+    </property>
+    <addaction name="actionChangeFont"/>
+   </widget>
    <addaction name="fileMenu"/>
    <addaction name="commandMenu"/>
+   <addaction name="menuSetting"/>
    <addaction name="helpMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -1485,6 +1486,11 @@
   <action name="actionStartGenSpceFile">
    <property name="text">
     <string>Generate Spce File</string>
+   </property>
+  </action>
+  <action name="actionChangeFont">
+   <property name="text">
+    <string>Font</string>
    </property>
   </action>
  </widget>

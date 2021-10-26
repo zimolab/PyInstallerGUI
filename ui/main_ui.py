@@ -11,7 +11,7 @@ from typing import Union
 from PySide2 import QtCore
 from PySide2.QtGui import QDropEvent
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QPushButton, QLabel, QCheckBox, QRadioButton, \
-    QComboBox, QListWidget
+    QComboBox, QListWidget, QApplication
 from QBinder import QEventHook, Binder
 
 from core.options import BindingOption, BindingFlag, BindingMultipleOption
@@ -25,7 +25,7 @@ from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
-    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput
+    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -85,6 +85,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.actionGotoPyinstallerWebsite.triggered.connect(lambda: webbrowser.open(PYINSTALLER_WEBSITE_URL))
         self.actionGotoPyInstallerDoc.triggered.connect(lambda: webbrowser.open(PYINSTALLER_DOC_STABLE_URL))
         self.actionStartGenSpceFile.triggered.connect(self.startGenerateSpecFile)
+        self.actionChangeFont.triggered.connect(self.onChangeFont)
 
     def setupScriptsUI(self):
         self.setTooltip("scriptname: name of script files to be processed", self.scriptsLabel, self.scriptsListWidget)
@@ -495,3 +496,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
         """创建新的配置对象"""
         if ask(self, self.tr("New Configs"), self.tr("Current configs will be lost. Sure to create a new config?")):
             self._configs.reset()
+
+    def onChangeFont(self):
+        app = QApplication.instance()
+        currentFont = app.font()
+        font = getFont(self, initial=currentFont)
+        if font is not None:
+            app.setFont(font)

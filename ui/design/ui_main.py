@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainKBtMuY.ui'
+## Form generated from reading UI file 'mainzhdIYF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,11 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(709, 917)
-        font = QFont()
-        font.setFamily(u"Arial")
-        font.setPointSize(10)
-        MainWindow.setFont(font)
+        MainWindow.resize(709, 933)
         MainWindow.setAcceptDrops(True)
         self.actionStartPack = QAction(MainWindow)
         self.actionStartPack.setObjectName(u"actionStartPack")
@@ -48,6 +44,8 @@ class Ui_MainWindow(object):
         self.actionGotoPyInstallerDoc.setObjectName(u"actionGotoPyInstallerDoc")
         self.actionStartGenSpceFile = QAction(MainWindow)
         self.actionStartGenSpceFile.setObjectName(u"actionStartGenSpceFile")
+        self.actionChangeFont = QAction(MainWindow)
+        self.actionChangeFont.setObjectName(u"actionChangeFont")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
@@ -1207,13 +1205,15 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 709, 25))
+        self.menubar.setGeometry(QRect(0, 0, 709, 26))
         self.fileMenu = QMenu(self.menubar)
         self.fileMenu.setObjectName(u"fileMenu")
         self.commandMenu = QMenu(self.menubar)
         self.commandMenu.setObjectName(u"commandMenu")
         self.helpMenu = QMenu(self.menubar)
         self.helpMenu.setObjectName(u"helpMenu")
+        self.menuSetting = QMenu(self.menubar)
+        self.menuSetting.setObjectName(u"menuSetting")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -1221,6 +1221,7 @@ class Ui_MainWindow(object):
 
         self.menubar.addAction(self.fileMenu.menuAction())
         self.menubar.addAction(self.commandMenu.menuAction())
+        self.menubar.addAction(self.menuSetting.menuAction())
         self.menubar.addAction(self.helpMenu.menuAction())
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.actionNewConfigs)
@@ -1236,6 +1237,7 @@ class Ui_MainWindow(object):
         self.helpMenu.addAction(self.actionGotoPyInstallerDoc)
         self.helpMenu.addSeparator()
         self.helpMenu.addAction(self.actionHelp)
+        self.menuSetting.addAction(self.actionChangeFont)
 
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
@@ -1268,6 +1270,7 @@ class Ui_MainWindow(object):
         self.actionGotoPyinstallerWebsite.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Website", None))
         self.actionGotoPyInstallerDoc.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Documentation", None))
         self.actionStartGenSpceFile.setText(QCoreApplication.translate("MainWindow", u"Generate Spce File", None))
+        self.actionChangeFont.setText(QCoreApplication.translate("MainWindow", u"Font", None))
         self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"cwd", None))
         self.changeCWDButton.setText(QCoreApplication.translate("MainWindow", u"Change", None))
         self.pyinstallerLabel.setText(QCoreApplication.translate("MainWindow", u"Pynstaller Path", None))
@@ -1396,5 +1399,6 @@ class Ui_MainWindow(object):
         self.fileMenu.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.commandMenu.setTitle(QCoreApplication.translate("MainWindow", u"Command", None))
         self.helpMenu.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
+        self.menuSetting.setTitle(QCoreApplication.translate("MainWindow", u"Setting", None))
     # retranslateUi
 

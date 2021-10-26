@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'start_cmdJRCmWT.ui'
+## Form generated from reading UI file 'start_cmdBPmgIK.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -19,10 +19,6 @@ class Ui_StartCommandDialog(object):
             StartCommandDialog.setObjectName(u"StartCommandDialog")
         StartCommandDialog.setWindowModality(Qt.ApplicationModal)
         StartCommandDialog.resize(821, 698)
-        font = QFont()
-        font.setFamily(u"Arial")
-        font.setPointSize(10)
-        StartCommandDialog.setFont(font)
         self.verticalLayout_3 = QVBoxLayout(StartCommandDialog)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.splitter = QSplitter(StartCommandDialog)
@@ -102,8 +98,8 @@ class Ui_StartCommandDialog(object):
         self.outputTextBrowser.setHtml(QCoreApplication.translate("StartCommandDialog", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Arial'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'SimSun'; font-size:7.2pt;\"><br /></p></body></html>", None))
+"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.2pt;\"><br /></p></body></html>", None))
         self.commandLabel.setText(QCoreApplication.translate("StartCommandDialog", u"Command:", None))
         self.startButton.setText(QCoreApplication.translate("StartCommandDialog", u"Start", None))
         self.terminateButton.setText(QCoreApplication.translate("StartCommandDialog", u"Terminate", None))

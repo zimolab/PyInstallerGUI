@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_extrasATChkV.ui'
+## Form generated from reading UI file 'add_extrasWrmpLu.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -19,10 +19,6 @@ class Ui_AddExtrasDialog(object):
             AddExtrasDialog.setObjectName(u"AddExtrasDialog")
         AddExtrasDialog.setWindowModality(Qt.WindowModal)
         AddExtrasDialog.resize(537, 216)
-        font = QFont()
-        font.setFamily(u"Arial")
-        font.setPointSize(10)
-        AddExtrasDialog.setFont(font)
         AddExtrasDialog.setModal(True)
         self.verticalLayout = QVBoxLayout(AddExtrasDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")

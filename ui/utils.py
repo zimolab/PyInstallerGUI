@@ -8,7 +8,7 @@ from os.path import isfile, isdir, relpath, basename
 
 from PySide2.QtCore import QDir
 from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView, \
-    QInputDialog, QLineEdit
+    QInputDialog, QLineEdit, QFontDialog
 
 
 def info(parent, title, content):
@@ -155,3 +155,15 @@ def getTextInput(parent, title, label, text=""):
         return None
     else:
         return inputText
+
+
+def getFont(parent, initial=None, title=None):
+    if title is None:
+        title = parent.tr(u"Select Font")
+    if initial is None:
+        ok, font = QFontDialog.getFont(parent=parent, title=title)
+    else:
+        ok, font = QFontDialog.getFont(initial=initial, parent=parent, title=title)
+    if ok:
+        return font
+    return None

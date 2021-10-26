@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'modify_pathmuQzrs.ui'
+## Form generated from reading UI file 'modify_pathJxFpQk.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -19,10 +19,6 @@ class Ui_ModifyPathDialog(object):
             ModifyPathDialog.setObjectName(u"ModifyPathDialog")
         ModifyPathDialog.setWindowModality(Qt.WindowModal)
         ModifyPathDialog.resize(425, 173)
-        font = QFont()
-        font.setFamily(u"Arial")
-        font.setPointSize(10)
-        ModifyPathDialog.setFont(font)
         self.verticalLayout = QVBoxLayout(ModifyPathDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gridLayout = QGridLayout()
