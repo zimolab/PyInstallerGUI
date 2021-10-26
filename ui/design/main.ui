@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -812,26 +812,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_23">
             <item>
-             <widget class="QLabel" name="copyMetadaLabel">
+             <widget class="QLabel" name="copyMetadataLabel">
               <property name="text">
                <string>Copy metadata for:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="copyMetadaListWidget"/>
+             <widget class="QListWidget" name="copyMetadataListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_17">
               <item>
-               <widget class="QPushButton" name="addCopyMetadaButton">
+               <widget class="QPushButton" name="addCopyMetadataButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="removeCopyMetadaButton">
+               <widget class="QPushButton" name="removeCopyMetadataButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -851,26 +851,26 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_14">
             <item>
-             <widget class="QLabel" name="deepcopyMetadaLabel">
+             <widget class="QLabel" name="deepcopyMetadataLabel">
               <property name="text">
                <string>Copy metadata for(recursively):</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="deepcopyMetadaListWidget"/>
+             <widget class="QListWidget" name="deepcopyMetadataListWidget"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_18">
               <item>
-               <widget class="QPushButton" name="addDeepcopyMetadaButton">
+               <widget class="QPushButton" name="addDeepcopyMetadataButton">
                 <property name="text">
                  <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="removeDeepcopyMetadaButton">
+               <widget class="QPushButton" name="removeDeepcopyMetadataButton">
                 <property name="text">
                  <string>Remove</string>
                 </property>

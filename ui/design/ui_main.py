@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainzhdIYF.ui'
+## Form generated from reading UI file 'mainobVMVc.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -734,27 +734,27 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
         self.verticalLayout_23 = QVBoxLayout()
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.copyMetadaLabel = QLabel(self.modulesTab)
-        self.copyMetadaLabel.setObjectName(u"copyMetadaLabel")
+        self.copyMetadataLabel = QLabel(self.modulesTab)
+        self.copyMetadataLabel.setObjectName(u"copyMetadataLabel")
 
-        self.verticalLayout_23.addWidget(self.copyMetadaLabel)
+        self.verticalLayout_23.addWidget(self.copyMetadataLabel)
 
-        self.copyMetadaListWidget = QListWidget(self.modulesTab)
-        self.copyMetadaListWidget.setObjectName(u"copyMetadaListWidget")
+        self.copyMetadataListWidget = QListWidget(self.modulesTab)
+        self.copyMetadataListWidget.setObjectName(u"copyMetadataListWidget")
 
-        self.verticalLayout_23.addWidget(self.copyMetadaListWidget)
+        self.verticalLayout_23.addWidget(self.copyMetadataListWidget)
 
         self.horizontalLayout_17 = QHBoxLayout()
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
-        self.addCopyMetadaButton = QPushButton(self.modulesTab)
-        self.addCopyMetadaButton.setObjectName(u"addCopyMetadaButton")
+        self.addCopyMetadataButton = QPushButton(self.modulesTab)
+        self.addCopyMetadataButton.setObjectName(u"addCopyMetadataButton")
 
-        self.horizontalLayout_17.addWidget(self.addCopyMetadaButton)
+        self.horizontalLayout_17.addWidget(self.addCopyMetadataButton)
 
-        self.removeCopyMetadaButton = QPushButton(self.modulesTab)
-        self.removeCopyMetadaButton.setObjectName(u"removeCopyMetadaButton")
+        self.removeCopyMetadataButton = QPushButton(self.modulesTab)
+        self.removeCopyMetadataButton.setObjectName(u"removeCopyMetadataButton")
 
-        self.horizontalLayout_17.addWidget(self.removeCopyMetadaButton)
+        self.horizontalLayout_17.addWidget(self.removeCopyMetadataButton)
 
 
         self.verticalLayout_23.addLayout(self.horizontalLayout_17)
@@ -771,27 +771,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_14 = QVBoxLayout()
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.deepcopyMetadaLabel = QLabel(self.modulesTab)
-        self.deepcopyMetadaLabel.setObjectName(u"deepcopyMetadaLabel")
+        self.deepcopyMetadataLabel = QLabel(self.modulesTab)
+        self.deepcopyMetadataLabel.setObjectName(u"deepcopyMetadataLabel")
 
-        self.verticalLayout_14.addWidget(self.deepcopyMetadaLabel)
+        self.verticalLayout_14.addWidget(self.deepcopyMetadataLabel)
 
-        self.deepcopyMetadaListWidget = QListWidget(self.modulesTab)
-        self.deepcopyMetadaListWidget.setObjectName(u"deepcopyMetadaListWidget")
+        self.deepcopyMetadataListWidget = QListWidget(self.modulesTab)
+        self.deepcopyMetadataListWidget.setObjectName(u"deepcopyMetadataListWidget")
 
-        self.verticalLayout_14.addWidget(self.deepcopyMetadaListWidget)
+        self.verticalLayout_14.addWidget(self.deepcopyMetadataListWidget)
 
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
-        self.addDeepcopyMetadaButton = QPushButton(self.modulesTab)
-        self.addDeepcopyMetadaButton.setObjectName(u"addDeepcopyMetadaButton")
+        self.addDeepcopyMetadataButton = QPushButton(self.modulesTab)
+        self.addDeepcopyMetadataButton.setObjectName(u"addDeepcopyMetadataButton")
 
-        self.horizontalLayout_18.addWidget(self.addDeepcopyMetadaButton)
+        self.horizontalLayout_18.addWidget(self.addDeepcopyMetadataButton)
 
-        self.removeDeepcopyMetadaButton = QPushButton(self.modulesTab)
-        self.removeDeepcopyMetadaButton.setObjectName(u"removeDeepcopyMetadaButton")
+        self.removeDeepcopyMetadataButton = QPushButton(self.modulesTab)
+        self.removeDeepcopyMetadataButton.setObjectName(u"removeDeepcopyMetadataButton")
 
-        self.horizontalLayout_18.addWidget(self.removeDeepcopyMetadaButton)
+        self.horizontalLayout_18.addWidget(self.removeDeepcopyMetadataButton)
 
 
         self.verticalLayout_14.addLayout(self.horizontalLayout_18)
@@ -1242,7 +1242,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(0)
+        self.mainTabWidget.setCurrentIndex(3)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -1346,12 +1346,12 @@ class Ui_MainWindow(object):
         self.collectAllLabel.setText(QCoreApplication.translate("MainWindow", u"Collect all(submodules,data, bin...) from:", None))
         self.addCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeCollectAllButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.copyMetadaLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for:", None))
-        self.addCopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeCopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.deepcopyMetadaLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for(recursively):", None))
-        self.addDeepcopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeDeepcopyMetadaButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.copyMetadataLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for:", None))
+        self.addCopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeCopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.deepcopyMetadataLabel.setText(QCoreApplication.translate("MainWindow", u"Copy metadata for(recursively):", None))
+        self.addDeepcopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeDeepcopyMetadataButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.modulesTab), QCoreApplication.translate("MainWindow", u"Modules/Packages", None))
         self.noUPXCheckBox.setText(QCoreApplication.translate("MainWindow", u"Disable UPX", None))
         self.upxPathLabel.setText(QCoreApplication.translate("MainWindow", u"UPX path", None))

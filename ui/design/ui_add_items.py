@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_itemsQIeszr.ui'
+## Form generated from reading UI file 'add_itemsHFJeFq.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -17,18 +17,33 @@ class Ui_AddItemsDialog(object):
     def setupUi(self, AddItemsDialog):
         if not AddItemsDialog.objectName():
             AddItemsDialog.setObjectName(u"AddItemsDialog")
-        AddItemsDialog.resize(507, 209)
+        AddItemsDialog.resize(507, 261)
         self.verticalLayout = QVBoxLayout(AddItemsDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.itemsLabel = QLabel(AddItemsDialog)
-        self.itemsLabel.setObjectName(u"itemsLabel")
-
-        self.verticalLayout.addWidget(self.itemsLabel)
-
         self.itemsEdit = QTextEdit(AddItemsDialog)
         self.itemsEdit.setObjectName(u"itemsEdit")
 
         self.verticalLayout.addWidget(self.itemsEdit)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.multiItemSeparatorLabel = QLabel(AddItemsDialog)
+        self.multiItemSeparatorLabel.setObjectName(u"multiItemSeparatorLabel")
+        self.multiItemSeparatorLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.horizontalLayout_2.addWidget(self.multiItemSeparatorLabel)
+
+        self.multiItemSeparatorCombo = QComboBox(AddItemsDialog)
+        self.multiItemSeparatorCombo.setObjectName(u"multiItemSeparatorCombo")
+
+        self.horizontalLayout_2.addWidget(self.multiItemSeparatorCombo)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -54,7 +69,7 @@ class Ui_AddItemsDialog(object):
 
     def retranslateUi(self, AddItemsDialog):
         AddItemsDialog.setWindowTitle(QCoreApplication.translate("AddItemsDialog", u"Add Items", None))
-        self.itemsLabel.setText(QCoreApplication.translate("AddItemsDialog", u"use semicolon(;) to split multiple items", None))
+        self.multiItemSeparatorLabel.setText(QCoreApplication.translate("AddItemsDialog", u"Multi-Item Separator:", None))
         self.addButton.setText(QCoreApplication.translate("AddItemsDialog", u"Add", None))
         self.cancelButton.setText(QCoreApplication.translate("AddItemsDialog", u"Cancel", None))
     # retranslateUi

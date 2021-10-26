@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>507</width>
-    <height>209</height>
+    <height>261</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,14 +15,37 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="itemsLabel">
-     <property name="text">
-      <string>use semicolon(;) to split multiple items</string>
-     </property>
-    </widget>
+    <widget class="QTextEdit" name="itemsEdit"/>
    </item>
    <item>
-    <widget class="QTextEdit" name="itemsEdit"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="multiItemSeparatorLabel">
+       <property name="text">
+        <string>Multi-Item Separator:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="multiItemSeparatorCombo"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

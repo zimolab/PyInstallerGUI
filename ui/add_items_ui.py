@@ -22,7 +22,16 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
     COPY_METADATA = 7
     DEEP_COPY_METADATA = 8
 
-    ITEMS_SEP = ";"
+    DEFAULT_ITEMS_SEP = ";"
+    itemSeparators = {
+        "semicolon(;)": ";",
+        "ampersand(&)": "&",
+        "comma(,)": ",",
+        "colon(:)": ":",
+        "slash(/)": "/",
+        "backslash(\\)": "\\",
+        "white space": " "
+    }
 
     itemsAdded = Signal(BindingMultipleOption, list)
 
@@ -34,6 +43,7 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
 
     def setupUi(self, _=None):
         super(AddItemsDialog, self).setupUi(self)
+        self.multiItemSeparatorCombo.addItems(self.itemSeparators.keys())
         self.addButton.clicked.connect(self.onAddItem)
 
     def onAddItem(self):
@@ -41,7 +51,14 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
         if content == "":
             warn(self, self.tr(u"Warning"), self.tr("Items cannot be empty!"))
             return
-        items = content.split(self.ITEMS_SEP)
+        content = content.replace("；", ";").replace("，", ",")
+        sepKey = self.multiItemSeparatorCombo.currentText()
+        if sepKey in self.itemSeparators:
+            sep = self.itemSeparators[sepKey]
+        else:
+            sep = self.DEFAULT_ITEMS_SEP
+        items = content.split(sep)
+        items = [item for item in items if item is not None and item != ""]
         self.itemsAdded.emit(self._option, items)
         self.accept()
 
