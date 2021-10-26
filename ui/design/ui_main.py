@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainobVMVc.ui'
+## Form generated from reading UI file 'mainLlMNzT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -146,91 +146,31 @@ class Ui_MainWindow(object):
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(-1, 5, -1, -1)
-        self.specPathLabel = QLabel(self.commonTab)
-        self.specPathLabel.setObjectName(u"specPathLabel")
+        self.workPathEdit = QLineEdit(self.commonTab)
+        self.workPathEdit.setObjectName(u"workPathEdit")
 
-        self.gridLayout.addWidget(self.specPathLabel, 3, 0, 1, 1)
-
-        self.defaultDebugOptionButton = QPushButton(self.commonTab)
-        self.defaultDebugOptionButton.setObjectName(u"defaultDebugOptionButton")
-
-        self.gridLayout.addWidget(self.defaultDebugOptionButton, 10, 2, 1, 1)
-
-        self.productNameLabel = QLabel(self.commonTab)
-        self.productNameLabel.setObjectName(u"productNameLabel")
-
-        self.gridLayout.addWidget(self.productNameLabel, 0, 0, 1, 1)
-
-        self.defaultLogLevelButton = QPushButton(self.commonTab)
-        self.defaultLogLevelButton.setObjectName(u"defaultLogLevelButton")
-
-        self.gridLayout.addWidget(self.defaultLogLevelButton, 9, 2, 1, 1)
+        self.gridLayout.addWidget(self.workPathEdit, 2, 1, 1, 1)
 
         self.distPathLabel = QLabel(self.commonTab)
         self.distPathLabel.setObjectName(u"distPathLabel")
 
         self.gridLayout.addWidget(self.distPathLabel, 1, 0, 1, 1)
 
-        self.encryptionKeyEdit = QLineEdit(self.commonTab)
-        self.encryptionKeyEdit.setObjectName(u"encryptionKeyEdit")
+        self.cleanBeforePackCheckBox = QCheckBox(self.commonTab)
+        self.cleanBeforePackCheckBox.setObjectName(u"cleanBeforePackCheckBox")
+        self.cleanBeforePackCheckBox.setTristate(False)
 
-        self.gridLayout.addWidget(self.encryptionKeyEdit, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.cleanBeforePackCheckBox, 12, 1, 1, 1)
 
-        self.stripSymbolsCheckBox = QCheckBox(self.commonTab)
-        self.stripSymbolsCheckBox.setObjectName(u"stripSymbolsCheckBox")
-        self.stripSymbolsCheckBox.setTristate(False)
+        self.selectDistPathButton = QPushButton(self.commonTab)
+        self.selectDistPathButton.setObjectName(u"selectDistPathButton")
 
-        self.gridLayout.addWidget(self.stripSymbolsCheckBox, 14, 1, 1, 1)
+        self.gridLayout.addWidget(self.selectDistPathButton, 1, 3, 1, 1)
 
-        self.appIconEdit = QLineEdit(self.commonTab)
-        self.appIconEdit.setObjectName(u"appIconEdit")
+        self.windowModeLabel = QLabel(self.commonTab)
+        self.windowModeLabel.setObjectName(u"windowModeLabel")
 
-        self.gridLayout.addWidget(self.appIconEdit, 4, 1, 1, 1)
-
-        self.debugOptionCombo = QComboBox(self.commonTab)
-        self.debugOptionCombo.setObjectName(u"debugOptionCombo")
-
-        self.gridLayout.addWidget(self.debugOptionCombo, 10, 1, 1, 1)
-
-        self.windowModeCombo = QComboBox(self.commonTab)
-        self.windowModeCombo.setObjectName(u"windowModeCombo")
-
-        self.gridLayout.addWidget(self.windowModeCombo, 7, 1, 1, 1)
-
-        self.productNameEdit = QLineEdit(self.commonTab)
-        self.productNameEdit.setObjectName(u"productNameEdit")
-
-        self.gridLayout.addWidget(self.productNameEdit, 0, 1, 1, 1)
-
-        self.defaultWindowModeButton = QPushButton(self.commonTab)
-        self.defaultWindowModeButton.setObjectName(u"defaultWindowModeButton")
-
-        self.gridLayout.addWidget(self.defaultWindowModeButton, 7, 2, 1, 1)
-
-        self.encryptionKeyLabel = QLabel(self.commonTab)
-        self.encryptionKeyLabel.setObjectName(u"encryptionKeyLabel")
-
-        self.gridLayout.addWidget(self.encryptionKeyLabel, 6, 0, 1, 1)
-
-        self.specPathEdit = QLineEdit(self.commonTab)
-        self.specPathEdit.setObjectName(u"specPathEdit")
-
-        self.gridLayout.addWidget(self.specPathEdit, 3, 1, 1, 1)
-
-        self.selectAppIconButton = QPushButton(self.commonTab)
-        self.selectAppIconButton.setObjectName(u"selectAppIconButton")
-
-        self.gridLayout.addWidget(self.selectAppIconButton, 4, 3, 1, 1)
-
-        self.defaultSplashButton = QPushButton(self.commonTab)
-        self.defaultSplashButton.setObjectName(u"defaultSplashButton")
-
-        self.gridLayout.addWidget(self.defaultSplashButton, 5, 2, 1, 1)
-
-        self.defaultWorkPathButton = QPushButton(self.commonTab)
-        self.defaultWorkPathButton.setObjectName(u"defaultWorkPathButton")
-
-        self.gridLayout.addWidget(self.defaultWorkPathButton, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.windowModeLabel, 7, 0, 1, 1)
 
         self.asciiOnlyCheckBox = QCheckBox(self.commonTab)
         self.asciiOnlyCheckBox.setObjectName(u"asciiOnlyCheckBox")
@@ -238,10 +178,137 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.asciiOnlyCheckBox, 15, 1, 1, 1)
 
+        self.generateEncryptionKeyButton = QPushButton(self.commonTab)
+        self.generateEncryptionKeyButton.setObjectName(u"generateEncryptionKeyButton")
+
+        self.gridLayout.addWidget(self.generateEncryptionKeyButton, 6, 3, 1, 1)
+
+        self.defaultWorkPathButton = QPushButton(self.commonTab)
+        self.defaultWorkPathButton.setObjectName(u"defaultWorkPathButton")
+
+        self.gridLayout.addWidget(self.defaultWorkPathButton, 2, 2, 1, 1)
+
+        self.productModelLabel = QLabel(self.commonTab)
+        self.productModelLabel.setObjectName(u"productModelLabel")
+
+        self.gridLayout.addWidget(self.productModelLabel, 8, 0, 1, 1)
+
+        self.specPathEdit = QLineEdit(self.commonTab)
+        self.specPathEdit.setObjectName(u"specPathEdit")
+
+        self.gridLayout.addWidget(self.specPathEdit, 3, 1, 1, 1)
+
+        self.appIconLabel = QLabel(self.commonTab)
+        self.appIconLabel.setObjectName(u"appIconLabel")
+
+        self.gridLayout.addWidget(self.appIconLabel, 4, 0, 1, 1)
+
+        self.stripSymbolsCheckBox = QCheckBox(self.commonTab)
+        self.stripSymbolsCheckBox.setObjectName(u"stripSymbolsCheckBox")
+        self.stripSymbolsCheckBox.setTristate(False)
+
+        self.gridLayout.addWidget(self.stripSymbolsCheckBox, 14, 1, 1, 1)
+
+        self.defaultSplashButton = QPushButton(self.commonTab)
+        self.defaultSplashButton.setObjectName(u"defaultSplashButton")
+
+        self.gridLayout.addWidget(self.defaultSplashButton, 5, 2, 1, 1)
+
+        self.distPathEdit = DirectoryEdit(self.commonTab)
+        self.distPathEdit.setObjectName(u"distPathEdit")
+
+        self.gridLayout.addWidget(self.distPathEdit, 1, 1, 1, 1)
+
+        self.selectSplashButton = QPushButton(self.commonTab)
+        self.selectSplashButton.setObjectName(u"selectSplashButton")
+
+        self.gridLayout.addWidget(self.selectSplashButton, 5, 3, 1, 1)
+
+        self.specPathLabel = QLabel(self.commonTab)
+        self.specPathLabel.setObjectName(u"specPathLabel")
+
+        self.gridLayout.addWidget(self.specPathLabel, 3, 0, 1, 1)
+
+        self.windowModeCombo = QComboBox(self.commonTab)
+        self.windowModeCombo.setObjectName(u"windowModeCombo")
+
+        self.gridLayout.addWidget(self.windowModeCombo, 7, 1, 1, 1)
+
+        self.defaultEncryptionKeyButton = QPushButton(self.commonTab)
+        self.defaultEncryptionKeyButton.setObjectName(u"defaultEncryptionKeyButton")
+
+        self.gridLayout.addWidget(self.defaultEncryptionKeyButton, 6, 2, 1, 1)
+
+        self.splashLabel = QLabel(self.commonTab)
+        self.splashLabel.setObjectName(u"splashLabel")
+
+        self.gridLayout.addWidget(self.splashLabel, 5, 0, 1, 1)
+
+        self.splashEdit = QLineEdit(self.commonTab)
+        self.splashEdit.setObjectName(u"splashEdit")
+
+        self.gridLayout.addWidget(self.splashEdit, 5, 1, 1, 1)
+
+        self.encryptionKeyEdit = QLineEdit(self.commonTab)
+        self.encryptionKeyEdit.setObjectName(u"encryptionKeyEdit")
+
+        self.gridLayout.addWidget(self.encryptionKeyEdit, 6, 1, 1, 1)
+
+        self.productNameEdit = QLineEdit(self.commonTab)
+        self.productNameEdit.setObjectName(u"productNameEdit")
+
+        self.gridLayout.addWidget(self.productNameEdit, 0, 1, 1, 1)
+
+        self.defaultLogLevelButton = QPushButton(self.commonTab)
+        self.defaultLogLevelButton.setObjectName(u"defaultLogLevelButton")
+
+        self.gridLayout.addWidget(self.defaultLogLevelButton, 9, 2, 1, 1)
+
+        self.logLevelCombo = QComboBox(self.commonTab)
+        self.logLevelCombo.setObjectName(u"logLevelCombo")
+
+        self.gridLayout.addWidget(self.logLevelCombo, 9, 1, 1, 1)
+
+        self.startPackButton = QPushButton(self.commonTab)
+        self.startPackButton.setObjectName(u"startPackButton")
+
+        self.gridLayout.addWidget(self.startPackButton, 17, 0, 1, 4)
+
+        self.noConfirmCheckBox = QCheckBox(self.commonTab)
+        self.noConfirmCheckBox.setObjectName(u"noConfirmCheckBox")
+        self.noConfirmCheckBox.setTristate(False)
+
+        self.gridLayout.addWidget(self.noConfirmCheckBox, 13, 1, 1, 1)
+
+        self.debugOptionCombo = QComboBox(self.commonTab)
+        self.debugOptionCombo.setObjectName(u"debugOptionCombo")
+
+        self.gridLayout.addWidget(self.debugOptionCombo, 10, 1, 1, 1)
+
+        self.selectAppIconButton = QPushButton(self.commonTab)
+        self.selectAppIconButton.setObjectName(u"selectAppIconButton")
+
+        self.gridLayout.addWidget(self.selectAppIconButton, 4, 3, 1, 1)
+
+        self.defaultProductModeButton = QPushButton(self.commonTab)
+        self.defaultProductModeButton.setObjectName(u"defaultProductModeButton")
+
+        self.gridLayout.addWidget(self.defaultProductModeButton, 8, 2, 1, 1)
+
         self.workPathLabel = QLabel(self.commonTab)
         self.workPathLabel.setObjectName(u"workPathLabel")
 
         self.gridLayout.addWidget(self.workPathLabel, 2, 0, 1, 1)
+
+        self.productNameLabel = QLabel(self.commonTab)
+        self.productNameLabel.setObjectName(u"productNameLabel")
+
+        self.gridLayout.addWidget(self.productNameLabel, 0, 0, 1, 1)
+
+        self.defaultDistPathButton = QPushButton(self.commonTab)
+        self.defaultDistPathButton.setObjectName(u"defaultDistPathButton")
+
+        self.gridLayout.addWidget(self.defaultDistPathButton, 1, 2, 1, 1)
 
         self.selectSpecPathButton = QPushButton(self.commonTab)
         self.selectSpecPathButton.setObjectName(u"selectSpecPathButton")
@@ -253,122 +320,60 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.logLevelLabel, 9, 0, 1, 1)
 
-        self.productModelLabel = QLabel(self.commonTab)
-        self.productModelLabel.setObjectName(u"productModelLabel")
+        self.appIconEdit = QLineEdit(self.commonTab)
+        self.appIconEdit.setObjectName(u"appIconEdit")
 
-        self.gridLayout.addWidget(self.productModelLabel, 8, 0, 1, 1)
+        self.gridLayout.addWidget(self.appIconEdit, 4, 1, 1, 1)
 
-        self.debugOptionLabel = QLabel(self.commonTab)
-        self.debugOptionLabel.setObjectName(u"debugOptionLabel")
+        self.encryptionKeyLabel = QLabel(self.commonTab)
+        self.encryptionKeyLabel.setObjectName(u"encryptionKeyLabel")
 
-        self.gridLayout.addWidget(self.debugOptionLabel, 10, 0, 1, 1)
-
-        self.selectDistPathButton = QPushButton(self.commonTab)
-        self.selectDistPathButton.setObjectName(u"selectDistPathButton")
-
-        self.gridLayout.addWidget(self.selectDistPathButton, 1, 3, 1, 1)
+        self.gridLayout.addWidget(self.encryptionKeyLabel, 6, 0, 1, 1)
 
         self.selectWorkPathButton = QPushButton(self.commonTab)
         self.selectWorkPathButton.setObjectName(u"selectWorkPathButton")
 
         self.gridLayout.addWidget(self.selectWorkPathButton, 2, 3, 1, 1)
 
-        self.defaultAppIconButton = QPushButton(self.commonTab)
-        self.defaultAppIconButton.setObjectName(u"defaultAppIconButton")
+        self.defaultProductNameButton = QPushButton(self.commonTab)
+        self.defaultProductNameButton.setObjectName(u"defaultProductNameButton")
 
-        self.gridLayout.addWidget(self.defaultAppIconButton, 4, 2, 1, 1)
+        self.gridLayout.addWidget(self.defaultProductNameButton, 0, 2, 1, 1)
 
-        self.defaultProductModeButton = QPushButton(self.commonTab)
-        self.defaultProductModeButton.setObjectName(u"defaultProductModeButton")
+        self.defaultDebugOptionButton = QPushButton(self.commonTab)
+        self.defaultDebugOptionButton.setObjectName(u"defaultDebugOptionButton")
 
-        self.gridLayout.addWidget(self.defaultProductModeButton, 8, 2, 1, 1)
+        self.gridLayout.addWidget(self.defaultDebugOptionButton, 10, 2, 1, 1)
 
         self.productModeCombo = QComboBox(self.commonTab)
         self.productModeCombo.setObjectName(u"productModeCombo")
 
         self.gridLayout.addWidget(self.productModeCombo, 8, 1, 1, 1)
 
-        self.splashEdit = QLineEdit(self.commonTab)
-        self.splashEdit.setObjectName(u"splashEdit")
+        self.debugOptionLabel = QLabel(self.commonTab)
+        self.debugOptionLabel.setObjectName(u"debugOptionLabel")
 
-        self.gridLayout.addWidget(self.splashEdit, 5, 1, 1, 1)
+        self.gridLayout.addWidget(self.debugOptionLabel, 10, 0, 1, 1)
+
+        self.defaultWindowModeButton = QPushButton(self.commonTab)
+        self.defaultWindowModeButton.setObjectName(u"defaultWindowModeButton")
+
+        self.gridLayout.addWidget(self.defaultWindowModeButton, 7, 2, 1, 1)
 
         self.defaultSpecPathButton = QPushButton(self.commonTab)
         self.defaultSpecPathButton.setObjectName(u"defaultSpecPathButton")
 
         self.gridLayout.addWidget(self.defaultSpecPathButton, 3, 2, 1, 1)
 
-        self.defaultEncryptionKeyButton = QPushButton(self.commonTab)
-        self.defaultEncryptionKeyButton.setObjectName(u"defaultEncryptionKeyButton")
+        self.defaultAppIconButton = QPushButton(self.commonTab)
+        self.defaultAppIconButton.setObjectName(u"defaultAppIconButton")
 
-        self.gridLayout.addWidget(self.defaultEncryptionKeyButton, 6, 2, 1, 1)
+        self.gridLayout.addWidget(self.defaultAppIconButton, 4, 2, 1, 1)
 
-        self.generateEncryptionKeyButton = QPushButton(self.commonTab)
-        self.generateEncryptionKeyButton.setObjectName(u"generateEncryptionKeyButton")
+        self.ignoreSignalsCheckBox = QCheckBox(self.commonTab)
+        self.ignoreSignalsCheckBox.setObjectName(u"ignoreSignalsCheckBox")
 
-        self.gridLayout.addWidget(self.generateEncryptionKeyButton, 6, 3, 1, 1)
-
-        self.logLevelCombo = QComboBox(self.commonTab)
-        self.logLevelCombo.setObjectName(u"logLevelCombo")
-
-        self.gridLayout.addWidget(self.logLevelCombo, 9, 1, 1, 1)
-
-        self.noConfirmCheckBox = QCheckBox(self.commonTab)
-        self.noConfirmCheckBox.setObjectName(u"noConfirmCheckBox")
-        self.noConfirmCheckBox.setTristate(False)
-
-        self.gridLayout.addWidget(self.noConfirmCheckBox, 13, 1, 1, 1)
-
-        self.distPathEdit = DirectoryEdit(self.commonTab)
-        self.distPathEdit.setObjectName(u"distPathEdit")
-
-        self.gridLayout.addWidget(self.distPathEdit, 1, 1, 1, 1)
-
-        self.appIconLabel = QLabel(self.commonTab)
-        self.appIconLabel.setObjectName(u"appIconLabel")
-
-        self.gridLayout.addWidget(self.appIconLabel, 4, 0, 1, 1)
-
-        self.selectSplashButton = QPushButton(self.commonTab)
-        self.selectSplashButton.setObjectName(u"selectSplashButton")
-
-        self.gridLayout.addWidget(self.selectSplashButton, 5, 3, 1, 1)
-
-        self.cleanBeforePackCheckBox = QCheckBox(self.commonTab)
-        self.cleanBeforePackCheckBox.setObjectName(u"cleanBeforePackCheckBox")
-        self.cleanBeforePackCheckBox.setTristate(False)
-
-        self.gridLayout.addWidget(self.cleanBeforePackCheckBox, 12, 1, 1, 1)
-
-        self.workPathEdit = QLineEdit(self.commonTab)
-        self.workPathEdit.setObjectName(u"workPathEdit")
-
-        self.gridLayout.addWidget(self.workPathEdit, 2, 1, 1, 1)
-
-        self.splashLabel = QLabel(self.commonTab)
-        self.splashLabel.setObjectName(u"splashLabel")
-
-        self.gridLayout.addWidget(self.splashLabel, 5, 0, 1, 1)
-
-        self.startPackButton = QPushButton(self.commonTab)
-        self.startPackButton.setObjectName(u"startPackButton")
-
-        self.gridLayout.addWidget(self.startPackButton, 16, 0, 1, 4)
-
-        self.defaultDistPathButton = QPushButton(self.commonTab)
-        self.defaultDistPathButton.setObjectName(u"defaultDistPathButton")
-
-        self.gridLayout.addWidget(self.defaultDistPathButton, 1, 2, 1, 1)
-
-        self.windowModeLabel = QLabel(self.commonTab)
-        self.windowModeLabel.setObjectName(u"windowModeLabel")
-
-        self.gridLayout.addWidget(self.windowModeLabel, 7, 0, 1, 1)
-
-        self.defaultProductNameButton = QPushButton(self.commonTab)
-        self.defaultProductNameButton.setObjectName(u"defaultProductNameButton")
-
-        self.gridLayout.addWidget(self.defaultProductNameButton, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.ignoreSignalsCheckBox, 16, 1, 1, 1)
 
 
         self.verticalLayout_2.addLayout(self.gridLayout)
@@ -378,17 +383,40 @@ class Ui_MainWindow(object):
         self.pathsTab.setObjectName(u"pathsTab")
         self.verticalLayout = QVBoxLayout(self.pathsTab)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout_3 = QVBoxLayout()
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.rtTmpDirLabel = QLabel(self.pathsTab)
+        self.rtTmpDirLabel.setObjectName(u"rtTmpDirLabel")
+
+        self.horizontalLayout.addWidget(self.rtTmpDirLabel)
+
+        self.rtTmpDirEdit = QLineEdit(self.pathsTab)
+        self.rtTmpDirEdit.setObjectName(u"rtTmpDirEdit")
+
+        self.horizontalLayout.addWidget(self.rtTmpDirEdit)
+
+        self.selectRTTmpDirButton = QPushButton(self.pathsTab)
+        self.selectRTTmpDirButton.setObjectName(u"selectRTTmpDirButton")
+
+        self.horizontalLayout.addWidget(self.selectRTTmpDirButton)
+
+        self.defaultRTTmpDirButton = QPushButton(self.pathsTab)
+        self.defaultRTTmpDirButton.setObjectName(u"defaultRTTmpDirButton")
+
+        self.horizontalLayout.addWidget(self.defaultRTTmpDirButton)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
         self.searchPathsLabel = QLabel(self.pathsTab)
         self.searchPathsLabel.setObjectName(u"searchPathsLabel")
 
-        self.verticalLayout_3.addWidget(self.searchPathsLabel)
+        self.verticalLayout.addWidget(self.searchPathsLabel)
 
         self.searchPathsListWidget = DirectoryListWidget(self.pathsTab)
         self.searchPathsListWidget.setObjectName(u"searchPathsListWidget")
 
-        self.verticalLayout_3.addWidget(self.searchPathsListWidget)
+        self.verticalLayout.addWidget(self.searchPathsListWidget)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -408,10 +436,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.clearSearchPathButton)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
-
-
-        self.verticalLayout.addLayout(self.verticalLayout_3)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
 
         self.mainTabWidget.addTab(self.pathsTab, "")
         self.extraDataTab = QWidget()
@@ -868,6 +893,71 @@ class Ui_MainWindow(object):
         self.verticalLayout_18.addItem(self.verticalSpacer)
 
         self.mainTabWidget.addTab(self.upxTab, "")
+        self.hooksTab = QWidget()
+        self.hooksTab.setObjectName(u"hooksTab")
+        self.verticalLayout_27 = QVBoxLayout(self.hooksTab)
+        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
+        self.verticalLayout_19 = QVBoxLayout()
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.hooksLabel = QLabel(self.hooksTab)
+        self.hooksLabel.setObjectName(u"hooksLabel")
+
+        self.verticalLayout_19.addWidget(self.hooksLabel)
+
+        self.hooksListWidget = QListWidget(self.hooksTab)
+        self.hooksListWidget.setObjectName(u"hooksListWidget")
+
+        self.verticalLayout_19.addWidget(self.hooksListWidget)
+
+        self.horizontalLayout_25 = QHBoxLayout()
+        self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
+        self.addHooksButton = QPushButton(self.hooksTab)
+        self.addHooksButton.setObjectName(u"addHooksButton")
+
+        self.horizontalLayout_25.addWidget(self.addHooksButton)
+
+        self.removeHooksButton = QPushButton(self.hooksTab)
+        self.removeHooksButton.setObjectName(u"removeHooksButton")
+
+        self.horizontalLayout_25.addWidget(self.removeHooksButton)
+
+
+        self.verticalLayout_19.addLayout(self.horizontalLayout_25)
+
+
+        self.verticalLayout_27.addLayout(self.verticalLayout_19)
+
+        self.verticalLayout_20 = QVBoxLayout()
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.rtHooksLabel = QLabel(self.hooksTab)
+        self.rtHooksLabel.setObjectName(u"rtHooksLabel")
+
+        self.verticalLayout_20.addWidget(self.rtHooksLabel)
+
+        self.rtHooksListWidget = QListWidget(self.hooksTab)
+        self.rtHooksListWidget.setObjectName(u"rtHooksListWidget")
+
+        self.verticalLayout_20.addWidget(self.rtHooksListWidget)
+
+        self.horizontalLayout_26 = QHBoxLayout()
+        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
+        self.addRTHooksButton = QPushButton(self.hooksTab)
+        self.addRTHooksButton.setObjectName(u"addRTHooksButton")
+
+        self.horizontalLayout_26.addWidget(self.addRTHooksButton)
+
+        self.removeRTHooksButton = QPushButton(self.hooksTab)
+        self.removeRTHooksButton.setObjectName(u"removeRTHooksButton")
+
+        self.horizontalLayout_26.addWidget(self.removeRTHooksButton)
+
+
+        self.verticalLayout_20.addLayout(self.horizontalLayout_26)
+
+
+        self.verticalLayout_27.addLayout(self.verticalLayout_20)
+
+        self.mainTabWidget.addTab(self.hooksTab, "")
         self.platformTab = QWidget()
         self.platformTab.setObjectName(u"platformTab")
         self.horizontalLayout_24 = QHBoxLayout(self.platformTab)
@@ -1017,131 +1107,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_24.addWidget(self.tabWidget_2)
 
         self.mainTabWidget.addTab(self.platformTab, "")
-        self.miscTab = QWidget()
-        self.miscTab.setObjectName(u"miscTab")
-        self.verticalLayout_27 = QVBoxLayout(self.miscTab)
-        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.verticalLayout_19 = QVBoxLayout()
-        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
-        self.hooksLabel = QLabel(self.miscTab)
-        self.hooksLabel.setObjectName(u"hooksLabel")
-
-        self.verticalLayout_19.addWidget(self.hooksLabel)
-
-        self.hooksListWidget = QListWidget(self.miscTab)
-        self.hooksListWidget.setObjectName(u"hooksListWidget")
-
-        self.verticalLayout_19.addWidget(self.hooksListWidget)
-
-        self.horizontalLayout_25 = QHBoxLayout()
-        self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
-        self.addHooksButton = QPushButton(self.miscTab)
-        self.addHooksButton.setObjectName(u"addHooksButton")
-
-        self.horizontalLayout_25.addWidget(self.addHooksButton)
-
-        self.removeHooksButton = QPushButton(self.miscTab)
-        self.removeHooksButton.setObjectName(u"removeHooksButton")
-
-        self.horizontalLayout_25.addWidget(self.removeHooksButton)
-
-
-        self.verticalLayout_19.addLayout(self.horizontalLayout_25)
-
-
-        self.verticalLayout_27.addLayout(self.verticalLayout_19)
-
-        self.verticalLayout_20 = QVBoxLayout()
-        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.rtHooksLabel = QLabel(self.miscTab)
-        self.rtHooksLabel.setObjectName(u"rtHooksLabel")
-
-        self.verticalLayout_20.addWidget(self.rtHooksLabel)
-
-        self.rtHooksListWidget = QListWidget(self.miscTab)
-        self.rtHooksListWidget.setObjectName(u"rtHooksListWidget")
-
-        self.verticalLayout_20.addWidget(self.rtHooksListWidget)
-
-        self.horizontalLayout_26 = QHBoxLayout()
-        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
-        self.addRTHooksButton = QPushButton(self.miscTab)
-        self.addRTHooksButton.setObjectName(u"addRTHooksButton")
-
-        self.horizontalLayout_26.addWidget(self.addRTHooksButton)
-
-        self.removeRTHooksButton = QPushButton(self.miscTab)
-        self.removeRTHooksButton.setObjectName(u"removeRTHooksButton")
-
-        self.horizontalLayout_26.addWidget(self.removeRTHooksButton)
-
-
-        self.verticalLayout_20.addLayout(self.horizontalLayout_26)
-
-
-        self.verticalLayout_27.addLayout(self.verticalLayout_20)
-
-        self.verticalLayout_25 = QVBoxLayout()
-        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
-        self.rtTmpDirLabel = QLabel(self.miscTab)
-        self.rtTmpDirLabel.setObjectName(u"rtTmpDirLabel")
-
-        self.verticalLayout_25.addWidget(self.rtTmpDirLabel)
-
-        self.rtTmpDirlistWidget = QListWidget(self.miscTab)
-        self.rtTmpDirlistWidget.setObjectName(u"rtTmpDirlistWidget")
-
-        self.verticalLayout_25.addWidget(self.rtTmpDirlistWidget)
-
-        self.horizontalLayout_27 = QHBoxLayout()
-        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
-        self.addRTTmpDirButton = QPushButton(self.miscTab)
-        self.addRTTmpDirButton.setObjectName(u"addRTTmpDirButton")
-
-        self.horizontalLayout_27.addWidget(self.addRTTmpDirButton)
-
-        self.removeRTTmpDirButton = QPushButton(self.miscTab)
-        self.removeRTTmpDirButton.setObjectName(u"removeRTTmpDirButton")
-
-        self.horizontalLayout_27.addWidget(self.removeRTTmpDirButton)
-
-
-        self.verticalLayout_25.addLayout(self.horizontalLayout_27)
-
-
-        self.verticalLayout_27.addLayout(self.verticalLayout_25)
-
-        self.verticalLayout_26 = QVBoxLayout()
-        self.verticalLayout_26.setObjectName(u"verticalLayout_26")
-        self.blIgnoreSignalsLabel = QLabel(self.miscTab)
-        self.blIgnoreSignalsLabel.setObjectName(u"blIgnoreSignalsLabel")
-
-        self.verticalLayout_26.addWidget(self.blIgnoreSignalsLabel)
-
-        self.blIgnoreSignalsListWidget = QListWidget(self.miscTab)
-        self.blIgnoreSignalsListWidget.setObjectName(u"blIgnoreSignalsListWidget")
-
-        self.verticalLayout_26.addWidget(self.blIgnoreSignalsListWidget)
-
-        self.horizontalLayout_28 = QHBoxLayout()
-        self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
-        self.addBLIgnoreSignalsButton = QPushButton(self.miscTab)
-        self.addBLIgnoreSignalsButton.setObjectName(u"addBLIgnoreSignalsButton")
-
-        self.horizontalLayout_28.addWidget(self.addBLIgnoreSignalsButton)
-
-        self.removeBLIgnoreSignalsButton = QPushButton(self.miscTab)
-        self.removeBLIgnoreSignalsButton.setObjectName(u"removeBLIgnoreSignalsButton")
-
-        self.horizontalLayout_28.addWidget(self.removeBLIgnoreSignalsButton)
-
-
-        self.verticalLayout_26.addLayout(self.horizontalLayout_28)
-
-
-        self.verticalLayout_27.addLayout(self.verticalLayout_26)
-
-        self.mainTabWidget.addTab(self.miscTab, "")
         self.metadataTab = QWidget()
         self.metadataTab.setObjectName(u"metadataTab")
         self.verticalLayout_4 = QVBoxLayout(self.metadataTab)
@@ -1242,7 +1207,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(3)
+        self.mainTabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -1280,40 +1245,44 @@ class Ui_MainWindow(object):
         self.scriptsLabel.setText(QCoreApplication.translate("MainWindow", u"Scripts", None))
         self.addScriptButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeScriptButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.specPathLabel.setText(QCoreApplication.translate("MainWindow", u"Spec Path", None))
-        self.defaultDebugOptionButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.productNameLabel.setText(QCoreApplication.translate("MainWindow", u"Product Name", None))
-        self.defaultLogLevelButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.distPathLabel.setText(QCoreApplication.translate("MainWindow", u"Dist Path", None))
-        self.stripSymbolsCheckBox.setText(QCoreApplication.translate("MainWindow", u"Strip symbol-table", None))
-        self.defaultWindowModeButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.encryptionKeyLabel.setText(QCoreApplication.translate("MainWindow", u"Encryption Key", None))
-        self.selectAppIconButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.defaultSplashButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.defaultWorkPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.cleanBeforePackCheckBox.setText(QCoreApplication.translate("MainWindow", u"Clean before build", None))
+        self.selectDistPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.windowModeLabel.setText(QCoreApplication.translate("MainWindow", u"Window Mode", None))
         self.asciiOnlyCheckBox.setText(QCoreApplication.translate("MainWindow", u"ASCII only\uff08no unicode\uff09", None))
+        self.generateEncryptionKeyButton.setText(QCoreApplication.translate("MainWindow", u"Auto Gen", None))
+        self.defaultWorkPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.productModelLabel.setText(QCoreApplication.translate("MainWindow", u"Product Mode", None))
+        self.appIconLabel.setText(QCoreApplication.translate("MainWindow", u"App Icon", None))
+        self.stripSymbolsCheckBox.setText(QCoreApplication.translate("MainWindow", u"Strip symbol-table", None))
+        self.defaultSplashButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.selectSplashButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.specPathLabel.setText(QCoreApplication.translate("MainWindow", u"Spec Path", None))
+        self.defaultEncryptionKeyButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.splashLabel.setText(QCoreApplication.translate("MainWindow", u"Splash", None))
+        self.defaultLogLevelButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.startPackButton.setText(QCoreApplication.translate("MainWindow", u"Pack", None))
+        self.noConfirmCheckBox.setText(QCoreApplication.translate("MainWindow", u"Don't Confirm", None))
+        self.selectAppIconButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.defaultProductModeButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.workPathLabel.setText(QCoreApplication.translate("MainWindow", u"Work Path", None))
+        self.productNameLabel.setText(QCoreApplication.translate("MainWindow", u"Product Name", None))
+        self.defaultDistPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.selectSpecPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.logLevelLabel.setText(QCoreApplication.translate("MainWindow", u"Log Level", None))
-        self.productModelLabel.setText(QCoreApplication.translate("MainWindow", u"Product Mode", None))
-        self.debugOptionLabel.setText(QCoreApplication.translate("MainWindow", u"Debug Option", None))
-        self.selectDistPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.encryptionKeyLabel.setText(QCoreApplication.translate("MainWindow", u"Encryption Key", None))
         self.selectWorkPathButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.defaultAppIconButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.defaultProductModeButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.defaultSpecPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.defaultEncryptionKeyButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.generateEncryptionKeyButton.setText(QCoreApplication.translate("MainWindow", u"Auto Gen", None))
-        self.noConfirmCheckBox.setText(QCoreApplication.translate("MainWindow", u"Don't Confirm", None))
-        self.appIconLabel.setText(QCoreApplication.translate("MainWindow", u"App Icon", None))
-        self.selectSplashButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.cleanBeforePackCheckBox.setText(QCoreApplication.translate("MainWindow", u"Clean before build", None))
-        self.splashLabel.setText(QCoreApplication.translate("MainWindow", u"Splash", None))
-        self.startPackButton.setText(QCoreApplication.translate("MainWindow", u"Pack", None))
-        self.defaultDistPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.windowModeLabel.setText(QCoreApplication.translate("MainWindow", u"Window Mode", None))
         self.defaultProductNameButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.defaultDebugOptionButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.debugOptionLabel.setText(QCoreApplication.translate("MainWindow", u"Debug Option", None))
+        self.defaultWindowModeButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.defaultSpecPathButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.defaultAppIconButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.ignoreSignalsCheckBox.setText(QCoreApplication.translate("MainWindow", u"Bootloader Ignore Signals", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.commonTab), QCoreApplication.translate("MainWindow", u"Common", None))
+        self.rtTmpDirLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime Tmp Dir", None))
+        self.selectRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.defaultRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.searchPathsLabel.setText(QCoreApplication.translate("MainWindow", u"Search Paths", None))
         self.addSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
@@ -1360,6 +1329,13 @@ class Ui_MainWindow(object):
         self.addUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.upxTab), QCoreApplication.translate("MainWindow", u"UPX", None))
+        self.hooksLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
+        self.addHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.rtHooksLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime hooks", None))
+        self.addRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.removeRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.hooksTab), QCoreApplication.translate("MainWindow", u"Hooks", None))
         self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
         self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))
         self.uacUIAccessCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-uiaccess", None))
@@ -1378,19 +1354,6 @@ class Ui_MainWindow(object):
         self.selectEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.macosxOptionTab), QCoreApplication.translate("MainWindow", u"Mac OS X", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.platformTab), QCoreApplication.translate("MainWindow", u"Platform Specific", None))
-        self.hooksLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
-        self.addHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.rtHooksLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime hooks", None))
-        self.addRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.rtTmpDirLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime tmp dir", None))
-        self.addRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.blIgnoreSignalsLabel.setText(QCoreApplication.translate("MainWindow", u"Bootloader ignore signals", None))
-        self.addBLIgnoreSignalsButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.removeBLIgnoreSignalsButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.miscTab), QCoreApplication.translate("MainWindow", u"MISC", None))
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"name", None))
         self.authorLabel.setText(QCoreApplication.translate("MainWindow", u"author", None))
         self.versionLabel.setText(QCoreApplication.translate("MainWindow", u"version", None))

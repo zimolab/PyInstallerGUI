@@ -6,6 +6,7 @@ import os
 import uuid
 import webbrowser
 from os.path import isfile, exists, join, abspath
+from pathlib import Path
 from typing import Union
 
 from PySide2 import QtCore
@@ -242,6 +243,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.autosetFlagUI(flag=self._commonOptions.stripSymbolTable, flagBox=self.stripSymbolsCheckBox)
         # asciiOnly
         self.autosetFlagUI(flag=self._commonOptions.asciiOnly, flagBox=self.asciiOnlyCheckBox)
+        # bootloaderIgnoreSignals
+        self.autosetFlagUI(flag=self._commonOptions.bootloaderIgnoreSignals, flagBox=self.ignoreSignalsCheckBox)
 
         # searchPaths&runtimeTmpDir
         def onSearchPaths(paths, option: BindingMultipleOption):
@@ -387,6 +390,12 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  removeButton=self.removeDeepcopyMetadataButton, onAdd=onAddItem, enableDrop=False,
                                  onModify=onModifyItem)
 
+        # runtimeTmpDir
+        self.autosetPathSelectionUI(option=self._commonOptions.runtimeTmpDir, label=self.rtTmpDirLabel,
+                                    edit=self.rtTmpDirEdit, selectButton=self.selectRTTmpDirButton,
+                                    defaultButton=self.defaultRTTmpDirButton, selectionMode=self.SELECT_DIR,
+                                    startPath=str(Path.home()))
+
 
 
     def setupUPXOptionsUI(self):
@@ -399,7 +408,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
         pass
 
     def autosetPathSelectionUI(self, option: BindingOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,
-                               defaultButton: QPushButton, selectionMode, filters=None):
+                               defaultButton: QPushButton, selectionMode, filters=None, startPath=None):
+        if startPath is None:
+            startPath = os.getcwd()
 
         if selectionMode != self.SELECT_FILE and selectionMode != self.SELECT_DIR:
             raise ValueError(f"unsupported selectionMode of {selectionMode}")
@@ -409,13 +420,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 filters = FILTER_ALL_FILE
         self.setTooltip(option.description, edit, label)
         option.bind(edit)
-        defaultButton.clicked.connect(option.unset)
+        if defaultButton is not None:
+            defaultButton.clicked.connect(option.unset)
 
         def onSelectPath():
             if selectionMode == self.SELECT_FILE:
-                selected = openFileDialog(self, self.tr("Select File"), path=None, filters=filters)
+                selected = openFileDialog(self, self.tr("Select File"), path=startPath, filters=filters)
             else:
-                selected = openDirDialog(self, self.tr("Select Directory"))
+                selected = openDirDialog(self, self.tr("Select Directory"), path=startPath)
 
             if selected is not None:
                 option.set(selected)

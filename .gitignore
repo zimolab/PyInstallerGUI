@@ -1,5 +1,6 @@
 *.spec
 .venv
 dist
+build
 .idea
 .idea/PyInstallerGUI.iml
