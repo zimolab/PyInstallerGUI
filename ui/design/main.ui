@@ -14,7 +14,7 @@
   <property name="font">
    <font>
     <family>Arial</family>
-    <pointsize>9</pointsize>
+    <pointsize>10</pointsize>
    </font>
   </property>
   <property name="acceptDrops">
@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -1391,7 +1391,7 @@
      <x>0</x>
      <y>0</y>
      <width>709</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="fileMenu">
@@ -1428,16 +1428,6 @@
    <addaction name="helpMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionLoadPreset">
-   <property name="text">
-    <string>load preset</string>
-   </property>
-  </action>
-  <action name="actionSavePreset">
-   <property name="text">
-    <string>save preset</string>
-   </property>
-  </action>
   <action name="actionStartPack">
    <property name="text">
     <string>Start Pack</string>
@@ -1457,10 +1447,16 @@
    <property name="text">
     <string>Sava Configs</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionLoadConfigs">
    <property name="text">
     <string>Load Configs</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionHelp">
@@ -1468,14 +1464,12 @@
     <string>Help</string>
    </property>
   </action>
-  <action name="actionSettings">
-   <property name="text">
-    <string>Settings</string>
-   </property>
-  </action>
   <action name="actionNewConfigs">
    <property name="text">
     <string>New Configs</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionGotoPyinstallerWebsite">

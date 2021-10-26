@@ -10,6 +10,12 @@
     <height>209</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Add Items</string>
   </property>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_itemsSMhwRv.ui'
+## Form generated from reading UI file 'add_itemsqyVPHt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,6 +18,10 @@ class Ui_AddItemsDialog(object):
         if not AddItemsDialog.objectName():
             AddItemsDialog.setObjectName(u"AddItemsDialog")
         AddItemsDialog.resize(507, 209)
+        font = QFont()
+        font.setFamily(u"Arial")
+        font.setPointSize(9)
+        AddItemsDialog.setFont(font)
         self.verticalLayout = QVBoxLayout(AddItemsDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.itemsLabel = QLabel(AddItemsDialog)

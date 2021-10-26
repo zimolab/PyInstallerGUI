@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainCJkbCJ.ui'
+## Form generated from reading UI file 'mainKBtMuY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -25,13 +25,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(709, 917)
         font = QFont()
         font.setFamily(u"Arial")
-        font.setPointSize(9)
+        font.setPointSize(10)
         MainWindow.setFont(font)
         MainWindow.setAcceptDrops(True)
-        self.actionLoadPreset = QAction(MainWindow)
-        self.actionLoadPreset.setObjectName(u"actionLoadPreset")
-        self.actionSavePreset = QAction(MainWindow)
-        self.actionSavePreset.setObjectName(u"actionSavePreset")
         self.actionStartPack = QAction(MainWindow)
         self.actionStartPack.setObjectName(u"actionStartPack")
         self.actionExit = QAction(MainWindow)
@@ -44,8 +40,6 @@ class Ui_MainWindow(object):
         self.actionLoadConfigs.setObjectName(u"actionLoadConfigs")
         self.actionHelp = QAction(MainWindow)
         self.actionHelp.setObjectName(u"actionHelp")
-        self.actionSettings = QAction(MainWindow)
-        self.actionSettings.setObjectName(u"actionSettings")
         self.actionNewConfigs = QAction(MainWindow)
         self.actionNewConfigs.setObjectName(u"actionNewConfigs")
         self.actionGotoPyinstallerWebsite = QAction(MainWindow)
@@ -1213,7 +1207,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 709, 23))
+        self.menubar.setGeometry(QRect(0, 0, 709, 25))
         self.fileMenu = QMenu(self.menubar)
         self.fileMenu.setObjectName(u"fileMenu")
         self.commandMenu = QMenu(self.menubar)
@@ -1246,7 +1240,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(3)
+        self.mainTabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -1255,16 +1249,22 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"PyInstaller GUI", None))
-        self.actionLoadPreset.setText(QCoreApplication.translate("MainWindow", u"load preset", None))
-        self.actionSavePreset.setText(QCoreApplication.translate("MainWindow", u"save preset", None))
         self.actionStartPack.setText(QCoreApplication.translate("MainWindow", u"Start Pack", None))
         self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Quit", None))
         self.actionAbout.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.actionSaveConfigs.setText(QCoreApplication.translate("MainWindow", u"Sava Configs", None))
+#if QT_CONFIG(shortcut)
+        self.actionSaveConfigs.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
+#endif // QT_CONFIG(shortcut)
         self.actionLoadConfigs.setText(QCoreApplication.translate("MainWindow", u"Load Configs", None))
+#if QT_CONFIG(shortcut)
+        self.actionLoadConfigs.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+O", None))
+#endif // QT_CONFIG(shortcut)
         self.actionHelp.setText(QCoreApplication.translate("MainWindow", u"Help", None))
-        self.actionSettings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.actionNewConfigs.setText(QCoreApplication.translate("MainWindow", u"New Configs", None))
+#if QT_CONFIG(shortcut)
+        self.actionNewConfigs.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+N", None))
+#endif // QT_CONFIG(shortcut)
         self.actionGotoPyinstallerWebsite.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Website", None))
         self.actionGotoPyInstallerDoc.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Documentation", None))
         self.actionStartGenSpceFile.setText(QCoreApplication.translate("MainWindow", u"Generate Spce File", None))
