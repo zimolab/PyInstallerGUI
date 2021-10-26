@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainrBMCzm.ui'
+## Form generated from reading UI file 'mainIKeHVb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -1051,55 +1051,30 @@ class Ui_MainWindow(object):
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.manifestFileLabel = QLabel(self.windowsOptionTab)
+        self.manifestFileLabel.setObjectName(u"manifestFileLabel")
+
+        self.gridLayout_4.addWidget(self.manifestFileLabel, 2, 0, 1, 1)
+
         self.versionFileLabel = QLabel(self.windowsOptionTab)
         self.versionFileLabel.setObjectName(u"versionFileLabel")
 
         self.gridLayout_4.addWidget(self.versionFileLabel, 1, 0, 1, 1)
+
+        self.privateAssembliesCheckBox = QCheckBox(self.windowsOptionTab)
+        self.privateAssembliesCheckBox.setObjectName(u"privateAssembliesCheckBox")
+
+        self.gridLayout_4.addWidget(self.privateAssembliesCheckBox, 6, 1, 1, 1)
 
         self.resourceLabel = QLabel(self.windowsOptionTab)
         self.resourceLabel.setObjectName(u"resourceLabel")
 
         self.gridLayout_4.addWidget(self.resourceLabel, 3, 0, 1, 1)
 
-        self.uacUIAccessCheckBox = QCheckBox(self.windowsOptionTab)
-        self.uacUIAccessCheckBox.setObjectName(u"uacUIAccessCheckBox")
-
-        self.gridLayout_4.addWidget(self.uacUIAccessCheckBox, 5, 1, 1, 1)
-
-        self.selectManifestFileButton = QPushButton(self.windowsOptionTab)
-        self.selectManifestFileButton.setObjectName(u"selectManifestFileButton")
-
-        self.gridLayout_4.addWidget(self.selectManifestFileButton, 2, 2, 1, 1)
-
         self.resourceEdit = QLineEdit(self.windowsOptionTab)
         self.resourceEdit.setObjectName(u"resourceEdit")
 
         self.gridLayout_4.addWidget(self.resourceEdit, 3, 1, 1, 1)
-
-        self.versionFileEdit = QLineEdit(self.windowsOptionTab)
-        self.versionFileEdit.setObjectName(u"versionFileEdit")
-
-        self.gridLayout_4.addWidget(self.versionFileEdit, 1, 1, 1, 1)
-
-        self.manifestFileLabel = QLabel(self.windowsOptionTab)
-        self.manifestFileLabel.setObjectName(u"manifestFileLabel")
-
-        self.gridLayout_4.addWidget(self.manifestFileLabel, 2, 0, 1, 1)
-
-        self.selectVersionFileButton = QPushButton(self.windowsOptionTab)
-        self.selectVersionFileButton.setObjectName(u"selectVersionFileButton")
-
-        self.gridLayout_4.addWidget(self.selectVersionFileButton, 1, 2, 1, 1)
-
-        self.uacAdminCheckBox = QCheckBox(self.windowsOptionTab)
-        self.uacAdminCheckBox.setObjectName(u"uacAdminCheckBox")
-
-        self.gridLayout_4.addWidget(self.uacAdminCheckBox, 4, 1, 1, 1)
-
-        self.selectResourceButton = QPushButton(self.windowsOptionTab)
-        self.selectResourceButton.setObjectName(u"selectResourceButton")
-
-        self.gridLayout_4.addWidget(self.selectResourceButton, 3, 2, 1, 1)
 
         self.manifestFileEdit = QLineEdit(self.windowsOptionTab)
         self.manifestFileEdit.setObjectName(u"manifestFileEdit")
@@ -1111,10 +1086,50 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.noPreferRedirectsCheckBox, 7, 1, 1, 1)
 
-        self.privateAssembliesCheckBox = QCheckBox(self.windowsOptionTab)
-        self.privateAssembliesCheckBox.setObjectName(u"privateAssembliesCheckBox")
+        self.versionFileEdit = QLineEdit(self.windowsOptionTab)
+        self.versionFileEdit.setObjectName(u"versionFileEdit")
 
-        self.gridLayout_4.addWidget(self.privateAssembliesCheckBox, 6, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.versionFileEdit, 1, 1, 1, 1)
+
+        self.uacAdminCheckBox = QCheckBox(self.windowsOptionTab)
+        self.uacAdminCheckBox.setObjectName(u"uacAdminCheckBox")
+
+        self.gridLayout_4.addWidget(self.uacAdminCheckBox, 4, 1, 1, 1)
+
+        self.uacUIAccessCheckBox = QCheckBox(self.windowsOptionTab)
+        self.uacUIAccessCheckBox.setObjectName(u"uacUIAccessCheckBox")
+
+        self.gridLayout_4.addWidget(self.uacUIAccessCheckBox, 5, 1, 1, 1)
+
+        self.selectResourceButton = QPushButton(self.windowsOptionTab)
+        self.selectResourceButton.setObjectName(u"selectResourceButton")
+
+        self.gridLayout_4.addWidget(self.selectResourceButton, 3, 2, 1, 1)
+
+        self.selectManifestFileButton = QPushButton(self.windowsOptionTab)
+        self.selectManifestFileButton.setObjectName(u"selectManifestFileButton")
+
+        self.gridLayout_4.addWidget(self.selectManifestFileButton, 2, 2, 1, 1)
+
+        self.selectVersionFileButton = QPushButton(self.windowsOptionTab)
+        self.selectVersionFileButton.setObjectName(u"selectVersionFileButton")
+
+        self.gridLayout_4.addWidget(self.selectVersionFileButton, 1, 2, 1, 1)
+
+        self.defaultVersionFileButton = QPushButton(self.windowsOptionTab)
+        self.defaultVersionFileButton.setObjectName(u"defaultVersionFileButton")
+
+        self.gridLayout_4.addWidget(self.defaultVersionFileButton, 1, 3, 1, 1)
+
+        self.defaultManifestFileButton = QPushButton(self.windowsOptionTab)
+        self.defaultManifestFileButton.setObjectName(u"defaultManifestFileButton")
+
+        self.gridLayout_4.addWidget(self.defaultManifestFileButton, 2, 3, 1, 1)
+
+        self.defaultResourceButton = QPushButton(self.windowsOptionTab)
+        self.defaultResourceButton.setObjectName(u"defaultResourceButton")
+
+        self.gridLayout_4.addWidget(self.defaultResourceButton, 3, 3, 1, 1)
 
 
         self.verticalLayout_10.addLayout(self.gridLayout_4)
@@ -1130,10 +1145,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.gridLayout_5 = QGridLayout()
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.entitlementsFileLabel = QLabel(self.macosxOptionTab)
-        self.entitlementsFileLabel.setObjectName(u"entitlementsFileLabel")
+        self.codesignIdentityEdit = QLineEdit(self.macosxOptionTab)
+        self.codesignIdentityEdit.setObjectName(u"codesignIdentityEdit")
 
-        self.gridLayout_5.addWidget(self.entitlementsFileLabel, 0, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.codesignIdentityEdit, 3, 1, 1, 1)
 
         self.entitlementsFileEdit = QLineEdit(self.macosxOptionTab)
         self.entitlementsFileEdit.setObjectName(u"entitlementsFileEdit")
@@ -1145,15 +1160,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.targetArchitectureLabel, 1, 0, 1, 1)
 
-        self.targetArchitectureCombo = QComboBox(self.macosxOptionTab)
-        self.targetArchitectureCombo.setObjectName(u"targetArchitectureCombo")
-
-        self.gridLayout_5.addWidget(self.targetArchitectureCombo, 1, 1, 1, 1)
-
         self.bundleIdentifierLabel = QLabel(self.macosxOptionTab)
         self.bundleIdentifierLabel.setObjectName(u"bundleIdentifierLabel")
 
         self.gridLayout_5.addWidget(self.bundleIdentifierLabel, 2, 0, 1, 1)
+
+        self.entitlementsFileLabel = QLabel(self.macosxOptionTab)
+        self.entitlementsFileLabel.setObjectName(u"entitlementsFileLabel")
+
+        self.gridLayout_5.addWidget(self.entitlementsFileLabel, 0, 0, 1, 1)
+
+        self.targetArchitectureCombo = QComboBox(self.macosxOptionTab)
+        self.targetArchitectureCombo.setObjectName(u"targetArchitectureCombo")
+
+        self.gridLayout_5.addWidget(self.targetArchitectureCombo, 1, 1, 1, 1)
 
         self.bundleIdentifierEdit = QLineEdit(self.macosxOptionTab)
         self.bundleIdentifierEdit.setObjectName(u"bundleIdentifierEdit")
@@ -1165,15 +1185,15 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.codesignIdentityLabel, 3, 0, 1, 1)
 
-        self.codesignIdentityEdit = QLineEdit(self.macosxOptionTab)
-        self.codesignIdentityEdit.setObjectName(u"codesignIdentityEdit")
-
-        self.gridLayout_5.addWidget(self.codesignIdentityEdit, 3, 1, 1, 1)
-
         self.selectEntitlementsFileButton = QPushButton(self.macosxOptionTab)
         self.selectEntitlementsFileButton.setObjectName(u"selectEntitlementsFileButton")
 
         self.gridLayout_5.addWidget(self.selectEntitlementsFileButton, 0, 2, 1, 1)
+
+        self.defaultEntitlementsFileButton = QPushButton(self.macosxOptionTab)
+        self.defaultEntitlementsFileButton.setObjectName(u"defaultEntitlementsFileButton")
+
+        self.gridLayout_5.addWidget(self.defaultEntitlementsFileButton, 0, 3, 1, 1)
 
 
         self.verticalLayout_12.addLayout(self.gridLayout_5)
@@ -1290,8 +1310,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
 
-        self.mainTabWidget.setCurrentIndex(6)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.mainTabWidget.setCurrentIndex(7)
+        self.tabWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1423,7 +1443,7 @@ class Ui_MainWindow(object):
         self.removeUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearUPXExcludesButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.upxTab), QCoreApplication.translate("MainWindow", u"UPX", None))
-        self.hookDirsLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks", None))
+        self.hookDirsLabel.setText(QCoreApplication.translate("MainWindow", u"Additional hooks dirs", None))
         self.addHookDirsButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeHookDirsButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearHookDirsButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
@@ -1432,22 +1452,26 @@ class Ui_MainWindow(object):
         self.removeRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.clearRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.hooksTab), QCoreApplication.translate("MainWindow", u"Hooks", None))
-        self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
-        self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))
-        self.uacUIAccessCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-uiaccess", None))
-        self.selectManifestFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.manifestFileLabel.setText(QCoreApplication.translate("MainWindow", u"Manifest File", None))
-        self.selectVersionFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.uacAdminCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-admin", None))
-        self.selectResourceButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.noPreferRedirectsCheckBox.setText(QCoreApplication.translate("MainWindow", u"win-no-prefer-redirects", None))
+        self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
         self.privateAssembliesCheckBox.setText(QCoreApplication.translate("MainWindow", u"win-private-assemblies", None))
+        self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))
+        self.noPreferRedirectsCheckBox.setText(QCoreApplication.translate("MainWindow", u"win-no-prefer-redirects", None))
+        self.uacAdminCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-admin", None))
+        self.uacUIAccessCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-uiaccess", None))
+        self.selectResourceButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.selectManifestFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.selectVersionFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.defaultVersionFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.defaultManifestFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.defaultResourceButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.windowsOptionTab), QCoreApplication.translate("MainWindow", u"Windows", None))
-        self.entitlementsFileLabel.setText(QCoreApplication.translate("MainWindow", u"Entitlements File", None))
         self.targetArchitectureLabel.setText(QCoreApplication.translate("MainWindow", u"Target Architecture", None))
         self.bundleIdentifierLabel.setText(QCoreApplication.translate("MainWindow", u"Bundle Identifier", None))
+        self.entitlementsFileLabel.setText(QCoreApplication.translate("MainWindow", u"Entitlements File", None))
         self.codesignIdentityLabel.setText(QCoreApplication.translate("MainWindow", u"Codesign Identity", None))
         self.selectEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.defaultEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.macosxOptionTab), QCoreApplication.translate("MainWindow", u"Mac OS X", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.platformTab), QCoreApplication.translate("MainWindow", u"Platform Specific", None))
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"name", None))

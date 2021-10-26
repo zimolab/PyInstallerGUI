@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="commonTab">
        <attribute name="title">
@@ -1265,7 +1265,7 @@
            <enum>QTabWidget::South</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="windowsOptionTab">
            <attribute name="title">
@@ -1274,10 +1274,24 @@
            <layout class="QVBoxLayout" name="verticalLayout_10">
             <item>
              <layout class="QGridLayout" name="gridLayout_4">
+              <item row="2" column="0">
+               <widget class="QLabel" name="manifestFileLabel">
+                <property name="text">
+                 <string>Manifest File</string>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="0">
                <widget class="QLabel" name="versionFileLabel">
                 <property name="text">
                  <string>Version File</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QCheckBox" name="privateAssembliesCheckBox">
+                <property name="text">
+                 <string>win-private-assemblies</string>
                 </property>
                </widget>
               </item>
@@ -1288,53 +1302,8 @@
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="uacUIAccessCheckBox">
-                <property name="text">
-                 <string>uac-uiaccess</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QPushButton" name="selectManifestFileButton">
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
-              </item>
               <item row="3" column="1">
                <widget class="QLineEdit" name="resourceEdit"/>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="versionFileEdit"/>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="manifestFileLabel">
-                <property name="text">
-                 <string>Manifest File</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QPushButton" name="selectVersionFileButton">
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="uacAdminCheckBox">
-                <property name="text">
-                 <string>uac-admin</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QPushButton" name="selectResourceButton">
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
               </item>
               <item row="2" column="1">
                <widget class="QLineEdit" name="manifestFileEdit"/>
@@ -1346,10 +1315,62 @@
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
-               <widget class="QCheckBox" name="privateAssembliesCheckBox">
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="versionFileEdit"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="uacAdminCheckBox">
                 <property name="text">
-                 <string>win-private-assemblies</string>
+                 <string>uac-admin</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="uacUIAccessCheckBox">
+                <property name="text">
+                 <string>uac-uiaccess</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QPushButton" name="selectResourceButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="selectManifestFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="selectVersionFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QPushButton" name="defaultVersionFileButton">
+                <property name="text">
+                 <string>Default</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QPushButton" name="defaultManifestFileButton">
+                <property name="text">
+                 <string>Default</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QPushButton" name="defaultResourceButton">
+                <property name="text">
+                 <string>Default</string>
                 </property>
                </widget>
               </item>
@@ -1380,12 +1401,8 @@
            <layout class="QVBoxLayout" name="verticalLayout_12">
             <item>
              <layout class="QGridLayout" name="gridLayout_5">
-              <item row="0" column="0">
-               <widget class="QLabel" name="entitlementsFileLabel">
-                <property name="text">
-                 <string>Entitlements File</string>
-                </property>
-               </widget>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="codesignIdentityEdit"/>
               </item>
               <item row="0" column="1">
                <widget class="QLineEdit" name="entitlementsFileEdit"/>
@@ -1397,15 +1414,22 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="targetArchitectureCombo"/>
-              </item>
               <item row="2" column="0">
                <widget class="QLabel" name="bundleIdentifierLabel">
                 <property name="text">
                  <string>Bundle Identifier</string>
                 </property>
                </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="entitlementsFileLabel">
+                <property name="text">
+                 <string>Entitlements File</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="targetArchitectureCombo"/>
               </item>
               <item row="2" column="1">
                <widget class="QLineEdit" name="bundleIdentifierEdit"/>
@@ -1417,13 +1441,17 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="QLineEdit" name="codesignIdentityEdit"/>
-              </item>
               <item row="0" column="2">
                <widget class="QPushButton" name="selectEntitlementsFileButton">
                 <property name="text">
                  <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="defaultEntitlementsFileButton">
+                <property name="text">
+                 <string>Default</string>
                 </property>
                </widget>
               </item>

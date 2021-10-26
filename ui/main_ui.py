@@ -20,7 +20,7 @@ from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
 from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
-    PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE
+    PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE
 from ui.design.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
@@ -476,7 +476,21 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._upxExcludesDialog.upxExcludesAdded.connect(lambda excludes, option: option.addAll(True, *excludes))
 
     def setupWindowsOptionsUI(self):
-        pass
+        self.autosetPathSelectionUI(option=self._windowsOptions.versionFile, label=self.versionFileLabel,
+                                    edit=self.versionFileEdit, selectButton=self.selectVersionFileButton,
+                                    defaultButton=self.defaultVersionFileButton, selectionMode=self.SELECT_FILE)
+        self.autosetPathSelectionUI(option=self._windowsOptions.manifestFile, label=self.manifestFileLabel,
+                                    edit=self.manifestFileEdit, selectButton=self.selectManifestFileButton,
+                                    defaultButton=self.defaultManifestFileButton, selectionMode=self.SELECT_FILE,
+                                    filters=FILTER_MANIFEST_FILE)
+        self.autosetPathSelectionUI(option=self._windowsOptions.resource, label=self.resourceLabel,
+                                    edit=self.resourceEdit, selectButton=self.selectResourceButton,
+                                    defaultButton=self.defaultResourceButton, selectionMode=self.SELECT_FILE,
+                                    filters=FILTER_RESOURCE_FILE)
+        self.autosetFlagUI(flag=self._windowsOptions.uacAdmin, flagBox=self.uacAdminCheckBox)
+        self.autosetFlagUI(flag=self._windowsOptions.uacUIAccess, flagBox=self.uacUIAccessCheckBox)
+        self.autosetFlagUI(flag=self._windowsOptions.privateAssemblies, flagBox=self.privateAssembliesCheckBox)
+        self.autosetFlagUI(flag=self._windowsOptions.noPreferRedirects, flagBox=self.noPreferRedirectsCheckBox)
 
     def setupMacOSXOptionsUI(self):
         pass
