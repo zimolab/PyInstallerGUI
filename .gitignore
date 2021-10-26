@@ -2,3 +2,4 @@
 .venv
 dist
 .idea
+.idea/PyInstallerGUI.iml
