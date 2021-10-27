@@ -23,9 +23,9 @@
 
 4.生成目录
 
-![avatar](D:\Projects\PyInstallerGUI\screenshots\ss-build.png)
+![avatar](./screenshots/ss-build.png)
 
 
 4.最终产品目录
 
-![avatar](D:\Projects\PyInstallerGUI\screenshots\ss-dist.PNG)
+![avatar](./screenshots/ss-dist.PNG)
