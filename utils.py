@@ -7,10 +7,10 @@ from os.path import isfile, isdir, relpath, basename, abspath
 
 from PySide2.QtCore import QDir
 from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView, \
-    QInputDialog, QLineEdit, QFontDialog
+    QInputDialog, QFontDialog
 
 from core.options import DEFAULT_VALUE_UNSET
-from ui.constants import ITEM_SEPARATORS
+from ui.base.constants import ITEM_SEPARATORS
 
 
 def info(parent, title, content):

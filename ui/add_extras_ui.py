@@ -1,7 +1,4 @@
 # -*- coding:utf-8 -*-
-"""
-添加额外文件/文件夹的界面
-"""
 import os
 from os.path import relpath, basename
 from PySide2.QtCore import Signal

@@ -19,7 +19,7 @@ from core.options import BindingOption, BindingFlag, BindingMultipleOption
 from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
-from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
+from ui.base.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
     FILTER_ENTITLEMENTS_FILE
 from ui.base.ui_main import Ui_MainWindow

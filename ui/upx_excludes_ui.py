@@ -5,7 +5,7 @@ from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
 from core.options import BindingMultipleOption
-from ui.constants import ITEM_SEPARATORS
+from ui.base.constants import ITEM_SEPARATORS
 from ui.base.ui_upx_excludes import Ui_UPXExcludesDialog
 
 
