@@ -11,6 +11,7 @@
     "options": {
         "clean": true,
         "distPath": "./build/dist",
+        "icon": "./data/pyinstaller-gui-logos/pyinstaller-gui.ico",
         "noConfirm": true,
         "productMode": "onedir",
         "productName": "PyInstallerGUI",
