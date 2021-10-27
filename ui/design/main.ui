@@ -46,7 +46,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="pyimakespecEdit"/>
+           <widget class="FileEdit" name="pyimakespecEdit"/>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="pyinstallerLabel">
@@ -159,7 +159,7 @@
            <widget class="QLineEdit" name="productNameEdit"/>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="splashEdit"/>
+           <widget class="FileEdit" name="splashEdit"/>
           </item>
           <item row="11" column="1">
            <widget class="QCheckBox" name="noConfirmCheckBox">
@@ -234,7 +234,7 @@
            <widget class="DirectoryEdit" name="distPathEdit"/>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="appIconEdit"/>
+           <widget class="FileEdit" name="appIconEdit"/>
           </item>
           <item row="13" column="0" colspan="4">
            <widget class="QPushButton" name="startPackButton">
@@ -268,7 +268,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="workPathEdit"/>
+           <widget class="DirectoryEdit" name="workPathEdit"/>
           </item>
           <item row="5" column="2">
            <widget class="QPushButton" name="defaultSplashButton">
@@ -278,7 +278,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="specPathEdit"/>
+           <widget class="DirectoryEdit" name="specPathEdit"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="distPathLabel">
@@ -454,7 +454,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="rtTmpDirEdit"/>
+           <widget class="DirectoryEdit" name="rtTmpDirEdit"/>
           </item>
           <item row="0" column="2">
            <widget class="QPushButton" name="changeCWDButton">
@@ -1105,7 +1105,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="upxPathEdit"/>
+           <widget class="DirectoryEdit" name="upxPathEdit"/>
           </item>
           <item>
            <widget class="QPushButton" name="selectUPXPathButton">
@@ -1317,10 +1317,10 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLineEdit" name="resourceEdit"/>
+               <widget class="FileEdit" name="resourceEdit"/>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="manifestFileEdit"/>
+               <widget class="FileEdit" name="manifestFileEdit"/>
               </item>
               <item row="7" column="1">
                <widget class="QCheckBox" name="noPreferRedirectsCheckBox">
@@ -1330,7 +1330,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="versionFileEdit"/>
+               <widget class="FileEdit" name="versionFileEdit"/>
               </item>
               <item row="4" column="1">
                <widget class="QCheckBox" name="uacAdminCheckBox">
@@ -1419,7 +1419,7 @@
                <widget class="QLineEdit" name="codesignIdentityEdit"/>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="entitlementsFileEdit"/>
+               <widget class="FileEdit" name="entitlementsFileEdit"/>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="targetArchitectureLabel">

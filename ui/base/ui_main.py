@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form base from reading UI file 'mainEdfwLN.ui'
+## Form generated from reading UI file 'maindbLyPq.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -68,7 +68,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.selectPyimakespecButton, 1, 2, 1, 1)
 
-        self.pyimakespecEdit = QLineEdit(self.commonTab)
+        self.pyimakespecEdit = FileEdit(self.commonTab)
         self.pyimakespecEdit.setObjectName(u"pyimakespecEdit")
 
         self.gridLayout_2.addWidget(self.pyimakespecEdit, 1, 1, 1, 1)
@@ -156,7 +156,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.productNameEdit, 0, 1, 1, 1)
 
-        self.splashEdit = QLineEdit(self.commonTab)
+        self.splashEdit = FileEdit(self.commonTab)
         self.splashEdit.setObjectName(u"splashEdit")
 
         self.gridLayout.addWidget(self.splashEdit, 5, 1, 1, 1)
@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.distPathEdit, 1, 1, 1, 1)
 
-        self.appIconEdit = QLineEdit(self.commonTab)
+        self.appIconEdit = FileEdit(self.commonTab)
         self.appIconEdit.setObjectName(u"appIconEdit")
 
         self.gridLayout.addWidget(self.appIconEdit, 4, 1, 1, 1)
@@ -247,7 +247,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.defaultProductNameButton, 0, 2, 1, 1)
 
-        self.workPathEdit = QLineEdit(self.commonTab)
+        self.workPathEdit = DirectoryEdit(self.commonTab)
         self.workPathEdit.setObjectName(u"workPathEdit")
 
         self.gridLayout.addWidget(self.workPathEdit, 2, 1, 1, 1)
@@ -257,7 +257,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.defaultSplashButton, 5, 2, 1, 1)
 
-        self.specPathEdit = QLineEdit(self.commonTab)
+        self.specPathEdit = DirectoryEdit(self.commonTab)
         self.specPathEdit.setObjectName(u"specPathEdit")
 
         self.gridLayout.addWidget(self.specPathEdit, 3, 1, 1, 1)
@@ -395,7 +395,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.cwdEdit, 0, 1, 1, 1)
 
-        self.rtTmpDirEdit = QLineEdit(self.miscTab)
+        self.rtTmpDirEdit = DirectoryEdit(self.miscTab)
         self.rtTmpDirEdit.setObjectName(u"rtTmpDirEdit")
 
         self.gridLayout_6.addWidget(self.rtTmpDirEdit, 1, 1, 1, 1)
@@ -914,7 +914,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_22.addWidget(self.upxPathLabel)
 
-        self.upxPathEdit = QLineEdit(self.upxTab)
+        self.upxPathEdit = DirectoryEdit(self.upxTab)
         self.upxPathEdit.setObjectName(u"upxPathEdit")
 
         self.horizontalLayout_22.addWidget(self.upxPathEdit)
@@ -1081,12 +1081,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.resourceLabel, 3, 0, 1, 1)
 
-        self.resourceEdit = QLineEdit(self.windowsOptionTab)
+        self.resourceEdit = FileEdit(self.windowsOptionTab)
         self.resourceEdit.setObjectName(u"resourceEdit")
 
         self.gridLayout_4.addWidget(self.resourceEdit, 3, 1, 1, 1)
 
-        self.manifestFileEdit = QLineEdit(self.windowsOptionTab)
+        self.manifestFileEdit = FileEdit(self.windowsOptionTab)
         self.manifestFileEdit.setObjectName(u"manifestFileEdit")
 
         self.gridLayout_4.addWidget(self.manifestFileEdit, 2, 1, 1, 1)
@@ -1096,7 +1096,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.noPreferRedirectsCheckBox, 7, 1, 1, 1)
 
-        self.versionFileEdit = QLineEdit(self.windowsOptionTab)
+        self.versionFileEdit = FileEdit(self.windowsOptionTab)
         self.versionFileEdit.setObjectName(u"versionFileEdit")
 
         self.gridLayout_4.addWidget(self.versionFileEdit, 1, 1, 1, 1)
@@ -1160,7 +1160,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.codesignIdentityEdit, 3, 1, 1, 1)
 
-        self.entitlementsFileEdit = QLineEdit(self.macosxOptionTab)
+        self.entitlementsFileEdit = FileEdit(self.macosxOptionTab)
         self.entitlementsFileEdit.setObjectName(u"entitlementsFileEdit")
 
         self.gridLayout_5.addWidget(self.entitlementsFileEdit, 0, 1, 1, 1)

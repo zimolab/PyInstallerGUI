@@ -15,6 +15,7 @@ from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QPushBu
     QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup
 from QBinder import QEventHook, Binder
 
+from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH
 from core.options import BindingOption, BindingFlag, BindingMultipleOption
 from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
@@ -194,9 +195,19 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         self.changeCWDButton.clicked.connect(
             lambda: onChangeCWD(openDirDialog(self, self.tr("Change Working Directory"))))
+        self.cwdEdit.contextMenu.setEnabled(False)
         self.cwdEdit.setText(lambda: self._state.cwd * 1)
         self.cwdEdit.textChanged.connect(onChangeCWD)
         self.setTooltip(self.tr("current working directory"), self.cwdEdit, self.cwdLabel)
+
+        # pyinstaller & pyimakespec
+        def restoreDefault(edit):
+            if edit == self.pyinstallerEdit:
+                self._configs.pyinstaller = DEFAULT_PYINSTALLER_PATH
+            elif edit == self.pyimakespecEdit:
+                self._configs.pyimakespec = DEFAULT_PYIMAKESPEC_PATH
+            else:
+                raise ValueError("unknown edit")
 
         # pyinstaller
         def onChangePyInstallerPath():
@@ -205,8 +216,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
             if path is None:
                 return
             self._configs.pyinstaller = path
-
+        # 绑定数据
         self._configs.bind("pyinstaller", self.pyinstallerEdit)
+        self.pyinstallerEdit.actionRestoreDefaultHandler = restoreDefault
         self.selectPyInstallerButton.clicked.connect(onChangePyInstallerPath)
         self.setTooltip(self.tr("Path to pyinstaller executable"), self.pyinstallerEdit, self.pyinstallerLabel)
 
@@ -217,8 +229,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
             if path is None:
                 return
             self._configs.pyimakespec = path
-
+        # 绑定数据
         self._configs.bind("pyimakespec", self.pyimakespecEdit)
+        self.pyimakespecEdit.actionRestoreDefaultHandler = restoreDefault
         self.selectPyimakespecButton.clicked.connect(onChangePyimakespecPath)
         self.setTooltip(self.tr("Path to pyi-makespec executable"), self.pyimakespecEdit, self.pyimakespecLabel)
         # scripts

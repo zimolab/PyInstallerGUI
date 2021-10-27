@@ -6,7 +6,7 @@ Check https://pyinstaller.readthedocs.io/en/stable/usage.html for more details.
 import json
 import platform
 from os import makedirs
-from os.path import dirname
+from os.path import dirname, isfile
 
 from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit, QPlainTextEdit
 from QBinder import Binder
@@ -15,6 +15,7 @@ from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH, D
     DEFAULT_ENCODINGS
 from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSET, BindingMultipleOption, \
     BaseOption
+from utils import isEmpty
 
 
 class PackageConfig(object):
