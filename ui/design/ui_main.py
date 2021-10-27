@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainHdAXJo.ui'
+## Form generated from reading UI file 'mainEdfwLN.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -120,6 +120,11 @@ class Ui_MainWindow(object):
         self.removeScriptButton.setObjectName(u"removeScriptButton")
 
         self.horizontalLayout_2.addWidget(self.removeScriptButton)
+
+        self.clearScriptsButton = QPushButton(self.commonTab)
+        self.clearScriptsButton.setObjectName(u"clearScriptsButton")
+
+        self.horizontalLayout_2.addWidget(self.clearScriptsButton)
 
 
         self.scriptsListWidgetLayout.addLayout(self.horizontalLayout_2)
@@ -328,25 +333,25 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.gridLayout_6 = QGridLayout()
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.defaultLogLevelButton = QPushButton(self.miscTab)
-        self.defaultLogLevelButton.setObjectName(u"defaultLogLevelButton")
-
-        self.gridLayout_6.addWidget(self.defaultLogLevelButton, 2, 2, 1, 1)
-
         self.logLevelCombo = QComboBox(self.miscTab)
         self.logLevelCombo.setObjectName(u"logLevelCombo")
 
         self.gridLayout_6.addWidget(self.logLevelCombo, 2, 1, 1, 1)
 
-        self.debugOptionCombo = QComboBox(self.miscTab)
-        self.debugOptionCombo.setObjectName(u"debugOptionCombo")
+        self.debugOptionLabel = QLabel(self.miscTab)
+        self.debugOptionLabel.setObjectName(u"debugOptionLabel")
 
-        self.gridLayout_6.addWidget(self.debugOptionCombo, 3, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.debugOptionLabel, 3, 0, 1, 1)
 
         self.defaultDebugOptionButton = QPushButton(self.miscTab)
         self.defaultDebugOptionButton.setObjectName(u"defaultDebugOptionButton")
 
         self.gridLayout_6.addWidget(self.defaultDebugOptionButton, 3, 2, 1, 1)
+
+        self.cwdLabel = QLabel(self.miscTab)
+        self.cwdLabel.setObjectName(u"cwdLabel")
+
+        self.gridLayout_6.addWidget(self.cwdLabel, 0, 0, 1, 1)
 
         self.logLevelLabel = QLabel(self.miscTab)
         self.logLevelLabel.setObjectName(u"logLevelLabel")
@@ -359,20 +364,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.stripSymbolsCheckBox, 4, 1, 1, 1)
 
-        self.changeCWDButton = QPushButton(self.miscTab)
-        self.changeCWDButton.setObjectName(u"changeCWDButton")
+        self.debugOptionCombo = QComboBox(self.miscTab)
+        self.debugOptionCombo.setObjectName(u"debugOptionCombo")
 
-        self.gridLayout_6.addWidget(self.changeCWDButton, 0, 2, 1, 1)
+        self.gridLayout_6.addWidget(self.debugOptionCombo, 3, 1, 1, 1)
+
+        self.disableWindowedTracebackCheckBox = QCheckBox(self.miscTab)
+        self.disableWindowedTracebackCheckBox.setObjectName(u"disableWindowedTracebackCheckBox")
+
+        self.gridLayout_6.addWidget(self.disableWindowedTracebackCheckBox, 6, 1, 1, 1)
+
+        self.ignoreSignalsCheckBox = QCheckBox(self.miscTab)
+        self.ignoreSignalsCheckBox.setObjectName(u"ignoreSignalsCheckBox")
+
+        self.gridLayout_6.addWidget(self.ignoreSignalsCheckBox, 5, 1, 1, 1)
+
+        self.defaultRTTmpDirButton = QPushButton(self.miscTab)
+        self.defaultRTTmpDirButton.setObjectName(u"defaultRTTmpDirButton")
+
+        self.gridLayout_6.addWidget(self.defaultRTTmpDirButton, 1, 2, 1, 1)
 
         self.rtTmpDirLabel = QLabel(self.miscTab)
         self.rtTmpDirLabel.setObjectName(u"rtTmpDirLabel")
 
         self.gridLayout_6.addWidget(self.rtTmpDirLabel, 1, 0, 1, 1)
-
-        self.selectRTTmpDirButton = QPushButton(self.miscTab)
-        self.selectRTTmpDirButton.setObjectName(u"selectRTTmpDirButton")
-
-        self.gridLayout_6.addWidget(self.selectRTTmpDirButton, 1, 2, 1, 1)
 
         self.cwdEdit = DirectoryEdit(self.miscTab)
         self.cwdEdit.setObjectName(u"cwdEdit")
@@ -380,30 +395,25 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.cwdEdit, 0, 1, 1, 1)
 
-        self.defaultRTTmpDirButton = QPushButton(self.miscTab)
-        self.defaultRTTmpDirButton.setObjectName(u"defaultRTTmpDirButton")
-
-        self.gridLayout_6.addWidget(self.defaultRTTmpDirButton, 1, 3, 1, 1)
-
-        self.cwdLabel = QLabel(self.miscTab)
-        self.cwdLabel.setObjectName(u"cwdLabel")
-
-        self.gridLayout_6.addWidget(self.cwdLabel, 0, 0, 1, 1)
-
-        self.debugOptionLabel = QLabel(self.miscTab)
-        self.debugOptionLabel.setObjectName(u"debugOptionLabel")
-
-        self.gridLayout_6.addWidget(self.debugOptionLabel, 3, 0, 1, 1)
-
         self.rtTmpDirEdit = QLineEdit(self.miscTab)
         self.rtTmpDirEdit.setObjectName(u"rtTmpDirEdit")
 
         self.gridLayout_6.addWidget(self.rtTmpDirEdit, 1, 1, 1, 1)
 
-        self.ignoreSignalsCheckBox = QCheckBox(self.miscTab)
-        self.ignoreSignalsCheckBox.setObjectName(u"ignoreSignalsCheckBox")
+        self.changeCWDButton = QPushButton(self.miscTab)
+        self.changeCWDButton.setObjectName(u"changeCWDButton")
 
-        self.gridLayout_6.addWidget(self.ignoreSignalsCheckBox, 5, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.changeCWDButton, 0, 2, 1, 1)
+
+        self.selectRTTmpDirButton = QPushButton(self.miscTab)
+        self.selectRTTmpDirButton.setObjectName(u"selectRTTmpDirButton")
+
+        self.gridLayout_6.addWidget(self.selectRTTmpDirButton, 1, 3, 1, 1)
+
+        self.defaultLogLevelButton = QPushButton(self.miscTab)
+        self.defaultLogLevelButton.setObjectName(u"defaultLogLevelButton")
+
+        self.gridLayout_6.addWidget(self.defaultLogLevelButton, 2, 2, 1, 1)
 
 
         self.verticalLayout_3.addLayout(self.gridLayout_6)
@@ -1361,6 +1371,7 @@ class Ui_MainWindow(object):
         self.scriptsLabel.setText(QCoreApplication.translate("MainWindow", u"Scripts", None))
         self.addScriptButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeScriptButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
+        self.clearScriptsButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.defaultProductModeButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.productNameLabel.setText(QCoreApplication.translate("MainWindow", u"Product Name", None))
         self.asciiOnlyCheckBox.setText(QCoreApplication.translate("MainWindow", u"ASCII only\uff08no unicode\uff09", None))
@@ -1390,17 +1401,18 @@ class Ui_MainWindow(object):
         self.generateEncryptionKeyButton.setText(QCoreApplication.translate("MainWindow", u"Auto Gen", None))
         self.selectAppIconButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.commonTab), QCoreApplication.translate("MainWindow", u"Common", None))
-        self.defaultLogLevelButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.debugOptionLabel.setText(QCoreApplication.translate("MainWindow", u"Debug Option", None))
         self.defaultDebugOptionButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"cwd", None))
         self.logLevelLabel.setText(QCoreApplication.translate("MainWindow", u"Log Level", None))
         self.stripSymbolsCheckBox.setText(QCoreApplication.translate("MainWindow", u"Strip symbol-table", None))
-        self.changeCWDButton.setText(QCoreApplication.translate("MainWindow", u"Change", None))
-        self.rtTmpDirLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime Tmp Dir", None))
-        self.selectRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.defaultRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.cwdLabel.setText(QCoreApplication.translate("MainWindow", u"cwd", None))
-        self.debugOptionLabel.setText(QCoreApplication.translate("MainWindow", u"Debug Option", None))
+        self.disableWindowedTracebackCheckBox.setText(QCoreApplication.translate("MainWindow", u"Disable Windowed Traceback", None))
         self.ignoreSignalsCheckBox.setText(QCoreApplication.translate("MainWindow", u"Bootloader Ignore Signals", None))
+        self.defaultRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.rtTmpDirLabel.setText(QCoreApplication.translate("MainWindow", u"Runtime Tmp Dir", None))
+        self.changeCWDButton.setText(QCoreApplication.translate("MainWindow", u"Change", None))
+        self.selectRTTmpDirButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.defaultLogLevelButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.miscTab), QCoreApplication.translate("MainWindow", u"Misc", None))
         self.searchPathsLabel.setText(QCoreApplication.translate("MainWindow", u"Search Paths", None))
         self.addSearchPathButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))

@@ -115,6 +115,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="clearScriptsButton">
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -367,23 +374,27 @@
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="2" column="2">
-           <widget class="QPushButton" name="defaultLogLevelButton">
-            <property name="text">
-             <string>Default</string>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QComboBox" name="logLevelCombo"/>
           </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="debugOptionCombo"/>
+          <item row="3" column="0">
+           <widget class="QLabel" name="debugOptionLabel">
+            <property name="text">
+             <string>Debug Option</string>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2">
            <widget class="QPushButton" name="defaultDebugOptionButton">
             <property name="text">
              <string>Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="cwdLabel">
+            <property name="text">
+             <string>cwd</string>
             </property>
            </widget>
           </item>
@@ -404,10 +415,27 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QPushButton" name="changeCWDButton">
+          <item row="3" column="1">
+           <widget class="QComboBox" name="debugOptionCombo"/>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="disableWindowedTracebackCheckBox">
             <property name="text">
-             <string>Change</string>
+             <string>Disable Windowed Traceback</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="ignoreSignalsCheckBox">
+            <property name="text">
+             <string>Bootloader Ignore Signals</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="defaultRTTmpDirButton">
+            <property name="text">
+             <string>Default</string>
             </property>
            </widget>
           </item>
@@ -418,13 +446,6 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="selectRTTmpDirButton">
-            <property name="text">
-             <string>Select</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="DirectoryEdit" name="cwdEdit">
             <property name="focusPolicy">
@@ -432,34 +453,27 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QPushButton" name="defaultRTTmpDirButton">
-            <property name="text">
-             <string>Default</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="cwdLabel">
-            <property name="text">
-             <string>cwd</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="debugOptionLabel">
-            <property name="text">
-             <string>Debug Option</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="QLineEdit" name="rtTmpDirEdit"/>
           </item>
-          <item row="5" column="1">
-           <widget class="QCheckBox" name="ignoreSignalsCheckBox">
+          <item row="0" column="2">
+           <widget class="QPushButton" name="changeCWDButton">
             <property name="text">
-             <string>Bootloader Ignore Signals</string>
+             <string>Change</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="selectRTTmpDirButton">
+            <property name="text">
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="defaultLogLevelButton">
+            <property name="text">
+             <string>Default</string>
             </property>
            </widget>
           </item>

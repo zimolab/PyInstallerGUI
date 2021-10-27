@@ -11,6 +11,8 @@ from os.path import dirname
 from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit, QPlainTextEdit
 from QBinder import Binder
 
+from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH, DEFAULT_VERSION, DEFAULT_DESCRIPTION, \
+    DEFAULT_ENCODINGS
 from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSET, BindingMultipleOption, \
     BaseOption
 
@@ -21,12 +23,12 @@ class PackageConfig(object):
 
     def __init__(self):
         self._state = Binder()
-        self._state.pyinstaller = "pyinstaller"
-        self._state.pyimakespec = "pyi-makespec"
+        self._state.pyinstaller = DEFAULT_PYINSTALLER_PATH
+        self._state.pyimakespec = DEFAULT_PYIMAKESPEC_PATH
         self._state.name = ""
         self._state.author = ""
-        self._state.version = "0.0.1"
-        self._state.description = "pyinstaller gui config file"
+        self._state.version = DEFAULT_VERSION
+        self._state.description = DEFAULT_DESCRIPTION
         self._state.scripts = []
         self.commonOptions = self.CommonOptions()
         self.hookOptions = self.HookOptions()
@@ -87,13 +89,15 @@ class PackageConfig(object):
         return self._state.scripts
 
     def reset(self):
-        self.pyinstaller = "pyinstaller"
-        self.pyimakespec = "pyi-makespec"
-        self.name = ""
-        self.author = ""
-        self.version = "0.0.1"
-        self.description = "pyinstaller gui config file"
+        # non-options
+        self._state.pyinstaller = DEFAULT_PYINSTALLER_PATH
+        self._state.pyimakespec = DEFAULT_PYIMAKESPEC_PATH
+        self._state.name = ""
+        self._state.author = ""
+        self._state.version = DEFAULT_VERSION
+        self._state.description = DEFAULT_DESCRIPTION
         self.clearScripts()
+        # options
         options = []
         options.extend(self.commonOptions.getOptions(withNames=False))
         options.extend(self.hookOptions.getOptions(withNames=False))
@@ -102,11 +106,13 @@ class PackageConfig(object):
         options.extend(self.macOSXOptions.getOptions(withNames=False))
         for opt in options:
             opt.unset()
+        del options[:]
+        del options
 
     def load(self, path, reset=True, ignoreErrors=True):
         if reset:
             self.reset()
-        with open(path, "r", encoding="utf-8") as file:
+        with open(path, "r", encoding=DEFAULT_ENCODINGS) as file:
             jsonData = json.load(file)
             if not isinstance(jsonData, dict):
                 if ignoreErrors:
@@ -114,12 +120,12 @@ class PackageConfig(object):
                 else:
                     raise RuntimeError("bad file format")
 
-        self.pyinstaller = self._get(jsonData, "pyinstaller", self.pyinstaller)
-        self.pyimakespec = self._get(jsonData, "pyi-makespec", self.pyimakespec)
-        self.name = self._get(jsonData, "name", self.name)
-        self.author = self._get(jsonData, "author", self.author)
-        self.version = self._get(jsonData, "version", self.version)
-        self.description = self._get(jsonData, "description", self.description)
+        self.pyinstaller = self._get(jsonData, "pyinstaller", DEFAULT_PYINSTALLER_PATH)
+        self.pyimakespec = self._get(jsonData, "pyi-makespec", DEFAULT_PYIMAKESPEC_PATH)
+        self.name = self._get(jsonData, "name", "")
+        self.author = self._get(jsonData, "author", "")
+        self.version = self._get(jsonData, "version", DEFAULT_VERSION)
+        self.description = self._get(jsonData, "description", DEFAULT_DESCRIPTION)
         scripts = self._get(jsonData, "scripts", [])
         if isinstance(scripts, list):
             self.addScripts(*scripts)
@@ -162,7 +168,7 @@ class PackageConfig(object):
 
     def clearScripts(self):
         self._state.scripts.clear()
-        self._state.scripts = []
+        del self._state.scripts[:]
 
     def replaceScriptsWith(self, newScripts):
         self.clearScripts()
@@ -253,8 +259,7 @@ class PackageConfig(object):
         else:
             raise RuntimeError(f"unknown target name '{target}'")
 
-    def toJSON(self):
-        excludes = []
+    def toJSON(self, excludes=None):
         serialized = {
             "name": self.name,
             "author": self.author,
@@ -281,10 +286,9 @@ class PackageConfig(object):
         serialized["options"]["windows"] = {}
         self.serializeOptions(serialized["options"]["windows"], windowsOptions, excludes)
 
-        macosOptions = self.macOSXOptions.getOptions(filterUnsetOptions=True, withNames=True)
+        macosxOptions = self.macOSXOptions.getOptions(filterUnsetOptions=True, withNames=True)
         serialized["options"]["macOSX"] = {}
-        self.serializeOptions(serialized["options"]["macOSX"], macosOptions, excludes)
-        self.serializeOptions(serialized["options"]["macOSX"], macosOptions, excludes)
+        self.serializeOptions(serialized["options"]["macOSX"], macosxOptions, excludes)
 
         return json.dumps(serialized, indent=4, ensure_ascii=False)
 
@@ -313,8 +317,7 @@ class PackageConfig(object):
                 continue
             if isinstance(opt, BindingMultipleOption):
                 if isinstance(val, list) and len(val) > 0:
-                    for arg in val:
-                        opt.add(arg)
+                    opt.addAll(True, *val)
             elif isinstance(opt, BindingOption):
                 opt.argument = val
             elif isinstance(opt, BindingFlag):
@@ -329,7 +332,7 @@ class PackageConfig(object):
     @classmethod
     def loadFromFile(cls, path, ignoreErrors=True):
         configs = cls()
-        with open(path, "r", encoding="utf-8") as file:
+        with open(path, "r", encoding=DEFAULT_ENCODINGS) as file:
             jsonData = json.load(file)
             if not isinstance(jsonData, dict):
                 if ignoreErrors:
@@ -371,12 +374,12 @@ class PackageConfig(object):
         dirs = dirname(path)
         makedirs(dirs, exist_ok=True)
         with open(path, "wb") as file:
-            file.write(self.toJSON().encode("utf-8"))
+            file.write(self.toJSON().encode(DEFAULT_ENCODINGS))
 
     def toCommandLine(self, cmd, useCurrentPlatformConfigs=True):
-        return f"{cmd} {self.toOptionsCommandLine(useCurrentPlatformConfigs)}"
+        return f"{cmd} {self.toOptionsLine(useCurrentPlatformConfigs)}"
 
-    def toOptionsCommandLine(self, useCurrentPlatformConfigs=True):
+    def toOptionsLine(self, useCurrentPlatformConfigs=True):
         argList = self.toOptionsList(useCurrentPlatformConfigs)
         cmd = f"{' '.join(argList)} {' '.join(self.scripts)}"
         return cmd
@@ -431,7 +434,7 @@ class PackageConfig(object):
                             "Do not include unicode encoding support (default: included if available)."
             )
 
-            self.cleanBeforePack = BindingFlag(
+            self.clean = BindingFlag(
                 name="clean",
                 description="--clean: "
                             "Clean PyInstaller cache and remove temporary files before building."
@@ -439,14 +442,14 @@ class PackageConfig(object):
 
             self.logLevel = BindingOption(
                 name="log-level",
-                choices=[
+                choices=(
                     DEFAULT_VALUE_UNSET,
                     "TRACE",
                     "DEBUG",
                     "INFO",
                     "WARN",
                     "ERROR",
-                    "CRITICAL"],
+                    "CRITICAL"),
                 description="--log-level LEVEL: "
                             "Amount of detail in build-time console messages. LEVEL may be one of TRACE, DEBUG, INFO, "
                             "WARN, ERROR, CRITICAL (default: INFO). "
@@ -454,7 +457,7 @@ class PackageConfig(object):
 
             self.productMode = BindingOption(
                 name="",
-                choices=[DEFAULT_VALUE_UNSET, "onefile", "onedir"],
+                choices=(DEFAULT_VALUE_UNSET, "onefile", "onedir"),
                 connector="",
                 description="-D, --onedir or -F, --onefile: "
                             "Create a one-folder bundle containing an executable (default) or "
@@ -463,7 +466,7 @@ class PackageConfig(object):
 
             self.windowMode = BindingOption(
                 name="",
-                choices=[DEFAULT_VALUE_UNSET, "windowed", "console"],
+                choices=(DEFAULT_VALUE_UNSET, "windowed", "console"),
                 connector="",
                 description="-w, --windowed, --noconsole or -c, --console, --nowindowed: "
                             "(-w, --windowed, --noconsole)Windows and Mac OS X: do not provide a console window for "
@@ -472,14 +475,6 @@ class PackageConfig(object):
                             "*NIX systems. (-c, --console, --nowindowed) Open a console window for standard i/o ("
                             "default). On Windows this option will have no effect if the first script is a ‘.pyw’ "
                             "file. ",
-
-            )
-
-            self.consoleMode = BindingFlag(
-                name="console",
-                description="-c, --console, --nowindowed: "
-                            "Open a console window for standard i/o (default). On Windows this option will have no "
-                            "effect if the first script is a ‘.pyw’ file. "
             )
 
             self.productName = BindingOption(
@@ -488,7 +483,7 @@ class PackageConfig(object):
                             "Name to assign to the bundled app and spec file (default: first script’s basename)."
             )
 
-            self.extraData = BindingMultipleOption(
+            self.addData = BindingMultipleOption(
                 name="add-data",
                 description="--add-data <SRC;DEST or SRC:DEST>: "
                             "Additional non-binary files or folders to be added to the executable. The path separator "
@@ -497,14 +492,14 @@ class PackageConfig(object):
                 wrapArgument=True
             )
 
-            self.extraBinaries = BindingMultipleOption(
+            self.addBinary = BindingMultipleOption(
                 name="add-binary",
                 description="--add-binary <SRC;DEST or SRC:DEST>: "
                             "Additional binary files to be added to the executable. ",
                 wrapArgument=True
             )
 
-            self.searchPaths = BindingMultipleOption(
+            self.paths = BindingMultipleOption(
                 name="paths",
                 description="-p DIR, --paths DIR: "
                             "A path to search for imports (like using PYTHONPATH). Multiple paths are allowed, "
@@ -547,20 +542,20 @@ class PackageConfig(object):
                             "Copy metadata for the specified package. "
             )
 
-            self.deepcopyMetadata = BindingMultipleOption(
+            self.recursiveCopyMetadata = BindingMultipleOption(
                 name="recursive-copy-metadata",
                 description="--recursive-copy-metadata PACKAGENAME: "
                             "Copy metadata for the specified package and all its dependencies."
             )
 
-            self.excludeModules = BindingMultipleOption(
+            self.excludeModule = BindingMultipleOption(
                 name="exclude-module",
                 description="--exclude-module EXCLUDES: "
                             "Optional module or package (the Python name, not the path name) that will be ignored (as "
                             "though it was not found). "
             )
 
-            self.encryptionKey = BindingOption(
+            self.key = BindingOption(
                 name="key",
                 description="--key KEY: "
                             "The key used to encrypt Python bytecode."
@@ -573,7 +568,7 @@ class PackageConfig(object):
                             "splash screen can show progress updates while unpacking. "
             )
 
-            self.debugOption = BindingOption(
+            self.debug = BindingOption(
                 name="debug",
                 choices=[DEFAULT_VALUE_UNSET, "all", "imports", "bootloader", "noarchive"],
                 description="-d {all,imports,bootloader,noarchive}, --debug {all,imports,bootloader,noarchive}: "
@@ -588,7 +583,7 @@ class PackageConfig(object):
                             "store them as files in the resulting output directory. "
             )
 
-            self.stripSymbolTable = BindingFlag(
+            self.strip = BindingFlag(
                 name="strip",
                 description="-s, --strip: "
                             "Apply a symbol-table strip to the executable and shared libs (not recommended for "
@@ -637,7 +632,7 @@ class PackageConfig(object):
                             "An additional path to search for hooks. "
             )
 
-            self.runtimeHooks = BindingMultipleOption(
+            self.runtimeHook = BindingMultipleOption(
                 name="runtime-hook",
                 description="--runtime-hook RUNTIME_HOOKS: "
                             "Path to a custom runtime hook file. A runtime hook is code that is bundled with the "
@@ -652,12 +647,12 @@ class PackageConfig(object):
                 description="--noupx: "
                             "Do not use UPX even if it is available (works differently between Windows and *nix)"
             )
-            self.upxPath = BindingOption(
+            self.upxDir = BindingOption(
                 name="upx-dir",
                 description="--upx-dir UPX_DIR: "
                             "Path to UPX utility (default: search the execution path)"
             )
-            self.excludeFiles = BindingMultipleOption(
+            self.upxExclude = BindingMultipleOption(
                 name="upx-exclude",
                 description="--upx-exclude FILE:"
                             "Prevent a binary from being compressed when using upx. This is typically used if upx "
@@ -672,7 +667,7 @@ class PackageConfig(object):
                 description="--version-file FILE: "
                             "add a version resource from FILE to the exe."
             )
-            self.manifestFile = BindingOption(
+            self.manifest = BindingOption(
                 name="manifest",
                 description="-m <FILE or XML>, --manifest <FILE or XML>: "
                             "add manifest FILE or XML to the exe."
@@ -699,7 +694,7 @@ class PackageConfig(object):
                 description="--uac-uiaccess: "
                             "Using this option allows an elevated application to work with Remote Desktop."
             )
-            self.privateAssemblies = BindingFlag(
+            self.winPrivateAssemblies = BindingFlag(
                 name="win-private-assemblies",
                 description="--win-private-assemblies: "
                             "Any Shared Assemblies bundled into the application will be changed into Private "
@@ -707,7 +702,7 @@ class PackageConfig(object):
                             "and any newer versions installed on user machines at the system level will be ignored. "
             )
 
-            self.noPreferRedirects = BindingFlag(
+            self.winNoPreferRedirects = BindingFlag(
                 name="win-no-prefer-redirects",
                 description="--win-no-prefer-redirects: "
                             "While searching for Shared or Private Assemblies to bundle into the application, "
@@ -717,7 +712,7 @@ class PackageConfig(object):
 
     class MacOSXOptions(Options):
         def __init__(self):
-            self.bundleIdentifier = BindingOption(
+            self.osxBundleIdentifier = BindingOption(
                 name="osx-bundle-identifier",
                 description="--osx-bundle-identifier BUNDLE_IDENTIFIER: "
                             "Mac OS X .app bundle identifier is used as the default unique program name for code "
@@ -748,19 +743,3 @@ class PackageConfig(object):
                 description="--osx-entitlements-file FILENAME: "
                             "Entitlements file to use when code-signing the collected binaries (macOS only)."
             )
-
-# simple test
-# configs = Package()
-# configs.saveToFile("./test.json")
-# configs = Package.loadFromFile("./test.json")
-# print("pyinstaller:", configs.pyinstaller)
-# print("name:", configs.name)
-# print("author:", configs.author)
-# print("version:", configs.version)
-# print("description:", configs.description)
-# print("scripts:", configs.scripts)
-# #configs.commonOptions.noConfirm.set()
-# print("noConfirm:", configs.commonOptions.noConfirm.isSet)
-# print("icon:", configs.commonOptions.icon.argument)
-# configs.saveToFile("./test.json")
-# print("Done")

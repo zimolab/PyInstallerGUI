@@ -9,8 +9,14 @@
         "main.py"
     ],
     "options": {
+        "clean": true,
+        "distPath": "./build/dist",
+        "noConfirm": true,
         "productMode": "onedir",
+        "productName": "PyInstallerGUI",
+        "specPath": "./build",
         "windowMode": "windowed",
+        "workPath": "./build",
         "upx": {},
         "hooks": {},
         "windows": {},

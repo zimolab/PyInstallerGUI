@@ -131,7 +131,7 @@ class BindingOption(BaseOption):
             widget.setText(lambda: self.argument * 1)
             widget.textChanged.connect(self.set)
         elif isinstance(widget, QComboBox):
-            if isinstance(self.choices, list) and len(self.choices) > 0:
+            if (isinstance(self.choices, list) or isinstance(self.choices, tuple)) and len(self.choices) > 0:
                 widget.addItems(self.choices)
             widget.setCurrentText(lambda: self.argument * 1)
             widget.currentTextChanged.connect(self.set)
@@ -359,81 +359,3 @@ class Options(object):
                     else:
                         options.append(val)
         return options
-
-# Simple test
-# from PySide2.QtWidgets import QApplication, QFrame, QMainWindow, QVBoxLayout, QPushButton, QInputDialog, QMessageBox
-# import sys
-# app = QApplication(sys.argv)
-#
-# window = QMainWindow()
-# panel = QFrame()
-# layout = QVBoxLayout()
-# edit = QLineEdit()
-# cb = QCheckBox()
-# cb.setText("flag")
-# rb = QRadioButton()
-# rb.setText("flag")
-# combo = QComboBox()
-# lw = QListWidget()
-#
-# opt = BindingOption("text")
-# opt.validator = None
-# opt.bind(edit)
-# opt2 = BindingOption("text2")
-# opt2.choices = ["1", "2", "3", DEFAULT_VALUE_UNSET]
-# combo.addItems(opt2.choices)
-# opt2.bind(combo)
-# flag = BindingFlag("flag", default=False)
-# opt3 = BindingMultipleOption("text3", default=["1", "2", "3"])
-# opt3.bind(lw)
-#
-#
-# def onGen():
-#     print("Opt single argument:", opt.argument, opt.toString(), opt.isSet)
-#     print("flag:", flag.toString())
-#     print("combo:", opt2.toString())
-#     print("list:", opt3.toString())
-#
-#
-# genBtn = QPushButton(text="Gen")
-# genBtn.clicked.connect(onGen)
-#
-#
-# def onAdd():
-#     text = QInputDialog.getText(window, "Add Item", "item to add:", QLineEdit.Normal, "item")[0]
-#     r = opt3.add(text)
-#     if r:
-#         QMessageBox.information(window, "Message", "Ok")
-#     else:
-#         QMessageBox.information(window, "Message", "Failed")
-#
-#
-# addBtn = QPushButton(text="Add")
-# addBtn.clicked.connect(onAdd)
-#
-#
-# def onRemoveItem():
-#     selected = [w.text() for w in lw.selectedItems()]
-#     for i in selected:
-#         opt3.remove(i)
-#
-#
-# removeBtn = QPushButton(text="Remove")
-# removeBtn.clicked.connect(onRemoveItem)
-#
-# flag.bind(cb)
-# flag.bind(rb)
-# layout.addWidget(edit)
-# layout.addWidget(cb)
-# layout.addWidget(rb)
-# layout.addWidget(combo)
-# layout.addWidget(lw)
-# layout.addWidget(addBtn)
-# layout.addWidget(removeBtn)
-# layout.addWidget(genBtn)
-#
-# panel.setLayout(layout)
-# window.setCentralWidget(panel)
-# window.show()
-#
-# sys.exit(app.exec_())
