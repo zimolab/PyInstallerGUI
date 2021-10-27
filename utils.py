@@ -3,6 +3,8 @@
 封装一些实用工具
 """
 import os
+import platform
+import subprocess
 from os.path import isfile, isdir, relpath, basename, abspath
 
 from PySide2.QtCore import QDir
@@ -65,9 +67,7 @@ def openDirDialog(parent, title, path=None):
     return selectDir
 
 
-def openDirsDialog(parent, title, path=None):
-    if path is None:
-        path = os.getcwd()
+def openDirsDialog(parent, title):
     dialog = QFileDialog(parent)
     dialog.setWindowTitle(title)
     dialog.setFileMode(QFileDialog.Directory)
@@ -79,7 +79,6 @@ def openDirsDialog(parent, title, path=None):
     treeView = dialog.findChild(QTreeView)
     if treeView is not None:
         treeView.setSelectionMode(QAbstractItemView.MultiSelection)
-
     dialog.setFilter(QDir.Dirs)
     dialog.exec_()
     selectedDirs = dialog.selectedFiles()
@@ -219,18 +218,96 @@ def absolutePath(path):
 
 
 # noinspection PyBroadException
-def relativePath(path, fallback=baseName):
+def relativePath(path, fallback=baseName, parent=None):
     if isEmpty(path) or path == DEFAULT_VALUE_UNSET:
-        if fallback is not None:
+        if notNull(fallback):
             return fallback(path)
         else:
             return path
     try:
-        p = relpath(path)
-    except Exception:
-        if fallback is not None:
+        return relpath(path)
+    except Exception as e:
+        if notNull(parent):
+            warn(parent, parent.tr("Error"), parent.tr("Cannot path convert to absolute path(error: ") + f"{e})!")
+        if notNull(fallback):
             return fallback(path)
         else:
             return path
+
+
+def systemOpen(path):
+    if not isfile(path) and not isdir(path):
+        return
+    if platform.system().lower() == "windows":
+        os.startfile(path)
+    elif platform.system().lower() == "darwin":
+        subprocess.call(["open"], path)
     else:
-        return p
+        subprocess.call("xdg-open", path)
+
+
+def isNull(obj):
+    return obj is None
+
+
+def notNull(obj):
+    return obj is not None
+
+
+def askAndRemove(parent, bindingList, itemsToRemove):
+    if isNull(itemsToRemove) or len(itemsToRemove) == 0:
+        return
+    if ask(parent, parent.tr("Remove"), parent.tr("Remove ") + f"{len(itemsToRemove)}" + parent.tr(" item(s)?")):
+        for item in itemsToRemove:
+            if item in bindingList:
+                bindingList.remove(item)
+
+
+def askAndClear(parent, bindingList):
+    if isNull(bindingList) or len(bindingList) == 0:
+        return
+    if ask(parent, parent.tr("Clear"), parent.tr("Remove all ") + f"{len(bindingList)}" + parent.tr(" item(s)?")):
+        del bindingList[:]
+        bindingList.clear()
+
+
+def askAndToAbsPaths(parent, bindingList, paths):
+    if isNull(paths) or len(paths) == 0:
+        if ask(parent, parent.tr("Convert to Absolute Path"),
+               parent.tr("Convert all ") + f"{len(bindingList)}" + parent.tr(" items to absolute path?")):
+            for i in range(0, len(bindingList)):
+                p = absolutePath(bindingList[i])
+                if p in bindingList:
+                    continue
+                bindingList[i] = p
+    else:
+        if ask(parent, parent.tr("Convert to Absolute Path"),
+               parent.tr("Convert ") + f"{len(paths)}" + parent.tr(" items to absolute path?")):
+            for path in paths:
+                index = bindingList.index(path)
+                if index >= 0:
+                    p = absolutePath(bindingList[index])
+                    if p in bindingList:
+                        continue
+                    bindingList[index] = p
+
+
+def askAndToRelPaths(parent, bindingList, paths):
+    if isNull(paths) or len(paths) == 0:
+        if ask(parent, parent.tr("Convert to Relative Path"),
+               parent.tr("Convert ") + f"{len(bindingList)}" + parent.tr(" items to relative path?")):
+            for i in range(0, len(bindingList)):
+                p = relativePath(bindingList[i], fallback=None, parent=parent)
+                if p in bindingList:
+                    continue
+                bindingList[i] = p
+    else:
+        if ask(parent, parent.tr("Convert to Relative Path"),
+               parent.tr("Convert ") + f"{len(paths)}" + parent.tr(" items to relative path?")):
+            for path in paths:
+                index = bindingList.index(path)
+                if index >= 0:
+                    p = relativePath(path, fallback=None, parent=parent)
+                    if p in bindingList:
+                        continue
+                    bindingList[index] = p

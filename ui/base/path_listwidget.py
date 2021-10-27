@@ -4,8 +4,10 @@ from os.path import isfile
 from PySide2.QtGui import QDragEnterEvent, QDropEvent
 from PySide2.QtWidgets import QListWidget, QAbstractItemView
 
+from ui.base.base_listwidget import BasePathListWidget
 
-class FileListWidget(QListWidget):
+
+class PathListWidget(BasePathListWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setAcceptDrops(True)

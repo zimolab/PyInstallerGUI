@@ -30,7 +30,7 @@ from ui.start_cmd_ui import StartCommandDialog
 from ui.upx_excludes_ui import UPXExcludesDialog
 from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont, toBaseNames, \
-    filterFiles
+    filterFiles, absolutePath, systemOpen, askAndRemove, askAndClear
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -140,9 +140,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         def onRemoveScripts():
             selected = [w.text() for w in self.scriptsListWidget.selectedItems()]
-            if len(selected) > 0:
-                if ask(self, self.tr("Remove Scripts"), self.tr("Remove scripts?")):
-                    self._configs.removeScripts(*selected)
+            askAndRemove(self, self._configs.scripts, selected)
         # 移除脚本
         self.removeScriptButton.setEnabled(False)
         self.removeScriptButton.clicked.connect(onRemoveScripts)
@@ -151,8 +149,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             lambda: self.removeScriptButton.setEnabled(len(self.scriptsListWidget.selectedItems()) > 0))
 
         def onClearScripts():
-            if ask(self, self.tr("Remove Scripts"), self.tr("Clear scripts?")):
-                self._configs.clearScripts()
+            askAndClear(self, self._configs.scripts)
         # 清除全部脚本
         self.clearScriptsButton.clicked.connect(onClearScripts)
 
@@ -172,14 +169,19 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  lambda event: event.acceptProposedAction())
         self._eventHook.add_hook(self.addScriptButton, QtCore.QEvent.Drop, onDrop)
 
-        self.scriptsListWidget.itemDoubleClicked.connect(
-            lambda item: self._modifyPathDialog.display(
-                ModifyPathDialog.MODIFY_SCRIPT_PATH,
-                item.text(),
-                self._configs.scripts.index(item.text()))
-        )
+        def onModifyScript(item):
+            self._modifyPathDialog.display(ModifyPathDialog.MODIFY_SCRIPT_PATH, item.text(),
+                                           self._configs.scripts.index(item.text()))
         # 双击修改
+        self.scriptsListWidget.itemDoubleClicked.connect(onModifyScript)
         self._modifyPathDialog.scriptPathModified.connect(self._configs.updateScriptAt)
+
+        # 上下文菜单
+        self.scriptsListWidget.enableCustomContextMenu(True)
+        self.scriptsListWidget.bindingList = self._configs.scripts
+        self.scriptsListWidget.actionAddHandler = onAddScript
+        self.scriptsListWidget.actionModifyHandler = onModifyScript
+
 
     def setupNonOptionsUI(self):
         # cwd
@@ -302,7 +304,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.autosetFlagUI(flag=self._commonOptions.disableWindowedTraceback,
                            flagBox=self.disableWindowedTracebackCheckBox)
 
-        # paths & runtimeTmpDir
+        # paths
         def onAddSearchPaths(paths, option: BindingMultipleOption):
             if paths is None:
                 paths = openDirsDialog(self, self.tr("Add Directory"))
@@ -321,6 +323,13 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  onAdd=onAddSearchPaths,
                                  onModify=onModifySearchPath)
         self._modifyPathDialog.searchPathModified.connect(self._commonOptions.paths.set)
+        # 上下文菜单
+        self.searchPathsListWidget.enableCustomContextMenu(True)
+        self.searchPathsListWidget.bindingList = self._commonOptions.paths.argument
+        self.searchPathsListWidget.actionAddHandler = lambda: onAddSearchPaths(None, self._commonOptions.paths)
+        self.searchPathsListWidget.actionModifyHandler = lambda item: onModifySearchPath(
+            item.text(), self._commonOptions.paths.indexOf(item.text()), self._commonOptions.paths
+        )
 
         # addData & addBinary
         def onAddExtras(paths, option: BindingMultipleOption):
@@ -633,10 +642,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 移除数据
         if removeButton is not None:
             def onRemoveItems():
-                selected = [w.text() for w in listWidget.selectedItems()]
-                if len(selected) > 0:
-                    if ask(self, self.tr("Remove"), self.tr("Are you sure to remove these items?")):
-                        option.remove(*selected)
+                askAndRemove(self, option.argument, [w.text() for w in listWidget.selectedItems()])
 
             removeButton.setEnabled(len(listWidget.selectedItems()) > 0)
             listWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -647,8 +653,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 清除全部数据
         if clearButton is not None:
             def onClear():
-                if ask(self, self.tr("Clear Items"), self.tr("CLEAR ALL ITEMS?")):
-                    option.clear()
+                askAndClear(self, option.argument)
 
             clearButton.clicked.connect(onClear)
 

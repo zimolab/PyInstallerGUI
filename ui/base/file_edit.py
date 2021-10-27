@@ -3,10 +3,10 @@ from os.path import isfile
 
 from PySide2.QtGui import QDragEnterEvent, QDropEvent
 
-from ui.base.path_edit import PathEdit
+from ui.base.base_path_edit import BasePathEdit
 
 
-class FileEdit(PathEdit):
+class FileEdit(BasePathEdit):
     """
     实现单个文件拖放的LineEdit
     """

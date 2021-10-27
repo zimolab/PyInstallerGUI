@@ -81,7 +81,7 @@
            </widget>
           </item>
           <item>
-           <widget class="FileListWidget" name="scriptsListWidget">
+           <widget class="PathListWidget" name="scriptsListWidget">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>
@@ -507,7 +507,7 @@
          </widget>
         </item>
         <item>
-         <widget class="DirectoryListWidget" name="searchPathsListWidget"/>
+         <widget class="PathListWidget" name="searchPathsListWidget"/>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -551,7 +551,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QListWidget" name="extraDataListWidget"/>
+           <widget class="PathListWidget" name="extraDataListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -597,7 +597,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QListWidget" name="extraBinariesListWidget"/>
+           <widget class="PathListWidget" name="extraBinariesListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -1133,7 +1133,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="upxExcludesListWidget"/>
+           <widget class="PathListWidget" name="upxExcludesListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_23">
@@ -1198,7 +1198,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="hookDirsListWidget"/>
+           <widget class="PathListWidget" name="hookDirsListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_25">
@@ -1237,7 +1237,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="rtHooksListWidget"/>
+           <widget class="PathListWidget" name="rtHooksListWidget"/>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_26">
@@ -1721,17 +1721,12 @@
   <customwidget>
    <class>FileEdit</class>
    <extends>QLineEdit</extends>
-   <header>.file_edit</header>
+   <header location="global">.file_edit</header>
   </customwidget>
   <customwidget>
-   <class>FileListWidget</class>
+   <class>PathListWidget</class>
    <extends>QListWidget</extends>
-   <header>.file_listwidget</header>
-  </customwidget>
-  <customwidget>
-   <class>DirectoryListWidget</class>
-   <extends>QListView</extends>
-   <header>.directory_listwidget</header>
+   <header location="global">.path_listwidget</header>
   </customwidget>
  </customwidgets>
  <resources/>

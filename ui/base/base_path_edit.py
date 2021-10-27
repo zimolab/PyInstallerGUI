@@ -9,7 +9,7 @@ from core.options import DEFAULT_VALUE_UNSET
 from utils import absolutePath, relativePath, baseName
 
 
-class PathEdit(QLineEdit):
+class BasePathEdit(QLineEdit):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -37,7 +37,7 @@ class PathEdit(QLineEdit):
         self.actionRestoreDefault.setText(self.tr(u"Restore Default"))
         self.actionAbsolutePath.setText(self.tr(u"Absolute Path"))
         self.actionRelativePath.setText(self.tr(u"Relative Path"))
-        self.actionBaseName.setText(self.tr(u"Base Name"))
+        self.actionBaseName.setText(self.tr(u"Basename"))
         # 连接slot
         self.actionCopy.triggered.connect(self.onActionTriggered)
         self.actionPaste.triggered.connect(self.onActionTriggered)
@@ -113,7 +113,7 @@ class PathEdit(QLineEdit):
         self.setText(absolutePath(self.text()))
 
     def _actionRelativePathHandler(self):
-        self.setText(relativePath(self.text()))
+        self.setText(relativePath(self.text(), fallback=None, parent=self))
 
     def _actionBaseNameHandler(self):
         self.setText(baseName(self.text()))

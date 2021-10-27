@@ -2,10 +2,10 @@
 from os.path import isdir
 from PySide2.QtGui import QDragEnterEvent, QDropEvent
 
-from ui.base.path_edit import PathEdit
+from ui.base.base_path_edit import BasePathEdit
 
 
-class DirectoryEdit(PathEdit):
+class DirectoryEdit(BasePathEdit):
     """
     实现单个目录拖放的LineEdit
     """

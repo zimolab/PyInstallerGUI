@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'maindbLyPq.ui'
+## Form generated from reading UI file 'mainkuftRm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -14,8 +14,7 @@ from PySide2.QtWidgets import *
 
 from .directory_edit import DirectoryEdit
 from .file_edit import FileEdit
-from .file_listwidget import FileListWidget
-from .directory_listwidget import DirectoryListWidget
+from .path_listwidget import PathListWidget
 
 
 class Ui_MainWindow(object):
@@ -99,7 +98,7 @@ class Ui_MainWindow(object):
 
         self.scriptsListWidgetLayout.addWidget(self.scriptsLabel)
 
-        self.scriptsListWidget = FileListWidget(self.commonTab)
+        self.scriptsListWidget = PathListWidget(self.commonTab)
         self.scriptsListWidget.setObjectName(u"scriptsListWidget")
         self.scriptsListWidget.setMouseTracking(False)
         self.scriptsListWidget.setAcceptDrops(True)
@@ -432,7 +431,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.searchPathsLabel)
 
-        self.searchPathsListWidget = DirectoryListWidget(self.pathsTab)
+        self.searchPathsListWidget = PathListWidget(self.pathsTab)
         self.searchPathsListWidget.setObjectName(u"searchPathsListWidget")
 
         self.verticalLayout.addWidget(self.searchPathsListWidget)
@@ -469,7 +468,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5 = QVBoxLayout()
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.extraDataListWidget = QListWidget(self.extraDataTab)
+        self.extraDataListWidget = PathListWidget(self.extraDataTab)
         self.extraDataListWidget.setObjectName(u"extraDataListWidget")
 
         self.verticalLayout_5.addWidget(self.extraDataListWidget)
@@ -511,7 +510,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6 = QVBoxLayout()
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.extraBinariesListWidget = QListWidget(self.extraDataTab)
+        self.extraBinariesListWidget = PathListWidget(self.extraDataTab)
         self.extraBinariesListWidget.setObjectName(u"extraBinariesListWidget")
 
         self.verticalLayout_6.addWidget(self.extraBinariesListWidget)
@@ -939,7 +938,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_17.addWidget(self.upxExcludesLabel)
 
-        self.upxExcludesListWidget = QListWidget(self.upxTab)
+        self.upxExcludesListWidget = PathListWidget(self.upxTab)
         self.upxExcludesListWidget.setObjectName(u"upxExcludesListWidget")
 
         self.verticalLayout_17.addWidget(self.upxExcludesListWidget)
@@ -984,7 +983,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_19.addWidget(self.hookDirsLabel)
 
-        self.hookDirsListWidget = QListWidget(self.hooksTab)
+        self.hookDirsListWidget = PathListWidget(self.hooksTab)
         self.hookDirsListWidget.setObjectName(u"hookDirsListWidget")
 
         self.verticalLayout_19.addWidget(self.hookDirsListWidget)
@@ -1019,7 +1018,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_20.addWidget(self.rtHooksLabel)
 
-        self.rtHooksListWidget = QListWidget(self.hooksTab)
+        self.rtHooksListWidget = PathListWidget(self.hooksTab)
         self.rtHooksListWidget.setObjectName(u"rtHooksListWidget")
 
         self.verticalLayout_20.addWidget(self.rtHooksListWidget)
