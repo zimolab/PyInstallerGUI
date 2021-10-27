@@ -11,11 +11,21 @@
 ![avatar](./screenshots/ss-main.PNG)
 
 
-2.添加额外数据界面
+2.添加HiddenImports、ExcludeModules...等界面
 
-![avatar](./screenshots/ss-add-data.PNG)
+![avatar](./screenshots/ss-modules.PNG)
 
 
 3.开始打包界面
 
 ![avatar](./screenshots/ss-start-pack.PNG)
+
+
+4.生成目录
+
+![avatar](D:\Projects\PyInstallerGUI\screenshots\ss-build.png)
+
+
+4.最终产品目录
+
+![avatar](D:\Projects\PyInstallerGUI\screenshots\ss-dist.PNG)
