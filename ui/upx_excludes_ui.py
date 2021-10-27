@@ -6,11 +6,11 @@ from PySide2.QtWidgets import QDialog
 
 from core.options import BindingMultipleOption
 from ui.constants import ITEM_SEPARATORS
-from ui.design.ui_upx_excludes import Ui_UPXExcludesDialog
+from ui.base.ui_upx_excludes import Ui_UPXExcludesDialog
 
 
 # noinspection PyTypeChecker
-from ui.utils import warn, splitItems, openFilesDialog, toBaseNames
+from utils import warn, splitItems, openFilesDialog, toBaseNames
 
 
 # noinspection PyTypeChecker,PyUnresolvedReferences

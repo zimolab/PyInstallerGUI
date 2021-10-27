@@ -1,15 +1,14 @@
 # -*- coding:utf-8 -*-
-import PySide2
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
 from core.options import BindingMultipleOption
 from ui.constants import ITEM_SEPARATORS
-from ui.design.ui_add_items import Ui_AddItemsDialog
+from ui.base.ui_add_items import Ui_AddItemsDialog
 
 
 # noinspection PyTypeChecker
-from ui.utils import warn, splitItems
+from utils import warn, splitItems
 
 
 # noinspection PyTypeChecker

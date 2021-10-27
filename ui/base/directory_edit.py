@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-from os.path import isfile
+from os.path import isdir
 from PySide2.QtGui import QDragEnterEvent, QDropEvent
-from PySide2.QtWidgets import QLineEdit
+
+from ui.base.path_edit import PathEdit
 
 
-class FileEdit(QLineEdit):
+class DirectoryEdit(PathEdit):
     """
-    实现单个文件拖放的LineEdit
+    实现单个目录拖放的LineEdit
     """
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setAcceptDrops(True)
@@ -17,7 +19,7 @@ class FileEdit(QLineEdit):
             event.ignore()
             return
         path = event.mimeData().urls()[0].toLocalFile()
-        if isfile(path):
+        if isdir(path):
             event.acceptProposedAction()
         else:
             event.ignore()

@@ -3,12 +3,13 @@
 封装一些实用工具
 """
 import os
-from os.path import isfile, isdir, relpath, basename
+from os.path import isfile, isdir, relpath, basename, abspath
 
 from PySide2.QtCore import QDir
 from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView, \
     QInputDialog, QLineEdit, QFontDialog
 
+from core.options import DEFAULT_VALUE_UNSET
 from ui.constants import ITEM_SEPARATORS
 
 
@@ -203,3 +204,37 @@ def toBaseNames(paths, filters=None):
         else:
             results.append(bn)
     return results
+
+def isEmpty(text):
+    return text is None or text == ""
+
+
+def isNotEmpty(text):
+    return not isEmpty(text)
+
+
+def calcAbsolutePath(path):
+    if isEmpty(path):
+        return path
+    if path == DEFAULT_VALUE_UNSET:
+        return path
+    try:
+        p = abspath(path)
+    except:
+        return path
+    else:
+        return p
+
+
+def calcRelativePath(path):
+    if isEmpty(path):
+        return path
+    if path == DEFAULT_VALUE_UNSET:
+        return path
+    try:
+        p = relpath(path)
+    except:
+        return path
+    else:
+        return p
+

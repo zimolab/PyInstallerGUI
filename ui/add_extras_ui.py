@@ -7,9 +7,9 @@ from os.path import relpath, basename
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 from QBinder import Binder
-from ui.design.ui_add_extras import Ui_AddExtrasDialog
+from ui.base.ui_add_extras import Ui_AddExtrasDialog
 # noinspection PyTypeChecker
-from ui.utils import openDirDialog, openFileDialog, warn
+from utils import openDirDialog, openFileDialog, warn
 
 
 # noinspection PyTypeChecker

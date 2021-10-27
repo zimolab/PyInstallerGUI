@@ -5,8 +5,8 @@ from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
 from ui.constants import FILTER_PY_SOURCE_FILE
-from ui.design.ui_modify_path import Ui_ModifyPathDialog
-from ui.utils import warn, openFileDialog, openDirDialog
+from ui.base.ui_modify_path import Ui_ModifyPathDialog
+from utils import warn, openFileDialog, openDirDialog
 
 
 # noinspection PyTypeChecker

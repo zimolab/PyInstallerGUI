@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_extrasWrmpLu.ui'
+## Form base from reading UI file 'add_extrasWrmpLu.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##

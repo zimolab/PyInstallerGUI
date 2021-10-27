@@ -22,12 +22,12 @@ from ui.add_items_ui import AddItemsDialog
 from ui.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
     FILTER_ENTITLEMENTS_FILE
-from ui.design.ui_main import Ui_MainWindow
+from ui.base.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.upx_excludes_ui import UPXExcludesDialog
-from ui.utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
+from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont, toBaseNames, \
     filterFiles
 

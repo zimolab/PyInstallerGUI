@@ -6,12 +6,12 @@ import shlex
 from datetime import datetime
 
 from PySide2.QtCore import QProcess
-from PySide2.QtGui import QCloseEvent, QColor
+from PySide2.QtGui import QCloseEvent
 from PySide2.QtWidgets import QDialog, QApplication
 
-from ui.design.ui_start_cmd import Ui_StartCommandDialog
+from ui.base.ui_start_cmd import Ui_StartCommandDialog
 # noinspection PyTypeChecker
-from ui.utils import warn, info
+from utils import warn, info
 
 
 # noinspection PyTypeChecker

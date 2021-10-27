@@ -418,7 +418,7 @@ class PackageConfig(object):
             self.specPath = BindingOption(
                 name="specpath",
                 description="--specpath DIR: "
-                            "Folder to store the generated spec file (default: current directory)."
+                            "Folder to store the base spec file (default: current directory)."
             )
 
             self.noConfirm = BindingFlag(
@@ -734,7 +734,7 @@ class PackageConfig(object):
                 name="codesign-identity",
                 description="--codesign-identity IDENTITY: "
                             "Code signing identity (macOS only). Use the provided identity to sign collected binaries "
-                            "and generated executable. If signing identity is not provided, ad- hoc signing is "
+                            "and base executable. If signing identity is not provided, ad- hoc signing is "
                             "performed instead. "
             )
 
