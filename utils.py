@@ -141,22 +141,6 @@ def filterDirs(paths):
     return [path for path in paths if isdir(path)]
 
 
-# noinspection PyBroadException
-def relativePath(path, basenameIfFail=True):
-    try:
-        p = relpath(path)
-    except Exception:
-        if basenameIfFail:
-            try:
-                return basename(path)
-            except Exception:
-                return path
-        else:
-            return path
-    else:
-        return p
-
-
 def getTextInput(parent, title, label, text=""):
     dialog = QInputDialog(parent)
     dialog.setWindowTitle(title)
@@ -205,6 +189,7 @@ def toBaseNames(paths, filters=None):
             results.append(bn)
     return results
 
+
 def isEmpty(text):
     return text is None or text == ""
 
@@ -213,28 +198,39 @@ def isNotEmpty(text):
     return not isEmpty(text)
 
 
-def calcAbsolutePath(path):
-    if isEmpty(path):
+# noinspection PyBroadException
+def baseName(path):
+    try:
+        return basename(path)
+    except Exception:
         return path
-    if path == DEFAULT_VALUE_UNSET:
+
+
+# noinspection PyBroadException
+def absolutePath(path):
+    if isEmpty(path) or path == DEFAULT_VALUE_UNSET:
         return path
     try:
         p = abspath(path)
-    except:
+    except Exception:
         return path
     else:
         return p
 
 
-def calcRelativePath(path):
-    if isEmpty(path):
-        return path
-    if path == DEFAULT_VALUE_UNSET:
-        return path
+# noinspection PyBroadException
+def relativePath(path, fallback=baseName):
+    if isEmpty(path) or path == DEFAULT_VALUE_UNSET:
+        if fallback is not None:
+            return fallback(path)
+        else:
+            return path
     try:
         p = relpath(path)
-    except:
-        return path
+    except Exception:
+        if fallback is not None:
+            return fallback(path)
+        else:
+            return path
     else:
         return p
-
