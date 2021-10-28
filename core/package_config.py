@@ -15,6 +15,7 @@ from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH, D
     DEFAULT_ENCODINGS
 from core.options import Options, StringOption, FlagOption, DEFAULT_VALUE_UNSET, MultiOption, \
     BaseBindingOption
+from utils import isEmpty, isNull
 
 
 class PackageConfig(object):
@@ -150,10 +151,22 @@ class PackageConfig(object):
 
     def addScripts(self, *scripts):
         for script in scripts:
+            if isNull(script):
+                return
+            if isinstance(script, str) or isinstance(script, bytes):
+                script = script.strip()
+            if isEmpty(script):
+                return
             if script not in self.scripts:
                 self._state.scripts.append(script)
 
     def addScript(self, script):
+        if isNull(script):
+            return
+        if isinstance(script, str) or isinstance(script, bytes):
+            script = script.strip()
+        if isEmpty(script):
+            return
         if script not in self.scripts:
             self._state.scripts.append(script)
 
@@ -179,6 +192,12 @@ class PackageConfig(object):
         self.addScripts(*newScripts)
 
     def updateScriptAt(self, index, newScript):
+        if isNull(newScript):
+            return
+        if isinstance(newScript, str) or isinstance(newScript, bytes):
+            newScript = newScript.strip()
+        if isEmpty(newScript):
+            return
         # 防止访问越界
         if index < 0 or index >= len(self._state.scripts):
             return

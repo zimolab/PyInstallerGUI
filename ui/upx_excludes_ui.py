@@ -35,7 +35,7 @@ class UPXExcludesDialog(QDialog, Ui_UPXExcludesDialog):
         if content == "":
             warn(self, self.tr(u"Warning"), self.tr("Items cannot be empty!"))
             return
-        content = content.replace("；", ";").replace("，", ",")
+        content = content.replace("；", ";").replace("，", ",").strip()
         sepKey = self.filenameSeparatorCombo.currentText()
         items = splitItems(content, sepKey, self.DEFAULT_SEP)
         if isinstance(items, list) and isinstance(self._option, MultiOption):
@@ -54,8 +54,8 @@ class UPXExcludesDialog(QDialog, Ui_UPXExcludesDialog):
                     sep = ITEM_SEPARATORS[sepKey]
                 else:
                     sep = self.DEFAULT_SEP
-                content = sep.join(excludes)
-                currentContent = self.filenamesEdit.toPlainText()
+                content = sep.join(excludes).strip()
+                currentContent = self.filenamesEdit.toPlainText().strip()
                 if currentContent.endswith(sep):
                     self.filenamesEdit.setPlainText(currentContent + content)
                 else:

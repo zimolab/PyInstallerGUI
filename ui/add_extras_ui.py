@@ -4,7 +4,8 @@ from PySide2.QtWidgets import QDialog
 
 from ui.base.ui_add_extras import Ui_AddExtrasDialog
 # noinspection PyTypeChecker
-from utils import openDirDialog, openFileDialog, warn, relativePath, getBasename, notNull, isNull, joinSrcAndDest
+from utils import openDirDialog, openFileDialog, warn, relativePath, getBasename, notNull, isNull, joinSrcAndDest, \
+    isEmpty, absolutePath
 
 
 # noinspection PyTypeChecker
@@ -26,7 +27,9 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
 
         self.selectDirButton.clicked.connect(self.onSelectDir)
         self.selectFileButton.clicked.connect(self.onSelectFile)
-        self.addButton.clicked.connect(self.onConfirm)
+        self.relativePathButton.clicked.connect(self.onToRelativePath)
+        self.absolutePathButton.clicked.connect(self.onToAbsolutePath)
+        self.addButton.clicked.connect(self.onAdd)
 
     def display(self, action):
         self._action = action
@@ -66,9 +69,21 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
             self.soureEdit.setText(selectedFile)
             self.destinationEdit.setText(relativePath(selectedFile, fallback=getBasename))
 
+    def onToRelativePath(self):
+        path = self.soureEdit.text().strip()
+        if isEmpty(path):
+            return
+        self.soureEdit.setText(relativePath(path))
+
+    def onToAbsolutePath(self):
+        path = self.soureEdit.text().strip()
+        if isEmpty(path):
+            return
+        self.soureEdit.setText(absolutePath(path))
+
     # noinspection PyUnresolvedReferences
-    def onConfirm(self):
-        if isNull(self.soureEdit.text().strip()) or isNull(self.destinationEdit.text().strip()):
+    def onAdd(self):
+        if isEmpty(self.soureEdit.text().strip()) or isEmpty(self.destinationEdit.text().strip()):
             warn(self, self.tr("Warning"), self.tr("Source and Destination cannot be empty!"))
             return
         extra = joinSrcAndDest(self.soureEdit.text().strip(), self.destinationEdit.text().strip())

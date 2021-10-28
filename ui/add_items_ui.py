@@ -8,7 +8,7 @@ from ui.base.ui_add_items import Ui_AddItemsDialog
 
 
 # noinspection PyTypeChecker
-from utils import warn, splitItems
+from utils import warn, splitItems, isEmpty
 
 
 # noinspection PyTypeChecker
@@ -38,11 +38,11 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
         self.addButton.clicked.connect(self.onAddItem)
 
     def onAddItem(self):
-        content = self.itemsEdit.toPlainText().strip().replace("\n", "").replace("\r", "")
-        if content == "":
+        content = self.itemsEdit.toPlainText().replace("\n", "").replace("\r", "").strip()
+        if isEmpty(content):
             warn(self, self.tr(u"Warning"), self.tr("Items cannot be empty!"))
             return
-        content = content.replace("；", ";").replace("，", ",").strip()
+        content = content.replace("；", ";").replace("，", ",")
         sepKey = self.multiItemSeparatorCombo.currentText()
         items = splitItems(content, sepKey, self.DEFAULT_ITEMS_SEP)
         self.itemsAdded.emit(self._option, items)

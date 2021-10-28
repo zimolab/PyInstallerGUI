@@ -4,7 +4,7 @@ from PySide2.QtCore import Qt
 from PySide2.QtGui import QCursor
 from PySide2.QtWidgets import QLineEdit, QAction, QApplication, QMenu
 
-from utils import absolutePath, ask, relativePath, isNull, notNull
+from utils import absolutePath, ask, relativePath, isNull, notNull, isEmpty
 
 
 class BasePathEdit(QLineEdit):
@@ -63,11 +63,12 @@ class BasePathEdit(QLineEdit):
         args = []
         if action is self.actionCopy:
             if self.selectionLength() == 0:
-                text = self.text()
+                text = self.text().strip()
             else:
-                text = self.selectedText()
-            clipboard = QApplication.clipboard()
-            clipboard.setText(text)
+                text = self.selectedText().strip()
+            if not isEmpty(text):
+                clipboard = QApplication.clipboard()
+                clipboard.setText(text)
         elif action is self.actionPaste:
             self.paste()
         elif action is self.actionClear:
@@ -87,14 +88,14 @@ class BasePathEdit(QLineEdit):
 
     def _actionAbsolutePathHandler(self):
         if ask(self, self.tr(u"Convert"), self.tr(u"Convert to absolute path?")):
-            self.setText(absolutePath(self.text()))
+            self.setText(absolutePath(self.text().strip()).strip())
 
     def _actionRestoreDefaultHandler(self, *args):
         self.clear()
 
     def _actionRelativePathHandler(self):
         if ask(self, self.tr(u"Convert"), self.tr(u"Convert to relative path?")):
-            self.setText(relativePath(self.text()))
+            self.setText(relativePath(self.text().strip()).strip())
 
     def _onRequestContextMenu(self):
         self.contextMenu.exec_(QCursor.pos())

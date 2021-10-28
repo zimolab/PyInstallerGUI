@@ -4,7 +4,7 @@ from PySide2.QtWidgets import QDialog
 
 from ui.base.constants import FILTER_PY_SOURCE_FILE
 from ui.base.ui_modify_path import Ui_ModifyPathDialog
-from utils import warn, openFileDialog, openDirDialog, relativePath, absolutePath
+from utils import warn, openFileDialog, openDirDialog, relativePath, absolutePath, isEmpty
 
 
 # noinspection PyTypeChecker
@@ -66,8 +66,8 @@ class ModifyPathDialog(QDialog, Ui_ModifyPathDialog):
             raise ValueError("unknown action")
 
     def onConfirm(self):
-        modified = self.modifiedPathEdit.text()
-        if modified == "":
+        modified = self.modifiedPathEdit.text().strip()
+        if isEmpty(modified):
             warn(self, self.tr("Warning"), self.tr("path cannot be empty"))
             return
         else:
@@ -86,7 +86,7 @@ class ModifyPathDialog(QDialog, Ui_ModifyPathDialog):
             signal = self.runtimeHooksModified
         else:
             raise ValueError("unknown action")
-        signal.emit(self._currentIndex, self.modifiedPathEdit.text())
+        signal.emit(self._currentIndex, self.modifiedPathEdit.text().strip())
 
     def updateTitle(self):
         if self._action == self.MODIFY_SCRIPT_PATH:

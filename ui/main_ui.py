@@ -138,7 +138,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         def onAddScript():
             scripts = openFilesDialog(self, self.tr(u"Add Script"), None, self.tr(FILTER_PY_SOURCE_FILE))
-            if scripts is not None:
+            if notNull(scripts) and len(scripts) > 0:
                 self._configs.addScripts(*scripts)
         # 添加脚本
         self.addScriptButton.clicked.connect(onAddScript)

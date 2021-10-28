@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'modify_extrasSNQygl.ui'
+## Form generated from reading UI file 'modify_extrasyHbuon.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,59 +18,34 @@ class Ui_ModifyExtrasDialog(object):
         if not ModifyExtrasDialog.objectName():
             ModifyExtrasDialog.setObjectName(u"ModifyExtrasDialog")
         ModifyExtrasDialog.setWindowModality(Qt.WindowModal)
-        ModifyExtrasDialog.resize(563, 251)
+        ModifyExtrasDialog.resize(586, 214)
         ModifyExtrasDialog.setModal(True)
         self.verticalLayout = QVBoxLayout(ModifyExtrasDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
+        self.destinationEdit = QLineEdit(ModifyExtrasDialog)
+        self.destinationEdit.setObjectName(u"destinationEdit")
+
+        self.gridLayout.addWidget(self.destinationEdit, 2, 1, 1, 1)
+
         self.soureEdit = QLineEdit(ModifyExtrasDialog)
         self.soureEdit.setObjectName(u"soureEdit")
 
         self.gridLayout.addWidget(self.soureEdit, 0, 1, 1, 1)
 
-        self.horizontalLayout_3 = QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.destBasenameButton = QPushButton(ModifyExtrasDialog)
-        self.destBasenameButton.setObjectName(u"destBasenameButton")
-
-        self.horizontalLayout_3.addWidget(self.destBasenameButton)
-
-        self.destRelativePathButton = QPushButton(ModifyExtrasDialog)
-        self.destRelativePathButton.setObjectName(u"destRelativePathButton")
-
-        self.horizontalLayout_3.addWidget(self.destRelativePathButton)
-
-
-        self.gridLayout.addLayout(self.horizontalLayout_3, 4, 1, 1, 1)
-
-        self.destinationEdit = QLineEdit(ModifyExtrasDialog)
-        self.destinationEdit.setObjectName(u"destinationEdit")
-
-        self.gridLayout.addWidget(self.destinationEdit, 3, 1, 1, 1)
-
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.reselectDirButton = QPushButton(ModifyExtrasDialog)
-        self.reselectDirButton.setObjectName(u"reselectDirButton")
-
-        self.horizontalLayout_2.addWidget(self.reselectDirButton)
-
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.reselectFileButton = QPushButton(ModifyExtrasDialog)
         self.reselectFileButton.setObjectName(u"reselectFileButton")
 
-        self.horizontalLayout_2.addWidget(self.reselectFileButton)
+        self.horizontalLayout_4.addWidget(self.reselectFileButton)
 
+        self.reselectDirButton = QPushButton(ModifyExtrasDialog)
+        self.reselectDirButton.setObjectName(u"reselectDirButton")
 
-        self.gridLayout.addLayout(self.horizontalLayout_2, 1, 1, 1, 1)
+        self.horizontalLayout_4.addWidget(self.reselectDirButton)
 
-        self.destinationLabel = QLabel(ModifyExtrasDialog)
-        self.destinationLabel.setObjectName(u"destinationLabel")
-
-        self.gridLayout.addWidget(self.destinationLabel, 3, 0, 1, 1)
-
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.srcRelativePathButton = QPushButton(ModifyExtrasDialog)
         self.srcRelativePathButton.setObjectName(u"srcRelativePathButton")
 
@@ -82,12 +57,32 @@ class Ui_ModifyExtrasDialog(object):
         self.horizontalLayout_4.addWidget(self.srcAbsoluteButton)
 
 
-        self.gridLayout.addLayout(self.horizontalLayout_4, 2, 1, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_4, 1, 1, 1, 1)
+
+        self.destinationLabel = QLabel(ModifyExtrasDialog)
+        self.destinationLabel.setObjectName(u"destinationLabel")
+
+        self.gridLayout.addWidget(self.destinationLabel, 2, 0, 1, 1)
 
         self.sourceLabel = QLabel(ModifyExtrasDialog)
         self.sourceLabel.setObjectName(u"sourceLabel")
 
         self.gridLayout.addWidget(self.sourceLabel, 0, 0, 1, 1)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.destBasenameButton = QPushButton(ModifyExtrasDialog)
+        self.destBasenameButton.setObjectName(u"destBasenameButton")
+
+        self.horizontalLayout_2.addWidget(self.destBasenameButton)
+
+        self.destRelativePathButton = QPushButton(ModifyExtrasDialog)
+        self.destRelativePathButton.setObjectName(u"destRelativePathButton")
+
+        self.horizontalLayout_2.addWidget(self.destRelativePathButton)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout_2, 3, 1, 1, 1)
 
 
         self.verticalLayout.addLayout(self.gridLayout)
@@ -124,14 +119,14 @@ class Ui_ModifyExtrasDialog(object):
 
     def retranslateUi(self, ModifyExtrasDialog):
         ModifyExtrasDialog.setWindowTitle(QCoreApplication.translate("ModifyExtrasDialog", u"Modify Extras", None))
-        self.destBasenameButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Basename", None))
-        self.destRelativePathButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Relative Path", None))
-        self.reselectDirButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Reselect Dir", None))
         self.reselectFileButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Reselect File", None))
-        self.destinationLabel.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Destination", None))
+        self.reselectDirButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Reselect Dir", None))
         self.srcRelativePathButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Relative Path", None))
         self.srcAbsoluteButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Absolute Path", None))
+        self.destinationLabel.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Destination", None))
         self.sourceLabel.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Source", None))
+        self.destBasenameButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Basename", None))
+        self.destRelativePathButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Relative Path", None))
         self.confirmButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Confirm", None))
         self.cancelButton.setText(QCoreApplication.translate("ModifyExtrasDialog", u"Cancel", None))
     # retranslateUi
