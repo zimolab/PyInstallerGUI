@@ -10,6 +10,7 @@ from utils import warn, notNull, isNull, requestRemove, requestClear, requestPat
 class BasePathListWidget(QListWidget):
     def __init__(self, parent):
         super().__init__(parent)
+        self._bindToSelectionState = []
 
         self.actionOpenPath = QAction(self, text=self.tr(u"Open"))
         self.actionAdd = QAction(self, text=self.tr(u"Add"))
@@ -39,6 +40,7 @@ class BasePathListWidget(QListWidget):
         self._stateChange()
         self.disableCustomContextMenu()
 
+
     def setupActions(self):
         self.actionOpenPath.triggered.connect(self.onActionTriggered)
         self.actionAdd.triggered.connect(self.onActionTriggered)
@@ -50,6 +52,11 @@ class BasePathListWidget(QListWidget):
         self.actionRelativePaths.triggered.connect(self.onActionTriggered)
         self.actionAllRelativePaths.triggered.connect(self.onActionTriggered)
 
+        self._bindToSelectionState.append(self.actionOpenPath)
+        self._bindToSelectionState.append(self.actionRemove)
+        self._bindToSelectionState.append(self.actionModify)
+        self._bindToSelectionState.append(self.actionAbsolutePaths)
+        self._bindToSelectionState.append(self.actionRelativePaths)
 
     def enableCustomContextMenu(self, bindingList):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -128,11 +135,8 @@ class BasePathListWidget(QListWidget):
 
     def _stateChange(self):
         hasSelection = len(self.selectedItems()) > 0
-        self.actionOpenPath.setEnabled(hasSelection)
-        self.actionRemove.setEnabled(hasSelection)
-        self.actionModify.setEnabled(hasSelection)
-        self.actionAbsolutePaths.setEnabled(hasSelection)
-        self.actionRelativePaths.setEnabled(hasSelection)
+        for action in self._bindToSelectionState:
+            action.setEnabled(hasSelection)
 
     def _onRequestContextMenu(self):
         self.contextMenu.exec_(QCursor.pos())
@@ -154,12 +158,12 @@ class BasePathListWidget(QListWidget):
 
     def _actionOpenPathHandler(self, selectedItems):
         """actionOpenPath的默认动作"""
-        paths = self._itemTextsOf(selectedItems)
+        paths = self.itemTextsOf(selectedItems)
         requestOpenPaths(self, *paths)
 
     def _actionRemoveHandler(self, selectedItems):
         """actionRemove的默认动作"""
-        requestRemove(self, self.bindingList, self._itemTextsOf(selectedItems))
+        requestRemove(self, self.bindingList, self.itemTextsOf(selectedItems))
 
     def _actionClearHandler(self):
         """actionClear的默认动作"""
@@ -167,7 +171,7 @@ class BasePathListWidget(QListWidget):
 
     def _actionAbsolutePathsHandler(self, selectedItems):
         """actionToAbsolutePaths的默认动作"""
-        requestPathsConversion(self, self.bindingList, self._itemTextsOf(selectedItems), absolutePath)
+        requestPathsConversion(self, self.bindingList, self.itemTextsOf(selectedItems), absolutePath)
 
     def _actionAllAbsolutePathsHandler(self, _):
         """actionAllToAbsolutePaths的默认动作"""
@@ -175,13 +179,33 @@ class BasePathListWidget(QListWidget):
 
     def _actionRelativePathsHandler(self, selectedItems):
         print("_actionRelativePathsHandler")
-        requestPathsConversion(self, self.bindingList, self._itemTextsOf(selectedItems), relativePath)
+        requestPathsConversion(self, self.bindingList, self.itemTextsOf(selectedItems), relativePath)
 
     def _actionAllRelativePathsHandler(self, _):
         requestPathsConversion(self, self.bindingList, _, relativePath)
 
+
+    def removePathsConversionActions(self):
+        self.removeActions(self.actionAbsolutePaths, self.actionAllAbsolutePaths,
+                           self.actionRelativePaths, self.actionAllRelativePaths)
+
+    def removeActions(self, *actions):
+        for action in actions:
+            self.contextMenu.removeAction(action)
+
+    def addSubmenu(self, *menus):
+        for menu in menus:
+            self.contextMenu.addMenu(menu)
+
+    def addExtraActions(self, *actions, bindToSelectionState=False):
+        for action in actions:
+            self.contextMenu.addAction(action)
+            if bindToSelectionState:
+                self._bindToSelectionState.append(action)
+        self._stateChange()
+
     @classmethod
-    def _itemTextsOf(cls, selectedItems):
+    def itemTextsOf(cls, selectedItems):
         if isNull(selectedItems) or len(selectedItems) == 0:
             return None
         return [i.text() for i in selectedItems]

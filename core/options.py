@@ -95,6 +95,8 @@ class StringOption(BaseBindingOption):
 
     @argument.setter
     def argument(self, val):
+        if isinstance(val, str) or isinstance(val, bytes):
+            val = val.strip()
         if val in self._valuesForUnset:
             if notNull(self.choices) and DEFAULT_VALUE_UNSET in self.choices:
                 self._state.argument = DEFAULT_VALUE_UNSET
@@ -237,6 +239,8 @@ class MultiOption(BaseBindingOption):
         return True
 
     def add(self, val, ignoreValidationError=True):
+        if isinstance(val, str) or isinstance(val, bytes):
+            val = val.strip()
         # 防止元素重复
         if val in self._state.argument:
             return False
@@ -281,6 +285,8 @@ class MultiOption(BaseBindingOption):
         return True
 
     def set(self, index, val, ignoreValidationError=True):
+        if isinstance(val, str) or isinstance(val, bytes):
+            val = val.strip()
         # 防止越界访问
         if index < 0 or index >= len(self._state.argument):
             return False

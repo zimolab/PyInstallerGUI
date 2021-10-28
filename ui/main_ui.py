@@ -32,7 +32,7 @@ from ui.upx_excludes_ui import UPXExcludesDialog
 from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, getDirs, joinSrcAndDest, getTextInput, getFont, getBasenames, \
     getFiles, requestRemove, requestClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist, notNull, isEmpty, \
-    splitSrcAndDest, requestOpenPaths, isNull
+    splitSrcAndDest, requestOpenPaths, isNull, getBasename
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -429,10 +429,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._modifyExtrasDialog.extraDataModified.connect(
             lambda index, modified: self._commonOptions.addData.set(index, modified, True))
         # 上下文菜单
-        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionRelativePaths)
-        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAllRelativePaths)
-        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAbsolutePaths)
-        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAllAbsolutePaths)
+        self.extraDataListWidget.removePathsConversionActions()
         self.extraDataListWidget.actionAddHandler = lambda: onAddExtras(None, self._commonOptions.addData)
         self.extraDataListWidget.actionModifyHandler = \
             lambda item: onModifyExtras(item.text().strip(),
@@ -450,10 +447,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._modifyExtrasDialog.extraBinaryModified.connect(
             lambda index, modified: self._commonOptions.addBinary.set(index, modified, True))
         # 上下文菜单
-        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionRelativePaths)
-        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAllRelativePaths)
-        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAbsolutePaths)
-        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAllAbsolutePaths)
+        self.extraBinariesListWidget.removePathsConversionActions()
         self.extraBinariesListWidget.actionAddHandler = lambda: onAddExtras(None, self._commonOptions.addBinary)
         self.extraBinariesListWidget.actionModifyHandler = \
             lambda item: onModifyExtras(item.text().strip(),
@@ -571,23 +565,48 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                     selectionMode=self.SELECT_DIR)
 
         # upxExclude
-        def onAdd(paths, option: MultiOption):
-            if paths is None:
+        def onAdd(names, option: MultiOption):
+            if isNull(names):
                 self._upxExcludesDialog.display(option)
             else:
-                excludes = getBasenames(paths, filters=isFile)
+                excludes = getBasenames(names, filters=isFile)
                 option.addAll(True, *excludes)
 
-        def onModify(path, index, option: MultiOption):
-            modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), path)
+        def onModify(name, index, option: MultiOption):
+            name = name.strip()
+            if isEmpty(name) or index <= 0:
+                return
+            modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), name)
             if modified is not None:
                 option.set(index, modified, True)
+
+        def onStripPaths():
+            selectedItems = self.upxExcludesListWidget.selectedItems()
+            if len(selectedItems) <= 0:
+                return
+            if ask(self, self.tr("Remove Paths"), self.tr("Only the file name will be left, continue?")):
+                for item in selectedItems:
+                    path = item.text().strip()
+                    index = self._upxOptions.upxExclude.indexOf(path)
+                    if index >= 0:
+                        self._upxOptions.upxExclude.set(index, getBasename(path))
         # upxExclude
         self.autosetMultiItemsUI(option=self._upxOptions.upxExclude, label=self.upxExcludesLabel,
                                  listWidget=self.upxExcludesListWidget, addButton=self.addUPXExcludesButton,
                                  removeButton=self.removeUPXExcludesButton, clearButton=self.clearUPXExcludesButton,
                                  onAdd=onAdd, onModify=onModify)
         self._upxExcludesDialog.upxExcludesAdded.connect(lambda excludes, option: option.addAll(True, *excludes))
+        # 上下文菜单
+        self.upxExcludesListWidget.removeActions(self.upxExcludesListWidget.actionOpenPath)
+        self.upxExcludesListWidget.removePathsConversionActions()
+        self.upxExcludesListWidget.actionAddHandler = lambda: onAdd(None, self._upxOptions.upxExclude)
+        self.upxExcludesListWidget.actionModifyHandler = lambda item: \
+            onModify(item.text(), self._upxOptions.upxExclude.indexOf(item.text()), self._upxOptions.upxExclude)
+        # 添加一项菜单
+        actionStripPaths = QAction(self.upxExcludesListWidget, text=self.upxExcludesListWidget.tr("Strip Paths"))
+        actionStripPaths.triggered.connect(onStripPaths)
+        self.upxExcludesListWidget.addExtraActions(actionStripPaths, bindToSelectionState=True)
+        self.upxExcludesListWidget.enableCustomContextMenu(self._upxOptions.upxExclude.argument)
 
     def setupWindowsOptionsUI(self):
         # versionFile
