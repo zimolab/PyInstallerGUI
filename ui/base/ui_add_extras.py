@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form base from reading UI file 'add_extrasWrmpLu.ui'
+## Form generated from reading UI file 'add_extrasGsrfbH.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,7 +18,7 @@ class Ui_AddExtrasDialog(object):
         if not AddExtrasDialog.objectName():
             AddExtrasDialog.setObjectName(u"AddExtrasDialog")
         AddExtrasDialog.setWindowModality(Qt.WindowModal)
-        AddExtrasDialog.resize(537, 216)
+        AddExtrasDialog.resize(555, 182)
         AddExtrasDialog.setModal(True)
         self.verticalLayout = QVBoxLayout(AddExtrasDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -69,10 +69,10 @@ class Ui_AddExtrasDialog(object):
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.actButton = QPushButton(AddExtrasDialog)
-        self.actButton.setObjectName(u"actButton")
+        self.addButton = QPushButton(AddExtrasDialog)
+        self.addButton.setObjectName(u"addButton")
 
-        self.horizontalLayout_2.addWidget(self.actButton)
+        self.horizontalLayout_2.addWidget(self.addButton)
 
         self.exitButton = QPushButton(AddExtrasDialog)
         self.exitButton.setObjectName(u"exitButton")
@@ -81,6 +81,10 @@ class Ui_AddExtrasDialog(object):
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
 
 
         self.retranslateUi(AddExtrasDialog)
@@ -96,7 +100,7 @@ class Ui_AddExtrasDialog(object):
         self.label.setText(QCoreApplication.translate("AddExtrasDialog", u"Note: glob format is supported!", None))
         self.selectFileButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Select File", None))
         self.selectDirButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Select Dir", None))
-        self.actButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Add", None))
+        self.addButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Add", None))
         self.exitButton.setText(QCoreApplication.translate("AddExtrasDialog", u"Exit", None))
     # retranslateUi
 

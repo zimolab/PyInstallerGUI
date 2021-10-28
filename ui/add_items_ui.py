@@ -2,7 +2,7 @@
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
-from core.options import BindingMultipleOption
+from core.options import MultiOption
 from ui.base.constants import ITEM_SEPARATORS
 from ui.base.ui_add_items import Ui_AddItemsDialog
 
@@ -24,7 +24,7 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
 
     DEFAULT_ITEMS_SEP = ";"
 
-    itemsAdded = Signal(BindingMultipleOption, list)
+    itemsAdded = Signal(MultiOption, list)
 
     def __init__(self, parent):
         super().__init__(parent)

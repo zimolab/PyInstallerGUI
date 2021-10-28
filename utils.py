@@ -106,21 +106,22 @@ def joinSrcAndDest(src, dest, pathsep=None):
 
 
 def splitSrcAndDest(joined: str, pathsep=None):
-    if pathsep is None:
+    if notNull(pathsep):
         result = joined.split(pathsep, maxsplit=1)
         if len(result) <= 1:
             return joined, ""
         return result
-
+    # 尝试使用“;”
     pathsep = ";"
     tmp = joined.split(pathsep)
     if len(tmp) == 2:
         return tmp
-
+    # 尝试使用“:”
     pathsep = ":"
     tmp = joined.split(pathsep)
     if len(tmp) == 2:
         return tmp
+    # 失败时返回
     return joined, ""
 
 
@@ -337,3 +338,18 @@ def requestPathsConversion(parent, bindingList, paths, converter, *args, **kwarg
                     if p in bindingList:
                         continue
                     bindingList[index] = p
+
+
+def requestOpenPaths(parent, *paths):
+    if isNull(paths) or len(paths) <= 0:
+        return
+    if len(paths) > 1:
+        prompt = parent.tr("Open ") + f"{len(paths)}" + parent.tr(" paths?")
+    else:
+        prompt = parent.tr("Open ") + f'"{paths[0]}"?'
+    if ask(parent, parent.tr(u"Open"), prompt):
+        for path in paths:
+            if isFile(path) or isDir(path):
+                systemOpen(path)
+            else:
+                warn(parent, parent.tr("Warning"), f'"{path}"' + parent.tr(" is not exist"))

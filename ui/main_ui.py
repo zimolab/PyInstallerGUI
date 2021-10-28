@@ -11,25 +11,28 @@ from typing import Union
 from PySide2 import QtCore
 from PySide2.QtGui import QDropEvent, QIcon
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QPushButton, QLabel, QCheckBox, QRadioButton, \
-    QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup
+    QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup, QMenu
 from QBinder import QEventHook, Binder
 
 from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH
-from core.options import BindingOption, BindingFlag, BindingMultipleOption
+from core.options import StringOption, FlagOption, MultiOption
 from core.package_config import PackageConfig
 from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
+from ui.base.base_path_listwidget import BasePathListWidget
 from ui.base.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
     FILTER_ENTITLEMENTS_FILE, PY_FILE_EXT
 from ui.base.ui_main import Ui_MainWindow
+from ui.modfiy_extras import ModifyExtrasDialog
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.upx_excludes_ui import UPXExcludesDialog
 from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, getDirs, joinSrcAndDest, getTextInput, getFont, getBasenames, \
-    getFiles, requestRemove, requestClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist
+    getFiles, requestRemove, requestClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist, notNull, isEmpty, \
+    splitSrcAndDest, requestOpenPaths, isNull
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -59,6 +62,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 创建对话框或其他窗口
         self._startCommandDialog = StartCommandDialog(self)
         self._addExtrasDialog = AddExtrasDialog(self)
+        self._modifyExtrasDialog = ModifyExtrasDialog(self)
         self._modifyPathDialog = ModifyPathDialog(self)
         self._addItemsDialog = AddItemsDialog(self)
         self._upxExcludesDialog = UPXExcludesDialog(self)
@@ -304,7 +308,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                            flagBox=self.disableWindowedTracebackCheckBox)
 
         # paths
-        def onAddSearchPaths(paths, option: BindingMultipleOption):
+        def onAddSearchPaths(paths, option: MultiOption):
             if paths is None:
                 paths = openDirsDialog(self, self.tr("Add Directory"))
             else:
@@ -330,7 +334,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         )
 
         # addData & addBinary
-        def onAddExtras(paths, option: BindingMultipleOption):
+        def onAddExtras(paths, option: MultiOption):
             if paths is None:
                 if option.name == self._commonOptions.addBinary.name:
                     self._addExtrasDialog.display(AddExtrasDialog.ADD_EXTRA_BIN)
@@ -356,13 +360,65 @@ class MainUI(QMainWindow, Ui_MainWindow):
                 paths = tmp
             option.addAll(True, *paths)
 
-        def onModifyExtras(path, index, option):
+        def onModifyExtras(extra, index, option):
+            if isEmpty(extra) or index < 0:
+                return
             if option.name == self._commonOptions.addData.name:
-                self._addExtrasDialog.display(AddExtrasDialog.MODIFY_EXTRA_DATA, path, index)
+                self._modifyExtrasDialog.display(ModifyExtrasDialog.MODIFY_EXTRA_DATA, index, extra)
             elif option.name == self._commonOptions.addBinary.name:
-                self._addExtrasDialog.display(AddExtrasDialog.MODIFY_EXTRA_BIN, path, index)
+                self._modifyExtrasDialog.display(ModifyExtrasDialog.MODIFY_EXTRA_BIN, index, extra)
             else:
                 pass
+
+        def onOpenExtrasPath(selectedItems):
+            texts = [i.text().strip() for i in selectedItems]
+            paths = []
+            for text in texts:
+                src, dest = splitSrcAndDest(text)
+                paths.append(src)
+            del texts[:]
+            del texts
+            requestOpenPaths(self, *paths)
+        # TODO: 实现统一路径分隔符功能
+        # def onUnifyPathSep(selectedItems, pathsep, option):
+        #     print(selectedItems, pathsep, option)
+        #     if isNull(selectedItems):
+        #         for item in selectedItems:
+        #             joined = item.text()
+        #             index = option.indexOf(joined)
+        #             if index >= 0:
+        #                 option.set(index, joined.replace(";", pathsep).replace(":", pathsep))
+        #     else:
+        #         warn(self, self.tr(u"Warning"), self.tr(u"Select some items first!"))
+        #
+        # def addUnifyPathSepMenu(widget: BasePathListWidget, option):
+        #     unifyPathSepMenu = QMenu(widget)
+        #     unifyPathSepMenu.setTitle(self.tr(u"Unify Path Separator"))
+        #
+        #     actionUseSystemPathSep = QAction(widget, text=self.tr(u"System Path Separator"))
+        #     actionUseSystemPathSep.setData(os.pathsep)
+        #     actionUseSystemPathSep.triggered.connect(lambda: onUnifyPathSep(
+        #         widget.selectedItems(), actionUseSystemPathSep.data(), option
+        #     ))
+        #
+        #     actionUseSemicolon = QAction(widget, text=self.tr(u"Use Semicolon"))
+        #     actionUseSemicolon.setData(";")
+        #     actionUseSemicolon.triggered.connect(lambda: onUnifyPathSep(
+        #         widget.selectedItems(), actionUseSemicolon.data(), option
+        #     ))
+        #
+        #     actionUseColon = QAction(widget, text=self.tr(u"Use Colon"))
+        #     actionUseColon.setData(":")
+        #     actionUseColon.triggered.connect(lambda: onUnifyPathSep(
+        #         widget.selectedItems(), actionUseColon.data(), option
+        #     ))
+        #
+        #     unifyPathSepMenu.addAction(actionUseSystemPathSep)
+        #     unifyPathSepMenu.addAction(actionUseSemicolon)
+        #     unifyPathSepMenu.addAction(actionUseColon)
+        #
+        #     widget.contextMenu.addSeparator()
+        #     widget.contextMenu.addMenu(unifyPathSepMenu)
 
         # extraData
         self.autosetMultiItemsUI(option=self._commonOptions.addData, label=self.extraDataLabel,
@@ -370,33 +426,45 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  removeButton=self.removeExtraDataButton, clearButton=self.clearExtraData,
                                  onAdd=onAddExtras, onModify=onModifyExtras)
         self._addExtrasDialog.extraDataAdded.connect(lambda path: onAddExtras(path, self._commonOptions.addData))
-        self._addExtrasDialog.extraDataChanged.connect(self._commonOptions.addData.set)
+        self._modifyExtrasDialog.extraDataModified.connect(
+            lambda index, modified: self._commonOptions.addData.set(index, modified, True))
         # 上下文菜单
         self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionRelativePaths)
         self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAllRelativePaths)
         self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAbsolutePaths)
         self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAllAbsolutePaths)
         self.extraDataListWidget.actionAddHandler = lambda: onAddExtras(None, self._commonOptions.addData)
+        self.extraDataListWidget.actionModifyHandler = \
+            lambda item: onModifyExtras(item.text().strip(),
+                                        self._commonOptions.addData.indexOf(item.text().strip()),
+                                        self._commonOptions.addData)
+        self.extraDataListWidget.actionOpenPathHandler = onOpenExtrasPath
+        #addUnifyPathSepMenu(self.extraDataListWidget, self._commonOptions.addData)
         self.extraDataListWidget.enableCustomContextMenu(self._commonOptions.addData.argument)
         # extraBinaries
         self.autosetMultiItemsUI(option=self._commonOptions.addBinary, label=self.extraBinariesLabel,
                                  listWidget=self.extraBinariesListWidget, addButton=self.addExtraBinariesButton,
                                  removeButton=self.removeExtraBinariesButton, clearButton=self.clearExtraBinariesButton,
                                  onAdd=onAddExtras, onModify=onModifyExtras)
-        self._addExtrasDialog.extraBinaryAdded.connect(
-            lambda path: onAddExtras(path, self._commonOptions.addBinary))
-        self._addExtrasDialog.extraBinaryChanged.connect(self._commonOptions.addBinary.set)
+        self._addExtrasDialog.extraBinaryAdded.connect(lambda path: onAddExtras(path, self._commonOptions.addBinary))
+        self._modifyExtrasDialog.extraBinaryModified.connect(
+            lambda index, modified: self._commonOptions.addBinary.set(index, modified, True))
         # 上下文菜单
         self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionRelativePaths)
         self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAllRelativePaths)
         self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAbsolutePaths)
         self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAllAbsolutePaths)
         self.extraBinariesListWidget.actionAddHandler = lambda: onAddExtras(None, self._commonOptions.addBinary)
+        self.extraBinariesListWidget.actionModifyHandler = \
+            lambda item: onModifyExtras(item.text().strip(),
+                                        self._commonOptions.addBinary.indexOf(item.text().strip()),
+                                        self._commonOptions.addBinary)
+        #addUnifyPathSepMenu(self.extraBinariesListWidget, self._commonOptions.addBinary)
         self.extraBinariesListWidget.enableCustomContextMenu(self._commonOptions.addBinary.argument)
 
         # excludeModule & hiddenImports & collectSubmodules & collectData & collectBinaries & collectAll &
         # copyMetadata & recursiveCopyMetadata
-        def onAddItem(_, option: BindingMultipleOption):
+        def onAddItem(_, option: MultiOption):
             if option.name == self._commonOptions.excludeModule.name:
                 self._addItemsDialog.display(AddItemsDialog.ADD_EXCLUDE_MODULES, option)
             elif option.name == self._commonOptions.hiddenImports.name:
@@ -416,7 +484,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             else:
                 raise ValueError("unknown action")
 
-        def onModifyItem(item, index, option: BindingMultipleOption):
+        def onModifyItem(item, index, option: MultiOption):
             modified = getTextInput(self, self.tr("Modify"), self.tr("To be modified:"), item)
             if modified is not None:
                 option.set(index, modified, True)
@@ -503,14 +571,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                     selectionMode=self.SELECT_DIR)
 
         # upxExclude
-        def onAdd(paths, option: BindingMultipleOption):
+        def onAdd(paths, option: MultiOption):
             if paths is None:
                 self._upxExcludesDialog.display(option)
             else:
                 excludes = getBasenames(paths, filters=isFile)
                 option.addAll(True, *excludes)
 
-        def onModify(path, index, option: BindingMultipleOption):
+        def onModify(path, index, option: MultiOption):
             modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), path)
             if modified is not None:
                 option.set(index, modified, True)
@@ -563,7 +631,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                 edit=self.codesignIdentityEdit, defaultButton=self.defaultCodesignIdentityButton)
 
     def setupHookOptionsUI(self):
-        def onAdd(paths, option: BindingMultipleOption):
+        def onAdd(paths, option: MultiOption):
             if paths is None:
                 if option.name == self._hookOptions.additionalHooksDir.name:
                     paths = openDirsDialog(self, self.tr("Add Additional Hooks Directories"))
@@ -580,7 +648,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                     return
             option.addAll(True, *paths)
 
-        def onModify(path, index, option: BindingMultipleOption):
+        def onModify(path, index, option: MultiOption):
             if option.name == self._hookOptions.additionalHooksDir.name:
                 self._modifyPathDialog.display(ModifyPathDialog.MODIFY_ADDITIONAL_HOOKS_DIR, path, index)
             else:
@@ -600,7 +668,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._modifyPathDialog.runtimeHooksModified.connect(
             lambda index, modified: self._hookOptions.runtimeHook.set(index, modified, True))
 
-    def autosetPathSelectionUI(self, option: BindingOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,
+    def autosetPathSelectionUI(self, option: StringOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,
                                defaultButton: QPushButton, selectionMode, filters=None, startPath=None):
         if startPath is None:
             startPath = cwd()
@@ -627,14 +695,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         selectButton.clicked.connect(onSelectPath)
 
-    def autosetFlagUI(self, flag: BindingFlag, flagBox: Union[QCheckBox, QRadioButton], defaultButton=None):
+    def autosetFlagUI(self, flag: FlagOption, flagBox: Union[QCheckBox, QRadioButton], defaultButton=None):
         self.setTooltip(flag.description, flagBox)
         flag.bind(flagBox)
 
         if defaultButton is not None:
             defaultButton.clicked.connect(flag.unset)
 
-    def autosetChoiceUI(self, option: BindingOption, label: QLabel, choicesBox: QComboBox, defaultButton=None):
+    def autosetChoiceUI(self, option: StringOption, label: QLabel, choicesBox: QComboBox, defaultButton=None):
         if option.choices is None:
             raise ValueError("option without choices")
 
@@ -644,13 +712,13 @@ class MainUI(QMainWindow, Ui_MainWindow):
         if defaultButton is not None:
             defaultButton.clicked.connect(option.unset)
 
-    def autosetTextInputUI(self, option: BindingOption, label: QLabel, edit: QLineEdit, defaultButton=None):
+    def autosetTextInputUI(self, option: StringOption, label: QLabel, edit: QLineEdit, defaultButton=None):
         self.setTooltip(option.description, label, edit)
         option.bind(edit)
         if defaultButton is not None:
             defaultButton.clicked.connect(option.unset)
 
-    def autosetMultiItemsUI(self, option: BindingMultipleOption, label: QLabel, listWidget: QListWidget,
+    def autosetMultiItemsUI(self, option: MultiOption, label: QLabel, listWidget: QListWidget,
                             addButton: QPushButton = None, removeButton: QPushButton = None,
                             clearButton: QPushButton = None, onAdd=None, onModify=None, enableDrop=True):
         self.setTooltip(option.description, label, listWidget)

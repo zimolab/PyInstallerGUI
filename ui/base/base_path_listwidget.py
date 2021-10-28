@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-from os.path import isfile, isdir
-
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QCursor
 from PySide2.QtWidgets import QListWidget, QMenu, QAction
 
-from utils import systemOpen, warn, ask, notNull, isNull, requestRemove, requestClear, requestPathsConversion, \
-    absolutePath, relativePath
+from utils import warn, notNull, isNull, requestRemove, requestClear, requestPathsConversion, \
+    absolutePath, relativePath, requestOpenPaths
 
 
 class BasePathListWidget(QListWidget):
@@ -157,14 +155,7 @@ class BasePathListWidget(QListWidget):
     def _actionOpenPathHandler(self, selectedItems):
         """actionOpenPath的默认动作"""
         paths = self._itemTextsOf(selectedItems)
-        if isNull(paths):
-            return
-        if ask(self, self.tr(u"Open"), self.tr("Open ") + f"{len(paths)}" + self.tr(" paths?")):
-            for path in paths:
-                if isfile(path) or isdir(path):
-                    systemOpen(path)
-                else:
-                    warn(self, self.tr("Warning"), f'"{path}"' + self.tr(" is not exist"))
+        requestOpenPaths(self, *paths)
 
     def _actionRemoveHandler(self, selectedItems):
         """actionRemove的默认动作"""

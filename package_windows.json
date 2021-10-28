@@ -1,0 +1,26 @@
+{
+    "name": "PyInstallerGUI",
+    "author": "zimolab@aliyun.com",
+    "version": "0.0.1",
+    "description": "一个简化PyInstaller命令行使用的小工具。界面基于PySide2构建。\n源码：https://github.com/zimolab/PyInstallerGUI.git\n开源协议：GPL v3.0",
+    "pyinstaller": "pyinstaller",
+    "pyimakespec": "pyi-makespec",
+    "scripts": [
+        "main.py"
+    ],
+    "options": {
+        "clean": true,
+        "distPath": "./build/dist",
+        "icon": "../data/logos/pyinstaller-gui.ico",
+        "noConfirm": true,
+        "productMode": "onedir",
+        "productName": "PyInstallerGUI",
+        "specPath": "./build",
+        "windowMode": "windowed",
+        "workPath": "./build",
+        "upx": {},
+        "hooks": {},
+        "windows": {},
+        "macOSX": {}
+    }
+}

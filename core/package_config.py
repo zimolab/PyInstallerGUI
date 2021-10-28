@@ -13,8 +13,8 @@ from QBinder import Binder
 
 from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH, DEFAULT_VERSION, DEFAULT_DESCRIPTION, \
     DEFAULT_ENCODINGS
-from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSET, BindingMultipleOption, \
-    BaseOption
+from core.options import Options, StringOption, FlagOption, DEFAULT_VALUE_UNSET, MultiOption, \
+    BaseBindingOption
 
 
 class PackageConfig(object):
@@ -303,7 +303,7 @@ class PackageConfig(object):
         for name, opt in options:
             if name in excludes:
                 continue
-            if isinstance(opt, BaseOption):
+            if isinstance(opt, BaseBindingOption):
                 serialized[name] = opt.argument
             else:
                 raise ValueError(f"unknown options type: {type(options)}")
@@ -317,14 +317,14 @@ class PackageConfig(object):
             if not hasattr(target, key) or key.startswith("_") or isinstance(val, dict):
                 continue
             opt = getattr(target, key)
-            if not isinstance(opt, BaseOption):
+            if not isinstance(opt, BaseBindingOption):
                 continue
-            if isinstance(opt, BindingMultipleOption):
+            if isinstance(opt, MultiOption):
                 if isinstance(val, list) and len(val) > 0:
                     opt.addAll(True, *val)
-            elif isinstance(opt, BindingOption):
+            elif isinstance(opt, StringOption):
                 opt.argument = val
-            elif isinstance(opt, BindingFlag):
+            elif isinstance(opt, FlagOption):
                 opt.set(val)
 
     @staticmethod
@@ -407,44 +407,44 @@ class PackageConfig(object):
 
     class CommonOptions(Options):
         def __init__(self):
-            self.distPath = BindingOption(
+            self.distPath = StringOption(
                 name="distpath",
                 description="--distpath DIR: "
                             "Where to put the bundled app (default: ./dist)."
             )
 
-            self.workPath = BindingOption(
+            self.workPath = StringOption(
                 name="workpath",
                 description="--workpath WORKPATH: "
                             "Where to put all the temporary work files, .log, .pyz and etc. (default: ./build)."
             )
 
-            self.specPath = BindingOption(
+            self.specPath = StringOption(
                 name="specpath",
                 description="--specpath DIR: "
                             "Folder to store the base spec file (default: current directory)."
             )
 
-            self.noConfirm = BindingFlag(
+            self.noConfirm = FlagOption(
                 name="noconfirm",
                 description="-y, --noconfirm: "
                             "Replace output directory (default: SPECPATH/dist/SPECNAME) without asking for "
                             "confirmation. "
             )
 
-            self.asciiOnly = BindingFlag(
+            self.asciiOnly = FlagOption(
                 name="ascii",
                 description="-a, --ascii: "
                             "Do not include unicode encoding support (default: included if available)."
             )
 
-            self.clean = BindingFlag(
+            self.clean = FlagOption(
                 name="clean",
                 description="--clean: "
                             "Clean PyInstaller cache and remove temporary files before building."
             )
 
-            self.logLevel = BindingOption(
+            self.logLevel = StringOption(
                 name="log-level",
                 choices=(
                     DEFAULT_VALUE_UNSET,
@@ -459,7 +459,7 @@ class PackageConfig(object):
                             "WARN, ERROR, CRITICAL (default: INFO). "
             )
 
-            self.productMode = BindingOption(
+            self.productMode = StringOption(
                 name="",
                 choices=(DEFAULT_VALUE_UNSET, "onefile", "onedir"),
                 connector="",
@@ -468,7 +468,7 @@ class PackageConfig(object):
                             "Create a one-file bundled executable."
             )
 
-            self.windowMode = BindingOption(
+            self.windowMode = StringOption(
                 name="",
                 choices=(DEFAULT_VALUE_UNSET, "windowed", "console"),
                 connector="",
@@ -481,13 +481,13 @@ class PackageConfig(object):
                             "file. ",
             )
 
-            self.productName = BindingOption(
+            self.productName = StringOption(
                 name="name",
                 description="-n NAME, --name NAME: "
                             "Name to assign to the bundled app and spec file (default: first script’s basename)."
             )
 
-            self.addData = BindingMultipleOption(
+            self.addData = MultiOption(
                 name="add-data",
                 description="--add-data <SRC;DEST or SRC:DEST>: "
                             "Additional non-binary files or folders to be added to the executable. The path separator "
@@ -496,83 +496,83 @@ class PackageConfig(object):
                 wrapArgument=True
             )
 
-            self.addBinary = BindingMultipleOption(
+            self.addBinary = MultiOption(
                 name="add-binary",
                 description="--add-binary <SRC;DEST or SRC:DEST>: "
                             "Additional binary files to be added to the executable. ",
                 wrapArgument=True
             )
 
-            self.paths = BindingMultipleOption(
+            self.paths = MultiOption(
                 name="paths",
                 description="-p DIR, --paths DIR: "
                             "A path to search for imports (like using PYTHONPATH). Multiple paths are allowed, "
                             "separated by ':', or use this option multiple times. "
             )
 
-            self.hiddenImports = BindingMultipleOption(
+            self.hiddenImports = MultiOption(
                 name="hidden-import",
                 description="--hidden-import MODULENAME, --hiddenimport MODULENAME: "
                             "Name an import not visible in the code of the script(s). "
             )
 
-            self.collectSubmodules = BindingMultipleOption(
+            self.collectSubmodules = MultiOption(
                 name="collect-submodules",
                 description="--collect-submodules MODULENAME: "
                             "Collect all submodules from the specified package or module."
             )
 
-            self.collectData = BindingMultipleOption(
+            self.collectData = MultiOption(
                 name="collect-data",
                 description="--collect-data MODULENAME, --collect-datas MODULENAME: "
                             "Collect all data from the specified package or module."
             )
 
-            self.collectBinaries = BindingMultipleOption(
+            self.collectBinaries = MultiOption(
                 name="collect-binaries",
                 description="--collect-binaries MODULENAME: "
                             "Collect all binaries from the specified package or module."
             )
 
-            self.collectAll = BindingMultipleOption(
+            self.collectAll = MultiOption(
                 name="collect-all",
                 description="-collect-all MODULENAME: "
                             "Collect all submodules, data files, and binaries from the specified package or module."
             )
 
-            self.copyMetadata = BindingMultipleOption(
+            self.copyMetadata = MultiOption(
                 name="copy-metadata",
                 description="--copy-metadata PACKAGENAME: "
                             "Copy metadata for the specified package. "
             )
 
-            self.recursiveCopyMetadata = BindingMultipleOption(
+            self.recursiveCopyMetadata = MultiOption(
                 name="recursive-copy-metadata",
                 description="--recursive-copy-metadata PACKAGENAME: "
                             "Copy metadata for the specified package and all its dependencies."
             )
 
-            self.excludeModule = BindingMultipleOption(
+            self.excludeModule = MultiOption(
                 name="exclude-module",
                 description="--exclude-module EXCLUDES: "
                             "Optional module or package (the Python name, not the path name) that will be ignored (as "
                             "though it was not found). "
             )
 
-            self.key = BindingOption(
+            self.key = StringOption(
                 name="key",
                 description="--key KEY: "
                             "The key used to encrypt Python bytecode."
             )
 
-            self.splash = BindingOption(
+            self.splash = StringOption(
                 name="splash",
                 description="--splash IMAGE_FILE: "
                             "(EXPERIMENTAL) Add an splash screen with the image IMAGE_FILE to the application. The "
                             "splash screen can show progress updates while unpacking. "
             )
 
-            self.debug = BindingOption(
+            self.debug = StringOption(
                 name="debug",
                 choices=[DEFAULT_VALUE_UNSET, "all", "imports", "bootloader", "noarchive"],
                 description="-d {all,imports,bootloader,noarchive}, --debug {all,imports,bootloader,noarchive}: "
@@ -587,14 +587,14 @@ class PackageConfig(object):
                             "store them as files in the resulting output directory. "
             )
 
-            self.strip = BindingFlag(
+            self.strip = FlagOption(
                 name="strip",
                 description="-s, --strip: "
                             "Apply a symbol-table strip to the executable and shared libs (not recommended for "
                             "Windows). "
             )
 
-            self.icon = BindingOption(
+            self.icon = StringOption(
                 name="icon",
                 description="--icon <FILE.ico or FILE.exe,ID or FILE.icns or 'NONE'>: "
                             "FILE.ico: apply that icon to a Windows executable. "
@@ -604,7 +604,7 @@ class PackageConfig(object):
                             "(default: apply PyInstaller’s icon)"
             )
 
-            self.runtimeTmpDir = BindingOption(
+            self.runtimeTmpDir = StringOption(
                 name="runtime-tmpdir",
                 description="--runtime-tmpdir PATH: "
                             "Where to extract libraries and support files in onefile-mode. If this option is given, "
@@ -613,7 +613,7 @@ class PackageConfig(object):
                             "Please use this option only if you know what you are doing."
             )
 
-            self.bootloaderIgnoreSignals = BindingFlag(
+            self.bootloaderIgnoreSignals = FlagOption(
                 name="bootloader-ignore-signals",
                 description="--bootloader-ignore-signals: "
                             "Tell the bootloader to ignore signals rather than forwarding them to the child process. "
@@ -621,7 +621,7 @@ class PackageConfig(object):
                             "child (e.g. via a process group) to avoid signalling the child twice. "
             )
 
-            self.disableWindowedTraceback = BindingFlag(
+            self.disableWindowedTraceback = FlagOption(
                 name="disable-windowed-traceback",
                 description="--disable-windowed-traceback: "
                             "Disable traceback dump of unhandled exception in windowed (noconsole) mode (Windows and "
@@ -630,13 +630,13 @@ class PackageConfig(object):
 
     class HookOptions(Options):
         def __init__(self):
-            self.additionalHooksDir = BindingMultipleOption(
+            self.additionalHooksDir = MultiOption(
                 name="additional-hooks-dir",
                 description="--additional-hooks-dir HOOKSPATH: "
                             "An additional path to search for hooks. "
             )
 
-            self.runtimeHook = BindingMultipleOption(
+            self.runtimeHook = MultiOption(
                 name="runtime-hook",
                 description="--runtime-hook RUNTIME_HOOKS: "
                             "Path to a custom runtime hook file. A runtime hook is code that is bundled with the "
@@ -646,17 +646,17 @@ class PackageConfig(object):
 
     class UPXOptions(Options):
         def __init__(self):
-            self.noUPX = BindingFlag(
+            self.noUPX = FlagOption(
                 name="noupx",
                 description="--noupx: "
                             "Do not use UPX even if it is available (works differently between Windows and *nix)"
             )
-            self.upxDir = BindingOption(
+            self.upxDir = StringOption(
                 name="upx-dir",
                 description="--upx-dir UPX_DIR: "
                             "Path to UPX utility (default: search the execution path)"
             )
-            self.upxExclude = BindingMultipleOption(
+            self.upxExclude = MultiOption(
                 name="upx-exclude",
                 description="--upx-exclude FILE:"
                             "Prevent a binary from being compressed when using upx. This is typically used if upx "
@@ -666,18 +666,18 @@ class PackageConfig(object):
 
     class WindowsOptions(Options):
         def __init__(self):
-            self.versionFile = BindingOption(
+            self.versionFile = StringOption(
                 name="version-file",
                 description="--version-file FILE: "
                             "add a version resource from FILE to the exe."
             )
-            self.manifest = BindingOption(
+            self.manifest = StringOption(
                 name="manifest",
                 description="-m <FILE or XML>, --manifest <FILE or XML>: "
                             "add manifest FILE or XML to the exe."
             )
 
-            self.resource = BindingOption(
+            self.resource = StringOption(
                 name="resource",
                 description="-r RESOURCE, --resource RESOURCE: "
                             "Add or update a resource to a Windows executable. The RESOURCE is one to four items, "
@@ -687,18 +687,18 @@ class PackageConfig(object):
                             "all resources from FILE will be added/updated to the final executable if TYPE, "
                             "NAME and LANGUAGE are omitted or specified as wildcard * "
             )
-            self.uacAdmin = BindingFlag(
+            self.uacAdmin = FlagOption(
                 name="uac-admin",
                 description="--uac-admin: "
                             "Using this option creates a Manifest which will request elevation upon application "
                             "restart. "
             )
-            self.uacUIAccess = BindingFlag(
+            self.uacUIAccess = FlagOption(
                 name="uac-uiaccess",
                 description="--uac-uiaccess: "
                             "Using this option allows an elevated application to work with Remote Desktop."
             )
-            self.winPrivateAssemblies = BindingFlag(
+            self.winPrivateAssemblies = FlagOption(
                 name="win-private-assemblies",
                 description="--win-private-assemblies: "
                             "Any Shared Assemblies bundled into the application will be changed into Private "
@@ -706,7 +706,7 @@ class PackageConfig(object):
                             "and any newer versions installed on user machines at the system level will be ignored. "
             )
 
-            self.winNoPreferRedirects = BindingFlag(
+            self.winNoPreferRedirects = FlagOption(
                 name="win-no-prefer-redirects",
                 description="--win-no-prefer-redirects: "
                             "While searching for Shared or Private Assemblies to bundle into the application, "
@@ -716,7 +716,7 @@ class PackageConfig(object):
 
     class MacOSXOptions(Options):
         def __init__(self):
-            self.osxBundleIdentifier = BindingOption(
+            self.osxBundleIdentifier = StringOption(
                 name="osx-bundle-identifier",
                 description="--osx-bundle-identifier BUNDLE_IDENTIFIER: "
                             "Mac OS X .app bundle identifier is used as the default unique program name for code "
@@ -724,7 +724,7 @@ class PackageConfig(object):
                             "example: com.mycompany.department.appname (default: first script’s basename) "
             )
 
-            self.targetArchitecture = BindingOption(
+            self.targetArchitecture = StringOption(
                 name="target-arch",
                 choices=[DEFAULT_VALUE_UNSET, "x86_64", "arm64", "universal2"],
                 description="--target-architecture ARCH, --target-arch ARCH: "
@@ -734,7 +734,7 @@ class PackageConfig(object):
                             "specified, the current running architecture is targeted. "
             )
 
-            self.codesignIdentity = BindingOption(
+            self.codesignIdentity = StringOption(
                 name="codesign-identity",
                 description="--codesign-identity IDENTITY: "
                             "Code signing identity (macOS only). Use the provided identity to sign collected binaries "
@@ -742,7 +742,7 @@ class PackageConfig(object):
                             "performed instead. "
             )
 
-            self.entitlementsFile = BindingOption(
+            self.entitlementsFile = StringOption(
                 name="entitlements-file",
                 description="--osx-entitlements-file FILENAME: "
                             "Entitlements file to use when code-signing the collected binaries (macOS only)."

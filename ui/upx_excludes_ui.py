@@ -2,7 +2,7 @@
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
-from core.options import BindingMultipleOption
+from core.options import MultiOption
 from ui.base.constants import ITEM_SEPARATORS
 from ui.base.ui_upx_excludes import Ui_UPXExcludesDialog
 
@@ -13,7 +13,7 @@ from utils import warn, splitItems, openFilesDialog, getBasenames, isFile
 # noinspection PyTypeChecker,PyUnresolvedReferences
 class UPXExcludesDialog(QDialog, Ui_UPXExcludesDialog):
     DEFAULT_SEP = ";"
-    upxExcludesAdded = Signal(list, BindingMultipleOption)
+    upxExcludesAdded = Signal(list, MultiOption)
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -38,7 +38,7 @@ class UPXExcludesDialog(QDialog, Ui_UPXExcludesDialog):
         content = content.replace("；", ";").replace("，", ",")
         sepKey = self.filenameSeparatorCombo.currentText()
         items = splitItems(content, sepKey, self.DEFAULT_SEP)
-        if isinstance(items, list) and isinstance(self._option, BindingMultipleOption):
+        if isinstance(items, list) and isinstance(self._option, MultiOption):
             self.upxExcludesAdded.emit(items, self._option)
             self.accept()
         else:

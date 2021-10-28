@@ -1,10 +1,11 @@
 # -*- coding:utf-8 -*-
+import os
 from enum import Enum
 from typing import Union
 
 from PySide2.QtWidgets import QLineEdit, QCheckBox, \
     QRadioButton, QComboBox, QListWidget
-from QBinder import Binder, constant
+from QBinder import Binder, constant, Binding
 
 DEFAULT_VALUE_UNSET = "DEFAULT-UNSET"
 constant.AUTO_DUMP = False
@@ -26,7 +27,7 @@ class ArgumentInvalidError(Exception):
         super(ArgumentInvalidError, self).__init__(f"argument '{argument}' of option '{optionName}' is invalid")
 
 
-class BaseOption(object):
+class BaseBindingOption(object):
     def __init__(self, name, form, description):
         self._name = name
         self.form = form
@@ -63,7 +64,7 @@ def notNull(choices):
     return True
 
 
-class BindingOption(BaseOption):
+class StringOption(BaseBindingOption):
     def __init__(self, name, default="", form=OptionForm.LONG_OPTION, choices=None, connector=OptionConnector.EQUAL,
                  description="", validator=None, ignoreValidationError=True, wrapArgument=False):
         super().__init__(name, form, description)
@@ -160,7 +161,7 @@ class BindingOption(BaseOption):
             raise ValueError("unsupported widget type")
 
 
-class BindingFlag(BaseOption):
+class FlagOption(BaseBindingOption):
     def __init__(self, name, default=None, form=OptionForm.LONG_OPTION, description=""):
         super().__init__(name, form, description)
         self._state = Binder()
@@ -202,7 +203,7 @@ class BindingFlag(BaseOption):
         self._state.argument = self._state.argument
 
 
-class BindingMultipleOption(BaseOption):
+class MultiOption(BaseBindingOption):
     def __init__(self, name, default=None, form=OptionForm.LONG_OPTION, choices=None, connector=OptionConnector.EQUAL,
                  description="", validator=None, wrapArgument=False):
         super().__init__(name, form, description)
@@ -366,7 +367,7 @@ class Options(object):
         options = []
         for opt in dir(self):
             val = getattr(self, opt)
-            if isinstance(val, BaseOption):
+            if isinstance(val, BaseBindingOption):
                 if filterUnsetOptions:
                     if val.isSet:
                         if withNames:
