@@ -1,6 +1,4 @@
 # -*- coding:utf-8 -*-
-from os.path import isfile
-
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
@@ -8,9 +6,8 @@ from core.options import BindingMultipleOption
 from ui.base.constants import ITEM_SEPARATORS
 from ui.base.ui_upx_excludes import Ui_UPXExcludesDialog
 
-
 # noinspection PyTypeChecker
-from utils import warn, splitItems, openFilesDialog, toBaseNames
+from utils import warn, splitItems, openFilesDialog, getBasenames, isFile
 
 
 # noinspection PyTypeChecker,PyUnresolvedReferences
@@ -50,7 +47,7 @@ class UPXExcludesDialog(QDialog, Ui_UPXExcludesDialog):
     def onSelectUPXExcludes(self):
         filenames = openFilesDialog(self, self.tr("Select UPX Exclude Files"))
         if filenames is not None:
-            excludes = toBaseNames(filenames, isfile)
+            excludes = getBasenames(filenames, filters=isFile)
             if len(excludes) > 0:
                 sepKey = self.filenameSeparatorCombo.currentText()
                 if sepKey in ITEM_SEPARATORS:

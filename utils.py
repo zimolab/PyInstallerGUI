@@ -5,11 +5,11 @@
 import os
 import platform
 import subprocess
-from os.path import isfile, isdir, relpath, basename, abspath
+from pathlib import *
 
 from PySide2.QtCore import QDir
-from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, QTreeView, \
-    QInputDialog, QFontDialog
+from PySide2.QtWidgets import QMessageBox, QFileDialog, QApplication, QWidget, QListView, QAbstractItemView, \
+    QTreeView, QInputDialog, QFontDialog
 
 from core.options import DEFAULT_VALUE_UNSET
 from ui.base.constants import ITEM_SEPARATORS
@@ -37,7 +37,7 @@ def openFileDialog(parent, title, path=None, filters=None):
     selected = QFileDialog.getOpenFileName(parent, title, path, filters)[0]
     if selected == "":
         return None
-    return selected
+    return Path(selected).as_posix()
 
 
 def openFilesDialog(parent, title, path=None, filters=None):
@@ -46,7 +46,7 @@ def openFilesDialog(parent, title, path=None, filters=None):
     files = QFileDialog.getOpenFileNames(parent, title, path, filters)[0]
     if files is None or len(files) == 0:
         return None
-    return files
+    return [Path(f).as_posix() for f in files]
 
 
 def saveFileDialog(parent, title, path=None, filters=None):
@@ -64,7 +64,7 @@ def openDirDialog(parent, title, path=None):
     selectDir = QFileDialog.getExistingDirectory(parent, title, path)
     if selectDir is None or selectDir == "":
         return None
-    return selectDir
+    return Path(selectDir).as_posix()
 
 
 def openDirsDialog(parent, title):
@@ -82,7 +82,7 @@ def openDirsDialog(parent, title):
     dialog.setFilter(QDir.Dirs)
     dialog.exec_()
     selectedDirs = dialog.selectedFiles()
-    return selectedDirs
+    return [Path(p).as_posix() for p in selectedDirs]
 
 
 def globalCentralize(w: QWidget):
@@ -124,22 +124,6 @@ def splitSrcAndDest(joined: str, pathsep=None):
     return joined, ""
 
 
-def filterFiles(paths, *extensions):
-    if len(extensions) == 0:
-        return [path for path in paths if isfile(path)]
-    else:
-        return [path for path in paths if isfile(path) and hasExtension(path, *extensions)]
-
-
-def hasExtension(path, *extensions):
-    ext = os.path.splitext(path)[-1]
-    return ext in extensions
-
-
-def filterDirs(paths):
-    return [path for path in paths if isdir(path)]
-
-
 def getTextInput(parent, title, label, text=""):
     dialog = QInputDialog(parent)
     dialog.setWindowTitle(title)
@@ -174,69 +158,132 @@ def splitItems(content, sepKey, defaultSep=";"):
     return [item for item in items if item is not None and item != ""]
 
 
-def toBaseNames(paths, filters=None):
-    results = []
-    for path in paths:
-        if filters is not None:
-            if not filters(path):
-                continue
-        try:
-            bn = basename(path)
-        except:
-            results.append(path)
-        else:
-            results.append(bn)
-    return results
-
-
-def isEmpty(text):
-    return text is None or text == ""
+def isEmpty(val):
+    return val is None or val == ""
 
 
 def isNotEmpty(text):
     return not isEmpty(text)
 
 
+def cwd():
+    return Path.cwd().as_posix()
+
+
+def isFile(path):
+    if isinstance(path, Path):
+        return path.is_file()
+    else:
+        return Path(path).is_file()
+
+
+def isDir(path):
+    if isinstance(path, Path):
+        return path.is_dir()
+    else:
+        return Path(path).is_dir()
+
+
+def getFiles(paths, *suffixes):
+    results = []
+    for path in paths:
+        if not isinstance(path, Path):
+            path = Path(path)
+        if not path.is_file():
+            continue
+        if len(suffixes) <= 0:
+            results.append(path.as_posix())
+        else:
+            suffix = path.suffix
+            if suffix in suffixes:
+                results.append(path.as_posix())
+    return results
+
+
+def getDirs(paths):
+    results = []
+    for path in paths:
+        if not isinstance(path, Path):
+            path = Path(path)
+        if path.is_dir():
+            results.append(path.as_posix())
+    return results
+
+
 # noinspection PyBroadException
-def baseName(path):
-    try:
-        return basename(path)
-    except Exception:
-        return path
+def getBasename(path):
+    if isinstance(path, Path):
+        return path.name
+    else:
+        path = Path(path)
+        return path.name
+
+
+# noinspection PyBroadException
+def getBasenames(paths, filters=None):
+    results = []
+    for path in paths:
+        try:
+            if not isinstance(path, Path):
+                path = Path(path)
+            if filters is not None:
+                if not filters(path.as_posix()):
+                    continue
+            results.append(path.name)
+        except:
+            results.append(path)
+    return results
 
 
 # noinspection PyBroadException
 def absolutePath(path):
     if isEmpty(path) or path == DEFAULT_VALUE_UNSET:
         return path
-    try:
-        p = abspath(path)
-    except Exception:
-        return path
-    else:
-        return p
 
+    if not isinstance(path, Path):
+        path = Path(path)
 
-# noinspection PyBroadException
-def relativePath(path, fallback=baseName, parent=None):
-    if isEmpty(path) or path == DEFAULT_VALUE_UNSET:
-        if notNull(fallback):
-            return fallback(path)
-        else:
-            return path
     try:
-        return relpath(path)
+        return Path(path).absolute().as_posix()
     except Exception as e:
-        if notNull(parent):
-            warn(parent, parent.tr("Error"), parent.tr("Cannot path convert to absolute path(error: ") + f"{e})!")
-        if notNull(fallback):
-            return fallback(path)
+        return path.as_posix()
+
+
+def relativePath(path, relativeTo=None, fallback=None):
+    if isEmpty(path) or path == DEFAULT_VALUE_UNSET:
+        return path
+
+    if not isinstance(path, Path):
+        path = Path(path)
+
+    if isEmpty(relativeTo) or relativeTo == DEFAULT_VALUE_UNSET:
+        relativeTo = cwd()
+
+    try:
+        return path.relative_to(relativeTo).as_posix()
+    except ValueError:
+        if fallback is None:
+            return path.as_posix()
         else:
-            return path
+            return fallback(path.as_posix())
+
+
+def isExist(path):
+    if isinstance(path, Path):
+        return path.exists()
+    else:
+        return Path(path).exists()
+
+
+def joinPath(path, *other):
+    if isinstance(path, Path):
+        return path.joinpath(*other).as_posix()
+    else:
+        return Path(path).joinpath(*other).as_posix()
 
 
 def systemOpen(path):
-    if not isfile(path) and not isdir(path):
+    if not isFile(path) and not isDir(path):
         return
     if platform.system().lower() == "windows":
         os.startfile(path)
@@ -287,27 +334,6 @@ def askAndToAbsPaths(parent, bindingList, paths):
                 index = bindingList.index(path)
                 if index >= 0:
                     p = absolutePath(bindingList[index])
-                    if p in bindingList:
-                        continue
-                    bindingList[index] = p
-
-
-def askAndToRelPaths(parent, bindingList, paths):
-    if isNull(paths) or len(paths) == 0:
-        if ask(parent, parent.tr("Convert to Relative Path"),
-               parent.tr("Convert ") + f"{len(bindingList)}" + parent.tr(" items to relative path?")):
-            for i in range(0, len(bindingList)):
-                p = relativePath(bindingList[i], fallback=None, parent=parent)
-                if p in bindingList:
-                    continue
-                bindingList[i] = p
-    else:
-        if ask(parent, parent.tr("Convert to Relative Path"),
-               parent.tr("Convert ") + f"{len(paths)}" + parent.tr(" items to relative path?")):
-            for path in paths:
-                index = bindingList.index(path)
-                if index >= 0:
-                    p = relativePath(path, fallback=None, parent=parent)
                     if p in bindingList:
                         continue
                     bindingList[index] = p

@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 import os
-from os.path import relpath, basename
+
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 from QBinder import Binder
 from ui.base.ui_add_extras import Ui_AddExtrasDialog
 # noinspection PyTypeChecker
-from utils import openDirDialog, openFileDialog, warn
+from utils import openDirDialog, openFileDialog, warn, relativePath, getBasename
 
 
 # noinspection PyTypeChecker
@@ -69,7 +69,7 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
         )
         if selectedDir is not None:
             self._state.sourcePath = selectedDir
-            self._state.destinationPath = self.relativePath(selectedDir)
+            self._state.destinationPath = relativePath(selectedDir, fallback=getBasename)
 
     def onSelectFile(self):
         selectedFile = openFileDialog(
@@ -78,7 +78,7 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
         )
         if selectedFile is not None:
             self._state.sourcePath = selectedFile
-            self._state.destinationPath = self.relativePath(selectedFile)
+            self._state.destinationPath = relativePath(selectedFile, fallback=getBasename)
 
     # noinspection PyUnresolvedReferences
     def onAction(self):
@@ -117,13 +117,6 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
         if len(tmp) == 2:
             return tmp
         return extra, ""
-
-    @staticmethod
-    def relativePath(path):
-        try:
-            return relpath(path)
-        except ValueError as e:
-            return basename(path)
 
     def startModifyAction(self, extra, index):
         self.actButton.setText(self.tr("Modify"))

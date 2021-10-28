@@ -6,16 +6,15 @@ Check https://pyinstaller.readthedocs.io/en/stable/usage.html for more details.
 import json
 import platform
 from os import makedirs
-from os.path import dirname, isfile
+from os.path import dirname
 
-from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit, QPlainTextEdit
+from PySide2.QtWidgets import QLineEdit, QListWidget, QTextEdit
 from QBinder import Binder
 
 from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH, DEFAULT_VERSION, DEFAULT_DESCRIPTION, \
     DEFAULT_ENCODINGS
 from core.options import Options, BindingOption, BindingFlag, DEFAULT_VALUE_UNSET, BindingMultipleOption, \
     BaseOption
-from utils import isEmpty
 
 
 class PackageConfig(object):
@@ -153,6 +152,10 @@ class PackageConfig(object):
         for script in scripts:
             if script not in self.scripts:
                 self._state.scripts.append(script)
+
+    def addScript(self, script):
+        if script not in self.scripts:
+            self._state.scripts.append(script)
 
     def removeScript(self, script):
         if script in self._state.scripts:

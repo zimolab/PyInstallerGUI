@@ -1,12 +1,10 @@
 # -*- coding:utf-8 -*-
-from os.path import relpath, abspath
-
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
 
 from ui.base.constants import FILTER_PY_SOURCE_FILE
 from ui.base.ui_modify_path import Ui_ModifyPathDialog
-from utils import warn, openFileDialog, openDirDialog
+from utils import warn, openFileDialog, openDirDialog, relativePath, absolutePath
 
 
 # noinspection PyTypeChecker
@@ -42,22 +40,10 @@ class ModifyPathDialog(QDialog, Ui_ModifyPathDialog):
         self.show()
 
     def onCalcRelPath(self):
-        try:
-            rel = relpath(self.originPathEdit.text())
-        except Exception as e:
-            warn(self, self.tr("Warning"),
-                 self.tr("Cannot get relative path of") + f"'{self.originPathEdit.text()}'(error: {e})")
-        else:
-            self.modifiedPathEdit.setText(rel)
+        self.modifiedPathEdit.setText(relativePath(self.originPathEdit.text()))
 
     def onCalcAbsPath(self):
-        try:
-            _abspath = abspath(self.originPathEdit.text())
-        except Exception as e:
-            warn(self, self.tr("Warning"),
-                 self.tr("Cannot get absolute path of") + f"'{self.originPathEdit.text()}'(error: {e})")
-        else:
-            self.modifiedPathEdit.setText(_abspath)
+        self.modifiedPathEdit.setText(absolutePath(self.originPathEdit.text()))
 
     def onReselect(self):
         if self._action == self.MODIFY_SCRIPT_PATH:

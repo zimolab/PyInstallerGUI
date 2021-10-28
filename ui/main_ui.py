@@ -5,12 +5,11 @@
 import os
 import uuid
 import webbrowser
-from os.path import isfile, exists, join, abspath
 from pathlib import Path
 from typing import Union
 
 from PySide2 import QtCore
-from PySide2.QtGui import QDropEvent
+from PySide2.QtGui import QDropEvent, QIcon
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QPushButton, QLabel, QCheckBox, QRadioButton, \
     QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup
 from QBinder import QEventHook, Binder
@@ -22,15 +21,15 @@ from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
 from ui.base.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
-    FILTER_ENTITLEMENTS_FILE
+    FILTER_ENTITLEMENTS_FILE, PY_FILE_EXT
 from ui.base.ui_main import Ui_MainWindow
 from ui.modify_path_ui import ModifyPathDialog
 from ui.start_cmd_ui import StartCommandDialog
 # noinspection PyTypeChecker
 from ui.upx_excludes_ui import UPXExcludesDialog
 from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
-    localCentralize, openDirsDialog, filterDirs, joinSrcAndDest, relativePath, getTextInput, getFont, toBaseNames, \
-    filterFiles, absolutePath, systemOpen, askAndRemove, askAndClear
+    localCentralize, openDirsDialog, getDirs, joinSrcAndDest, getTextInput, getFont, getBasenames, \
+    getFiles, askAndRemove, askAndClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -56,7 +55,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._eventHook = QEventHook.instance()
         # 创建响应式对象
         self._state = Binder()
-        self._state.cwd = abspath(os.getcwd())
+        self._state.cwd = absolutePath(cwd())
         # 创建对话框或其他窗口
         self._startCommandDialog = StartCommandDialog(self)
         self._addExtrasDialog = AddExtrasDialog(self)
@@ -74,6 +73,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         super().setupUi(self)
         # 居中显示窗口
         localCentralize(self)
+        # 设置窗口图标
+        self.setWindowIcon(QIcon("data/logos/pyinstaller-gui.ico"))
         # 设置非Options部分的UI
         self.setupNonOptionsUI()
         # 设置Options部分的UI
@@ -157,12 +158,10 @@ class MainUI(QMainWindow, Ui_MainWindow):
             urls = event.mimeData().urls()
             if len(urls) == 0:
                 return
-            scripts = [
-                url.toLocalFile()
-                for url in urls if
-                isfile(url.toLocalFile()) and (url.toLocalFile().endswith(".py") or url.toLocalFile().endswith(".pyw"))
-            ]
-            self._configs.addScripts(*scripts)
+            for url in urls:
+                localFile = Path(url.toLocalFile())
+                if localFile.is_file() and localFile.suffix in PY_FILE_EXT:
+                    self._configs.addScript(localFile.as_posix())
         # 文件拖放，实现在按钮上
         self.addScriptButton.setAcceptDrops(True)
         self._eventHook.add_hook(self.addScriptButton, QtCore.QEvent.DragEnter,
@@ -177,8 +176,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._modifyPathDialog.scriptPathModified.connect(self._configs.updateScriptAt)
 
         # 上下文菜单
-        self.scriptsListWidget.enableCustomContextMenu(True)
-        self.scriptsListWidget.bindingList = self._configs.scripts
+        relativeTo = None
+        self.scriptsListWidget.enableCustomContextMenu(self._configs.scripts)
         self.scriptsListWidget.actionAddHandler = onAddScript
         self.scriptsListWidget.actionModifyHandler = onModifyScript
 
@@ -269,6 +268,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.autosetPathSelectionUI(option=self._commonOptions.icon, label=self.appIconLabel, edit=self.appIconEdit,
                                     selectButton=self.selectAppIconButton, defaultButton=self.defaultAppIconButton,
                                     selectionMode=self.SELECT_FILE, filters=FILTER_ICON_FILE)
+        self.appIconEdit.enableCustomContextMenu()
         # splash
         self.autosetPathSelectionUI(option=self._commonOptions.splash, label=self.splashLabel, edit=self.splashEdit,
                                     selectButton=self.selectSplashButton, defaultButton=self.defaultSplashButton,
@@ -309,7 +309,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             if paths is None:
                 paths = openDirsDialog(self, self.tr("Add Directory"))
             else:
-                paths = filterDirs(paths)
+                paths = getDirs(paths)
             if paths is None or len(paths) == 0:
                 return
             option.addAll(True, *paths)
@@ -324,8 +324,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  onModify=onModifySearchPath)
         self._modifyPathDialog.searchPathModified.connect(self._commonOptions.paths.set)
         # 上下文菜单
-        self.searchPathsListWidget.enableCustomContextMenu(True)
-        self.searchPathsListWidget.bindingList = self._commonOptions.paths.argument
+        self.searchPathsListWidget.enableCustomContextMenu(self._commonOptions.paths.argument)
         self.searchPathsListWidget.actionAddHandler = lambda: onAddSearchPaths(None, self._commonOptions.paths)
         self.searchPathsListWidget.actionModifyHandler = lambda item: onModifySearchPath(
             item.text(), self._commonOptions.paths.indexOf(item.text()), self._commonOptions.paths
@@ -344,12 +343,18 @@ class MainUI(QMainWindow, Ui_MainWindow):
             elif isinstance(paths, str):
                 paths = [paths]
             else:
-                if option.name == self._commonOptions.addData.name:
-                    paths = [joinSrcAndDest(path, relativePath(path)) for path in paths]
-                elif option.name == self._commonOptions.addBinary.name:
-                    paths = [joinSrcAndDest(path, relativePath(path)) for path in paths if isfile(path)]
-                else:
-                    return
+                tmp = []
+                for path in paths:
+                    path = Path(path)
+                    if option.name == self._commonOptions.addBinary.name:
+                        if path.is_file():
+                            tmp.append(joinSrcAndDest(path.as_posix(), relativePath(path)))
+                        else:
+                            continue
+                    else:
+                        tmp.append(joinSrcAndDest(path.as_posix(), relativePath(path)))
+                del paths[:]
+                paths = tmp
             option.addAll(True, *paths)
 
         def onModifyExtras(path, index, option):
@@ -489,7 +494,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             if paths is None:
                 self._upxExcludesDialog.display(option)
             else:
-                excludes = toBaseNames(paths, filters=isfile)
+                excludes = getBasenames(paths, filters=isFile)
                 option.addAll(True, *excludes)
 
         def onModify(path, index, option: BindingMultipleOption):
@@ -555,9 +560,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
                     return
             else:
                 if option.name == self._hookOptions.additionalHooksDir.name:
-                    paths = filterDirs(paths)
+                    paths = getDirs(paths)
                 else:
-                    paths = filterFiles(paths, ".py", ".pyw")
+                    paths = getFiles(paths, ".py", ".pyw")
                 if paths is None or len(paths) == 0:
                     return
             option.addAll(True, *paths)
@@ -585,7 +590,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def autosetPathSelectionUI(self, option: BindingOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,
                                defaultButton: QPushButton, selectionMode, filters=None, startPath=None):
         if startPath is None:
-            startPath = os.getcwd()
+            startPath = cwd()
 
         if selectionMode != self.SELECT_FILE and selectionMode != self.SELECT_DIR:
             raise ValueError(f"unsupported selectionMode of {selectionMode}")
@@ -696,8 +701,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
     def detectExistPackageConfigs(self):
         """检查当前路径下是否存在配置文件，并询问是否打开"""
-        path = join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE)
-        if exists(path):
+        path = joinPath(cwd(), DEFAULT_PACKAGE_CONFIG_FILE)
+        if isExist(path):
             if ask(self, self.tr("Load Package Config"),
                    self.tr("package.json found in current path, load it?")):
                 self.loadPackageConfigs(path)
@@ -727,7 +732,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
     def onSavePackageConfigs(self):
         """保持配置文件"""
         path = saveFileDialog(self, self.tr("Save Package Configs"),
-                              join(os.getcwd(), DEFAULT_PACKAGE_CONFIG_FILE))
+                              joinPath(cwd(), DEFAULT_PACKAGE_CONFIG_FILE))
         if path is not None:
             try:
                 self._configs.saveToFile(path)
