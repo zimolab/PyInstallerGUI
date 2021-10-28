@@ -29,7 +29,7 @@ from ui.start_cmd_ui import StartCommandDialog
 from ui.upx_excludes_ui import UPXExcludesDialog
 from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, getDirs, joinSrcAndDest, getTextInput, getFont, getBasenames, \
-    getFiles, askAndRemove, askAndClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist
+    getFiles, requestRemove, requestClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -141,7 +141,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         def onRemoveScripts():
             selected = [w.text() for w in self.scriptsListWidget.selectedItems()]
-            askAndRemove(self, self._configs.scripts, selected)
+            requestRemove(self, self._configs.scripts, selected)
         # 移除脚本
         self.removeScriptButton.setEnabled(False)
         self.removeScriptButton.clicked.connect(onRemoveScripts)
@@ -150,7 +150,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
             lambda: self.removeScriptButton.setEnabled(len(self.scriptsListWidget.selectedItems()) > 0))
 
         def onClearScripts():
-            askAndClear(self, self._configs.scripts)
+            requestClear(self, self._configs.scripts)
         # 清除全部脚本
         self.clearScriptsButton.clicked.connect(onClearScripts)
 
@@ -176,7 +176,6 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._modifyPathDialog.scriptPathModified.connect(self._configs.updateScriptAt)
 
         # 上下文菜单
-        relativeTo = None
         self.scriptsListWidget.enableCustomContextMenu(self._configs.scripts)
         self.scriptsListWidget.actionAddHandler = onAddScript
         self.scriptsListWidget.actionModifyHandler = onModifyScript
@@ -372,6 +371,13 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  onAdd=onAddExtras, onModify=onModifyExtras)
         self._addExtrasDialog.extraDataAdded.connect(lambda path: onAddExtras(path, self._commonOptions.addData))
         self._addExtrasDialog.extraDataChanged.connect(self._commonOptions.addData.set)
+        # 上下文菜单
+        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionRelativePaths)
+        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAllRelativePaths)
+        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAbsolutePaths)
+        self.extraDataListWidget.contextMenu.removeAction(self.extraDataListWidget.actionAllAbsolutePaths)
+        self.extraDataListWidget.actionAddHandler = lambda: onAddExtras(None, self._commonOptions.addData)
+        self.extraDataListWidget.enableCustomContextMenu(self._commonOptions.addData.argument)
         # extraBinaries
         self.autosetMultiItemsUI(option=self._commonOptions.addBinary, label=self.extraBinariesLabel,
                                  listWidget=self.extraBinariesListWidget, addButton=self.addExtraBinariesButton,
@@ -380,6 +386,13 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._addExtrasDialog.extraBinaryAdded.connect(
             lambda path: onAddExtras(path, self._commonOptions.addBinary))
         self._addExtrasDialog.extraBinaryChanged.connect(self._commonOptions.addBinary.set)
+        # 上下文菜单
+        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionRelativePaths)
+        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAllRelativePaths)
+        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAbsolutePaths)
+        self.extraBinariesListWidget.contextMenu.removeAction(self.extraBinariesListWidget.actionAllAbsolutePaths)
+        self.extraBinariesListWidget.actionAddHandler = lambda: onAddExtras(None, self._commonOptions.addBinary)
+        self.extraBinariesListWidget.enableCustomContextMenu(self._commonOptions.addBinary.argument)
 
         # excludeModule & hiddenImports & collectSubmodules & collectData & collectBinaries & collectAll &
         # copyMetadata & recursiveCopyMetadata
@@ -647,7 +660,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 移除数据
         if removeButton is not None:
             def onRemoveItems():
-                askAndRemove(self, option.argument, [w.text() for w in listWidget.selectedItems()])
+                requestRemove(self, option.argument, [w.text() for w in listWidget.selectedItems()])
 
             removeButton.setEnabled(len(listWidget.selectedItems()) > 0)
             listWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -658,7 +671,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 清除全部数据
         if clearButton is not None:
             def onClear():
-                askAndClear(self, option.argument)
+                requestClear(self, option.argument)
 
             clearButton.clicked.connect(onClear)
 

@@ -57,6 +57,12 @@ class BaseOption(object):
         raise NotImplementedError
 
 
+def notNull(choices):
+    if choices is None or len(choices) <= 0:
+        return False
+    return True
+
+
 class BindingOption(BaseOption):
     def __init__(self, name, default="", form=OptionForm.LONG_OPTION, choices=None, connector=OptionConnector.EQUAL,
                  description="", validator=None, ignoreValidationError=True, wrapArgument=False):
@@ -89,7 +95,10 @@ class BindingOption(BaseOption):
     @argument.setter
     def argument(self, val):
         if val in self._valuesForUnset:
-            self._state.argument = DEFAULT_VALUE_UNSET
+            if notNull(self.choices) and DEFAULT_VALUE_UNSET in self.choices:
+                self._state.argument = DEFAULT_VALUE_UNSET
+            else:
+                self._state.argument = ""
             return
         # choices的校验优先级高于validator
         if self.choices is not None:
@@ -97,7 +106,10 @@ class BindingOption(BaseOption):
                 if self._ignoreValidationError:
                     raise ArgumentInvalidError(self._name, val)
                 else:
-                    self._state.argument = DEFAULT_VALUE_UNSET
+                    if notNull(self.choices) and DEFAULT_VALUE_UNSET in self.choices:
+                        self._state.argument = DEFAULT_VALUE_UNSET
+                    else:
+                        self._state.argument = ""
             else:
                 self._state.argument = val
             return
@@ -110,7 +122,10 @@ class BindingOption(BaseOption):
                 if self._ignoreValidationError:
                     raise ArgumentInvalidError(self._name, val)
                 else:
-                    self._state.argument = DEFAULT_VALUE_UNSET
+                    if notNull(self.choices) and DEFAULT_VALUE_UNSET in self.choices:
+                        self._state.argument = DEFAULT_VALUE_UNSET
+                    else:
+                        self._state.argument = ""
         else:
             self._state.argument = val
 
@@ -127,17 +142,22 @@ class BindingOption(BaseOption):
         return ""
 
     def bind(self, widget):
+        def onTextChange(text):
+            self.argument = text.strip()
+
         if isinstance(widget, QLineEdit):
+            widget.textChanged.connect(onTextChange)
             widget.setText(lambda: self.argument * 1)
-            widget.textChanged.connect(self.set)
+            widget.setPlaceholderText(DEFAULT_VALUE_UNSET)
+            self.argument = self.argument
         elif isinstance(widget, QComboBox):
             if (isinstance(self.choices, list) or isinstance(self.choices, tuple)) and len(self.choices) > 0:
                 widget.addItems(self.choices)
+            widget.currentTextChanged.connect(onTextChange)
             widget.setCurrentText(lambda: self.argument * 1)
-            widget.currentTextChanged.connect(self.set)
+            self.argument = self.argument
         else:
             raise ValueError("unsupported widget type")
-        self.argument = self.argument
 
 
 class BindingFlag(BaseOption):
@@ -177,8 +197,8 @@ class BindingFlag(BaseOption):
         return ""
 
     def bind(self, widget: Union[QCheckBox, QRadioButton]):
-        widget.setChecked(lambda: self._state.argument * 1)
         widget.clicked.connect(lambda: self.set(widget.isChecked()))
+        widget.setChecked(lambda: self._state.argument * 1)
         self._state.argument = self._state.argument
 
 

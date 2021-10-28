@@ -301,7 +301,7 @@ def notNull(obj):
     return obj is not None
 
 
-def askAndRemove(parent, bindingList, itemsToRemove):
+def requestRemove(parent, bindingList, itemsToRemove):
     if isNull(itemsToRemove) or len(itemsToRemove) == 0:
         return
     if ask(parent, parent.tr("Remove"), parent.tr("Remove ") + f"{len(itemsToRemove)}" + parent.tr(" item(s)?")):
@@ -310,7 +310,7 @@ def askAndRemove(parent, bindingList, itemsToRemove):
                 bindingList.remove(item)
 
 
-def askAndClear(parent, bindingList):
+def requestClear(parent, bindingList):
     if isNull(bindingList) or len(bindingList) == 0:
         return
     if ask(parent, parent.tr("Clear"), parent.tr("Remove all ") + f"{len(bindingList)}" + parent.tr(" item(s)?")):
@@ -318,22 +318,22 @@ def askAndClear(parent, bindingList):
         bindingList.clear()
 
 
-def askAndToAbsPaths(parent, bindingList, paths):
+def requestPathsConversion(parent, bindingList, paths, converter, *args, **kwargs):
     if isNull(paths) or len(paths) == 0:
-        if ask(parent, parent.tr("Convert to Absolute Path"),
-               parent.tr("Convert all ") + f"{len(bindingList)}" + parent.tr(" items to absolute path?")):
+        if ask(parent, parent.tr("Convert"),
+               parent.tr("Convert all ") + f"{len(bindingList)}" + parent.tr(" path(s)?")):
             for i in range(0, len(bindingList)):
-                p = absolutePath(bindingList[i])
+                p = converter(bindingList[i], *args, **kwargs)
                 if p in bindingList:
                     continue
                 bindingList[i] = p
     else:
-        if ask(parent, parent.tr("Convert to Absolute Path"),
-               parent.tr("Convert ") + f"{len(paths)}" + parent.tr(" items to absolute path?")):
+        if ask(parent, parent.tr("Convert"),
+               parent.tr("Convert ") + f"{len(paths)}" + parent.tr(" path(s)?")):
             for path in paths:
                 index = bindingList.index(path)
                 if index >= 0:
-                    p = absolutePath(bindingList[index])
+                    p = converter(bindingList[index], *args, **kwargs)
                     if p in bindingList:
                         continue
                     bindingList[index] = p

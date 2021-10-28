@@ -4,23 +4,28 @@ from PySide2.QtCore import Qt
 from PySide2.QtGui import QCursor
 from PySide2.QtWidgets import QLineEdit, QAction, QApplication, QMenu
 
-from utils import absolutePath
+from utils import absolutePath, ask, relativePath, isNull, notNull
 
 
 class BasePathEdit(QLineEdit):
     def __init__(self, parent):
         super().__init__(parent)
 
-        self.actionCopy = QAction(self)
-        self.actionPaste = QAction(self)
-        self.actionClear = QAction(self)
-        self.actionAbsolutePath = QAction(self)
-        self.actionRestoreDefault = QAction(self)
+        self.actionCopy = QAction(self, text=self.tr(u"Copy"))
+        self.actionPaste = QAction(self, text=self.tr(u"Paste"))
+        self.actionClear = QAction(self, text=self.tr(u"Clear"))
+        self.actionRestoreDefault = QAction(self, text=self.tr(u"Restore Default"))
+        self.actionAbsolutePath = QAction(self, text=self.tr(u"Absolute Path"))
+        self.actionRelativePath = QAction(self, text=self.tr(u"Relative Path"))
+
         self.contextMenu = QMenu(self)
+
         self.actionRestoreDefaultHandler = None
         self.actionAbsolutePathHandler = None
+        self.actionRelativePathHandler = None
 
         self.setupContextMenu()
+        self.enableCustomContextMenu()
 
     def enableCustomContextMenu(self):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -31,18 +36,13 @@ class BasePathEdit(QLineEdit):
         self.contextMenu.setEnabled(False)
 
     def setupActions(self):
-        # 设置文本
-        self.actionCopy.setText(self.tr(u"Copy"))
-        self.actionPaste.setText(self.tr(u"Paste"))
-        self.actionClear.setText(self.tr(u"Clear"))
-        self.actionRestoreDefault.setText(self.tr(u"Restore Default"))
-        self.actionAbsolutePath.setText(self.tr(u"Absolute Path"))
         # 连接slot
         self.actionCopy.triggered.connect(self.onActionTriggered)
         self.actionPaste.triggered.connect(self.onActionTriggered)
         self.actionClear.triggered.connect(self.onActionTriggered)
         self.actionRestoreDefault.triggered.connect(self.onActionTriggered)
         self.actionAbsolutePath.triggered.connect(self.onActionTriggered)
+        self.actionRelativePath.triggered.connect(self.onActionTriggered)
 
     def setupContextMenu(self):
         self.setupActions()
@@ -54,11 +54,13 @@ class BasePathEdit(QLineEdit):
         self.contextMenu.addAction(self.actionRestoreDefault)
         self.contextMenu.addSeparator()
         self.contextMenu.addAction(self.actionAbsolutePath)
-        # 连接slot
+        self.contextMenu.addAction(self.actionRelativePath)
         self.customContextMenuRequested.connect(self._onRequestContextMenu)
 
     def onActionTriggered(self):
         action = self.sender()
+        handler = None
+        args = []
         if action is self.actionCopy:
             if self.selectionLength() == 0:
                 text = self.text()
@@ -66,34 +68,40 @@ class BasePathEdit(QLineEdit):
                 text = self.selectedText()
             clipboard = QApplication.clipboard()
             clipboard.setText(text)
-            processed = True
         elif action is self.actionPaste:
             self.paste()
-            processed = True
         elif action is self.actionClear:
             self.clear()
-            processed = True
         elif action is self.actionRestoreDefault:
-            if self.actionRestoreDefaultHandler is not None:
-                self.actionRestoreDefaultHandler(self)
-            else:
-                self._actionRestoreDefaultHandler()
-            processed = True
+            handler = self.getHandler(self.actionRestoreDefaultHandler, self._actionRestoreDefaultHandler)
+            args.append(self)
         elif action is self.actionAbsolutePath:
-            if self.actionAbsolutePathHandler is not None:
-                self.actionAbsolutePathHandler(self)
-            else:
-                self._actionAbsolutePathHandler()
-            processed = True
+            handler = self.getHandler(self.actionAbsolutePathHandler, self._actionAbsolutePathHandler)
+        elif action is self.actionRelativePath:
+            handler = self.getHandler(self.actionRelativePathHandler, self._actionRelativePathHandler)
         else:
-            processed = False
-        return processed
+            pass
+
+        if notNull(handler):
+            handler(*args)
 
     def _actionAbsolutePathHandler(self):
-        self.setText(absolutePath(self.text()))
+        if ask(self, self.tr(u"Convert"), self.tr(u"Convert to absolute path?")):
+            self.setText(absolutePath(self.text()))
 
-    def _actionRestoreDefaultHandler(self):
+    def _actionRestoreDefaultHandler(self, *args):
         self.clear()
+
+    def _actionRelativePathHandler(self):
+        if ask(self, self.tr(u"Convert"), self.tr(u"Convert to relative path?")):
+            self.setText(relativePath(self.text()))
 
     def _onRequestContextMenu(self):
         self.contextMenu.exec_(QCursor.pos())
+
+    @classmethod
+    def getHandler(cls, handler, defaultHandler):
+        if isNull(handler):
+            return defaultHandler
+        else:
+            return handler

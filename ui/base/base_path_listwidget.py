@@ -5,7 +5,8 @@ from PySide2.QtCore import Qt
 from PySide2.QtGui import QCursor
 from PySide2.QtWidgets import QListWidget, QMenu, QAction
 
-from utils import systemOpen, warn, ask, notNull, isNull, askAndRemove, askAndClear, askAndToAbsPaths
+from utils import systemOpen, warn, ask, notNull, isNull, requestRemove, requestClear, requestPathsConversion, \
+    absolutePath, relativePath
 
 
 class BasePathListWidget(QListWidget):
@@ -17,16 +18,21 @@ class BasePathListWidget(QListWidget):
         self.actionRemove = QAction(self, text=self.tr(u"Remove"))
         self.actionClear = QAction(self, text=self.tr(u"Clear"))
         self.actionModify = QAction(self, text=self.tr(u"Modify"))
-        self.actionToAbsolutePaths = QAction(self, text=self.tr(u"Absolute Paths"))
-        self.actionAllToAbsolutePaths = QAction(self, text=self.tr(u"Absolute Paths (All)"))
+        self.actionAbsolutePaths = QAction(self, text=self.tr(u"Absolute Paths"))
+        self.actionAllAbsolutePaths = QAction(self, text=self.tr(u"Absolute Paths (All)"))
+        self.actionRelativePaths = QAction(self, text=self.tr(u"Relative Paths"))
+        self.actionAllRelativePaths = QAction(self, text=self.tr(u"Relative Paths (All)"))
+
 
         self.actionOpenPathHandler = None
         self.actionAddHandler = None
         self.actionRemoveHandler = None
         self.actionClearHandler = None
         self.actionModifyHandler = None
-        self.actionToAbsolutePathsHandler = None
-        self.actionAllToAbsolutePathsHandler = None
+        self.actionAbsolutePathsHandler = None
+        self.actionAllAbsolutePathsHandler = None
+        self.actionRelativePathsHandler = None
+        self.actionAllRelativePathsHandler = None
 
         self.bindingList = None
 
@@ -41,8 +47,11 @@ class BasePathListWidget(QListWidget):
         self.actionRemove.triggered.connect(self.onActionTriggered)
         self.actionClear.triggered.connect(self.onActionTriggered)
         self.actionModify.triggered.connect(self.onActionTriggered)
-        self.actionToAbsolutePaths.triggered.connect(self.onActionTriggered)
-        self.actionAllToAbsolutePaths.triggered.connect(self.onActionTriggered)
+        self.actionAbsolutePaths.triggered.connect(self.onActionTriggered)
+        self.actionAllAbsolutePaths.triggered.connect(self.onActionTriggered)
+        self.actionRelativePaths.triggered.connect(self.onActionTriggered)
+        self.actionAllRelativePaths.triggered.connect(self.onActionTriggered)
+
 
     def enableCustomContextMenu(self, bindingList):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -62,8 +71,11 @@ class BasePathListWidget(QListWidget):
         self.contextMenu.addAction(self.actionClear)
         self.contextMenu.addAction(self.actionModify)
         self.contextMenu.addSeparator()
-        self.contextMenu.addAction(self.actionToAbsolutePaths)
-        self.contextMenu.addAction(self.actionAllToAbsolutePaths)
+        self.contextMenu.addAction(self.actionAbsolutePaths)
+        self.contextMenu.addAction(self.actionRelativePaths)
+        self.contextMenu.addSeparator()
+        self.contextMenu.addAction(self.actionAllAbsolutePaths)
+        self.contextMenu.addAction(self.actionAllRelativePaths)
         # 连接slot
         self.customContextMenuRequested.connect(self._onRequestContextMenu)
         self.itemSelectionChanged.connect(self._stateChange)
@@ -94,14 +106,23 @@ class BasePathListWidget(QListWidget):
             if hasSelection:
                 handler = self.getHandler(self.actionModifyHandler, self._handlerNotImplemented)
                 args.append(self.selectedItems()[0])
-        # actionToAbsolutePaths
-        elif action == self.actionToAbsolutePaths:
+        # actionAbsolutePaths
+        elif action == self.actionAbsolutePaths:
             if hasSelection:
-                handler = self.getHandler(self.actionToAbsolutePathsHandler, self._actionToAbsolutePathsHandler)
+                handler = self.getHandler(self.actionAbsolutePathsHandler, self._actionAbsolutePathsHandler)
                 args.append(self.selectedItems())
-        # actionAllToAbsolutePaths
-        elif action == self.actionAllToAbsolutePaths:
-            handler = self.getHandler(self.actionAllToAbsolutePathsHandler, self._actionAllToAbsolutePathsHandler)
+        # actionAllAbsolutePaths
+        elif action == self.actionAllAbsolutePaths:
+            handler = self.getHandler(self.actionAllAbsolutePathsHandler, self._actionAllAbsolutePathsHandler)
+            args.append(None)
+        # actionRelativePathsHandler
+        elif action == self.actionRelativePaths:
+            if hasSelection:
+                handler = self.getHandler(self.actionRelativePathsHandler, self._actionRelativePathsHandler)
+                args.append(self.selectedItems())
+        # actionAllRelativePaths
+        elif action == self.actionAllRelativePaths:
+            handler = self.getHandler(self.actionAllRelativePathsHandler, self._actionAllRelativePathsHandler)
             args.append(None)
         else:
             pass
@@ -109,10 +130,11 @@ class BasePathListWidget(QListWidget):
 
     def _stateChange(self):
         hasSelection = len(self.selectedItems()) > 0
+        self.actionOpenPath.setEnabled(hasSelection)
         self.actionRemove.setEnabled(hasSelection)
         self.actionModify.setEnabled(hasSelection)
-        self.actionToAbsolutePaths.setEnabled(hasSelection)
-        self.actionOpenPath.setEnabled(hasSelection)
+        self.actionAbsolutePaths.setEnabled(hasSelection)
+        self.actionRelativePaths.setEnabled(hasSelection)
 
     def _onRequestContextMenu(self):
         self.contextMenu.exec_(QCursor.pos())
@@ -146,19 +168,26 @@ class BasePathListWidget(QListWidget):
 
     def _actionRemoveHandler(self, selectedItems):
         """actionRemove的默认动作"""
-        askAndRemove(self, self.bindingList, self._itemTextsOf(selectedItems))
+        requestRemove(self, self.bindingList, self._itemTextsOf(selectedItems))
 
     def _actionClearHandler(self):
         """actionClear的默认动作"""
-        askAndClear(self, self.bindingList)
+        requestClear(self, self.bindingList)
 
-    def _actionToAbsolutePathsHandler(self, selectedItems):
+    def _actionAbsolutePathsHandler(self, selectedItems):
         """actionToAbsolutePaths的默认动作"""
-        askAndToAbsPaths(self, self.bindingList, self._itemTextsOf(selectedItems))
+        requestPathsConversion(self, self.bindingList, self._itemTextsOf(selectedItems), absolutePath)
 
-    def _actionAllToAbsolutePathsHandler(self, _):
+    def _actionAllAbsolutePathsHandler(self, _):
         """actionAllToAbsolutePaths的默认动作"""
-        askAndToAbsPaths(self, self.bindingList, None)
+        requestPathsConversion(self, self.bindingList, None, absolutePath)
+
+    def _actionRelativePathsHandler(self, selectedItems):
+        print("_actionRelativePathsHandler")
+        requestPathsConversion(self, self.bindingList, self._itemTextsOf(selectedItems), relativePath)
+
+    def _actionAllRelativePathsHandler(self, _):
+        requestPathsConversion(self, self.bindingList, _, relativePath)
 
     @classmethod
     def _itemTextsOf(cls, selectedItems):
