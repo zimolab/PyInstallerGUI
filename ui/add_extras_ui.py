@@ -1,9 +1,7 @@
 # -*- coding:utf-8 -*-
-import os
-
 from PySide2.QtCore import Signal
 from PySide2.QtWidgets import QDialog
-from QBinder import Binder
+
 from ui.base.ui_add_extras import Ui_AddExtrasDialog
 # noinspection PyTypeChecker
 from utils import openDirDialog, openFileDialog, warn, relativePath, getBasename, notNull, isNull, joinSrcAndDest
@@ -75,8 +73,8 @@ class AddExtrasDialog(QDialog, Ui_AddExtrasDialog):
             return
         extra = joinSrcAndDest(self.soureEdit.text().strip(), self.destinationEdit.text().strip())
         if self._action == self.ADD_EXTRA_DATA:
-            self.extraDataAdded.emit(extra)
+            self.extraDataAdded.emit(extra.strip())
         elif self._action == self.ADD_EXTRA_BIN:
-            self.extraBinaryAdded.emit(extra)
+            self.extraBinaryAdded.emit(extra.strip())
         else:
             raise RuntimeError("Unknown action")

@@ -42,7 +42,7 @@ class AddItemsDialog(QDialog, Ui_AddItemsDialog):
         if content == "":
             warn(self, self.tr(u"Warning"), self.tr("Items cannot be empty!"))
             return
-        content = content.replace("；", ";").replace("，", ",")
+        content = content.replace("；", ";").replace("，", ",").strip()
         sepKey = self.multiItemSeparatorCombo.currentText()
         items = splitItems(content, sepKey, self.DEFAULT_ITEMS_SEP)
         self.itemsAdded.emit(self._option, items)

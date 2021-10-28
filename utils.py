@@ -156,7 +156,7 @@ def splitItems(content, sepKey, defaultSep=";"):
     else:
         sep = defaultSep
     items = content.split(sep)
-    return [item for item in items if item is not None and item != ""]
+    return [item.strip() for item in items if item is not None and item != ""]
 
 
 def isEmpty(val):

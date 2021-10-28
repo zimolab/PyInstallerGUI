@@ -574,7 +574,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
 
         def onModify(name, index, option: MultiOption):
             name = name.strip()
-            if isEmpty(name) or index <= 0:
+            if isEmpty(name) or index < 0:
                 return
             modified = getTextInput(self, self.tr("Modify UPX Exclude"), self.tr("Exclude Filename："), name)
             if modified is not None:
@@ -668,6 +668,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
             option.addAll(True, *paths)
 
         def onModify(path, index, option: MultiOption):
+            path = path.strip()
+            if isEmpty(path) or index < 0:
+                return
             if option.name == self._hookOptions.additionalHooksDir.name:
                 self._modifyPathDialog.display(ModifyPathDialog.MODIFY_ADDITIONAL_HOOKS_DIR, path, index)
             else:
@@ -679,6 +682,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  onAdd=onAdd, onModify=onModify)
         self._modifyPathDialog.additionalHooksDirModified.connect(
             lambda index, modified: self._hookOptions.additionalHooksDir.set(index, modified, True))
+        # 上下文菜单
+        self.hookDirsListWidget.actionAddHandler = lambda: onAdd(None, self._hookOptions.additionalHooksDir)
+        self.hookDirsListWidget.actionModifyHandler = lambda item: onModify(
+            item.text().strip(),
+            self._hookOptions.additionalHooksDir.indexOf(item.text().strip()),
+            self._hookOptions.additionalHooksDir
+        )
+        self.hookDirsListWidget.enableCustomContextMenu(self._hookOptions.additionalHooksDir.argument)
         # runtimeHook
         self.autosetMultiItemsUI(option=self._hookOptions.runtimeHook, label=self.rtHooksLabel,
                                  listWidget=self.rtHooksListWidget, addButton=self.addRTHooksButton,
@@ -686,6 +697,14 @@ class MainUI(QMainWindow, Ui_MainWindow):
                                  onAdd=onAdd, onModify=onModify)
         self._modifyPathDialog.runtimeHooksModified.connect(
             lambda index, modified: self._hookOptions.runtimeHook.set(index, modified, True))
+        # 上下文菜单
+        self.rtHooksListWidget.actionAddHandler = lambda: onAdd(None, self._hookOptions.runtimeHook)
+        self.rtHooksListWidget.actionModifyHandler = lambda item: onModify(
+            item.text().strip(),
+            self._hookOptions.runtimeHook.indexOf(item.text().strip()),
+            self._hookOptions.runtimeHook
+        )
+        self.rtHooksListWidget.enableCustomContextMenu(self._hookOptions.runtimeHook.argument)
 
     def autosetPathSelectionUI(self, option: StringOption, label: QLabel, edit: QLineEdit, selectButton: QPushButton,
                                defaultButton: QPushButton, selectionMode, filters=None, startPath=None):
