@@ -11,7 +11,7 @@ from typing import Union
 from PySide2 import QtCore
 from PySide2.QtGui import QDropEvent, QIcon
 from PySide2.QtWidgets import QMainWindow, QAbstractItemView, QLineEdit, QPushButton, QLabel, QCheckBox, QRadioButton, \
-    QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup, QMenu
+    QComboBox, QListWidget, QApplication, QStyleFactory, QAction, QActionGroup
 from QBinder import QEventHook, Binder
 
 from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH
@@ -20,7 +20,6 @@ from core.package_config import PackageConfig
 from ui.about_ui import AboutDialog
 from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
-from ui.base.base_path_listwidget import BasePathListWidget
 from ui.base.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
     FILTER_ENTITLEMENTS_FILE, PY_FILE_EXT, HELP_URL
