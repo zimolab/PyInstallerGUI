@@ -7,7 +7,7 @@
 ---
 ### 说明
 
-PyInstaller仅仅是将PyInstaller命令的众多参数通过GUI化的形式向用户呈现、接受用户的输入。
+PyInstallerGUI仅仅是将PyInstaller命令的众多参数通过GUI化的形式向用户呈现、接受用户的输入。
 然后将用户的输入转换为命令行，最后调用PyInstaller命令进行真正的打包。本质上，它所替代的仅仅
 是你手写命令行的过程，其他地方毫无区别。 所以，一定要**保证你所工作的环境正确地安装了PyInstaller**。
 
