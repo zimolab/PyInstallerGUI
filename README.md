@@ -67,7 +67,7 @@ PyInstaller命令的参数众多，除了PyInstaller本身的参数也包括其�
 - 是否显示控制台窗口
 - 生成文件形式（单文件或文件夹）
 - 打包前是否进行清理
-- 替换旧文件前是不进行确认（建议总是打开这个选项）
+- 替换旧文件前时不要进行确认（建议总是打开这个选项）
 - 是否只包含ascii字符集等等
 
 ![avatar](./screenshots/ss-main-common-options.PNG)
