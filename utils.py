@@ -353,3 +353,7 @@ def requestOpenPaths(parent, *paths):
                 systemOpen(path)
             else:
                 warn(parent, parent.tr("Warning"), f'"{path}"' + parent.tr(" is not exist"))
+
+
+def getLogoPath():
+    return absolutePath(joinPath(os.path.dirname(__file__), "data/logos/pyinstaller-gui.ico"))

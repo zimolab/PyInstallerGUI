@@ -32,7 +32,7 @@ from ui.upx_excludes_ui import UPXExcludesDialog
 from utils import ask, warn, openFileDialog, openFilesDialog, saveFileDialog, openDirDialog, error, \
     localCentralize, openDirsDialog, getDirs, joinSrcAndDest, getTextInput, getFont, getBasenames, \
     getFiles, requestRemove, requestClear, relativePath, isFile, absolutePath, cwd, joinPath, isExist, notNull, isEmpty, \
-    splitSrcAndDest, requestOpenPaths, isNull, getBasename
+    splitSrcAndDest, requestOpenPaths, isNull, getBasename, getLogoPath
 
 DEFAULT_PACKAGE_CONFIG_FILE = "package.json"
 
@@ -79,7 +79,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # 居中显示窗口
         localCentralize(self)
         # 设置窗口图标
-        self.setWindowIcon(QIcon("data/logos/pyinstaller-gui.ico"))
+        self.setWindowIcon(QIcon(getLogoPath()))
         # 设置非Options部分的UI
         self.setupNonOptionsUI()
         # 设置Options部分的UI
