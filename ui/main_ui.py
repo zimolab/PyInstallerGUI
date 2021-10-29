@@ -17,12 +17,13 @@ from QBinder import QEventHook, Binder
 from core.constants import DEFAULT_PYINSTALLER_PATH, DEFAULT_PYIMAKESPEC_PATH
 from core.options import StringOption, FlagOption, MultiOption
 from core.package_config import PackageConfig
+from ui.about_ui import AboutDialog
 from ui.add_extras_ui import AddExtrasDialog
 from ui.add_items_ui import AddItemsDialog
 from ui.base.base_path_listwidget import BasePathListWidget
 from ui.base.constants import FILTER_PY_SOURCE_FILE, FILTER_IMAGE_FILE, FILTER_ICON_FILE, FILTER_CONFIG_FILE, \
     PYINSTALLER_WEBSITE_URL, PYINSTALLER_DOC_STABLE_URL, FILTER_ALL_FILE, FILTER_MANIFEST_FILE, FILTER_RESOURCE_FILE, \
-    FILTER_ENTITLEMENTS_FILE, PY_FILE_EXT
+    FILTER_ENTITLEMENTS_FILE, PY_FILE_EXT, HELP_URL
 from ui.base.ui_main import Ui_MainWindow
 from ui.modfiy_extras import ModifyExtrasDialog
 from ui.modify_path_ui import ModifyPathDialog
@@ -66,6 +67,7 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self._modifyPathDialog = ModifyPathDialog(self)
         self._addItemsDialog = AddItemsDialog(self)
         self._upxExcludesDialog = UPXExcludesDialog(self)
+        self._aboutDialog = AboutDialog(self)
         # 设置UI
         self.setupUi()
         # 设置菜单
@@ -103,6 +105,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.actionGotoPyInstallerDoc.triggered.connect(lambda: webbrowser.open(PYINSTALLER_DOC_STABLE_URL))
         self.actionStartGenSpceFile.triggered.connect(self.startGenerateSpecFile)
         self.actionChangeFont.triggered.connect(self.onChangeFont)
+        self.actionAbout.triggered.connect(self._aboutDialog.show)
+        self.actionHelp.triggered.connect(lambda: webbrowser.open(HELP_URL))
         self.setupStylesMenu()
 
     def setupStylesMenu(self):

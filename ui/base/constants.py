@@ -15,7 +15,7 @@ FILTER_ALL_FILE = u"All File(*.*)"
 PYINSTALLER_WEBSITE_URL = "http://www.pyinstaller.org/"
 PYINSTALLER_DOC_URL = "http://www.pyinstaller.org/documentation.html"
 PYINSTALLER_DOC_STABLE_URL = "https://pyinstaller.readthedocs.io/en/stable/"
-HELP_URL = ""
+HELP_URL = "https://github.com/zimolab/PyInstallerGUI"
 
 ITEM_SEPARATORS = {
     "semicolon(;)": ";",
