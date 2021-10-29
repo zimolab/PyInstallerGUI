@@ -9,10 +9,12 @@
         "main.py"
     ],
     "options": {
+        "addData": [
+            "../data;data"
+        ],
         "clean": true,
         "distPath": "./build/dist",
         "icon": "../data/logos/pyinstaller-gui.ico",
-        "key": "22ebf716d48a4a2398653805932732fc",
         "noConfirm": true,
         "productMode": "onedir",
         "productName": "PyInstallerGUI",

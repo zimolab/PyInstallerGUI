@@ -9,6 +9,9 @@
         "main.py"
     ],
     "options": {
+        "addData": [
+            "../data:data"
+        ],
         "clean": true,
         "distPath": "./build/dist",
         "icon": "../data/logos/pyinstaller-gui.ico",

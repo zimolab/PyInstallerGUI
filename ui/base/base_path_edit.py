@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QCursor
 from PySide2.QtWidgets import QLineEdit, QAction, QApplication, QMenu
-
 from utils import absolutePath, ask, relativePath, isNull, notNull, isEmpty
 
 

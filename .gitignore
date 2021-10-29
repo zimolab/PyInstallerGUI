@@ -1,7 +1,7 @@
 *.spec
-.venv
-dist
-build
-.idea
+.venv/
+dist/
+build/
+.idea/
 .idea/PyInstallerGUI.iml
 *.ipynb
