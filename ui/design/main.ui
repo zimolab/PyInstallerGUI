@@ -1295,75 +1295,10 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="versionFileLabel">
-                <property name="text">
-                 <string>Version File</string>
-                </property>
-               </widget>
-              </item>
               <item row="6" column="1">
                <widget class="QCheckBox" name="privateAssembliesCheckBox">
                 <property name="text">
                  <string>win-private-assemblies</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="resourceLabel">
-                <property name="text">
-                 <string>Resource</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="FileEdit" name="resourceEdit"/>
-              </item>
-              <item row="2" column="1">
-               <widget class="FileEdit" name="manifestFileEdit"/>
-              </item>
-              <item row="7" column="1">
-               <widget class="QCheckBox" name="noPreferRedirectsCheckBox">
-                <property name="text">
-                 <string>win-no-prefer-redirects</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="FileEdit" name="versionFileEdit"/>
-              </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="uacAdminCheckBox">
-                <property name="text">
-                 <string>uac-admin</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="uacUIAccessCheckBox">
-                <property name="text">
-                 <string>uac-uiaccess</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QPushButton" name="selectResourceButton">
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QPushButton" name="selectManifestFileButton">
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QPushButton" name="selectVersionFileButton">
-                <property name="text">
-                 <string>Select</string>
                 </property>
                </widget>
               </item>
@@ -1374,6 +1309,13 @@
                 </property>
                </widget>
               </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="resourceLabel">
+                <property name="text">
+                 <string>Resource</string>
+                </property>
+               </widget>
+              </item>
               <item row="2" column="3">
                <widget class="QPushButton" name="defaultManifestFileButton">
                 <property name="text">
@@ -1381,10 +1323,75 @@
                 </property>
                </widget>
               </item>
+              <item row="3" column="1">
+               <widget class="FileEdit" name="resourceEdit"/>
+              </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="noPreferRedirectsCheckBox">
+                <property name="text">
+                 <string>win-no-prefer-redirects</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="uacUIAccessCheckBox">
+                <property name="text">
+                 <string>uac-uiaccess</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="selectManifestFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="versionFileLabel">
+                <property name="text">
+                 <string>Version File</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="selectVersionFileButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
               <item row="3" column="3">
                <widget class="QPushButton" name="defaultResourceButton">
                 <property name="text">
                  <string>Default</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="uacAdminCheckBox">
+                <property name="text">
+                 <string>uac-admin</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="FileEdit" name="manifestFileEdit"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="QPushButton" name="selectResourceButton">
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="FileEdit" name="versionFileEdit"/>
+              </item>
+              <item row="8" column="1">
+               <widget class="QCheckBox" name="noEmbedManifestCheckBox">
+                <property name="text">
+                 <string>no-embed-manifest</string>
                 </property>
                </widget>
               </item>

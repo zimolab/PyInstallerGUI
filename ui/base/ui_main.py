@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainkuftRm.ui'
+## Form generated from reading UI file 'mainMNbdsV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -1065,80 +1065,85 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.manifestFileLabel, 2, 0, 1, 1)
 
-        self.versionFileLabel = QLabel(self.windowsOptionTab)
-        self.versionFileLabel.setObjectName(u"versionFileLabel")
-
-        self.gridLayout_4.addWidget(self.versionFileLabel, 1, 0, 1, 1)
-
         self.privateAssembliesCheckBox = QCheckBox(self.windowsOptionTab)
         self.privateAssembliesCheckBox.setObjectName(u"privateAssembliesCheckBox")
 
         self.gridLayout_4.addWidget(self.privateAssembliesCheckBox, 6, 1, 1, 1)
-
-        self.resourceLabel = QLabel(self.windowsOptionTab)
-        self.resourceLabel.setObjectName(u"resourceLabel")
-
-        self.gridLayout_4.addWidget(self.resourceLabel, 3, 0, 1, 1)
-
-        self.resourceEdit = FileEdit(self.windowsOptionTab)
-        self.resourceEdit.setObjectName(u"resourceEdit")
-
-        self.gridLayout_4.addWidget(self.resourceEdit, 3, 1, 1, 1)
-
-        self.manifestFileEdit = FileEdit(self.windowsOptionTab)
-        self.manifestFileEdit.setObjectName(u"manifestFileEdit")
-
-        self.gridLayout_4.addWidget(self.manifestFileEdit, 2, 1, 1, 1)
-
-        self.noPreferRedirectsCheckBox = QCheckBox(self.windowsOptionTab)
-        self.noPreferRedirectsCheckBox.setObjectName(u"noPreferRedirectsCheckBox")
-
-        self.gridLayout_4.addWidget(self.noPreferRedirectsCheckBox, 7, 1, 1, 1)
-
-        self.versionFileEdit = FileEdit(self.windowsOptionTab)
-        self.versionFileEdit.setObjectName(u"versionFileEdit")
-
-        self.gridLayout_4.addWidget(self.versionFileEdit, 1, 1, 1, 1)
-
-        self.uacAdminCheckBox = QCheckBox(self.windowsOptionTab)
-        self.uacAdminCheckBox.setObjectName(u"uacAdminCheckBox")
-
-        self.gridLayout_4.addWidget(self.uacAdminCheckBox, 4, 1, 1, 1)
-
-        self.uacUIAccessCheckBox = QCheckBox(self.windowsOptionTab)
-        self.uacUIAccessCheckBox.setObjectName(u"uacUIAccessCheckBox")
-
-        self.gridLayout_4.addWidget(self.uacUIAccessCheckBox, 5, 1, 1, 1)
-
-        self.selectResourceButton = QPushButton(self.windowsOptionTab)
-        self.selectResourceButton.setObjectName(u"selectResourceButton")
-
-        self.gridLayout_4.addWidget(self.selectResourceButton, 3, 2, 1, 1)
-
-        self.selectManifestFileButton = QPushButton(self.windowsOptionTab)
-        self.selectManifestFileButton.setObjectName(u"selectManifestFileButton")
-
-        self.gridLayout_4.addWidget(self.selectManifestFileButton, 2, 2, 1, 1)
-
-        self.selectVersionFileButton = QPushButton(self.windowsOptionTab)
-        self.selectVersionFileButton.setObjectName(u"selectVersionFileButton")
-
-        self.gridLayout_4.addWidget(self.selectVersionFileButton, 1, 2, 1, 1)
 
         self.defaultVersionFileButton = QPushButton(self.windowsOptionTab)
         self.defaultVersionFileButton.setObjectName(u"defaultVersionFileButton")
 
         self.gridLayout_4.addWidget(self.defaultVersionFileButton, 1, 3, 1, 1)
 
+        self.resourceLabel = QLabel(self.windowsOptionTab)
+        self.resourceLabel.setObjectName(u"resourceLabel")
+
+        self.gridLayout_4.addWidget(self.resourceLabel, 3, 0, 1, 1)
+
         self.defaultManifestFileButton = QPushButton(self.windowsOptionTab)
         self.defaultManifestFileButton.setObjectName(u"defaultManifestFileButton")
 
         self.gridLayout_4.addWidget(self.defaultManifestFileButton, 2, 3, 1, 1)
 
+        self.resourceEdit = FileEdit(self.windowsOptionTab)
+        self.resourceEdit.setObjectName(u"resourceEdit")
+
+        self.gridLayout_4.addWidget(self.resourceEdit, 3, 1, 1, 1)
+
+        self.noPreferRedirectsCheckBox = QCheckBox(self.windowsOptionTab)
+        self.noPreferRedirectsCheckBox.setObjectName(u"noPreferRedirectsCheckBox")
+
+        self.gridLayout_4.addWidget(self.noPreferRedirectsCheckBox, 7, 1, 1, 1)
+
+        self.uacUIAccessCheckBox = QCheckBox(self.windowsOptionTab)
+        self.uacUIAccessCheckBox.setObjectName(u"uacUIAccessCheckBox")
+
+        self.gridLayout_4.addWidget(self.uacUIAccessCheckBox, 5, 1, 1, 1)
+
+        self.selectManifestFileButton = QPushButton(self.windowsOptionTab)
+        self.selectManifestFileButton.setObjectName(u"selectManifestFileButton")
+
+        self.gridLayout_4.addWidget(self.selectManifestFileButton, 2, 2, 1, 1)
+
+        self.versionFileLabel = QLabel(self.windowsOptionTab)
+        self.versionFileLabel.setObjectName(u"versionFileLabel")
+
+        self.gridLayout_4.addWidget(self.versionFileLabel, 1, 0, 1, 1)
+
+        self.selectVersionFileButton = QPushButton(self.windowsOptionTab)
+        self.selectVersionFileButton.setObjectName(u"selectVersionFileButton")
+
+        self.gridLayout_4.addWidget(self.selectVersionFileButton, 1, 2, 1, 1)
+
         self.defaultResourceButton = QPushButton(self.windowsOptionTab)
         self.defaultResourceButton.setObjectName(u"defaultResourceButton")
 
         self.gridLayout_4.addWidget(self.defaultResourceButton, 3, 3, 1, 1)
+
+        self.uacAdminCheckBox = QCheckBox(self.windowsOptionTab)
+        self.uacAdminCheckBox.setObjectName(u"uacAdminCheckBox")
+
+        self.gridLayout_4.addWidget(self.uacAdminCheckBox, 4, 1, 1, 1)
+
+        self.manifestFileEdit = FileEdit(self.windowsOptionTab)
+        self.manifestFileEdit.setObjectName(u"manifestFileEdit")
+
+        self.gridLayout_4.addWidget(self.manifestFileEdit, 2, 1, 1, 1)
+
+        self.selectResourceButton = QPushButton(self.windowsOptionTab)
+        self.selectResourceButton.setObjectName(u"selectResourceButton")
+
+        self.gridLayout_4.addWidget(self.selectResourceButton, 3, 2, 1, 1)
+
+        self.versionFileEdit = FileEdit(self.windowsOptionTab)
+        self.versionFileEdit.setObjectName(u"versionFileEdit")
+
+        self.gridLayout_4.addWidget(self.versionFileEdit, 1, 1, 1, 1)
+
+        self.noEmbedManifestCheckBox = QCheckBox(self.windowsOptionTab)
+        self.noEmbedManifestCheckBox.setObjectName(u"noEmbedManifestCheckBox")
+
+        self.gridLayout_4.addWidget(self.noEmbedManifestCheckBox, 8, 1, 1, 1)
 
 
         self.verticalLayout_10.addLayout(self.gridLayout_4)
@@ -1479,18 +1484,19 @@ class Ui_MainWindow(object):
         self.clearRTHooksButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.hooksTab), QCoreApplication.translate("MainWindow", u"Hooks", None))
         self.manifestFileLabel.setText(QCoreApplication.translate("MainWindow", u"Manifest File", None))
-        self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
         self.privateAssembliesCheckBox.setText(QCoreApplication.translate("MainWindow", u"win-private-assemblies", None))
-        self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))
-        self.noPreferRedirectsCheckBox.setText(QCoreApplication.translate("MainWindow", u"win-no-prefer-redirects", None))
-        self.uacAdminCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-admin", None))
-        self.uacUIAccessCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-uiaccess", None))
-        self.selectResourceButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.selectManifestFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.selectVersionFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.defaultVersionFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.resourceLabel.setText(QCoreApplication.translate("MainWindow", u"Resource", None))
         self.defaultManifestFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.noPreferRedirectsCheckBox.setText(QCoreApplication.translate("MainWindow", u"win-no-prefer-redirects", None))
+        self.uacUIAccessCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-uiaccess", None))
+        self.selectManifestFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.versionFileLabel.setText(QCoreApplication.translate("MainWindow", u"Version File", None))
+        self.selectVersionFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.defaultResourceButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.uacAdminCheckBox.setText(QCoreApplication.translate("MainWindow", u"uac-admin", None))
+        self.selectResourceButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.noEmbedManifestCheckBox.setText(QCoreApplication.translate("MainWindow", u"no-embed-manifest", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.windowsOptionTab), QCoreApplication.translate("MainWindow", u"Windows", None))
         self.targetArchitectureLabel.setText(QCoreApplication.translate("MainWindow", u"Target Architecture", None))
         self.bundleIdentifierLabel.setText(QCoreApplication.translate("MainWindow", u"Bundle Identifier", None))

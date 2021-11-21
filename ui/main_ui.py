@@ -634,6 +634,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         self.autosetFlagUI(flag=self._windowsOptions.winPrivateAssemblies, flagBox=self.privateAssembliesCheckBox)
         # winNoPreferRedirects
         self.autosetFlagUI(flag=self._windowsOptions.winNoPreferRedirects, flagBox=self.noPreferRedirectsCheckBox)
+        # noEmbedManifest
+        self.autosetFlagUI(flag=self._windowsOptions.noEmbedManifest, flagBox=self.noEmbedManifestCheckBox)
 
     def setupMacOSXOptionsUI(self):
         # entitlementsFile

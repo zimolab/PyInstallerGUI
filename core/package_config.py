@@ -733,6 +733,14 @@ class PackageConfig(object):
                             "and will try to bundle the exact versions of the assembly. "
             )
 
+            self.noEmbedManifest = FlagOption(
+                name="no-embed-manifest",
+                description="--no-embed-manifest: "
+                            "Generate an external .exe.manifest file instead of embedding the manifest into the exe. "
+                            "Applicable only to onedir mode; in onefile mode, the manifest is always embedded, "
+                            "regardless of this option. "
+            )
+
     class MacOSXOptions(Options):
         def __init__(self):
             self.osxBundleIdentifier = StringOption(
