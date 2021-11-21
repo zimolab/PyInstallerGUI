@@ -5,7 +5,7 @@ class AppMeta(QObject):
     def __init__(self, parent):
         super().__init__(parent)
         self.appName = self.tr(u"PyInstallerGUI")
-        self.appVersion = self.tr(u"0.0.1")
+        self.appVersion = self.tr(u"0.0.2")
         self.appLicense = self.tr(u"GPL V3")
         self.appCopyright = self.tr(u"")
         self.appDescription = self.tr(u"A GUI wrapper for pyinstaller. Helps you get rid of the long command line.")
