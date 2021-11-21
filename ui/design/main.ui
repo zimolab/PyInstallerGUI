@@ -1425,13 +1425,10 @@
               <item row="3" column="1">
                <widget class="QLineEdit" name="codesignIdentityEdit"/>
               </item>
-              <item row="0" column="1">
-               <widget class="FileEdit" name="entitlementsFileEdit"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="targetArchitectureLabel">
+              <item row="0" column="3">
+               <widget class="QPushButton" name="selectEntitlementsFileButton">
                 <property name="text">
-                 <string>Target Architecture</string>
+                 <string>Select</string>
                 </property>
                </widget>
               </item>
@@ -1439,6 +1436,26 @@
                <widget class="QLabel" name="bundleIdentifierLabel">
                 <property name="text">
                  <string>Bundle Identifier</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="targetArchitectureCombo"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="bundleIdentifierEdit"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="defaultEntitlementsFileButton">
+                <property name="text">
+                 <string>Default</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QPushButton" name="defaultCodesignIdentityButton">
+                <property name="text">
+                 <string>Default</string>
                 </property>
                </widget>
               </item>
@@ -1456,18 +1473,12 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="targetArchitectureCombo"/>
-              </item>
               <item row="1" column="2">
                <widget class="QPushButton" name="defaultTargetArchitectureButton">
                 <property name="text">
                  <string>Default</string>
                 </property>
                </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="bundleIdentifierEdit"/>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="codesignIdentityLabel">
@@ -1476,24 +1487,20 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="2">
-               <widget class="QPushButton" name="defaultCodesignIdentityButton">
+              <item row="0" column="1">
+               <widget class="FileEdit" name="entitlementsFileEdit"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="targetArchitectureLabel">
                 <property name="text">
-                 <string>Default</string>
+                 <string>Target Architecture</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="defaultEntitlementsFileButton">
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="argvEmulationCheckBox">
                 <property name="text">
-                 <string>Default</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QPushButton" name="selectEntitlementsFileButton">
-                <property name="text">
-                 <string>Select</string>
+                 <string>argv-emulation</string>
                 </property>
                </widget>
               </item>
@@ -1647,6 +1654,8 @@
     </widget>
     <addaction name="actionChangeFont"/>
     <addaction name="menuStyles"/>
+    <addaction name="separator"/>
+    <addaction name="actionCurrentOSOnly"/>
    </widget>
    <addaction name="fileMenu"/>
    <addaction name="commandMenu"/>
@@ -1716,6 +1725,17 @@
   <action name="actionChangeFont">
    <property name="text">
     <string>Font</string>
+   </property>
+  </action>
+  <action name="actionCurrentOSOnly">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Current OS Only</string>
    </property>
   </action>
  </widget>

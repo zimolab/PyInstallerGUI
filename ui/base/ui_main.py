@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainMNbdsV.ui'
+## Form generated from reading UI file 'mainZnywnT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -45,6 +45,10 @@ class Ui_MainWindow(object):
         self.actionStartGenSpceFile.setObjectName(u"actionStartGenSpceFile")
         self.actionChangeFont = QAction(MainWindow)
         self.actionChangeFont.setObjectName(u"actionChangeFont")
+        self.actionCurrentOSOnly = QAction(MainWindow)
+        self.actionCurrentOSOnly.setObjectName(u"actionCurrentOSOnly")
+        self.actionCurrentOSOnly.setCheckable(True)
+        self.actionCurrentOSOnly.setChecked(True)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_11 = QVBoxLayout(self.centralwidget)
@@ -1164,20 +1168,35 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.codesignIdentityEdit, 3, 1, 1, 1)
 
-        self.entitlementsFileEdit = FileEdit(self.macosxOptionTab)
-        self.entitlementsFileEdit.setObjectName(u"entitlementsFileEdit")
+        self.selectEntitlementsFileButton = QPushButton(self.macosxOptionTab)
+        self.selectEntitlementsFileButton.setObjectName(u"selectEntitlementsFileButton")
 
-        self.gridLayout_5.addWidget(self.entitlementsFileEdit, 0, 1, 1, 1)
-
-        self.targetArchitectureLabel = QLabel(self.macosxOptionTab)
-        self.targetArchitectureLabel.setObjectName(u"targetArchitectureLabel")
-
-        self.gridLayout_5.addWidget(self.targetArchitectureLabel, 1, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.selectEntitlementsFileButton, 0, 3, 1, 1)
 
         self.bundleIdentifierLabel = QLabel(self.macosxOptionTab)
         self.bundleIdentifierLabel.setObjectName(u"bundleIdentifierLabel")
 
         self.gridLayout_5.addWidget(self.bundleIdentifierLabel, 2, 0, 1, 1)
+
+        self.targetArchitectureCombo = QComboBox(self.macosxOptionTab)
+        self.targetArchitectureCombo.setObjectName(u"targetArchitectureCombo")
+
+        self.gridLayout_5.addWidget(self.targetArchitectureCombo, 1, 1, 1, 1)
+
+        self.bundleIdentifierEdit = QLineEdit(self.macosxOptionTab)
+        self.bundleIdentifierEdit.setObjectName(u"bundleIdentifierEdit")
+
+        self.gridLayout_5.addWidget(self.bundleIdentifierEdit, 2, 1, 1, 1)
+
+        self.defaultEntitlementsFileButton = QPushButton(self.macosxOptionTab)
+        self.defaultEntitlementsFileButton.setObjectName(u"defaultEntitlementsFileButton")
+
+        self.gridLayout_5.addWidget(self.defaultEntitlementsFileButton, 0, 2, 1, 1)
+
+        self.defaultCodesignIdentityButton = QPushButton(self.macosxOptionTab)
+        self.defaultCodesignIdentityButton.setObjectName(u"defaultCodesignIdentityButton")
+
+        self.gridLayout_5.addWidget(self.defaultCodesignIdentityButton, 3, 2, 1, 1)
 
         self.entitlementsFileLabel = QLabel(self.macosxOptionTab)
         self.entitlementsFileLabel.setObjectName(u"entitlementsFileLabel")
@@ -1189,40 +1208,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.defaultBundleIdentifierButton, 2, 2, 1, 1)
 
-        self.targetArchitectureCombo = QComboBox(self.macosxOptionTab)
-        self.targetArchitectureCombo.setObjectName(u"targetArchitectureCombo")
-
-        self.gridLayout_5.addWidget(self.targetArchitectureCombo, 1, 1, 1, 1)
-
         self.defaultTargetArchitectureButton = QPushButton(self.macosxOptionTab)
         self.defaultTargetArchitectureButton.setObjectName(u"defaultTargetArchitectureButton")
 
         self.gridLayout_5.addWidget(self.defaultTargetArchitectureButton, 1, 2, 1, 1)
-
-        self.bundleIdentifierEdit = QLineEdit(self.macosxOptionTab)
-        self.bundleIdentifierEdit.setObjectName(u"bundleIdentifierEdit")
-
-        self.gridLayout_5.addWidget(self.bundleIdentifierEdit, 2, 1, 1, 1)
 
         self.codesignIdentityLabel = QLabel(self.macosxOptionTab)
         self.codesignIdentityLabel.setObjectName(u"codesignIdentityLabel")
 
         self.gridLayout_5.addWidget(self.codesignIdentityLabel, 3, 0, 1, 1)
 
-        self.defaultCodesignIdentityButton = QPushButton(self.macosxOptionTab)
-        self.defaultCodesignIdentityButton.setObjectName(u"defaultCodesignIdentityButton")
+        self.entitlementsFileEdit = FileEdit(self.macosxOptionTab)
+        self.entitlementsFileEdit.setObjectName(u"entitlementsFileEdit")
 
-        self.gridLayout_5.addWidget(self.defaultCodesignIdentityButton, 3, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.entitlementsFileEdit, 0, 1, 1, 1)
 
-        self.defaultEntitlementsFileButton = QPushButton(self.macosxOptionTab)
-        self.defaultEntitlementsFileButton.setObjectName(u"defaultEntitlementsFileButton")
+        self.targetArchitectureLabel = QLabel(self.macosxOptionTab)
+        self.targetArchitectureLabel.setObjectName(u"targetArchitectureLabel")
 
-        self.gridLayout_5.addWidget(self.defaultEntitlementsFileButton, 0, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.targetArchitectureLabel, 1, 0, 1, 1)
 
-        self.selectEntitlementsFileButton = QPushButton(self.macosxOptionTab)
-        self.selectEntitlementsFileButton.setObjectName(u"selectEntitlementsFileButton")
+        self.argvEmulationCheckBox = QCheckBox(self.macosxOptionTab)
+        self.argvEmulationCheckBox.setObjectName(u"argvEmulationCheckBox")
 
-        self.gridLayout_5.addWidget(self.selectEntitlementsFileButton, 0, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.argvEmulationCheckBox, 4, 1, 1, 1)
 
 
         self.verticalLayout_12.addLayout(self.gridLayout_5)
@@ -1335,6 +1344,8 @@ class Ui_MainWindow(object):
         self.helpMenu.addAction(self.actionHelp)
         self.menuSetting.addAction(self.actionChangeFont)
         self.menuSetting.addAction(self.menuStyles.menuAction())
+        self.menuSetting.addSeparator()
+        self.menuSetting.addAction(self.actionCurrentOSOnly)
 
         self.retranslateUi(MainWindow)
         self.actionExit.triggered.connect(MainWindow.close)
@@ -1368,6 +1379,7 @@ class Ui_MainWindow(object):
         self.actionGotoPyInstallerDoc.setText(QCoreApplication.translate("MainWindow", u"PyInstaller Documentation", None))
         self.actionStartGenSpceFile.setText(QCoreApplication.translate("MainWindow", u"Generate Spce File", None))
         self.actionChangeFont.setText(QCoreApplication.translate("MainWindow", u"Font", None))
+        self.actionCurrentOSOnly.setText(QCoreApplication.translate("MainWindow", u"Current OS Only", None))
         self.pyimakespecLabel.setText(QCoreApplication.translate("MainWindow", u"pyi-makespec", None))
         self.selectPyimakespecButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.pyinstallerLabel.setText(QCoreApplication.translate("MainWindow", u"Pynstaller Path", None))
@@ -1498,15 +1510,16 @@ class Ui_MainWindow(object):
         self.selectResourceButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.noEmbedManifestCheckBox.setText(QCoreApplication.translate("MainWindow", u"no-embed-manifest", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.windowsOptionTab), QCoreApplication.translate("MainWindow", u"Windows", None))
-        self.targetArchitectureLabel.setText(QCoreApplication.translate("MainWindow", u"Target Architecture", None))
+        self.selectEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
         self.bundleIdentifierLabel.setText(QCoreApplication.translate("MainWindow", u"Bundle Identifier", None))
+        self.defaultEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
+        self.defaultCodesignIdentityButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.entitlementsFileLabel.setText(QCoreApplication.translate("MainWindow", u"Entitlements File", None))
         self.defaultBundleIdentifierButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.defaultTargetArchitectureButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
         self.codesignIdentityLabel.setText(QCoreApplication.translate("MainWindow", u"Codesign Identity", None))
-        self.defaultCodesignIdentityButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.defaultEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Default", None))
-        self.selectEntitlementsFileButton.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.targetArchitectureLabel.setText(QCoreApplication.translate("MainWindow", u"Target Architecture", None))
+        self.argvEmulationCheckBox.setText(QCoreApplication.translate("MainWindow", u"argv-emulation", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.macosxOptionTab), QCoreApplication.translate("MainWindow", u"Mac OS X", None))
         self.mainTabWidget.setTabText(self.mainTabWidget.indexOf(self.platformTab), QCoreApplication.translate("MainWindow", u"Platform Specific", None))
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"name", None))

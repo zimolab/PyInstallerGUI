@@ -653,6 +653,9 @@ class MainUI(QMainWindow, Ui_MainWindow):
         # codesignIdentity
         self.autosetTextInputUI(option=self._macOSXOptions.codesignIdentity, label=self.codesignIdentityLabel,
                                 edit=self.codesignIdentityEdit, defaultButton=self.defaultCodesignIdentityButton)
+        # argvEmulation
+        self.autosetFlagUI(flag=self._macOSXOptions.argvEmulation, flagBox=self.argvEmulationCheckBox)
+
 
     def setupHookOptionsUI(self):
         def onAdd(paths, option: MultiOption):
@@ -844,7 +847,8 @@ class MainUI(QMainWindow, Ui_MainWindow):
         if len(self._configs.scripts) == 0:
             warn(self, self.tr("Warning"), self.tr("Need at least one script!"))
             return
-        self._startCommandDialog.display(action, self._configs.toCommandLine(cmd),
+        currentOSOnly = self.actionCurrentOSOnly.isChecked()
+        self._startCommandDialog.display(action, self._configs.toCommandLine(cmd, currentOSOnly),
                                          self._state.cwd)
 
     def onLoadPackageConfigs(self):

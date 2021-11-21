@@ -774,3 +774,11 @@ class PackageConfig(object):
                 description="--osx-entitlements-file FILENAME: "
                             "Entitlements file to use when code-signing the collected binaries (macOS only)."
             )
+
+            self.argvEmulation = FlagOption(
+                name="argv-emulation",
+                description="--argv-emulation: "
+                            "Enable argv emulation for macOS app bundles. If enabled, the intial open document/URL "
+                            "event is processed by the bootloader and the passed file paths or URLs are appended to "
+                            "sys.argv. "
+            )
